@@ -1,0 +1,11 @@
+configuration {
+    modi: "window,drun,combi";
+    lines: 8;
+    font: "ubuntumono nerd font mono 14";
+    show-icons: true;
+    terminal: "kitty";
+    combi-modi: "drun";
+    scrollbar-width: 4;
+}
+
+@theme "~/.cache/wal/colors-rofi-dark"

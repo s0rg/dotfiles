@@ -1,0 +1,121 @@
+#!/usr/bin/env python3
+
+import os
+import os.path as path
+import configparser
+import json
+from operator import itemgetter
+
+import rofi_menu
+
+
+BROWSER = "firefox"
+COMMAND = "rofi -show rfox -modi rfox:" + path.realpath(__file__)
+
+CACHE_PATH = path.expanduser("~/.cache/rofifox/")
+CACHE_NAME = "profiles.json"
+
+PROFILE = path.expanduser("~/.mozilla/firefox/profiles.ini")
+PROFILE_PREFIX = "Profile"
+NAME_KEY = "Name"
+DEFAULT_KEY = "Default"
+
+ROFI_VERSION = "1.5"
+ROFI_PROMPT = "\uF269 rfox "
+
+
+def _firefox_cmd(profile):
+    return BROWSER + " -no-remote -P " + profile
+
+
+def _private_cmd(profile):
+    return BROWSER + " -private -no-remote -P " + profile
+
+
+def _manager_cmd():
+    return BROWSER + " -ProfileManager"
+
+
+def _load_cache():
+    if not path.exists(CACHE_PATH):
+        os.mkdir(CACHE_PATH)
+        return []
+
+    cache = path.join(CACHE_PATH, CACHE_NAME)
+
+    cs, ps = os.stat(cache), os.stat(PROFILE)
+    if cs.st_mtime != ps.st_mtime:
+        return []
+
+    with open(cache, "rt", encoding="utf8") as fd:
+        return json.load(fd)
+
+
+def _store_cache(profiles):
+    cache = path.join(CACHE_PATH, CACHE_NAME)
+    with open(cache, "wt", encoding="utf8") as fd:
+        json.dump(profiles, fd)
+
+    return profiles
+
+
+def _load_profiles():
+    cache = _load_cache()
+    if cache:
+        return cache
+
+    cfg = configparser.ConfigParser()
+    cfg.read(PROFILE)
+    names = []
+
+    for n in cfg.sections():
+        if n.startswith(PROFILE_PREFIX):
+            order = int(n[len(PROFILE_PREFIX):])
+            p = cfg[n]
+            name = p.get(NAME_KEY, "")
+            if not name:
+                continue
+
+            if p.get(DEFAULT_KEY, "0") == "1":
+                order = -order
+
+            names.append((order, name))
+
+    if not names:
+        return []
+
+    names.sort(key=itemgetter(0))
+
+    return _store_cache([n[1] for n in names])
+
+
+def _make_profile_entry(prompt, p):
+    items = [
+        rofi_menu.ShellItem("\uF269 <b>" + p + "</b>", _firefox_cmd(p)),
+        rofi_menu.ShellItem("\uFAF8 <span style='italic'>" + p + "</span>", _private_cmd(p)),
+        rofi_menu.BackItem(text="\uF07C back"),
+    ]
+
+    return rofi_menu.Menu(prompt=prompt + "/ " + p, items=items)
+
+
+def _make_menu(prompt, profiles):
+    items = []
+
+    for p in profiles:
+        items.append(rofi_menu.NestedMenu("\uF07B "+ p, _make_profile_entry(prompt, p)))
+
+    if items:
+        items.append(rofi_menu.Delimiter())
+
+    items.append(rofi_menu.ShellItem("\uF085 manage", _manager_cmd()))
+
+    return rofi_menu.Menu(prompt=prompt, items=items)
+
+
+if __name__ == "__main__":
+    rofi_menu.run(
+        _make_menu(ROFI_PROMPT, _load_profiles()),
+        rofi_version=ROFI_VERSION,
+    )
+

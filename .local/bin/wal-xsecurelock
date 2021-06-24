@@ -1,0 +1,12 @@
+#!/bin/bash
+
+. ~/.cache/wal/colors.sh
+
+export XSECURELOCK_FONT="$UI_FONT_NAME"
+export XSECURELOCK_AUTH_FOREGROUND_COLOR="$foreground"
+export XSECURELOCK_AUTH_BACKGROUND_COLOR="$background"
+export XSECURELOCK_AUTH_WARNING_COLOR="#FF0000"
+
+xsecurelock
+
+#vi:ft=bash

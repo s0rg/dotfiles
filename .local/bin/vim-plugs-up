@@ -1,0 +1,25 @@
+#!/bin/bash
+
+ROOT=$HOME/.vim/bundle
+
+if [[ $# == 0 ]]; then
+    ITEMS=$(ls -1 $ROOT)
+else
+    ITEMS=$(cat "$1")
+fi
+
+for p in $ITEMS; do
+    n=$(basename $p)
+    [[ "${n##*.}" == "git" ]] && n="${n%.*}" # cut-off '.git' suffix
+
+    if [[ -d $ROOT/$n ]]; then
+        echo "updating: $n..."
+        git -C "$ROOT/$n" pull
+    else
+        echo "installing: $n..."
+        git -C "$ROOT" clone "$p"
+    fi
+    echo
+done
+
+#vim:ft=bash

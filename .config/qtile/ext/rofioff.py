@@ -1,0 +1,50 @@
+#!/usr/bin/env python3
+import os.path as path
+from collections import namedtuple
+
+import rofi_menu
+
+
+ROFI_VERSION = "1.5"
+ROFI_PROMPT = "\uF011 roff "
+
+actions = [
+    {"icon": "\uf023", "name": "lock", "command": "wal-xsecurelock", "confirm": False},
+    {"icon": "\uf9b1", "name": "suspend", "command": "systemctl suspend", "confirm": True},
+    {"icon": "\uF01E", "name": "reboot", "command": "systemctl reboot", "confirm": True},
+    {"icon": "\uF011", "name": "poweroff", "command": "systemctl poweroff", "confirm": True},
+]
+
+COMMAND = "rofi -show roff -modi roff:" + path.realpath(__file__)
+
+
+def _make_confirm_entry(action):
+    confirm = "yes, <b>{name}</b>".format(**action)
+    return rofi_menu.Menu(prompt="sure?", items=[
+        rofi_menu.ShellItem("\uF00C " + confirm, action["command"]),
+        rofi_menu.ExitItem("\uF00D no, cancel"),
+    ])
+
+
+def _make_action_entry(action):
+    title = "{icon} {name}".format(**action)
+    if not action["confirm"]:
+        return rofi_menu.ShellItem(title, action["command"])
+    return rofi_menu.NestedMenu(
+        title,
+        _make_confirm_entry(action),
+    )
+
+
+def _make_menu(prompt):
+    return rofi_menu.Menu(prompt=prompt, items=[
+        _make_action_entry(a) for a in actions
+    ])
+
+
+if __name__ == "__main__":
+    rofi_menu.run(
+        _make_menu(ROFI_PROMPT),
+        rofi_version=ROFI_VERSION,
+    )
+

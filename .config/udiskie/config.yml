@@ -1,0 +1,89 @@
+# This is an example (nonsense) configuration file for udiskie.
+
+program_options:
+  # Configure defaults for command line options
+
+  tray:             auto    # [bool] Enable the tray icon. "auto"
+                            # means auto-hide the tray icon when
+                            # there are no handled devices.
+
+  menu:             flat    # ["flat" | "nested"] Set the
+                            # systray menu behaviour.
+
+  automount:        true   # [bool] Enable automatic mounting.
+
+  notify:           true    # [bool] Enable notifications.
+
+  password_cache:   30      # [int] Password cache in minutes. Caching is
+                            # disabled by default. It can be disabled
+                            # explicitly by setting it to false
+
+  file_manager:     'pcmanfm-qt'
+    # [string] Set program to open directories. It will be invoked
+    # with the folder path as its last command line argument.
+
+  terminal:         'kitty'
+    # [string] Set terminal command line to open directories. It will be
+    # invoked with thefolder path as its last command line argument.
+
+  password_prompt: ["gnome-keyring-query", "get", "{id_uuid}"]
+    # [string|list] Set command to retrieve passwords. If specified
+    # as a list it defines the ARGV array for the program call. If
+    # specified as a string, it will be expanded in a shell-like
+    # manner. Each string will be formatted using `str.format`. For a
+    # list of device attributes, see below. The two special string values
+    # "builtin:gui" and "builtin:tty" signify to use udiskie's
+    # builtin password prompt.
+
+  notify_command: ""
+    # [string|list] Set command to be executed on any device event.
+    # This is specified like `password_prompt`.
+
+device_config:
+  - is_loop: true
+    ignore: true
+  - id_type: squashfs
+    ignore: true
+
+notifications:
+  timeout:          1.0     # set the default for all notifications
+
+  # Specify only if you want to overwrite the the default:
+  device_mounted:   5       # mount notification
+  device_unmounted: false   # unmount notification
+  device_added:     false   # device has appeared
+  device_removed:   false   # device has disappeared
+  device_unlocked:  -1      # encrypted device was unlocked
+  device_locked:    -1      # encrypted device was locked
+  job_failed:       -1      # mount/unlock/.. has failed
+
+quickmenu_actions: [mount, unmount, unlock, terminal, detach, delete]
+  # List of actions to be shown in the quickmenu or the special value 'all'.
+  # The quickmenu is shown on left-click if using flat menu type.
+
+notification_actions:
+  # Define which actions should be shown on notifications. Note that there
+  # are currently only a limited set of actions available for each
+  # notification. Events that are not explicitly specified show the default
+  # set of actions. Specify an empty list if you don't want to see any
+  # notification for the specified event:
+
+  device_mounted:   [browse]
+  device_added:     [mount]
+
+icon_names:
+  # Customize the icon set used by the tray widget. Each entry
+  # specifies a list of icon names. The first installed icon from
+  # that list will be used.
+
+  media:   [drive-removable-media, media-optical]
+  browse:  [document-open, folder-open]
+  terminal: [terminal, terminator, xfce-terminal]
+  mount:   [udiskie-mount]
+  unmount: [udiskie-unmount]
+  unlock:  [udiskie-unlock]
+  lock:    [udiskie-lock]
+  eject:   [udiskie-eject, media-eject]
+  detach:  [udiskie-detach]
+  delete:  [udiskie-eject]
+  quit:    [application-exit]
