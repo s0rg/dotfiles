@@ -100,7 +100,7 @@ def make_main_bar_widgets(theme):
             disable_drag=True,
             use_mouse_wheel=False,
         ),
-        widget.WindowCount(show_zero=True),
+        custom.WindowCount(show_zero=True),
 
         sep,
 

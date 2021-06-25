@@ -10,6 +10,7 @@ alias less='less -R'
 alias ncdu='ncdu --color dark'
 
 # tools
+alias v='vim'
 alias mc='mc -d'
 alias tailf='tail -f'
 alias wttr='curl http://wttr.in/?format="%c:+%f+%w\n"'
@@ -19,13 +20,6 @@ alias ru-tran='trans :ru'
 alias bp='bpython-curses'
 alias py='python3'
 alias py-serve='python3 -m http.server'
-
-# update kitty terminal
-alias kitty-up='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin'
-
-# qtile shortcuts
-alias qtail='tail -f $HOME/.local/share/qtile/qtile.log'
-alias qhome='cd $HOME/.config/qtile'
 
 # docker stuff
 alias dci-up="docker images -f 'dangling=false' --format '{{.Repository}}:{{.Tag}}' | grep -v space307 | xargs -L1 docker pull"
@@ -42,9 +36,17 @@ alias git-gc="git reflog expire --all --expire=now && git gc --prune=now --aggre
 alias git-born="git log --pretty='format:%ar at %ai' --reverse | head -1"
 alias git-origin="git remote show origin"
 
-# git alias for dotfiles
-alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+# kitty
+source <(kitty + complete setup bash)
+alias kitty-up='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin'
+alias ssh='kitty +kitten ssh'
 
-# vim
-alias v='vim'
+# qtile shortcuts
+alias qtail='tail -f $HOME/.local/share/qtile/qtile.log'
+alias qhome='cd $HOME/.config/qtile'
+
+# dotfiles management
+alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+# add some auto-complete words
+complete -W "add status commit push log checkout diff" dotfiles
 
