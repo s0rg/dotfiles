@@ -10,12 +10,10 @@ BAR_HEIGHT = 24
 FONT_SIZE = BAR_HEIGHT // 2
 FONT_BIG  = FONT_SIZE + 2
 
-CMD_TERM = "kitty"
-
-CMD_NCDU = CMD_TERM + " ncdu-home"
-CMD_CMUS = CMD_TERM + " cmus"
-CMD_TOP  =  CMD_TERM + " gotop"
-
+CMD_TERM  = "kitty"
+CMD_NCDU  = CMD_TERM + " ncdu-home"
+CMD_CMUS  = CMD_TERM + " cmus"
+CMD_TOP   = CMD_TERM + " gotop"
 CMD_MIXER = "pavucontrol-qt"
 
 CMD_ROFI_COMBI = "rofi -show combi -display-combi 'run '"

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+LINES=
+COLUMNS=
+
+ncdu --color dark ~

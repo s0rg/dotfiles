@@ -4,6 +4,6 @@ ROOT=$HOME/.vim/bundle
 
 for p in $(ls -1 $ROOT); do
     git -C "$ROOT/$p" remote get-url origin
-done;
+done
 
 #vim:ft=bash

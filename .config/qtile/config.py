@@ -107,8 +107,8 @@ def reload():
 
 @hook.subscribe.startup_once
 def auto_start():
-    # send fontname to env
     os.environ["UI_FONT_NAME"] = vars.FONT_NAME
+    os.environ["TERM"] = vars.CMD_TERM
 
     Popen(vars.CMD_START)
 
