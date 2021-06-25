@@ -20,7 +20,3 @@ udiskie -a -s --file-manager=pcmanfm-qt --terminal=kitty &
 # bluetooth stuff
 # blueman-applet &
 
-# fix terminal size for some TUI apps
-unset LINES
-unset COLUMNS
-
