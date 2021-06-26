@@ -152,38 +152,6 @@ let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeStatusline = '%#NonText#'
 let NERDTreeIgnore=['\.py[c,o]$', '__pycache__']
 
-call deoplete#custom#option({
-    \ 'auto_complete_delay': 0,
-    \ 'auto_complete_popup': 'manual',
-    \ 'on_text_changed_i': v:false,
-    \ 'on_insert_enter': v:false,
-    \ 'max_list': 50,
-    \ })
-
-call deoplete#custom#option('omni_patterns', {
-    \ 'go': '[^. *\t]\.\w*'
-    \ })
-
-call deoplete#custom#option('sources', {
-    \ '_': ['ale'],
-    \ })
-
-let g:deoplete#enable_at_startup = 1
-
-function! NERDTreeToggleInCurDir()
-  " If NERDTree is open in the current buffer
-  if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
-    exe ":NERDTreeClose"
-  else
-    exe ":NERDTreeFind"
-  endif
-endfunction
-map <C-n> :call NERDTreeToggleInCurDir()<CR>
-
-nmap <F12> :TagbarToggle<CR>
-
-autocmd BufWritePre * %s/\s\+$//e
-
 let g:airline#extensions#ale#enabled = 0
 let g:ale_popup_menu_enabled = 0
 let g:ale_completion_enabled = 0
@@ -206,6 +174,7 @@ let g:ale_go_gopls_init_options = {'ui.diagnostic.analyses': {
     \ 'unusedparams': v:true,
     \ 'shadow': v:true,
     \ }}
+
 let g:ale_linters = {
     \ 'go': ['gopls', 'govet'],
     \ 'python': ['pylint'],
@@ -214,5 +183,38 @@ let g:ale_linters = {
 let g:ale_sign_error = '->'
 let g:ale_sign_warning = ' *'
 
+call deoplete#custom#option({
+    \ 'auto_complete_delay': 0,
+    \ 'auto_complete_popup': 'manual',
+    \ 'on_text_changed_i': v:false,
+    \ 'on_insert_enter': v:false,
+    \ 'max_list': 50,
+    \ })
+
+call deoplete#custom#option('omni_patterns', {
+    \ 'go': '[^. *\t]\.\w*'
+    \ })
+
+call deoplete#custom#option('sources', {
+    \ '_': ['ale'],
+    \ })
+
+let g:deoplete#enable_at_startup = 1
+
+
+function! NERDTreeToggleInCurDir()
+  " If NERDTree is open in the current buffer
+  if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
+    exe ":NERDTreeClose"
+  else
+    exe ":NERDTreeFind"
+  endif
+endfunction
+
+
+map <C-n> :call NERDTreeToggleInCurDir()<CR>
+nmap <F12> :TagbarToggle<CR>
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+autocmd BufWritePre * %s/\s\+$//e
