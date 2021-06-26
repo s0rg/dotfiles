@@ -66,6 +66,8 @@ set termwinsize=6x0
 set noshowmode
 set laststatus=2
 
+let g:python_highlight_all = 1
+
 let g:lightline = {
     \   'colorscheme': 'jellybeans',
     \   'active': {'right': [['lineinfo'], ['percent'], ['lint_check','lint_err', 'lint_warn', 'lint_info', 'lint_ok'], ['gitbranch']]},
