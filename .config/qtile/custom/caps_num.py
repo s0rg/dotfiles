@@ -37,4 +37,3 @@ class CapsNumLockIndicator(widget.CapsNumLockIndicator):
         return " ".join([
             self._render(v) for v in [p[:2], p[2:]]
         ])
-

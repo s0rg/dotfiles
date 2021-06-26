@@ -11,4 +11,3 @@ def get_uptime_items():
     return [
         (c[i], c[i+1][0]) for i in range(0, len(c), 2)
     ]
-

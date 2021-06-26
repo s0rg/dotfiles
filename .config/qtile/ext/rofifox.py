@@ -118,4 +118,3 @@ if __name__ == "__main__":
         _make_menu(ROFI_PROMPT, _load_profiles()),
         rofi_version=ROFI_VERSION,
     )
-

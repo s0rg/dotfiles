@@ -34,17 +34,12 @@ DEFAULT_COLORS = [
 
 
 def _load_colors(d):
-    l = [(k, v) for k, v in d.items()]
+    l = list(d.items())
     l.sort(key=itemgetter(0))
     return [v[1] for v in l]
 
 
-def make_theme(
-    fontname,
-    fontsize,
-    fontlarge,
-    important=NOTIFY,
-) -> Theme:
+def make_theme(fontname, fontsize, fontlarge, important=NOTIFY) -> Theme:
     if not os.path.exists(CACHE):
         return Theme(
             "",
@@ -69,4 +64,3 @@ def make_theme(
             important,
             _load_colors(d.get("colors")),
         )
-

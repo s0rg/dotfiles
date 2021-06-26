@@ -35,14 +35,13 @@ def _dec(qtile, val):
 
 def inc(val=CHANGE_DEFAULT):
     @lazy.function
-    def fn(qtile):
+    def _inner(qtile):
         _inc(qtile, val)
-    return fn
+    return _inner
 
 
 def dec(val=CHANGE_DEFAULT):
     @lazy.function
-    def fn(qtile):
+    def _inner(qtile):
         _dec(qtile, val)
-    return fn
-
+    return _inner

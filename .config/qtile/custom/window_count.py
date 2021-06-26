@@ -22,8 +22,8 @@ class WindowCount(base._TextBox):
         self.add_defaults(WindowCount.defaults)
         self._count = 0
 
-    def _configure(self, qtile, bar):
-        base._TextBox._configure(self, qtile, bar)
+    def _configure(self, qtile, qbar):
+        base._TextBox._configure(self, qtile, qbar)
         self._setup_hooks()
         self._wincount()
 
@@ -61,8 +61,7 @@ class WindowCount(base._TextBox):
                 self.layout.width,
                 self.bar.width
             ) + self.actual_padding * 2
-        else:
-            return 0
+        return 0
 
     def update(self):
         self.text = self.text_format.format(num=self._count)

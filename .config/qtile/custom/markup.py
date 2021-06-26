@@ -29,5 +29,3 @@ def UptimeFunc(c):
         return up + " ".join(t)
 
     return _getter
-
-

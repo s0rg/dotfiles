@@ -40,10 +40,9 @@ def _toggle_state(qtile, name=""):
 
 def toggle():
     @lazy.function
-    def fn(qtile):
+    def _inner(qtile):
         global _PAD_NAME
         if _PAD_NAME == "":
             _PAD_NAME = _get_pad_name()
         _toggle_state(qtile, _PAD_NAME)
-    return fn
-
+    return _inner

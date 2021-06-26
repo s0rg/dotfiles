@@ -43,4 +43,3 @@ class ClockWidget(base.InLoopPollText):
         self._cached = full.format(**args)
 
         return self._cached
-

@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import os.path as path
-from collections import namedtuple
 
 import rofi_menu
 
@@ -47,4 +46,3 @@ if __name__ == "__main__":
         _make_menu(ROFI_PROMPT),
         rofi_version=ROFI_VERSION,
     )
-

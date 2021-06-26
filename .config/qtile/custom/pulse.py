@@ -13,8 +13,8 @@ VOLUME_ID = 1100
 MIC_ID = 1200
 
 
-devInfo = namedtuple("devInfo", ["volume", "muted"])
-volInfo = namedtuple("volInfo", ["vol", "mic"])
+DevInfo = namedtuple("DevInfo", ["volume", "muted"])
+VolInfo = namedtuple("VolInfo", ["vol", "mic"])
 
 _CLIENT_NAME = "qtile:volume-indicator"
 
@@ -57,7 +57,7 @@ class VolumeIndicator(widget.base.ThreadPoolText):
         self.add_defaults(VolumeIndicator.defaults)
         self._vol_norm = span_vol_tag + Span(span_vol_val, foreground=self.active_color)
         self._mic_norm = Span(span_mic_tag, foreground=self.active_color)
-        self._state = volInfo(None, None)
+        self._state = VolInfo(None, None)
         self._cache = None
 
     @property
@@ -117,9 +117,9 @@ class VolumeIndicator(widget.base.ThreadPoolText):
             out = first_by_name(srv.default_sink_name, p.sink_list())
             mic = first_by_name(srv.default_source_name, p.source_list())
 
-            return volInfo(
-                devInfo(ceil(out.volume.value_flat*100.0), out.mute==1),
-                devInfo(ceil(mic.volume.value_flat*100.0), mic.mute==1),
+            return VolInfo(
+                DevInfo(ceil(out.volume.value_flat*100.0), out.mute == 1),
+                DevInfo(ceil(mic.volume.value_flat*100.0), mic.mute == 1),
             )
 
     def _vol_change(self, val):
@@ -158,4 +158,4 @@ def first_by_name(name, it):
     for v in it:
         if v.name == name:
             return v
-
+    return None
