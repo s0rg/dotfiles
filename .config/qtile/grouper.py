@@ -14,7 +14,7 @@ height_key = "height"
 height_default = 0.9
 
 
-class Navigator(object):
+class Navigator():
     def __init__(self, apps):
         self._names = []
         for name, _ in apps:
@@ -64,20 +64,18 @@ def lower_all(it):
     return [s.lower() for s in it]
 
 
-def make_groups(
-    apps,
-    mod_key,
-    mov_key=None, # key to move windows between groups
-    drops=[],
-    scratchpad="drops",
-    scratchpad_key="d",
-):
+def make_groups(apps,
+                mod_key,
+                mov_key=None, # key to move windows between groups
+                drops=None,
+                scratchpad="drops",
+                scratchpad_key="d"):
     groups, grkeys, known = [], [], []
     known_classes = frozenset()
 
     def _app_matcher(c) -> bool:
         cls = c.window.get_wm_class()
-        logger.debug("matching: {} against: {}".format(cls, known_classes))
+        logger.debug("matching: %s against: %s", cls, known_classes)
         return cls[0].lower() not in known_classes
 
     for i, (name, args) in enumerate(apps, 1):
@@ -104,17 +102,17 @@ def make_groups(
     # update `known_classes` value for later use in `_app_matcher`.
     known_classes = frozenset(known)
 
-    if drops:
+    if drops is not None:
         items, keys = [], []
         for i, d in enumerate(drops, 1):
-            drop_height = d.get(height_key, height_default)
-            drop_name = "{}-{}".format(scratchpad, i)
+            height = d.get(height_key, height_default)
+            name = "{}-{}".format(scratchpad, i)
 
-            items.append(DropDown(drop_name, d["command"], **make_drop_defaults(drop_height)))
-            keys.append(Key([], str(i),
-                lazy.group[scratchpad].dropdown_toggle(drop_name),
-                desc="Toggle {} drop-down".format(i),
-            ))
+            items.append(DropDown(name, d["command"], **make_drop_defaults(height)))
+            key = Key([], str(i),
+                      lazy.group[scratchpad].dropdown_toggle(name),
+                      desc="Toggle {} drop-down".format(i))
+            keys.append(key)
 
         groups.append(ScratchPad(scratchpad, items))
         grkeys.append(KeyChord([mod_key], scratchpad_key, keys, mode=scratchpad))

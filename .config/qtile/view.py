@@ -1,5 +1,4 @@
 from libqtile import layout, widget, qtile
-from libqtile.lazy import lazy
 
 import custom
 
@@ -39,9 +38,10 @@ def make_layouts(theme, floaters, tiles_margin=5):
             layout.Tile(
                 add_after_last=True,
                 margin=tiles_margin,
-                **defaults,
-            ),
-            layout.VerticalTile(margin=tiles_margin, **defaults),
+                **defaults),
+            layout.VerticalTile(
+                margin=tiles_margin,
+                **defaults),
             layout.Floating(**defaults),
         ],
         make_floating(floaters, defaults),
@@ -82,6 +82,42 @@ def icon(sym, size):
     )
 
 
+def make_box_wigets(theme):
+    fc = theme.colors[focused]
+
+    return [
+        widget.GenPollText(
+            func=custom.markup.UptimeFunc(fc),
+            update_interval=30),
+
+        widget.DF(
+            partition="/home",
+            format=custom.markup.DiskFree(fc),
+            warn_space=5,
+            warn_color=theme.important,
+            visible_on_warn=False,
+            mouse_callbacks={
+                "Button1": click_spawner(variables.CMD_NCDU),
+            }),
+
+        widget.DF(
+            partition="/",
+            format=custom.markup.DiskFree(fc),
+            warn_space=5,
+            warn_color=theme.important),
+
+        widget.Spacer(length=3),
+
+        custom.VolumeIndicator(
+            foreground=fc,
+            active_color=theme.foreground,
+            update_interval=0.3,
+            mouse_callbacks={
+                "Button1": click_spawner(variables.CMD_MIXER),
+            }),
+    ]
+
+
 def make_main_bar_widgets(theme):
     fc = theme.colors[focused]
     gc = theme.colors[graph]
@@ -100,12 +136,13 @@ def make_main_bar_widgets(theme):
             disable_drag=True,
             use_mouse_wheel=False,
         ),
+
         custom.WindowCount(show_zero=True),
 
         sep,
 
         widget.WindowName(),
-        widget.Chord(fmt="[:{}:]", foreground=ac),
+        widget.Chord(fmt="[::{}::]", foreground=ac),
 
         sep,
 
@@ -114,46 +151,12 @@ def make_main_bar_widgets(theme):
             text_open=" > ",
             text_closed=" < ",
             close_button_location="right",
-            widgets=[
-                widget.GenPollText(
-                    func=custom.markup.UptimeFunc(fc),
-                    update_interval=30,
-                ),
-                widget.DF(
-                    partition="/home",
-                    format=custom.markup.DiskFree(fc),
-                    warn_space=5,
-                    warn_color=theme.important,
-                    visible_on_warn=False,
-                    mouse_callbacks={
-                        "Button1": click_spawner(variables.CMD_NCDU),
-                    },
-                ),
-                widget.DF(
-                    partition="/",
-                    format=custom.markup.DiskFree(fc),
-                    warn_space=5,
-                    warn_color=theme.important,
-                ),
+            widgets=make_box_wigets(theme)),
 
-                widget.Spacer(length=3),
-
-                #widget.Cmus(
-                #    play_color=theme.foreground,
-                #    noplay_color=fc,
-                #),
-
-                custom.VolumeIndicator(
-                    foreground=fc,
-                    active_color=theme.foreground,
-                    update_interval=0.3,
-                    mouse_callbacks={
-                        "Button1": click_spawner(variables.CMD_MIXER),
-                    },
-                ),
-        ]),
         widget.CPUGraph(**graph_defaults(ac, fc, 22)),
+
         widget.MemoryGraph(**graph_defaults(gc, fc, 22)),
+
         widget.ThermalSensor(
             foreground=theme.foreground,
             foreground_alert=theme.important,
@@ -175,6 +178,7 @@ def make_main_bar_widgets(theme):
             padding=1,
             margin=0,
         ),
+
         widget.KeyboardKbdd(
             fmt=custom.markup.Bold("{}"),
             configured_keyboards=["US", "RU"],
@@ -189,6 +193,7 @@ def make_main_bar_widgets(theme):
             clock=theme.foreground,
             holiday=ac,
         ),
+
         widget.CurrentLayoutIcon(
             padding=0,
             scale=0.6,

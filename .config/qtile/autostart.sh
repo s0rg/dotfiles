@@ -15,7 +15,7 @@ kbdd
 nm-applet &
 
 # media mounter
-udiskie -a -s --file-manager=pcmanfm-qt --terminal=kitty &
+udiskie &
 
 # bluetooth stuff
 # blueman-applet &
