@@ -160,7 +160,8 @@ let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 0
 let g:ale_hover_cursor = 0
 
-let g:ale_lint_on_enter = 0
+let g:ale_fix_on_save = 1
+let g:ale_lint_on_enter = 1
 let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_filetype_changed = 0
 let g:ale_lint_on_text_changed = 'never'
@@ -178,6 +179,10 @@ let g:ale_go_gopls_init_options = {'ui.diagnostic.analyses': {
 let g:ale_linters = {
     \ 'go': ['gopls', 'govet'],
     \ 'python': ['pylint'],
+    \ }
+
+let g:ale_fixers = {
+    \ 'python': ['yapf'],
     \ }
 
 let g:ale_sign_error = '->'
