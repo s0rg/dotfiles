@@ -164,6 +164,10 @@ call deoplete#custom#option('omni_patterns', {
     \ 'go': '[^. *\t]\.\w*'
     \ })
 
+call deoplete#custom#option('sources', {
+    \ '_': ['ale'],
+    \ })
+
 let g:deoplete#enable_at_startup = 1
 
 function! NERDTreeToggleInCurDir()
@@ -209,3 +213,6 @@ let g:ale_linters = {
 
 let g:ale_sign_error = '->'
 let g:ale_sign_warning = ' *'
+
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
