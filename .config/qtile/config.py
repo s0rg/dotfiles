@@ -7,7 +7,7 @@ from libqtile.config import Screen
 
 from ext.wal import make_theme
 
-import vars
+import variables
 
 from grouper import (
     Navigator,
@@ -27,12 +27,12 @@ from view import (
 # groups
 
 groups, keys = make_groups(
-    vars.APPS,
-    vars.MOD,
-    mov_key=vars.CTRL,
-    drops=vars.DROPS,
+    variables.APPS,
+    variables.MOD,
+    mov_key=variables.CTRL,
+    drops=variables.DROPS,
 )
-grp_nav = Navigator(vars.APPS)
+grp_nav = Navigator(variables.APPS)
 
 
 # input
@@ -44,11 +44,11 @@ mouse = make_mouse()
 # ui
 
 theme = make_theme(
-    vars.FONT_NAME,
-    vars.FONT_SIZE,
-    vars.FONT_BIG,
+    variables.FONT_NAME,
+    variables.FONT_SIZE,
+    variables.FONT_BIG,
 )
-layouts, floating_layout = make_layouts(theme, vars.FLOATERS)
+layouts, floating_layout = make_layouts(theme, variables.FLOATERS)
 widget_defaults = make_widgets_defaults(theme)
 extension_defaults = widget_defaults.copy()
 
@@ -57,7 +57,7 @@ screens = [Screen(
     wallpaper_mode="fill",
     top=bar.Bar(
         make_main_bar_widgets(theme),
-        vars.BAR_HEIGHT,
+        variables.BAR_HEIGHT,
         background=theme.background,
     ),
 )]
@@ -68,29 +68,29 @@ screens = [Screen(
 # Dealing with dialog windows
 @hook.subscribe.client_new
 def floating_dialogs(client):
-    w = client.window
-    is_dialog = w.get_wm_type() in vars.DIALOGS
-    if is_dialog or w.get_wm_transient_for():
+    win = client.window
+    is_dialog = win.get_wm_type() in variables.DIALOGS
+    if is_dialog or win.get_wm_transient_for():
         client.floating = True
-        w.cmd_bring_to_front()
-        w.cmd_focus()
+        win.cmd_bring_to_front()
+        win.cmd_focus()
 
 
 # Dealing with last window in group
 @hook.subscribe.client_killed
 def fallback(client):
-    cg = client.group
+    grp = client.group
 
-    if qtile.current_group != cg:
+    if qtile.current_group != grp:
         return
 
-    if len(cg.windows) > 1:
+    if len(grp.windows) > 1:
         return
 
-    for n in grp_nav.prev_for(cg.name):
-        g = qtile.groups_map[n]
-        if g.windows:
-            g.cmd_toscreen()
+    for name in grp_nav.prev_for(grp.name):
+        grp = qtile.groups_map[name]
+        if grp.windows:
+            grp.cmd_toscreen()
             return
 
 
@@ -102,22 +102,22 @@ def auto_focus():
             win.cmd_focus()
             return
 
-    r = qtile.core.conn.conn.core.QueryPointer(qtile.root.wid).reply()
-    win = qtile.windows_map.get(r.child, None)
+    cur = qtile.core.conn.conn.core.QueryPointer(qtile.root.wid).reply()
+    win = qtile.windows_map.get(cur.child, None)
     if win and win.group is qtile.current_group:
         win.group.focus(win, False)
 
 
 @hook.subscribe.startup
 def reload():
-    Popen(vars.CMD_RELOAD)
+    Popen(variables.CMD_RELOAD)
 
 
 @hook.subscribe.startup_once
 def auto_start():
-    os.environ["UI_FONT_NAME"] = vars.FONT_NAME
+    os.environ["UI_FONT_NAME"] = variables.FONT_NAME
 
-    Popen(vars.CMD_START)
+    Popen(variables.CMD_START)
 
 
 # main
@@ -136,4 +136,3 @@ dgroups_key_binder = None
 dgroups_app_rules = []  # type: List
 
 main = None  # WARNING: this is deprecated and will be removed soon
-

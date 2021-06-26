@@ -78,7 +78,7 @@ def make_groups(
     def _app_matcher(c) -> bool:
         cls = c.window.get_wm_class()
         logger.debug("matching: {} against: {}".format(cls, known_classes))
-        return not (cls[0].lower() in known_classes)
+        return cls[0].lower() not in known_classes
 
     for i, (name, args) in enumerate(apps, 1):
         match = []
@@ -97,11 +97,9 @@ def make_groups(
         })
 
         groups.append(Group(name, **args))
-        grkeys.append(Key([mod_key], str(i),
-            lazy.screen.toggle_group(name)))
+        grkeys.append(Key([mod_key], str(i), lazy.screen.toggle_group(name)))
         if mov_key is not None:
-            grkeys.append(Key([mod_key, mov_key], str(i),
-                lazy.window.togroup(name)))
+            grkeys.append(Key([mod_key, mov_key], str(i), lazy.window.togroup(name)))
 
     # update `known_classes` value for later use in `_app_matcher`.
     known_classes = frozenset(known)
@@ -109,12 +107,12 @@ def make_groups(
     if drops:
         items, keys = [], []
         for i, d in enumerate(drops, 1):
-            h = d.get(height_key, height_default)
-            n = "{}-{}".format(scratchpad, i)
+            drop_height = d.get(height_key, height_default)
+            drop_name = "{}-{}".format(scratchpad, i)
 
-            items.append(DropDown(n, d["command"], **make_drop_defaults(h)))
+            items.append(DropDown(drop_name, d["command"], **make_drop_defaults(drop_height)))
             keys.append(Key([], str(i),
-                lazy.group[scratchpad].dropdown_toggle(n),
+                lazy.group[scratchpad].dropdown_toggle(drop_name),
                 desc="Toggle {} drop-down".format(i),
             ))
 
@@ -122,4 +120,3 @@ def make_groups(
         grkeys.append(KeyChord([mod_key], scratchpad_key, keys, mode=scratchpad))
 
     return (groups, grkeys)
-

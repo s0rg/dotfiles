@@ -3,7 +3,7 @@ from libqtile.lazy import lazy
 
 import custom
 
-import vars
+import variables
 from grouper import make_class_matcher
 
 
@@ -14,9 +14,9 @@ active = 6
 
 
 def make_floating(cls, d):
-    r = layout.Floating.default_float_rules[:]
-    r.append(make_class_matcher(cls))
-    return layout.Floating(float_rules=r, **d)
+    rules = layout.Floating.default_float_rules[:]
+    rules.append(make_class_matcher(cls))
+    return layout.Floating(float_rules=rules, **d)
 
 
 def click_spawner(cmd):
@@ -26,7 +26,7 @@ def click_spawner(cmd):
 
 
 def make_layouts(theme, floaters, tiles_margin=5):
-    d = dict(
+    defaults = dict(
         font=theme.fontname,
         border_width=1,
         border_focus=theme.colors[focused],
@@ -35,16 +35,16 @@ def make_layouts(theme, floaters, tiles_margin=5):
 
     return (
         [
-            layout.Max(**d),
+            layout.Max(**defaults),
             layout.Tile(
                 add_after_last=True,
                 margin=tiles_margin,
-                **d,
+                **defaults,
             ),
-            layout.VerticalTile(margin=tiles_margin, **d),
-            layout.Floating(**d),
+            layout.VerticalTile(margin=tiles_margin, **defaults),
+            layout.Floating(**defaults),
         ],
-        make_floating(floaters, d),
+        make_floating(floaters, defaults),
     )
 
 
@@ -126,7 +126,7 @@ def make_main_bar_widgets(theme):
                     warn_color=theme.important,
                     visible_on_warn=False,
                     mouse_callbacks={
-                        "Button1": click_spawner(vars.CMD_NCDU),
+                        "Button1": click_spawner(variables.CMD_NCDU),
                     },
                 ),
                 widget.DF(
@@ -148,7 +148,7 @@ def make_main_bar_widgets(theme):
                     active_color=theme.foreground,
                     update_interval=0.3,
                     mouse_callbacks={
-                        "Button1": click_spawner(vars.CMD_MIXER),
+                        "Button1": click_spawner(variables.CMD_MIXER),
                     },
                 ),
         ]),
@@ -194,4 +194,3 @@ def make_main_bar_widgets(theme):
             scale=0.6,
         ),
     ]
-

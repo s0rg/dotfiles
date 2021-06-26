@@ -203,6 +203,7 @@ let g:ale_go_gopls_init_options = {'ui.diagnostic.analyses': {
     \ }}
 let g:ale_linters = {
     \ 'go': ['gopls', 'govet'],
+    \ 'python': ['pylint'],
     \ }
 
 let g:ale_sign_error = '->'
