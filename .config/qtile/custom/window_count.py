@@ -1,6 +1,6 @@
 from typing import Any, List, Tuple
 
-from libqtile import bar, hook
+from libqtile import bar as qbar, hook
 from libqtile.widget import base
 
 
@@ -17,13 +17,13 @@ class WindowCount(base._TextBox):
         ("show_zero", False, "Show window count when no windows")
     ]  # type: List[Tuple[str, Any, str]]
 
-    def __init__(self, text=" ", width=bar.CALCULATED, **config):
+    def __init__(self, text=" ", width=qbar.CALCULATED, **config):
         base._TextBox.__init__(self, text=text, width=width, **config)
         self.add_defaults(WindowCount.defaults)
         self._count = 0
 
-    def _configure(self, qtile, qbar):
-        base._TextBox._configure(self, qtile, qbar)
+    def _configure(self, qtile, bar):
+        base._TextBox._configure(self, qtile, bar)
         self._setup_hooks()
         self._wincount()
 
@@ -43,6 +43,7 @@ class WindowCount(base._TextBox):
 
     def _win_killed(self, window):
         if window.group != self.qtile.current_group:
+            # fix nasty behavior on auto-switch to alive group
             return
 
         try:

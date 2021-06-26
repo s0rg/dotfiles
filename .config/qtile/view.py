@@ -142,7 +142,7 @@ def make_main_bar_widgets(theme):
         sep,
 
         widget.WindowName(),
-        widget.Chord(fmt="[::{}::]", foreground=ac),
+        widget.Chord(fmt="[:. {} .:]", foreground=ac),
 
         sep,
 

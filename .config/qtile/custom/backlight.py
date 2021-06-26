@@ -9,7 +9,7 @@ from .markup import Span
 
 
 XBACKLIGHT_BIN = "xbacklight"
-CHANGE_DEFAULT = 10
+CHANGE_DEFAULT = 5
 BACKLIGHT_ID = 1000
 
 backlight_fmt = Span("\uF5DE", font="32") + Span(" {}%", font="18", rise="6900")
