@@ -72,6 +72,8 @@ def floating_dialogs(client):
     is_dialog = w.get_wm_type() in vars.DIALOGS
     if is_dialog or w.get_wm_transient_for():
         client.floating = True
+        w.cmd_bring_to_front()
+        w.cmd_focus()
 
 
 # Dealing with last window in group
@@ -94,6 +96,12 @@ def fallback(client):
 
 @hook.subscribe.setgroup
 def auto_focus():
+    for win in qtile.currentGroup.windows:
+        if win.floating:
+            win.cmd_bring_to_front()
+            win.cmd_focus()
+            return
+
     r = qtile.core.conn.conn.core.QueryPointer(qtile.root.wid).reply()
     win = qtile.windows_map.get(r.child, None)
     if win and win.group is qtile.current_group:

@@ -50,3 +50,5 @@ alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 # add some auto-complete words
 complete -W "add status commit push log checkout diff" dotfiles
 
+function mkd() { mkdir -p "$@" && cd "$@"; }
+
