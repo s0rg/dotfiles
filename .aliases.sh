@@ -51,5 +51,15 @@ alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 # add some auto-complete words
 complete -W "add status commit push log checkout diff" dotfiles
 
-function mkd() { mkdir -p "$@" && cd "$@"; }
+# create a new directory and enter it
+mkd() { mkdir -p "$@" && cd "$@" || exit; }
 
+# `opn` with no arguments opens the current directory,
+# otherwise opens the given location or file
+opn() {
+    if [ $# -eq 0 ]; then
+        xdg-open . > /dev/null 2>&1
+    else
+        xdg-open "$@" > /dev/null 2>&1
+    fi
+}

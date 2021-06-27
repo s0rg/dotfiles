@@ -4,10 +4,18 @@ $include /etc/inputrc
 "\C-n":history-search-forward
 
 set colored-stats on
-set completion-ignore-case on
-set completion-prefix-display-length 2
-set mark-symlinked-directories on
+set visible-stats on
+
+set page-completions off
+set match-hidden-files off
+
+set skip-completed-text on
 set show-all-if-ambiguous on
 set show-all-if-unmodified on
-set visible-stats on
+
+set completion-ignore-case on
+set completion-prefix-display-length 2
+set completion-query-items 150
+
+set mark-symlinked-directories on
 set menu-complete-display-prefix on
