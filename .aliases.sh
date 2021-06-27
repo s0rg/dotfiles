@@ -15,6 +15,7 @@ alias mc='mc -d'
 alias tailf='tail -f'
 alias wttr='curl http://wttr.in/?format="%c:+%f+%w\n"'
 alias ru-tran='trans :ru'
+alias cal='echo;ncal -3;echo'
 
 # python shortcuts
 alias bp='bpython-curses'

@@ -181,6 +181,7 @@ let g:ale_go_gopls_init_options = {'ui.diagnostic.analyses': {
 let g:ale_linters = {
     \ 'go': ['gopls', 'govet'],
     \ 'python': ['pylint'],
+    \ 'sh': ['shellcheck'],
     \ }
 
 let g:ale_fixers = {
@@ -199,7 +200,7 @@ call deoplete#custom#option({
     \ })
 
 call deoplete#custom#option('omni_patterns', {
-    \ 'go': '[^. *\t]\.\w*'
+    \ 'go': '[^. *\t]\.\w*',
     \ })
 
 call deoplete#custom#option('sources', {

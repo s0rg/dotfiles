@@ -1,8 +1,9 @@
 #!/bin/bash
 
 ROOT=$HOME/.vim/bundle
+ITEMS=$(ls -1 "$ROOT")
 
-for p in $(ls -1 $ROOT); do
+for p in $ITEMS; do
     git -C "$ROOT/$p" remote get-url origin
 done
 
