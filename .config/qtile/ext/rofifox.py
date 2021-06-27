@@ -8,7 +8,6 @@ from operator import itemgetter
 
 import rofi_menu
 
-
 BROWSER = "firefox"
 COMMAND = "rofi -show rfox -modi rfox:" + path.realpath(__file__)
 
@@ -92,7 +91,8 @@ def _load_profiles():
 def _make_profile_entry(prompt, p):
     items = [
         rofi_menu.ShellItem("\uF269 <b>" + p + "</b>", _firefox_cmd(p)),
-        rofi_menu.ShellItem("\uFAF8 <span style='italic'>" + p + "</span>", _private_cmd(p)),
+        rofi_menu.ShellItem("\uFAF8 <span style='italic'>" + p + "</span>",
+                            _private_cmd(p)),
         rofi_menu.BackItem(text="\uF07C back"),
     ]
 
@@ -103,7 +103,9 @@ def _make_menu(prompt, profiles):
     items = []
 
     for p in profiles:
-        items.append(rofi_menu.NestedMenu("\uF07B "+ p, _make_profile_entry(prompt, p)))
+        items.append(
+            rofi_menu.NestedMenu("\uF07B " + p, _make_profile_entry(prompt,
+                                                                    p)))
 
     if items:
         items.append(rofi_menu.Delimiter())

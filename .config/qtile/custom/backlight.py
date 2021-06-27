@@ -7,16 +7,16 @@ from libqtile.utils import send_notification
 
 from .markup import Span
 
-
 XBACKLIGHT_BIN = "xbacklight"
 CHANGE_DEFAULT = 5
 BACKLIGHT_ID = 1000
 
-backlight_fmt = Span("\uF5DE", font="32") + Span(" {}%", font="18", rise="6900")
+backlight_fmt = Span("\uF5DE", font="32") + Span(
+    " {}%", font="18", rise="6900")
 
 
 def _notify_state():
-    sleep(0.3) # wait for backlight to apply
+    sleep(0.3)  # wait for backlight to apply
     p = sh.Popen([XBACKLIGHT_BIN, "-get"], stdout=sh.PIPE)
     l = p.communicate()[0].decode().split("\n")
     v = floor(float(l[0]))
@@ -37,6 +37,7 @@ def inc(val=CHANGE_DEFAULT):
     @lazy.function
     def _inner(qtile):
         _inc(qtile, val)
+
     return _inner
 
 
@@ -44,4 +45,5 @@ def dec(val=CHANGE_DEFAULT):
     @lazy.function
     def _inner(qtile):
         _dec(qtile, val)
+
     return _inner

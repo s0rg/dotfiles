@@ -3,7 +3,6 @@ import json
 from operator import itemgetter
 from collections import namedtuple
 
-
 Theme = namedtuple("Theme", [
     "wallpaper",
     "fontname",
@@ -14,7 +13,6 @@ Theme = namedtuple("Theme", [
     "important",
     "colors",
 ])
-
 
 CACHE = os.path.expanduser("~/.cache/wal/colors.json")
 NOTIFY = "#AA5100"

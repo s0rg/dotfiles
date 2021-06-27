@@ -8,6 +8,4 @@ def get_uptime_items():
         return []
 
     c = l[0].split()[1:]
-    return [
-        (c[i], c[i+1][0]) for i in range(0, len(c), 2)
-    ]
+    return [(c[i], c[i + 1][0]) for i in range(0, len(c), 2)]

@@ -3,7 +3,6 @@ import subprocess as sh
 from libqtile.lazy import lazy
 from libqtile.utils import send_notification
 
-
 _PAD_NAME = ""
 PAD_NEEDLE = "touchpad"
 XINPUT_BIN = "xinput"
@@ -45,4 +44,5 @@ def toggle():
         if _PAD_NAME == "":
             _PAD_NAME = _get_pad_name()
         _toggle_state(qtile, _PAD_NAME)
+
     return _inner

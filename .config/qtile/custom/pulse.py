@@ -8,10 +8,8 @@ from pulsectl import Pulse
 
 from .markup import Span
 
-
 VOLUME_ID = 1100
 MIC_ID = 1200
-
 
 DevInfo = namedtuple("DevInfo", ["volume", "muted"])
 VolInfo = namedtuple("VolInfo", ["vol", "mic"])
@@ -29,7 +27,6 @@ span_vol_val = "{:3.0f}"
 span_vol_base = span_vol_tag + span_vol_val
 span_vol_mute = Span(span_vol_base, strikethrough="true")
 
-
 _vol_cap = 1.5
 _vol_max = 1.0
 _vol_step = 0.05
@@ -41,7 +38,8 @@ mic_muted = Span("\uF131", font=big_font)
 
 vol_norm = Span("\uFA7D", font=big_font)
 vol_muted = Span("\uFA80", font=big_font)
-vol_value = Span("\uFA7D", font=big_font) + Span(" {:.0%}", font="18", rise="6900")
+vol_value = Span("\uFA7D", font=big_font) + Span(
+    " {:.0%}", font="18", rise="6900")
 
 
 class VolumeIndicator(widget.base.ThreadPoolText):
@@ -50,12 +48,13 @@ class VolumeIndicator(widget.base.ThreadPoolText):
         ("active_color", "#FFFFFF", "Active text color"),
         ("vol_max", _vol_max, "Maximum volume value"),
         ("vol_step", _vol_step, "Step for volume up / down"),
-    ] # type: List[Tuple[str, Any, str]]
+    ]  # type: List[Tuple[str, Any, str]]
 
     def __init__(self, **config):
         super().__init__("", **config)
         self.add_defaults(VolumeIndicator.defaults)
-        self._vol_norm = span_vol_tag + Span(span_vol_val, foreground=self.active_color)
+        self._vol_norm = span_vol_tag + Span(span_vol_val,
+                                             foreground=self.active_color)
         self._mic_norm = Span(span_mic_tag, foreground=self.active_color)
         self._state = VolInfo(None, None)
         self._cache = None
@@ -118,8 +117,8 @@ class VolumeIndicator(widget.base.ThreadPoolText):
             mic = first_by_name(srv.default_source_name, p.source_list())
 
             return VolInfo(
-                DevInfo(ceil(out.volume.value_flat*100.0), out.mute == 1),
-                DevInfo(ceil(mic.volume.value_flat*100.0), mic.mute == 1),
+                DevInfo(ceil(out.volume.value_flat * 100.0), out.mute == 1),
+                DevInfo(ceil(mic.volume.value_flat * 100.0), mic.mute == 1),
             )
 
     def _vol_change(self, val):
@@ -131,21 +130,27 @@ class VolumeIndicator(widget.base.ThreadPoolText):
                 if out.mute == 1:
                     p.mute(out, 0)
                 p.volume_set_all_chans(out, val)
-                send_notification("pulse-audio", vol_value.format(val), id=VOLUME_ID)
+                send_notification("pulse-audio",
+                                  vol_value.format(val),
+                                  id=VOLUME_ID)
 
     def cmd_toggle_vol(self):
         with Pulse(_CLIENT_NAME) as p:
             srv = p.server_info()
             out = first_by_name(srv.default_sink_name, p.sink_list())
             p.mute(out, not out.mute)
-            send_notification("pulse-audio", (vol_muted if out.mute else vol_norm), id=VOLUME_ID)
+            send_notification("pulse-audio",
+                              (vol_muted if out.mute else vol_norm),
+                              id=VOLUME_ID)
 
     def cmd_toggle_mic(self):
         with Pulse(_CLIENT_NAME) as p:
             srv = p.server_info()
             mic = first_by_name(srv.default_source_name, p.source_list())
             p.mute(mic, not mic.mute)
-            send_notification("pulse-audio", (mic_muted if mic.mute else mic_norm), id=MIC_ID)
+            send_notification("pulse-audio",
+                              (mic_muted if mic.mute else mic_norm),
+                              id=MIC_ID)
 
     def cmd_vol_inc(self):
         self._vol_change(self.vol_step)

@@ -23,7 +23,6 @@ from view import (
     make_main_bar_widgets,
 )
 
-
 # groups
 
 groups, keys = make_groups(
@@ -34,12 +33,10 @@ groups, keys = make_groups(
 )
 grp_nav = Navigator(variables.APPS)
 
-
 # input
 
 keys.extend(make_keys())
 mouse = make_mouse()
-
 
 # ui
 
@@ -52,18 +49,20 @@ layouts, floating_layout = make_layouts(theme, variables.FLOATERS)
 widget_defaults = make_widgets_defaults(theme)
 extension_defaults = widget_defaults.copy()
 
-screens = [Screen(
-    wallpaper=theme.wallpaper,
-    wallpaper_mode="fill",
-    top=bar.Bar(
-        make_main_bar_widgets(theme),
-        variables.BAR_HEIGHT,
-        background=theme.background,
-    ),
-)]
-
+screens = [
+    Screen(
+        wallpaper=theme.wallpaper,
+        wallpaper_mode="fill",
+        top=bar.Bar(
+            make_main_bar_widgets(theme),
+            variables.BAR_HEIGHT,
+            background=theme.background,
+        ),
+    )
+]
 
 # hooks
+
 
 # Dealing with dialog windows
 @hook.subscribe.client_new
@@ -96,7 +95,7 @@ def fallback(client):
 
 @hook.subscribe.setgroup
 def auto_focus():
-    for win in qtile.currentGroup.windows:
+    for win in qtile.current_group.windows:
         if win.floating:
             win.cmd_bring_to_front()
             win.cmd_focus()

@@ -5,7 +5,7 @@ from .markup import Bold, Span
 class CapsNumLockIndicator(widget.CapsNumLockIndicator):
     defaults = [
         ("active_color", "#FFFFFF", "Active text color"),
-    ] # type: List[Tuple[str, Any, str]]
+    ]  # type: List[Tuple[str, Any, str]]
 
     def __init__(self, **config):
         super().__init__(**config)
@@ -34,6 +34,4 @@ class CapsNumLockIndicator(widget.CapsNumLockIndicator):
         if not p:
             return "[ none ]"
 
-        return " ".join([
-            self._render(v) for v in [p[:2], p[2:]]
-        ])
+        return " ".join([self._render(v) for v in [p[:2], p[2:]]])

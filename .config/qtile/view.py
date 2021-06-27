@@ -5,7 +5,6 @@ import custom
 import variables
 from grouper import make_class_matcher
 
-
 # color indexes
 focused = 2
 graph = 3
@@ -21,6 +20,7 @@ def make_floating(cls, d):
 def click_spawner(cmd):
     def _spawn():
         qtile.cmd_spawn(cmd)
+
     return _spawn
 
 
@@ -35,13 +35,8 @@ def make_layouts(theme, floaters, tiles_margin=5):
     return (
         [
             layout.Max(**defaults),
-            layout.Tile(
-                add_after_last=True,
-                margin=tiles_margin,
-                **defaults),
-            layout.VerticalTile(
-                margin=tiles_margin,
-                **defaults),
+            layout.Tile(add_after_last=True, margin=tiles_margin, **defaults),
+            layout.VerticalTile(margin=tiles_margin, **defaults),
             layout.Floating(**defaults),
         ],
         make_floating(floaters, defaults),
@@ -69,7 +64,7 @@ def graph_defaults(color, border, width, border_width=1, margin_x=2):
         border_color=border,
         border_width=border_width,
         fill_color="{}.3".format(color),
-        samples=width - (border_width*2 + margin_x),
+        samples=width - (border_width * 2 + margin_x),
     )
 
 
@@ -86,35 +81,28 @@ def make_box_wigets(theme):
     fc = theme.colors[focused]
 
     return [
-        widget.GenPollText(
-            func=custom.markup.UptimeFunc(fc),
-            update_interval=30),
-
-        widget.DF(
-            partition="/home",
-            format=custom.markup.DiskFree(fc),
-            warn_space=5,
-            warn_color=theme.important,
-            visible_on_warn=False,
-            mouse_callbacks={
-                "Button1": click_spawner(variables.CMD_NCDU),
-            }),
-
-        widget.DF(
-            partition="/",
-            format=custom.markup.DiskFree(fc),
-            warn_space=5,
-            warn_color=theme.important),
-
+        widget.GenPollText(func=custom.markup.UptimeFunc(fc),
+                           update_interval=30),
+        widget.DF(partition="/home",
+                  format=custom.markup.DiskFree(fc),
+                  warn_space=5,
+                  warn_color=theme.important,
+                  visible_on_warn=False,
+                  mouse_callbacks={
+                      "Button1": click_spawner(variables.CMD_NCDU),
+                  }),
+        widget.DF(partition="/",
+                  format=custom.markup.DiskFree(fc),
+                  warn_space=5,
+                  warn_color=theme.important),
         widget.Spacer(length=3),
-
-        custom.VolumeIndicator(
-            foreground=fc,
-            active_color=theme.foreground,
-            update_interval=0.3,
-            mouse_callbacks={
-                "Button1": click_spawner(variables.CMD_MIXER),
-            }),
+        custom.VolumeIndicator(foreground=fc,
+                               active_color=theme.foreground,
+                               update_interval=0.3,
+                               mouse_callbacks={
+                                   "Button1":
+                                   click_spawner(variables.CMD_MIXER),
+                               }),
     ]
 
 
@@ -136,41 +124,28 @@ def make_main_bar_widgets(theme):
             disable_drag=True,
             use_mouse_wheel=False,
         ),
-
         custom.WindowCount(show_zero=True),
-
         sep,
-
         widget.WindowName(),
         widget.Chord(fmt="[:. {} .:]", foreground=ac),
-
         sep,
-
-        widget.WidgetBox(
-            foreground=fc,
-            text_open=" > ",
-            text_closed=" < ",
-            close_button_location="right",
-            widgets=make_box_wigets(theme)),
-
+        widget.WidgetBox(foreground=fc,
+                         text_open=" > ",
+                         text_closed=" < ",
+                         close_button_location="right",
+                         widgets=make_box_wigets(theme)),
         widget.CPUGraph(**graph_defaults(ac, fc, 22)),
-
         widget.MemoryGraph(**graph_defaults(gc, fc, 22)),
-
         widget.ThermalSensor(
             foreground=theme.foreground,
             foreground_alert=theme.important,
         ),
-
         sep,
-
         widget.Systray(
             icon_size=16,
             padding=4,
         ),
-
         widget.Spacer(length=4),
-
         custom.CapsNumLockIndicator(
             foreground=fc,
             active_color=ac,
@@ -178,22 +153,18 @@ def make_main_bar_widgets(theme):
             padding=1,
             margin=0,
         ),
-
         widget.KeyboardKbdd(
             fmt=custom.markup.Bold("{}"),
             configured_keyboards=["US", "RU"],
             update_interval=0.3,
         ),
-
         sep,
-
         custom.ClockWidget(
             fontsize=theme.fontlarge,
             foreground=fc,
             clock=theme.foreground,
             holiday=ac,
         ),
-
         widget.CurrentLayoutIcon(
             padding=0,
             scale=0.6,

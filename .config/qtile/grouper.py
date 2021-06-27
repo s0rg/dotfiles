@@ -9,7 +9,6 @@ from libqtile.config import (
 )
 from libqtile.log_utils import logger
 
-
 height_key = "height"
 height_default = 0.9
 
@@ -32,7 +31,7 @@ class Navigator():
             return []
 
         head = self._names[:idx]
-        tail = self._names[idx+1:]
+        tail = self._names[idx + 1:]
 
         if head:
             head = list(reversed(head))
@@ -64,12 +63,13 @@ def lower_all(it):
     return [s.lower() for s in it]
 
 
-def make_groups(apps,
-                mod_key,
-                mov_key=None, # key to move windows between groups
-                drops=None,
-                scratchpad="drops",
-                scratchpad_key="d"):
+def make_groups(
+        apps,
+        mod_key,
+        mov_key=None,  # key to move windows between groups
+        drops=None,
+        scratchpad="drops",
+        scratchpad_key="d"):
     groups, grkeys, known = [], [], []
     known_classes = frozenset()
 
@@ -97,7 +97,8 @@ def make_groups(apps,
         groups.append(Group(name, **args))
         grkeys.append(Key([mod_key], str(i), lazy.screen.toggle_group(name)))
         if mov_key is not None:
-            grkeys.append(Key([mod_key, mov_key], str(i), lazy.window.togroup(name)))
+            grkeys.append(
+                Key([mod_key, mov_key], str(i), lazy.window.togroup(name)))
 
     # update `known_classes` value for later use in `_app_matcher`.
     known_classes = frozenset(known)
@@ -108,13 +109,16 @@ def make_groups(apps,
             height = d.get(height_key, height_default)
             name = "{}-{}".format(scratchpad, i)
 
-            items.append(DropDown(name, d["command"], **make_drop_defaults(height)))
-            key = Key([], str(i),
+            items.append(
+                DropDown(name, d["command"], **make_drop_defaults(height)))
+            key = Key([],
+                      str(i),
                       lazy.group[scratchpad].dropdown_toggle(name),
                       desc="Toggle {} drop-down".format(i))
             keys.append(key)
 
         groups.append(ScratchPad(scratchpad, items))
-        grkeys.append(KeyChord([mod_key], scratchpad_key, keys, mode=scratchpad))
+        grkeys.append(
+            KeyChord([mod_key], scratchpad_key, keys, mode=scratchpad))
 
     return (groups, grkeys)
