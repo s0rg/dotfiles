@@ -1,0 +1,5 @@
+#!/bin/bash
+
+wal -n -t -q -i "$@" -o wal-post-exec.sh
+
+#vi:ft=bash

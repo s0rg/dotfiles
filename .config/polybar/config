@@ -1,0 +1,195 @@
+[settings]
+screenchange-reload = true
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+[colors]
+background = ${xrdb:color0:#222}
+background-alt = ${xrdb:color8:#444}
+foreground = ${xrdb:color2:#fff}
+foreground-alt = ${xrdb:color6:#eee}
+alert = ${xrdb:color4:#f00}
+
+[bar/mybar]
+width = 100%
+height = 20
+radius = 0.0
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 1
+
+border-size = 0
+border-color = ${colors.background}
+
+padding-left = 0
+padding-right = 1
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = ubuntumono nerd font mono:pixelsize=9;1
+font-1 = ubuntumono nerd font mono:pixelsize=14;1
+
+modules-left = i3
+modules-center = xwindow
+modules-right = temperature cpu memory filesystem backlight pulseaudio xkeyboard date
+
+tray-position = right
+tray-padding = 1
+
+wm-restack = i3
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/xwindow]
+type = internal/xwindow
+format-padding = 1
+label = %title%
+label-maxlen = 120
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = scroll lock
+format = <label-layout> <label-indicator>
+
+label-layout = %icon%
+label-layout-padding = 0
+
+label-indicator = %icon%
+label-indicator-padding = 0
+label-indicator-margin = 0
+
+layout-icon-default =
+layout-icon-0 = ru;RU
+layout-icon-1 = us;US
+
+indicator-icon-default =
+indicator-icon-0 = caps lock;;CAP
+indicator-icon-1 = scroll lock;;+SL
+indicator-icon-2 = num lock;;NUM
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+mount-0 = /home
+label-mounted = %mountpoint%: %percentage_used%%
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+enable-click = false
+enable-scroll = false
+pin-workspaces = true
+
+label-mode-padding = 2
+label-mode-foreground = ${colors.foreground-alt}
+label-mode-underline = ${colors.foreground-alt}
+
+; focused = Active workspace on focused monitor
+label-focused = [%index%]
+label-focused-foreground = ${colors.foreground-alt}
+label-focused-padding = 0
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-padding = 1
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index%
+label-urgent-background = ${colors.alert}
+label-urgent-foreground = ${colors.background}
+label-urgent-padding = 1
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format = <label>
+label = %{T2}%{T-} %percentage-sum:2%%
+
+[module/memory]
+type = internal/memory
+interval = 2
+format = <label>
+label = %{T2}%{T-} %percentage_used:2%%
+
+[module/date]
+type = internal/date
+interval = 2
+date = "%a %Y-%m-%d"
+time = %H:%M
+label = %date% %time%
+
+[module/pulseaudio]
+type = internal/pulseaudio
+format-volume = <label-volume>
+label-volume = %{T2}墳%{T-} %percentage%%
+label-muted = %{T2}婢%{T-}
+sink = @DEFAULT_SINK@
+use-ui-max = false
+click-right = pavucontrol-qt
+
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+use-actual-brightness = true
+format = <label>
+label = %{T2}%{T-} %percentage%%
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 98
+
+format-charging = <animation-charging> <label-charging>
+
+format-discharging = <animation-discharging> <label-discharging>
+;format-discharging-underline = ${self.format-charging-underline}
+
+format-full-prefix = " "
+;format-full-prefix-foreground = ${colors.foreground-alt}
+;format-full-underline = ${self.format-charging-underline}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+;ramp-capacity-foreground = ${colors.foreground-alt}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+;animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-framerate = 750
+
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+;animation-discharging-foreground = ${colors.foreground-alt}
+animation-discharging-framerate = 750
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input
+
+label = %temperature-c%
+format = <label>
+
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.foreground-alt}
+label-warn-underline = ${colors.alert}
+format-warn = <label-warn>
+
+; vim:ft=dosini

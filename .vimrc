@@ -226,3 +226,19 @@ nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 autocmd BufWritePre * %s/\s\+$//e
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Disable arrow keys in Normal mode
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" no <Up> <Nop>
+" no <Down> <Nop>
+" no <Left> <Nop>
+" no <Right> <Nop>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Disable arrow keys in Insert mode
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ino <Up> <Nop>
+" ino <Down> <Nop>
+" ino <Left> <Nop>
+" ino <Right> <Nop>

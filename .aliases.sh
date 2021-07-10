@@ -12,13 +12,15 @@ alias ncdu='ncdu --color dark'
 # tools
 alias v="vim"
 alias mc="mc -d"
-alias tailf="tail -f"
+alias tailf="tail -f --retry"
 alias wttr='curl http://wttr.in/?format="%c:+%f+%w\n"'
 alias ru-tran="trans :ru"
 alias cal="echo;ncal -3;echo"
+alias lt="exa --icons --group-directories-first --tree --level=2 --git-ignore"
+alias lx="exa --icons --group-directories-first --long --header --git --colour-scale --time-style=long-iso"
 
 # python shortcuts
-alias bp="bpython-curses"
+alias bp="bpython"
 alias py="python3"
 alias py-serve="python3 -m http.server"
 
@@ -50,8 +52,8 @@ alias qhome="cd $HOME/.config/qtile"
 
 # dotfiles management
 alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
-# add some auto-complete words
-complete -D -W "add status commit push log checkout diff" -o bashdefault -o default dotfiles
+# add auto-complete
+complete -W "add status commit push log checkout diff" dotfiles
 
 # create a new directory and enter it
 mkd() { mkdir -p "$@" && cd "$@" || exit; }

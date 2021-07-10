@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+import sys
+import socket
+
+import psutil
+
+
+def get_ip4(name, addrs):
+    for a in addrs.get(name, []):
+        if a.family != socket.AF_INET:
+            continue
+        if a.broadcast is None:
+            continue
+        yield (a.address, a.netmask, a.broadcast)
+
+
+def main():
+    ifaces = psutil.net_if_stats()
+    iaddrs = psutil.net_if_addrs()
+
+    for iface, stat in ifaces.items():
+        if not stat.isup:
+            continue
+        for addr, mask, bcast in get_ip4(iface, iaddrs):
+            print(
+                f'{iface}:\n\tip:   {addr}\n\tmask: {mask}\n\tbroadcast: {bcast}\n'
+            )
+
+    return 0
+
+
+sys.exit(main())
+
+#vim:ft=py3

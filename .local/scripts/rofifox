@@ -9,7 +9,6 @@ from operator import itemgetter
 import rofi_menu
 
 BROWSER = "firefox"
-COMMAND = "rofi -show rfox -modi rfox:" + path.realpath(__file__)
 
 CACHE_PATH = path.expanduser("~/.cache/rofifox/")
 CACHE_NAME = "profiles.json"

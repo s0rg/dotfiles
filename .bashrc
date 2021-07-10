@@ -6,12 +6,14 @@ esac
 # common history for all sessions
 export SHELL_SESSION_HISTORY=0
 
-HISTSIZE=5000
-HISTFILESIZE=5000
-HISTCONTROL=ignoreboth
+export HISTSIZE=5000
+export HISTFILESIZE=5000
+export HISTCONTROL=ignoreboth
 
 shopt -s histappend
-shopt -u checkwinsize
+shopt -s checkwinsize
+shopt -s globstar
+shopt -s autocd
 
 # say no to flow control
 stty -ixon
@@ -70,8 +72,15 @@ export GOPATH=$HOME/projects/go
 
 export MTR_OPTIONS=-t
 
+export FZF_COMPLETION_OPTS='--border --info=inline'
+export FZF_DEFAULT_OPTS="--ansi \
+    --height=80% \
+    --border \
+    --padding 0 \
+    --preview 'bat --line-range :300 {}'"
+export FZF_DEFAULT_COMMAND='rg --files --column --line-number --no-heading --color=always --smart-case '
+
 export QT_QPA_PLATFORMTHEME=qt5ct
-export CALIBRE_USE_DARK_PALETTE=1
 
 export PATH=$PATH:/usr/local/go${GOVERSION}/bin:${GOPATH}/bin:/snap/bin:$HOME/Telegram
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig

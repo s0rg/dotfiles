@@ -1,0 +1,40 @@
+#!/usr/bin/env python3
+
+import sys
+import docker
+
+
+def get_container_addrs(c):
+    rv = []
+
+    nets = c.attrs["NetworkSettings"]["Networks"]
+    for k, v in nets.items():
+        rv.append((k, v["IPAddress"]))
+
+    return sorted(rv, key=lambda n: n[0])
+
+
+def main(args):
+    if len(args) != 2:
+        print("not enough args!")
+        return 1
+
+    client = docker.from_env()
+    container = client.containers.get(args[1])
+
+    name = container.name
+    addrs = list(get_container_addrs(container))
+
+    if len(addrs) == 1:
+        print("{} ip: {}".format(name, addrs[0][1]))
+        return 0
+
+    print("{} addrs:".format(name))
+    for net, addr in addrs:
+        print("\t{}: {}".format(net, addr))
+
+    return 0
+
+
+sys.exit(main(sys.argv))
+#vi:syntax=py3

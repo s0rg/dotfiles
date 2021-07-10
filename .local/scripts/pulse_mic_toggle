@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+#vim:ft=py3
+from pulsectl import Pulse
+
+import notify
+
+msg_id = 1000
+
+client_name = "pulse-mic-toggle"
+mic_norm = "<span font='32'>\uF130</span>"
+mic_muted = "<span font='32'>\uF131</span>"
+
+
+def first_by_name(name, it):
+    for v in it:
+        if v.name == name:
+            return v
+    return None
+
+
+def main():
+    with Pulse(client_name) as p:
+        srv = p.server_info()
+        mic = first_by_name(
+            srv.default_source_name,
+            p.source_list(),
+        )
+        p.mute(mic, not mic.mute)
+        m = mic_muted if mic.mute else mic_norm
+        notify.send(client_name, "state", m, msg_id=msg_id)
+
+
+if __name__ == '__main__':
+    main()
