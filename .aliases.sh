@@ -46,10 +46,6 @@ alias kitty-up="curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/s
 alias ssh="kitty +kitten ssh"
 alias icat="kitty +kitten icat"
 
-# qtile shortcuts
-alias qtail="tail -f $HOME/.local/share/qtile/qtile.log"
-alias qhome="cd $HOME/.config/qtile"
-
 # dotfiles management
 alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 # add auto-complete
