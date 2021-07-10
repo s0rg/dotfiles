@@ -11,9 +11,9 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
 - music: `cmus`
 - menus: `rofi`
 - terminal: `kitty`
-- media auto-mount: `udiskie`
 - notifications: `dunst`
 - theme generation: `pywal`
+- media auto-mount: `udiskie`
 
 # example screenshot
 ![screenshot](https://github.com/s0rg/dotfiles/blob/master/.config/qtile/screenshot.png)
