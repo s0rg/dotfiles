@@ -26,21 +26,22 @@ line-size = 1
 border-size = 0
 border-color = ${colors.background}
 
-padding-left = 0
+padding-left = 1
 padding-right = 1
 
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = ubuntumono nerd font mono:pixelsize=9;1
-font-1 = ubuntumono nerd font mono:pixelsize=14;1
+font-0 = ubuntumono nerd font mono:pixelsize=9;0
+font-1 = ubuntumono nerd font mono:pixelsize=16;2
 
-modules-left = i3
-modules-center = xwindow
+modules-left = i3 xwindow
+modules-center =
 modules-right = temperature cpu memory filesystem backlight pulseaudio xkeyboard date
 
 tray-position = right
-tray-padding = 1
+tray-padding = 0
+tray-offset-y = -2
 
 wm-restack = i3
 
@@ -115,7 +116,7 @@ label-urgent-padding = 1
 type = internal/cpu
 interval = 2
 format = <label>
-label = %{T2}%{T-} %percentage-sum:2%%
+label = %{T2}%{T-} %percentage:2%%
 
 [module/memory]
 type = internal/memory
@@ -128,7 +129,7 @@ type = internal/date
 interval = 2
 date = "%a %Y-%m-%d"
 time = %H:%M
-label = %date% %time%
+label = %{T2}%{T-} %date% %time%
 
 [module/pulseaudio]
 type = internal/pulseaudio

@@ -1,48 +1,67 @@
 # i3 config file (v4)
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
 # vim: filetype=i3config
 
 set $mod  Mod4
+set $ctrl Control
 set $term kitty
 
+set $vol_step 5%
+set $bri_step 10
+
+floating_modifier             $mod
 workspace_layout              tabbed
 workspace_auto_back_and_forth no
 focus_wrapping                workspace
 default_border                none
+default_floating_border       none
 default_orientation           horizontal
-floating_modifier             $mod
 show_marks                    no
-
+focus_follows_mouse           no
+hide_edge_borders             both
+mouse_warping                 none
 
 ## KEYS
 
-mode "rofi" {
-    bindsym r exec --no-startup-id "rofi -show combi -display-combi 'run '"
-    bindsym w exec --no-startup-id "rofi -show window -display-window 'win '"
-    bindsym f exec --no-startup-id "rofi -show rfox -modi rfox:~/.local/scripts/rofifox"
-    bindsym q exec --no-startup-id "rofi -show roff -modi roff:~/.local/scripts/rofioff"
+mode "$rofi" {
+    bindsym r exec --no-startup-id "rofi -show combi -display-combi 'run '", mode "default"
+    bindsym w exec --no-startup-id "rofi -show window -display-window 'win '", mode "default"
+    bindsym f exec --no-startup-id "rofi -show rfox -modi rfox:~/.local/scripts/rofifox", mode "default"
+    bindsym q exec --no-startup-id "rofi -show roff -modi roff:~/.local/scripts/rofioff", mode "default"
 
     bindsym Escape mode "default"
 }
 
-mode "window" {
-    bindsym k kill
-    bindsym f fullscreen toggle
-    bindsym v floating toggle
-    bindsym x exec --no-startup-id xkill
+set $rofi rofi:: [r]un [w]in [f]ox [q]uit
+
+mode "$window" {
+    bindsym k kill, mode "default"
+    bindsym f fullscreen toggle, mode "default"
+    bindsym l floating toggle, mode "default"
+    bindsym s sticky toggle, mode "default"
+    bindsym x exec --no-startup-id xkill, mode "default"
 
     bindsym Escape mode "default"
 }
 
-mode "toggle" {
-    bindsym t exec --no-startup-id touchpad_toggle
-    bindsym m exec --no-startup-id pulse_mic_toggle
-    bindsym r exec --no-startup-id pkill -USR1 redshift
+set $window window:: [k]ill [x]kill [f]ull f[l]oat [s]ticky
+
+mode "$toggle" {
+    bindsym t exec --no-startup-id touchpad_toggle, mode "default"
+    bindsym m exec --no-startup-id pulse_mic_toggle, mode "default"
+    bindsym r exec --no-startup-id pkill -USR1 redshift, mode "default"
+
+    bindsym d exec --no-startup-id dunstctl set-paused toggle, mode "default"
+    bindsym n exec --no-startup-id dunstctl close-all, mode "default"
 
     bindsym Escape mode "default"
 }
+
+set $toggle toggle:: [t]ouchpad [m]ic [r]edshift [d]unst [n]otifies
 
 # start a terminal
-bindsym $mod+Return     exec $term
+bindsym $mod+Return     exec $term, focus
 
 # window navigation
 bindsym $mod+Down       focus left
@@ -53,29 +72,32 @@ bindsym $mod+Right      workspace prev
 bindsym $mod+Left       workspace next
 
 # modes
-bindsym $mod+r          mode "rofi"
-bindsym $mod+w          mode "window"
-bindsym $mod+t          mode "toggle"
+bindsym $mod+r          mode "$rofi"
+bindsym $mod+w          mode "$window"
+bindsym $mod+t          mode "$toggle"
+
+bindsym $mod+$ctrl+r    restart
 
 # media keys
-bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +$vol_step
+bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -$vol_step
 bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioPlay         exec --no-startup-id cmus-remote --pause
 bindsym XF86AudioNext         exec --no-startup-id cmus-remote --next
 bindsym XF86AudioPrev         exec --no-startup-id cmus-remote --prev
-bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc 5
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
-bindsym Print                 exec --no-startup-id flameshot gui
-bindsym Print+Control         exec --no-startup-id flameshot full -c
+bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc $bri_step
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec $bri_step
 
-# reload the configuration file
-bindsym $mod+Control+c  reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Control+r  restart
+bindsym Print                 exec --no-startup-id i3-scrot --desk
+bindsym Shift+Print           exec --no-startup-id i3-scrot --window
+
+# scratchpads
+bindsym $mod+c [instance="cmus"] scratchpad show
+
 
 ## WINDOW RULES
 
+for_window [urgent=latest]               focus
 for_window [class="^.*"]                 border none
 for_window [class="^pavucontrol-qt$"]    floating enable
 for_window [class="^zoom$"]              floating enable
@@ -93,7 +115,12 @@ for_window [window_type="dropdown_menu"] floating enable
 for_window [window_type="popup_menu"]    floating enable
 for_window [window_type="tooltip"]       floating enable
 for_window [window_type="dock"]          floating enable
+for_window [instance="cmus"]             move scratchpad
 
+# for_window [instance="cmus"]             move position px 25px 25px, \
+#                                         resize shrink height 300px, \
+#                                         resize grow width 683px, \
+#                                         move scratchpad
 
 ## WORKSPACES
 
@@ -150,7 +177,6 @@ set_from_resource             $bg i3wm.color0 #000000
 set_from_resource             $fg i3wm.color2 #00FF00
 
 client.focused                $bg $fg $bg $bg $bg
-
 client.focused_inactive       $bg $bg $bg $bg $bg
 client.unfocused              $bg $bg $bg $bg $bg
 client.placeholder            $bg $bg $bg $bg $bg
@@ -164,7 +190,7 @@ exec --no-startup-id systemctl --user import-environment DISPLAY
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-fancy
 
 exec --no-startup-id setxkbmap -model pc105 -layout us,ru -option terminate:ctrl_alt_bksp,grp:ctrl_shift_toggle
-exec --no-startup-id xset m 20/10 10 r rate 400 30 b on s 600
+exec --no-startup-id xset m 20/10 10 r rate 350 30 b on s 600
 
 exec --no-startup-id /usr/libexec/geoclue-2.0/demos/agent
 exec --no-startup-id wal -R
@@ -178,5 +204,5 @@ exec --no-startup-id kbdd
 exec --no-startup-id udiskie
 
 # first terminal
-exec $term
-
+exec --no-startup-id $term
+#exec --no-startup-id -name cmus $term cmus
