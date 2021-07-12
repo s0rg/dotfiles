@@ -3,10 +3,11 @@
 
 # vim: filetype=i3config
 
+# win key
 set $mod            Mod4
 set $ctrl           Control
-set $term           kitty
 
+set $term           kitty
 set $vol_step       5%
 set $vol_sink       @DEFAULT_SINK@
 set $bri_step       10
@@ -108,10 +109,14 @@ bindsym $mod+c                [instance="^cmus$"] $show_pad
 
 ## WINDOW RULES
 
+# borders
+for_window [class="^.*"]                       border none
+
+# focus
 for_window [urgent=latest]                     focus
 for_window [class="^kitty$"]                   focus
 
-for_window [class="^.*"]                       border none
+# auto-floaters
 for_window [class="^pavucontrol-qt$"]          $float_on
 for_window [class="^zoom$"]                    $float_on
 for_window [window_role="pop-up"]              $float_on
@@ -128,7 +133,14 @@ for_window [window_type="dropdown_menu"]       $float_on
 for_window [window_type="popup_menu"]          $float_on
 for_window [window_type="tooltip"]             $float_on
 for_window [window_type="dock"]                $float_on
-for_window [class="^kitty$" instance="^cmus$"] $float_on; $center; $move_pad
+
+# scratchpad
+for_window [class="^kitty$" instance="^cmus$"] mark pad
+
+for_window [con_mark="pad"] $float_on, $center, $move_pad
+
+# sticky picture-in-picture
+for_window [class="^Firefox$" title="^Picture-in-Picture$"] $float_on, sticky enable
 
 
 ## WORKSPACES
@@ -171,6 +183,8 @@ assign [class="^okular$"]         $ws4
 assign [class="^pcmanfm-qt$"]     $ws4
 assign [class="^qimgv$"]          $ws4
 assign [class="^featherpad$"]     $ws4
+assign [class="^Steam$"]          $ws4
+assign [title="^Steam$"]          $ws4
 
 # zoom
 assign [class="^zoom$"]           $ws5
@@ -196,11 +210,12 @@ client.background             $bg
 exec --no-startup-id systemctl --user import-environment DISPLAY
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-fancy
 
+exec --no-startup-id /usr/libexec/geoclue-2.0/demos/agent
+
 exec --no-startup-id setxkbmap -model pc105 -layout us,ru -option terminate:ctrl_alt_bksp,grp:ctrl_shift_toggle
 exec --no-startup-id xset m 20/10 10 r rate 350 30 b on s 600
 
-exec --no-startup-id /usr/libexec/geoclue-2.0/demos/agent
-exec --no-startup-id wal -R
+exec --no-startup-id wal -R -n
 exec --no-startup-id feh --no-fehbg --bg-fill ~/.config/i3/wall.png
 
 exec --no-startup-id nm-applet
