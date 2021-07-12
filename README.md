@@ -10,10 +10,12 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
 - editor: `vim`
 - music: `cmus`
 - menus: `rofi`
+- panel: `polybar`
 - terminal: `kitty`
 - notifications: `dunst`
 - theme generation: `pywal`
 - media auto-mount: `udiskie`
+- font: `ubuntu mono nerd font`
 
 # example screenshot
 ![screenshot](https://github.com/s0rg/dotfiles/blob/master/.config/i3/screenshot.png)
