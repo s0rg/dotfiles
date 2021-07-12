@@ -14,7 +14,7 @@ alert = ${xrdb:color4:#f00}
 
 [bar/mybar]
 width = 100%
-height = 20
+height = 22
 radius = 0.0
 fixed-center = false
 
@@ -36,12 +36,12 @@ font-0 = ubuntumono nerd font mono:pixelsize=9;0
 font-1 = ubuntumono nerd font mono:pixelsize=16;2
 
 modules-left = i3 xwindow
-modules-center =
+modules-center = cmus
 modules-right = temperature cpu memory filesystem backlight pulseaudio xkeyboard date
 
 tray-position = right
-tray-padding = 0
-tray-offset-y = -2
+tray-padding = 1
+tray-maxsize = 12
 
 wm-restack = i3
 
@@ -63,6 +63,7 @@ label-layout = %icon%
 label-layout-padding = 0
 
 label-indicator = %icon%
+label-indicator-foreground = ${colors.foreground-alt}
 label-indicator-padding = 0
 label-indicator-margin = 0
 
@@ -72,8 +73,7 @@ layout-icon-1 = us;US
 
 indicator-icon-default =
 indicator-icon-0 = caps lock;;CAP
-indicator-icon-1 = scroll lock;;+SL
-indicator-icon-2 = num lock;;NUM
+indicator-icon-1 = num lock;;NUM
 
 [module/filesystem]
 type = internal/fs
@@ -92,12 +92,12 @@ pin-workspaces = true
 
 label-mode-padding = 2
 label-mode-foreground = ${colors.foreground-alt}
-label-mode-underline = ${colors.foreground-alt}
 
 ; focused = Active workspace on focused monitor
-label-focused = [%index%]
+label-focused = %index%
 label-focused-foreground = ${colors.foreground-alt}
-label-focused-padding = 0
+label-focused-overline = ${colors.foreground-alt}
+label-focused-padding = 1
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
@@ -190,7 +190,15 @@ format = <label>
 
 label-warn = %temperature-c%
 label-warn-foreground = ${colors.foreground-alt}
-label-warn-underline = ${colors.alert}
+label-warn-overline = ${colors.alert}
 format-warn = <label-warn>
+
+[module/cmus]
+type = custom/script
+exec = ~/.config/polybar/cmus.sh
+exec-if = pgrep -x cmus
+interval = 1
+label-maxlen = 100
+click-left = cmus-remote --pause
 
 ; vim:ft=dosini

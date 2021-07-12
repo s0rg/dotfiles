@@ -3,62 +3,71 @@
 
 # vim: filetype=i3config
 
-set $mod  Mod4
-set $ctrl Control
-set $term kitty
+set $mod            Mod4
+set $ctrl           Control
+set $term           kitty
 
-set $vol_step 5%
-set $bri_step 10
+set $vol_step       5%
+set $vol_sink       @DEFAULT_SINK@
+set $bri_step       10
 
-floating_modifier             $mod
-workspace_layout              tabbed
+set $run            exec --no-startup-id
+set $mode_reset     mode "default"
+set $float_on       floating enable
+set $center         move position 10 ppt 10 ppt; resize set 80 ppt 80 ppt
+set $move_pad       move scratchpad
+set $show_pad       scratchpad show
+
+floating_modifier       $mod
+workspace_layout        tabbed
+
+default_border          none
+default_floating_border none
+default_orientation     horizontal
+
+hide_edge_borders       both
+
+show_marks              no
+focus_follows_mouse     no
+mouse_warping           none
+focus_wrapping          workspace
+
 workspace_auto_back_and_forth no
-focus_wrapping                workspace
-default_border                none
-default_floating_border       none
-default_orientation           horizontal
-show_marks                    no
-focus_follows_mouse           no
-hide_edge_borders             both
-mouse_warping                 none
 
 ## KEYS
 
+set $rofi rofi [r]un [w]in [f]ox [q]uit
 mode "$rofi" {
-    bindsym r exec --no-startup-id "rofi -show combi -display-combi 'run '", mode "default"
-    bindsym w exec --no-startup-id "rofi -show window -display-window 'win '", mode "default"
-    bindsym f exec --no-startup-id "rofi -show rfox -modi rfox:~/.local/scripts/rofifox", mode "default"
-    bindsym q exec --no-startup-id "rofi -show roff -modi roff:~/.local/scripts/rofioff", mode "default"
+    bindsym r $run "rofi -show combi -display-combi 'run '",              $mode_reset
+    bindsym w $run "rofi -show window -display-window 'win '",            $mode_reset
+    bindsym f $run "rofi -show rfox -modi rfox:~/.local/scripts/rofifox", $mode_reset
+    bindsym q $run "rofi -show roff -modi roff:~/.local/scripts/rofioff", $mode_reset
 
-    bindsym Escape mode "default"
+    bindsym Escape $mode_reset
 }
 
-set $rofi rofi:: [r]un [w]in [f]ox [q]uit
-
+set $window window [k]ill [x]kill [f]ull f[l]oat [s]ticky
 mode "$window" {
-    bindsym k kill, mode "default"
-    bindsym f fullscreen toggle, mode "default"
-    bindsym l floating toggle, mode "default"
-    bindsym s sticky toggle, mode "default"
-    bindsym x exec --no-startup-id xkill, mode "default"
+    bindsym k kill,              $mode_reset
+    bindsym f fullscreen toggle, $mode_reset
+    bindsym l floating toggle,   $mode_reset
+    bindsym s sticky toggle,     $mode_reset
+    bindsym x $run xkill,        $mode_reset
 
-    bindsym Escape mode "default"
+    bindsym Escape $mode_reset
 }
 
-set $window window:: [k]ill [x]kill [f]ull f[l]oat [s]ticky
-
+set $toggle toggle [t]ouchpad [m]ic [r]edshift [d]unst [n]otifies
 mode "$toggle" {
-    bindsym t exec --no-startup-id touchpad_toggle, mode "default"
-    bindsym m exec --no-startup-id pulse_mic_toggle, mode "default"
-    bindsym r exec --no-startup-id pkill -USR1 redshift, mode "default"
+    bindsym t $run touchpad_toggle,            $mode_reset
+    bindsym m $run pulse_mic_toggle,           $mode_reset
+    bindsym r $run pkill -USR1 redshift,       $mode_reset
 
-    bindsym d exec --no-startup-id dunstctl set-paused toggle, mode "default"
-    bindsym n exec --no-startup-id dunstctl close-all, mode "default"
+    bindsym d $run dunstctl set-paused toggle, $mode_reset
+    bindsym n $run dunstctl close-all,         $mode_reset
 
-    bindsym Escape mode "default"
+    bindsym Escape $mode_reset
 }
-
-set $toggle toggle:: [t]ouchpad [m]ic [r]edshift [d]unst [n]otifies
 
 # start a terminal
 bindsym $mod+Return     exec $term, focus
@@ -79,53 +88,51 @@ bindsym $mod+t          mode "$toggle"
 bindsym $mod+$ctrl+r    restart
 
 # media keys
-bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +$vol_step
-bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -$vol_step
-bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioPlay         exec --no-startup-id cmus-remote --pause
-bindsym XF86AudioNext         exec --no-startup-id cmus-remote --next
-bindsym XF86AudioPrev         exec --no-startup-id cmus-remote --prev
-bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc $bri_step
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec $bri_step
+bindsym XF86AudioRaiseVolume  $run pactl set-sink-volume $vol_sink +$vol_step
+bindsym XF86AudioLowerVolume  $run pactl set-sink-volume $vol_sink -$vol_step
+bindsym XF86AudioMute         $run pactl set-sink-mute $vol_sink toggle
 
-bindsym Print                 exec --no-startup-id i3-scrot --desk
-bindsym Shift+Print           exec --no-startup-id i3-scrot --window
+bindsym XF86AudioPlay         $run cmus-remote --pause
+bindsym XF86AudioNext         $run cmus-remote --next
+bindsym XF86AudioPrev         $run cmus-remote --prev
+
+bindsym XF86MonBrightnessUp   $run xbacklight -inc $bri_step
+bindsym XF86MonBrightnessDown $run xbacklight -dec $bri_step
+
+bindsym Print                 $run i3-scrot --desk
+bindsym $ctrl+Print           $run i3-scrot --window
 
 # scratchpads
-bindsym $mod+c [instance="cmus"] scratchpad show
+bindsym $mod+c                [instance="^cmus$"] $show_pad
 
 
 ## WINDOW RULES
 
-for_window [urgent=latest]               focus
-for_window [class="^.*"]                 border none
-for_window [class="^pavucontrol-qt$"]    floating enable
-for_window [class="^zoom$"]              floating enable
-for_window [window_role="pop-up"]        floating enable
-for_window [window_role="bubble"]        floating enable
-for_window [window_role="task_dialog"]   floating enable
-for_window [window_role="Preferences"]   floating enable
-for_window [window_type="dialog"]        floating enable
-for_window [window_type="menu"]          floating enable
-for_window [window_type="notification"]  floating enable
-for_window [window_type="toolbar"]       floating enable
-for_window [window_type="splash"]        floating enable
-for_window [window_type="utility"]       floating enable
-for_window [window_type="dropdown_menu"] floating enable
-for_window [window_type="popup_menu"]    floating enable
-for_window [window_type="tooltip"]       floating enable
-for_window [window_type="dock"]          floating enable
-for_window [instance="cmus"]             move scratchpad
+for_window [urgent=latest]                     focus
+for_window [class="^kitty$"]                   focus
 
-# for_window [instance="cmus"]             move position px 25px 25px, \
-#                                         resize shrink height 300px, \
-#                                         resize grow width 683px, \
-#                                         move scratchpad
+for_window [class="^.*"]                       border none
+for_window [class="^pavucontrol-qt$"]          $float_on
+for_window [class="^zoom$"]                    $float_on
+for_window [window_role="pop-up"]              $float_on
+for_window [window_role="bubble"]              $float_on
+for_window [window_role="task_dialog"]         $float_on
+for_window [window_role="Preferences"]         $float_on
+for_window [window_type="dialog"]              $float_on
+for_window [window_type="menu"]                $float_on
+for_window [window_type="notification"]        $float_on
+for_window [window_type="toolbar"]             $float_on
+for_window [window_type="splash"]              $float_on
+for_window [window_type="utility"]             $float_on
+for_window [window_type="dropdown_menu"]       $float_on
+for_window [window_type="popup_menu"]          $float_on
+for_window [window_type="tooltip"]             $float_on
+for_window [window_type="dock"]                $float_on
+for_window [class="^kitty$" instance="^cmus$"] $float_on; $center; $move_pad
+
 
 ## WORKSPACES
 
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -196,13 +203,15 @@ exec --no-startup-id /usr/libexec/geoclue-2.0/demos/agent
 exec --no-startup-id wal -R
 exec --no-startup-id feh --no-fehbg --bg-fill ~/.config/i3/wall.png
 
-# bar
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-
 exec --no-startup-id nm-applet
 exec --no-startup-id kbdd
 exec --no-startup-id udiskie
 
+# bar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
 # first terminal
 exec --no-startup-id $term
-#exec --no-startup-id -name cmus $term cmus
+
+# cmus for scratchpad
+exec --no-startup-id $term --name cmus cmus
