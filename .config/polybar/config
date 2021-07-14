@@ -35,14 +35,15 @@ module-margin-right = 1
 font-0 = ubuntumono nerd font mono:pixelsize=9;0
 font-1 = ubuntumono nerd font mono:pixelsize=16;2
 font-2 = ubuntumono nerd font mono:pixelsize=10:style=Bold;0
+font-3 = ubuntumono nerd font mono:pixelsize=12;1
 
 modules-left = i3 xwindow
 modules-center = cmus
-modules-right = xkeyboard temperature cpu memory filesystem backlight pulseaudio date
+modules-right = xkeyboard temperature cpu memory filesystem backlight micstatus pulseaudio date
 
 tray-position = right
 tray-padding = 1
-tray-maxsize = 12
+tray-maxsize = 16
 
 wm-restack = i3
 
@@ -150,6 +151,14 @@ use-actual-brightness = true
 format = <label>
 label = %{T2}%{T-} %percentage%%
 
+[module/micstatus]
+type = custom/script
+interval = 1.0
+format = <label>
+label-foreground = ${colors.foreground}
+label-font = 4
+exec = pulse_mic --status
+
 [module/battery]
 type = internal/battery
 battery = BAT0
@@ -198,7 +207,7 @@ format-warn = <label-warn>
 
 [module/cmus]
 type = custom/script
-exec = ~/.config/polybar/cmus.sh
+exec = ~/.config/polybar/cmus_status.sh
 exec-if = pgrep -x cmus
 interval = 1
 label-maxlen = 100

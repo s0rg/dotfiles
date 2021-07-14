@@ -1,0 +1,12 @@
+#!/bin/bash
+
+cmus="cmus"
+
+if pgrep -x "$cmus" > /dev/null
+then
+    echo "$cmus is running"
+else
+    kitty --name "$cmus" "$cmus"
+fi
+
+#vim:ft=bash

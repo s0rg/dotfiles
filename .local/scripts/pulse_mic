@@ -1,0 +1,50 @@
+#!/usr/bin/env python3
+import argparse
+
+from pulsectl import Pulse
+
+import notify
+
+client_name = "pulse-mic"
+
+icon_on = "\uF130"
+icon_off = "\uF131"
+
+notify_id = 1000
+notify_span_fmt = "<span font='32'>{}</span>"
+
+parser = argparse.ArgumentParser(description=client_name + " cli tool")
+group = parser.add_mutually_exclusive_group(required=True)
+group.add_argument("--toggle", action="store_true", help="toggle status")
+group.add_argument("--status", action="store_true", help="status icon")
+
+
+def first_by_name(name, it):
+    for v in it:
+        if v.name == name:
+            return v
+    return None
+
+
+def main():
+    args = parser.parse_args()
+
+    with Pulse(client_name) as p:
+        srv = p.server_info()
+        mic = first_by_name(
+            srv.default_source_name,
+            p.source_list(),
+        )
+        if args.status:
+            print(icon_off if mic.mute else icon_on)
+        elif args.toggle:
+            p.mute(mic, not mic.mute)
+
+            notice = notify_span_fmt.format(icon_off if mic.mute else icon_on)
+            notify.send(client_name, "state", notice, msg_id=notify_id)
+
+
+if __name__ == '__main__':
+    main()
+
+#vim:ft=py3

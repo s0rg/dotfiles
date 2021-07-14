@@ -1,7 +1,16 @@
+###########################################################
+#
+#   ██╗██████╗ ██╗    ██╗███╗   ███╗
+#   ██║╚════██╗██║    ██║████╗ ████║
+#   ██║ █████╔╝██║ █╗ ██║██╔████╔██║
+#   ██║ ╚═══██╗██║███╗██║██║╚██╔╝██║
+#   ██║██████╔╝╚███╔███╔╝██║ ╚═╝ ██║
+#   ╚═╝╚═════╝  ╚══╝╚══╝ ╚═╝     ╚═╝
+#
 # i3 config file (v4)
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
-
-# vim: filetype=i3config
+#
+# Complete reference: http://i3wm.org/docs/userguide.html
+#
 
 # win key
 set $mod            Mod4
@@ -61,7 +70,7 @@ mode "$window" {
 set $toggle toggle [t]ouchpad [m]ic [r]edshift [d]unst [n]otifies
 mode "$toggle" {
     bindsym t $run touchpad_toggle,            $mode_reset
-    bindsym m $run pulse_mic_toggle,           $mode_reset
+    bindsym m $run pulse_mic --toggle,         $mode_reset
     bindsym r $run pkill -USR1 redshift,       $mode_reset
 
     bindsym d $run dunstctl set-paused toggle, $mode_reset
@@ -136,8 +145,7 @@ for_window [window_type="dock"]                $float_on
 
 # scratchpad
 for_window [class="^kitty$" instance="^cmus$"] mark pad
-
-for_window [con_mark="pad"] $float_on, $center, $move_pad
+for_window [con_mark="pad"]                    $float_on, $center, $move_pad
 
 # sticky picture-in-picture
 for_window [class="^Firefox$" title="^Picture-in-Picture$"] $float_on, sticky enable
@@ -179,12 +187,10 @@ assign [class="^qbittorrent$"]    $ws2
 assign [class="Telegram"]         $ws3
 
 # apps
-assign [class="^okular$"]         $ws4
 assign [class="^pcmanfm-qt$"]     $ws4
 assign [class="^qimgv$"]          $ws4
 assign [class="^featherpad$"]     $ws4
-assign [class="^Steam$"]          $ws4
-assign [title="^Steam$"]          $ws4
+assign [title="^Steam"]           $ws4
 
 # zoom
 assign [class="^zoom$"]           $ws5
@@ -224,9 +230,10 @@ exec --no-startup-id udiskie
 
 # bar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+# cmus for scratchpad
+exec_always --no-startup-id i3-cmus
 
 # first terminal
 exec --no-startup-id $term
 
-# cmus for scratchpad
-exec --no-startup-id $term --name cmus cmus
+# vim:ft=i3config

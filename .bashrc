@@ -62,35 +62,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
-GOVERSION='1.16'
-
-export GO111MODULE=auto
-export GOPROXY=direct
-export GOSUMDB=off
-export GOROOT=/usr/local/go${GOVERSION}
-export GOPATH=$HOME/projects/go
-
-export MTR_OPTIONS=-t
-
-export FZF_COMPLETION_OPTS='--border --info=inline'
-export FZF_DEFAULT_OPTS="--ansi \
-    --height=80% \
-    --border \
-    --padding 0 \
-    --preview 'bat --line-range :300 {}'"
-export FZF_DEFAULT_COMMAND='rg --files --column --line-number --no-heading --color=always --smart-case '
-
-export QT_QPA_PLATFORMTHEME=qt5ct
-
-export PATH=$PATH:/usr/local/go${GOVERSION}/bin:${GOPATH}/bin:/snap/bin:$HOME/Telegram
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig
-
 # local aliases - last to override any others.
-if [ -f ~/.aliases.sh ]; then
-    . ~/.aliases.sh
+if [ -f ~/.aliases ]; then
+    . ~/.aliases
 fi
 
-if [ -f ~/.aliases_local.sh ]; then
-    . ~/.aliases_local.sh
+if [ -f ~/.aliases_local ]; then
+    . ~/.aliases_local
 fi
-
