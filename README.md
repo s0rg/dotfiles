@@ -22,12 +22,11 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
 
 - http cli: [httpie](https://httpie.io/)
 - sql client: [usql](https://github.com/xo/usql)
-- faster grep: [ripgrep](https://github.com/BurntSushi/ripgrep)
+- faster `grep`: [ripgrep](https://github.com/BurntSushi/ripgrep)
 - fuzzy finder: [fzf](https://github.com/junegunn/fzf)
-- eye-candy ls: [exa](https://the.exa.website/)
+- eye-candy `ls`: [exa](https://the.exa.website/)
 - colored `cat`: [bat](https://github.com/sharkdp/bat)
-- git-diff replacement: [delta](https://github.com/dandavison/delta)
-
+- `git-diff` replacement: [delta](https://github.com/dandavison/delta)
 
 # example screenshot
 ![screenshot](https://github.com/s0rg/dotfiles/blob/master/.config/i3/screenshot.png)
