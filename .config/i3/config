@@ -1,19 +1,19 @@
 ###########################################################
 #
-#   ██╗██████╗ ██╗    ██╗███╗   ███╗
-#   ██║╚════██╗██║    ██║████╗ ████║
-#   ██║ █████╔╝██║ █╗ ██║██╔████╔██║
-#   ██║ ╚═══██╗██║███╗██║██║╚██╔╝██║
-#   ██║██████╔╝╚███╔███╔╝██║ ╚═╝ ██║
-#   ╚═╝╚═════╝  ╚══╝╚══╝ ╚═╝     ╚═╝
+#   ██╗ ██████╗  ██╗    ██╗ ███╗   ███╗
+#   ██║ ╚════██╗ ██║    ██║ ████╗ ████║
+#   ██║  █████╔╝ ██║ █╗ ██║ ██╔████╔██║
+#   ██║  ╚═══██╗ ██║███╗██║ ██║╚██╔╝██║
+#   ██║ ██████╔╝ ╚███╔███╔╝ ██║ ╚═╝ ██║
+#   ╚═╝ ╚═════╝   ╚══╝╚══╝  ╚═╝     ╚═╝
 #
 # i3 config file (v4)
 #
 # Complete reference: http://i3wm.org/docs/userguide.html
-#
 
 # win key
 set $mod            Mod4
+set $alt            Mod1
 set $ctrl           Control
 
 set $term           kitty
@@ -59,10 +59,10 @@ mode "$rofi" {
 set $window window [k]ill [x]kill [f]ull f[l]oat [s]ticky
 mode "$window" {
     bindsym k kill,              $mode_reset
-    bindsym f fullscreen toggle, $mode_reset
-    bindsym l floating toggle,   $mode_reset
-    bindsym s sticky toggle,     $mode_reset
     bindsym x $run xkill,        $mode_reset
+    bindsym s sticky toggle,     $mode_reset
+    bindsym l floating toggle,   $mode_reset
+    bindsym f fullscreen toggle, $mode_reset
 
     bindsym Escape $mode_reset
 }
@@ -73,8 +73,8 @@ mode "$toggle" {
     bindsym m $run pulse_mic --toggle,         $mode_reset
     bindsym r $run pkill -USR1 redshift,       $mode_reset
 
-    bindsym d $run dunstctl set-paused toggle, $mode_reset
     bindsym n $run dunstctl close-all,         $mode_reset
+    bindsym d $run dunstctl set-paused toggle, $mode_reset
 
     bindsym Escape $mode_reset
 }
@@ -87,10 +87,6 @@ bindsym $mod+Up         focus up
 bindsym $mod+Down       focus down
 bindsym $mod+Left       focus left
 bindsym $mod+Right      focus right
-
-# workspace navigation
-#bindsym $mod+Right      workspace prev
-#bindsym $mod+Left       workspace next
 
 # modes
 bindsym $mod+r          mode "$rofi"
@@ -118,14 +114,13 @@ bindsym $ctrl+Print           $run i3-scrot --window
 # scratchpads
 bindsym $mod+c                [instance="^cmus$"] $show_pad
 
-
 ## WINDOW RULES
 
-# focus
+# auto focus
 for_window [urgent=latest]                     focus
 for_window [class="^kitty$"]                   focus
 
-# auto-floaters
+# auto floaters
 for_window [window_role="pop-up"]              $float_on
 for_window [window_role="bubble"]              $float_on
 for_window [window_role="task_dialog"]         $float_on
@@ -150,7 +145,6 @@ for_window [class="^pavucontrol-qt$"]          $float_on
 for_window [class="^zoom$"]                    $float_on
 
 for_window [class="^Firefox$" title="^Picture-in-Picture$"] $float_on, sticky enable
-
 
 ## WORKSPACES
 
@@ -178,24 +172,23 @@ bindsym $mod+$ctrl+5 move container to workspace number $ws5
 #bindsym $mod+Shift+6 move container to workspace number $ws6
 
 # terminal
-assign [class="^kitty$"]          $ws1
+assign [class="^kitty$"]           $ws1
 
 # web
-assign [class="^Firefox$"]        $ws2
-assign [class="^Tor Browser$"]    $ws2
-assign [class="^qbittorrent$"]    $ws2
+assign [class="^Firefox$"]         $ws2
+assign [class="^Tor Browser$"]     $ws2
+assign [class="^qbittorrent$"]     $ws2
 
 # chat
-assign [class="Telegram"]         $ws3
+assign [class="^TelegramDesktop$"] $ws3
 
 # apps
-assign [class="^pcmanfm-qt$"]     $ws4
-assign [class="^featherpad$"]     $ws4
-assign [title="^Steam"]           $ws4
+assign [class="^pcmanfm-qt$"]      $ws4
+assign [class="^featherpad$"]      $ws4
+assign [title="^Steam"]            $ws4
 
 # zoom
-assign [class="^zoom$"]           $ws5
-
+assign [class="^zoom$"]            $ws5
 
 ## UI
 
@@ -203,15 +196,15 @@ assign [class="^zoom$"]           $ws5
 font                          pango:monospace 0px
 set_from_resource             $bg i3wm.color0 #000000
 set_from_resource             $fg i3wm.color2 #00FF00
+set_from_resource             $ag i3wm.color4 #0000FF
 
-# <colorclass>                <border> <background> <text> <indicator> <child_border>
-client.focused                $bg      $fg          $bg    $bg         $bg
+# <colorclass>               <border> <background> <text> <indicator> <child_border>
+client.focused                $ag      $bg          $bg    $bg         $bg
 client.focused_inactive       $bg      $bg          $bg    $bg         $bg
-client.unfocused              $bg      $bg          $bg    $bg         $bg
+client.unfocused              $fg      $bg          $bg    $bg         $bg
 client.placeholder            $bg      $bg          $bg    $bg         $bg
 client.urgent                 $bg      $bg          $bg    $bg
 client.background             $bg
-
 
 ## AUTOSTART
 
