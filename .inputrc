@@ -1,5 +1,6 @@
 $include /etc/inputrc
 
+TAB:menu-complete
 "\C-p":history-search-backward
 "\C-n":history-search-forward
 

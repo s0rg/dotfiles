@@ -1,10 +1,7 @@
 #!/bin/bash
 
-iconcolor=#5DA111
-
 output=$(cmus-remote -C status)
 cmusstatus=$(echo "$output"| grep "^status" | cut -c 8-)
-duration=$(echo "$output" | grep -v "set " | grep -v "tag " | grep "duration " | cut -d ' ' -f 2)
 
 case $cmusstatus in
     "playing")
@@ -18,8 +15,16 @@ case $cmusstatus in
         exit 0
 esac
 
+if [ -f "$HOME/.cache/wal/colors.sh" ]; then
+    . "$HOME/.cache/wal/colors.sh"
+fi
+
+iconcolor="$color4"
+
 artist=$(echo "$output" | grep "^tag artist" | cut -c 12-)
 path=$(echo "$output" | grep "^file" | cut -c 12-)
+duration=$(echo "$output" | grep -v "set " | grep -v "tag " | grep "duration " | cut -d ' ' -f 2)
+
 pos_info="--"
 
 if [ "$duration" -ge 0 ]; then
