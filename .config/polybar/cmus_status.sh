@@ -3,10 +3,23 @@
 iconcolor=#5DA111
 
 output=$(cmus-remote -C status)
-artist=$(echo "$output" | grep "^tag artist" | cut -c 12-)
-path=$(echo "$output" | grep "^file" | cut -c 12-)
 cmusstatus=$(echo "$output"| grep "^status" | cut -c 8-)
 duration=$(echo "$output" | grep -v "set " | grep -v "tag " | grep "duration " | cut -d ' ' -f 2)
+
+case $cmusstatus in
+    "playing")
+        icon="%{F$iconcolor}契%{F-}"
+        ;;
+    "paused")
+        icon="%{F$iconcolor}%{F-}"
+        ;;
+    "stopped")
+        echo
+        exit 0
+esac
+
+artist=$(echo "$output" | grep "^tag artist" | cut -c 12-)
+path=$(echo "$output" | grep "^file" | cut -c 12-)
 pos_info="--"
 
 if [ "$duration" -ge 0 ]; then
@@ -20,18 +33,6 @@ if [ "$duration" -ge 0 ]; then
 
 	pos_info="$pm:$ps / $dm:$ds"
 fi
-
-case $cmusstatus in
-    "playing")
-        icon="%{F$iconcolor}契%{F-}"
-        ;;
-    "paused")
-        icon="%{F$iconcolor}%{F-}"
-        ;;
-    "stopped")
-        echo
-        exit 0
-esac
 
 if [[ $artist = *[!\ ]* ]]; then
     song=$(echo "$output" | grep "^tag title" | cut -c 11-)

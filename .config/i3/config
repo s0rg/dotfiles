@@ -126,8 +126,6 @@ for_window [urgent=latest]                     focus
 for_window [class="^kitty$"]                   focus
 
 # auto-floaters
-for_window [class="^pavucontrol-qt$"]          $float_on
-for_window [class="^zoom$"]                    $float_on
 for_window [window_role="pop-up"]              $float_on
 for_window [window_role="bubble"]              $float_on
 for_window [window_role="task_dialog"]         $float_on
@@ -147,7 +145,10 @@ for_window [window_type="dock"]                $float_on
 for_window [class="^kitty$" instance="^cmus$"] mark pad
 for_window [con_mark="pad"]                    $float_on, $center, $move_pad
 
-# sticky picture-in-picture
+# custom rules
+for_window [class="^pavucontrol-qt$"]          $float_on
+for_window [class="^zoom$"]                    $float_on
+
 for_window [class="^Firefox$" title="^Picture-in-Picture$"] $float_on, sticky enable
 
 
@@ -176,6 +177,7 @@ bindsym $mod+Shift+4 move container to workspace number $ws4
 bindsym $mod+Shift+5 move container to workspace number $ws5
 #bindsym $mod+Shift+6 move container to workspace number $ws6
 
+# terminal
 assign [class="^kitty$"]          $ws1
 
 # web
@@ -203,11 +205,12 @@ font                          pango:monospace 0px
 set_from_resource             $bg i3wm.color0 #000000
 set_from_resource             $fg i3wm.color2 #00FF00
 
-client.focused                $bg $fg $bg $bg $bg
-client.focused_inactive       $bg $bg $bg $bg $bg
-client.unfocused              $bg $bg $bg $bg $bg
-client.placeholder            $bg $bg $bg $bg $bg
-client.urgent                 $bg $bg $bg $bg
+# <colorclass>                <border> <background> <text> <indicator> <child_border>
+client.focused                $bg      $fg          $bg    $bg         $bg
+client.focused_inactive       $bg      $bg          $bg    $bg         $bg
+client.unfocused              $bg      $bg          $bg    $bg         $bg
+client.placeholder            $bg      $bg          $bg    $bg         $bg
+client.urgent                 $bg      $bg          $bg    $bg
 client.background             $bg
 
 
