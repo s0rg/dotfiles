@@ -88,6 +88,15 @@ mode "$layout" {
     bindsym Escape $mode_reset
 }
 
+mode "resize" {
+    bindsym Up    resize shrink height 10 px or 10 ppt
+    bindsym Down  resize grow   height 10 px or 10 ppt
+    bindsym Left  resize shrink width  10 px or 10 ppt
+    bindsym Right resize grow   width  10 px or 10 ppt
+
+    bindsym Escape $mode_reset
+}
+
 # start a terminal
 bindsym $mod+Return     exec $term, focus
 
@@ -102,6 +111,7 @@ bindsym $mod+r          mode "$rofi"
 bindsym $mod+w          mode "$window"
 bindsym $mod+t          mode "$toggle"
 bindsym $mod+l          mode "$layout"
+bindsym $mod+s          mode "resize"
 
 # container splits
 bindsym $mod+h          split h
@@ -198,7 +208,7 @@ assign [class="^TelegramDesktop$"]           $ws3
 
 # apps
 assign [class="^pcmanfm-qt$"]                $ws4
-assign [class="^featherpad$"]                $ws4
+assign [class="^FeatherPad$"]                $ws4
 assign [class="^qimgv$"]                     $ws4
 assign [title="^Steam"]                      $ws4
 

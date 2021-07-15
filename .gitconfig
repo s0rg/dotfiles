@@ -1,0 +1,26 @@
+[user]
+	email = al3x.s0rg@gmail.com
+	name = Shevchenko Alexey
+[core]
+    editor = vim
+[pull]
+    rebase = false
+
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    features = line-numbers navigate decorations
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = omit
+    file-decoration-style = none
+    hunk-header-style = file line-number syntax
+    hunk-header-decoration-style = box

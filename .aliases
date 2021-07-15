@@ -18,6 +18,7 @@ alias ru-tran='trans :ru'
 alias cal='echo;ncal -3;echo'
 alias lt='exa --icons --group-directories-first --tree --level=2 --git-ignore'
 alias lx='exa --icons --group-directories-first --long --header --git --colour-scale --time-style=long-iso'
+alias df='duf --hide special'
 
 # python shortcuts
 alias bp='bpython'
@@ -44,7 +45,7 @@ alias git-prune='git fetch --prune origin'
 source <(kitty + complete setup bash)
 alias kitty-up='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin'
 alias ssh='kitty +kitten ssh'
-alias icat='kitty +kitten icat'
+alias kcat='kitty +kitten icat'
 
 # dotfiles management
 alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
