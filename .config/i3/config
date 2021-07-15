@@ -186,23 +186,24 @@ bindsym $mod+$ctrl+5 move container to workspace number $ws5
 #bindsym $mod+Shift+6 move container to workspace number $ws6
 
 # terminal
-assign [class="^kitty$"]           $ws1
+assign [class="^kitty$" instance="^kitty$"]  $ws1
 
 # web
-assign [class="^Firefox$"]         $ws2
-assign [class="^Tor Browser$"]     $ws2
-assign [class="^qbittorrent$"]     $ws2
+assign [class="^Firefox$"]                   $ws2
+assign [class="^Tor Browser$"]               $ws2
+assign [class="^qbittorrent$"]               $ws2
 
 # chat
-assign [class="^TelegramDesktop$"] $ws3
+assign [class="^TelegramDesktop$"]           $ws3
 
 # apps
-assign [class="^pcmanfm-qt$"]      $ws4
-assign [class="^featherpad$"]      $ws4
-assign [title="^Steam"]            $ws4
+assign [class="^pcmanfm-qt$"]                $ws4
+assign [class="^featherpad$"]                $ws4
+assign [class="^qimgv$"]                     $ws4
+assign [title="^Steam"]                      $ws4
 
 # zoom
-assign [class="^zoom$"]            $ws5
+assign [class="^zoom$"]                      $ws5
 
 ## UI
 
