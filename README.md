@@ -2,9 +2,8 @@
 
 This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles) method
 
-# software
+## software
 
-- os: any debian-based linux distro
 - wm: [i3](https://i3wm.org/)
 - editor: [vim](https://www.vim.org/)
 - shell: [bash](https://www.gnu.org/software/bash/)
@@ -16,6 +15,7 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
 - notifications: [dunst](https://dunst-project.org/)
 - theme generation: [pywal](https://github.com/dylanaraps/pywal)
 - media auto-mount: [udiskie](https://github.com/coldfix/udiskie)
+- os: any debian-based linux distro
 
 ### look & feel
 
@@ -32,5 +32,5 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
 - faster `grep`: [ripgrep](https://github.com/BurntSushi/ripgrep)
 - better `git-diff`: [delta](https://github.com/dandavison/delta)
 
-# example screenshot
+## example screenshot
 ![screenshot](https://github.com/s0rg/dotfiles/blob/master/.config/i3/screenshot.png)
