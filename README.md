@@ -24,9 +24,9 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
 
 ### helpers
 
-- disk usage: [duf](https://github.com/muesli/duf)
 - http cli: [httpie](https://httpie.io/)
 - sql client: [usql](https://github.com/xo/usql)
+- disk usage: [duf](https://github.com/muesli/duf)
 - fuzzy finder: [fzf](https://github.com/junegunn/fzf)
 - colored `cat`: [bat](https://github.com/sharkdp/bat)
 - eye-candy `ls`: [exa](https://the.exa.website/)
