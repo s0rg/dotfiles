@@ -23,7 +23,7 @@ set $bri_step       10
 
 set $run            exec --no-startup-id
 set $mode_reset     mode "default"
-set $float_on       floating enable
+set $float          floating enable
 set $center         move position 10 ppt 10 ppt; resize set 80 ppt 80 ppt
 set $move_pad       move scratchpad
 set $show_pad       scratchpad show
@@ -31,7 +31,7 @@ set $show_pad       scratchpad show
 floating_modifier       $mod
 workspace_layout        tabbed
 
-default_border          none
+default_border          pixel 1
 default_floating_border pixel 1
 default_orientation     horizontal
 
@@ -56,13 +56,14 @@ mode "$rofi" {
     bindsym Escape $mode_reset
 }
 
-set $window window [k]ill [x]kill [f]ull f[l]oat [s]ticky
+set $window window [k]ill [x]kill [f]ull f[l]oat [s]ticky [m]ode
 mode "$window" {
     bindsym k kill,              $mode_reset
     bindsym x $run xkill,        $mode_reset
     bindsym s sticky toggle,     $mode_reset
     bindsym l floating toggle,   $mode_reset
     bindsym f fullscreen toggle, $mode_reset
+    bindsym m focus mode_toggle, $mode_reset
 
     bindsym Escape $mode_reset
 }
@@ -72,9 +73,17 @@ mode "$toggle" {
     bindsym t $run touchpad_toggle,            $mode_reset
     bindsym m $run pulse_mic --toggle,         $mode_reset
     bindsym r $run pkill -USR1 redshift,       $mode_reset
-
     bindsym n $run dunstctl close-all,         $mode_reset
     bindsym d $run dunstctl set-paused toggle, $mode_reset
+
+    bindsym Escape $mode_reset
+}
+
+set $layout layout [t]abbed [s]tacking s[p]lit
+mode "$layout" {
+    bindsym s layout stacking,     $mode_reset
+    bindsym t layout tabbed,       $mode_reset
+    bindsym p layout toggle split, $mode_reset
 
     bindsym Escape $mode_reset
 }
@@ -92,6 +101,11 @@ bindsym $mod+Right      focus right
 bindsym $mod+r          mode "$rofi"
 bindsym $mod+w          mode "$window"
 bindsym $mod+t          mode "$toggle"
+bindsym $mod+l          mode "$layout"
+
+# container splits
+bindsym $mod+h          split h
+bindsym $mod+v          split v
 
 bindsym $mod+$ctrl+c    reload
 bindsym $mod+$ctrl+r    restart
@@ -121,30 +135,30 @@ for_window [urgent=latest]                     focus
 for_window [class="^kitty$"]                   focus
 
 # auto floaters
-for_window [window_role="pop-up"]              $float_on
-for_window [window_role="bubble"]              $float_on
-for_window [window_role="task_dialog"]         $float_on
-for_window [window_role="Preferences"]         $float_on
-for_window [window_type="dialog"]              $float_on
-for_window [window_type="menu"]                $float_on
-for_window [window_type="notification"]        $float_on
-for_window [window_type="toolbar"]             $float_on
-for_window [window_type="splash"]              $float_on
-for_window [window_type="utility"]             $float_on
-for_window [window_type="dropdown_menu"]       $float_on
-for_window [window_type="popup_menu"]          $float_on
-for_window [window_type="tooltip"]             $float_on
-for_window [window_type="dock"]                $float_on
+for_window [window_role="pop-up"]              $float
+for_window [window_role="bubble"]              $float
+for_window [window_role="task_dialog"]         $float
+for_window [window_role="Preferences"]         $float
+for_window [window_type="dialog"]              $float
+for_window [window_type="menu"]                $float
+for_window [window_type="notification"]        $float
+for_window [window_type="toolbar"]             $float
+for_window [window_type="splash"]              $float
+for_window [window_type="utility"]             $float
+for_window [window_type="dropdown_menu"]       $float
+for_window [window_type="popup_menu"]          $float
+for_window [window_type="tooltip"]             $float
+for_window [window_type="dock"]                $float
 
 # scratchpad
 for_window [class="^kitty$" instance="^cmus$"] mark pad
-for_window [con_mark="pad"]                    $float_on, $center, $move_pad
+for_window [con_mark="pad"]                    $float, $center, $move_pad
 
 # custom rules
-for_window [class="^pavucontrol-qt$"]          $float_on
-for_window [class="^zoom$"]                    $float_on
+for_window [class="^pavucontrol-qt$"]          $float
+for_window [class="^zoom$"]                    $float
 
-for_window [class="^Firefox$" title="^Picture-in-Picture$"] $float_on, sticky enable
+for_window [class="^Firefox$" title="^Picture-in-Picture$"] $float, sticky enable
 
 ## WORKSPACES
 
