@@ -88,11 +88,12 @@ mode "$layout" {
     bindsym Escape $mode_reset
 }
 
-mode "resize" {
-    bindsym Up    resize shrink height 10 px or 10 ppt
-    bindsym Down  resize grow   height 10 px or 10 ppt
-    bindsym Left  resize shrink width  10 px or 10 ppt
-    bindsym Right resize grow   width  10 px or 10 ppt
+set $resize window resize
+mode "$resize" {
+    bindsym Up    resize shrink height 5 px or 5 ppt
+    bindsym Down  resize grow   height 5 px or 5 ppt
+    bindsym Left  resize shrink width  5 px or 5 ppt
+    bindsym Right resize grow   width  5 px or 5 ppt
 
     bindsym Escape $mode_reset
 }
@@ -100,7 +101,7 @@ mode "resize" {
 # start a terminal
 bindsym $mod+Return     exec $term, focus
 
-# windows navigation
+# window navigation
 bindsym $mod+Up         focus up
 bindsym $mod+Down       focus down
 bindsym $mod+Left       focus left
@@ -111,32 +112,43 @@ bindsym $mod+r          mode "$rofi"
 bindsym $mod+w          mode "$window"
 bindsym $mod+t          mode "$toggle"
 bindsym $mod+l          mode "$layout"
-bindsym $mod+s          mode "resize"
+bindsym $mod+s          mode "$resize"
 
 # container splits
+## horizontal
 bindsym $mod+h          split h
+## vertical
 bindsym $mod+v          split v
 
+# i3wm
+## config reload
 bindsym $mod+$ctrl+c    reload
+## restart in-place
 bindsym $mod+$ctrl+r    restart
 
 # media keys
+## volume
 bindsym XF86AudioRaiseVolume  $run pactl set-sink-volume $vol_sink +$vol_step
 bindsym XF86AudioLowerVolume  $run pactl set-sink-volume $vol_sink -$vol_step
 bindsym XF86AudioMute         $run pactl set-sink-mute $vol_sink toggle
 
+## cmus
 bindsym XF86AudioPlay         $run cmus-remote --pause
 bindsym XF86AudioNext         $run cmus-remote --next
 bindsym XF86AudioPrev         $run cmus-remote --prev
 
+## backlight
 bindsym XF86MonBrightnessUp   $run xbacklight -inc $bri_step
 bindsym XF86MonBrightnessDown $run xbacklight -dec $bri_step
 
-bindsym Print                 $run i3-scrot --desk
-bindsym $ctrl+Print           $run i3-scrot --window
+## print-screen full desktop
+bindsym --release Print       $run i3-scrot --desk
+## print-screen active window
+bindsym --release $ctrl+Print $run i3-scrot --window
 
 # scratchpads
-bindsym $mod+c                [instance="^cmus$"] $show_pad
+## cmus
+bindsym $mod+c                $run i3-cmus
 
 ## WINDOW RULES
 
@@ -224,12 +236,12 @@ set_from_resource             $fg i3wm.color2 #00FF00
 set_from_resource             $ag i3wm.color4 #0000FF
 
 # <colorclass>               <border> <background> <text> <indicator> <child_border>
-client.focused                $ag      $bg          $bg    $bg         $bg
-client.focused_inactive       $bg      $bg          $bg    $bg         $bg
+client.focused                $ag      $bg          $bg    $bg         $fg
+client.focused_inactive       $fg      $bg          $bg    $bg         $bg
 client.unfocused              $fg      $bg          $bg    $bg         $bg
-client.placeholder            $bg      $bg          $bg    $bg         $bg
-client.urgent                 $bg      $bg          $bg    $bg
-client.background             $bg
+client.placeholder            $fg      $bg          $bg    $bg         $bg
+client.urgent                 $fg      $bg          $bg    $bg
+client.background             $fg
 
 ## AUTOSTART
 
@@ -251,7 +263,7 @@ exec --no-startup-id udiskie
 # bar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # cmus for scratchpad
-exec_always --no-startup-id i3-cmus
+#exec_always --no-startup-id i3-cmus
 
 # first terminal
 exec --no-startup-id $term

@@ -9,8 +9,8 @@ margin-bottom = 0
 background = ${xrdb:color0:#222}
 background-alt = ${xrdb:color8:#444}
 foreground = ${xrdb:color2:#fff}
-foreground-alt = ${xrdb:color6:#eee}
-alert = ${xrdb:color4:#f00}
+foreground-alt = ${xrdb:color4:#eee}
+alert = ${xrdb:color6:#f00}
 
 [bar/mybar]
 width = 100%
@@ -37,9 +37,9 @@ font-1 = ubuntumono nerd font mono:pixelsize=16;2
 font-2 = ubuntumono nerd font mono:pixelsize=10:style=Bold;0
 font-3 = ubuntumono nerd font mono:pixelsize=12;1
 
-modules-left = i3 xwindow
+modules-left = i3 sep xwindow
 modules-center = cmus
-modules-right = xkeyboard temperature cpu memory filesystem backlight micstatus pulseaudio date
+modules-right = xkeyboard sep cpu temperature memory filesystem sep backlight pulseaudio micstatus sep date
 
 tray-position = right
 tray-padding = 1
@@ -76,11 +76,17 @@ indicator-icon-default =
 indicator-icon-0 = caps lock;;CAP
 indicator-icon-1 = num lock;;NUM
 
+[module/sep]
+type = custom/text
+content = |
+content-padding = 0
+content-margin = 0
+
 [module/filesystem]
 type = internal/fs
-interval = 20
+interval = 30
 mount-0 = /home
-label-mounted = %mountpoint%: %percentage_used%%
+label-mounted = %{T4}%{T-} %percentage_used%%
 
 [module/i3]
 type = internal/i3

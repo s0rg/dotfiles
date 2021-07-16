@@ -4,9 +4,11 @@ cmus="cmus"
 
 if pgrep -x "$cmus" > /dev/null
 then
-    echo "$cmus is running"
+    i3-msg "[instance=\"^cmus$\"] scratchpad show"
 else
-    kitty --name "$cmus" "$cmus"
+    kitty --name "$cmus" "$cmus" &
+    sleep 0.5
+    i3-msg "[instance=\"^cmus$\"] scratchpad show"
 fi
 
 #vim:ft=bash

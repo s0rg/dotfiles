@@ -1,3 +1,5 @@
+#vim:ft=bash
+
 # eye-candy output
 alias ls='ls --color=auto --group-directories-first'
 alias ip='ip -color=auto'
@@ -12,10 +14,13 @@ alias ncdu='ncdu --color dark'
 # tools
 alias v='vim'
 alias mc='mc -d'
+alias clr='clear'
 alias tailf='tail -f --retry'
 alias wttr='curl http://wttr.in/?format="%c:+%f+%w\n"'
 alias ru-tran='trans :ru'
-alias cal='echo;ncal -3;echo'
+alias cal='echo; ncal -3 -M; echo'
+
+# extras
 alias lt='exa --icons --group-directories-first --tree --level=2 --git-ignore'
 alias lx='exa --icons --group-directories-first --long --header --git --colour-scale --time-style=long-iso'
 alias df='duf --hide special'
@@ -24,6 +29,7 @@ alias df='duf --hide special'
 alias bp='bpython'
 alias py='python3'
 alias py-serve='python3 -m http.server'
+alias pip-up='pip3 install -U --user $(pip3 list --user --format json | jq ".[] | flatten | .[0]" | xargs echo)'
 
 # docker stuff
 alias dci-up="docker images -f 'dangling=false' --format '{{.Repository}}:{{.Tag}}' | xargs -L1 docker pull"
