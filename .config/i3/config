@@ -35,7 +35,7 @@ default_border          pixel 1
 default_floating_border pixel 1
 default_orientation     horizontal
 
-hide_edge_borders       both
+hide_edge_borders       smart
 
 show_marks              no
 focus_follows_mouse     no
@@ -43,6 +43,9 @@ mouse_warping           none
 focus_wrapping          workspace
 
 workspace_auto_back_and_forth no
+
+floating_minimum_size 150 x 100
+floating_maximum_size -10 x -10
 
 ## KEYS
 
@@ -79,11 +82,11 @@ mode "$toggle" {
     bindsym Escape $mode_reset
 }
 
-set $layout layout [t]abbed [s]tacking s[p]lit
-mode "$layout" {
-    bindsym s layout stacking,     $mode_reset
-    bindsym t layout tabbed,       $mode_reset
-    bindsym p layout toggle split, $mode_reset
+set $split split [t]oggle [v]ertical [h]orizontal
+mode "$split" {
+    bindsym t layout toggle split splitv splith, $mode_reset
+    bindsym h split h,                           $mode_reset
+    bindsym v split v,                           $mode_reset
 
     bindsym Escape $mode_reset
 }
@@ -98,8 +101,9 @@ mode "$resize" {
     bindsym Escape $mode_reset
 }
 
-# start a terminal
 bindsym $mod+Return     exec $term, focus
+bindsym $mod+c          $run i3-cmus
+bindsym $mod+Tab        layout toggle all
 
 # window navigation
 bindsym $mod+Up         focus up
@@ -111,19 +115,12 @@ bindsym $mod+Right      focus right
 bindsym $mod+r          mode "$rofi"
 bindsym $mod+w          mode "$window"
 bindsym $mod+t          mode "$toggle"
-bindsym $mod+l          mode "$layout"
-bindsym $mod+s          mode "$resize"
+bindsym $mod+s          mode "$split"
+#bindsym $mod+e          mode "$resize"
 
-# container splits
-## horizontal
-bindsym $mod+h          split h
-## vertical
-bindsym $mod+v          split v
-
-# i3wm
-## config reload
+# config reload
 bindsym $mod+$ctrl+c    reload
-## restart in-place
+# restart in-place
 bindsym $mod+$ctrl+r    restart
 
 # media keys
@@ -141,14 +138,14 @@ bindsym XF86AudioPrev         $run cmus-remote --prev
 bindsym XF86MonBrightnessUp   $run xbacklight -inc $bri_step
 bindsym XF86MonBrightnessDown $run xbacklight -dec $bri_step
 
-## print-screen full desktop
 bindsym --release Print       $run i3-scrot --desk
-## print-screen active window
 bindsym --release $ctrl+Print $run i3-scrot --window
 
-# scratchpads
-## cmus
-bindsym $mod+c                $run i3-cmus
+# scratchpad
+## move window
+bindsym $mod+KP_Subtract      $move_pad
+## show last window
+bindsym $mod+KP_Add           $show_pad
 
 ## WINDOW RULES
 
@@ -241,7 +238,7 @@ client.focused_inactive       $fg      $bg          $bg    $bg         $bg
 client.unfocused              $fg      $bg          $bg    $bg         $bg
 client.placeholder            $fg      $bg          $bg    $bg         $bg
 client.urgent                 $fg      $bg          $bg    $bg
-client.background             $fg
+client.background             $bg
 
 ## AUTOSTART
 
