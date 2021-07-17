@@ -175,17 +175,20 @@ exec = pulse_mic --status
 type = internal/battery
 battery = BAT1
 adapter = ACAD
-full-at = 96
+full-at = 98
 time-format = %H:%M
 
 label-charging = %percentage%%
 format-charging = %{T2}<animation-charging>%{T-} <label-charging>
 
-label-discharging = %percentage%% %time%
-format-discharging = %{T2}<ramp-capacity>%{T-} <label-discharging>
+label-discharging = %percentage%% ~ %time%
+format-discharging = <ramp-capacity> <label-discharging>
 
-format-full = <ramp-capacity>
-format-full-foreground = ${colors.foreground-alt}
+label-full = %percentage%%
+format-full = <label-full>
+format-full-prefix = " "
+format-full-prefix-foreground = ${colors.foreground-alt}
+format-full-overline = ${colors.foreground-alt}
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
@@ -196,7 +199,6 @@ ramp-capacity-5 = 
 ramp-capacity-6 = 
 ramp-capacity-7 = 
 ramp-capacity-8 = 
-ramp-capacity-9 = 
 
 animation-charging-0 = 
 animation-charging-1 = 
