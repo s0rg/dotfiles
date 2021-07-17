@@ -16,7 +16,7 @@ alias ncdu='ncdu --color dark'
 # misc
 alias v='vim'
 alias mc='mc -d'
-alias clr='clear'
+alias cls='clear'
 alias tailf='tail -f --retry'
 alias wttr='curl http://wttr.in/?format="%c:+%f+%w\n"'
 alias ru-tran='trans :ru'
