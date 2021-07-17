@@ -35,3 +35,11 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
 
 ## example screenshot
 ![screenshot](https://github.com/s0rg/dotfiles/blob/master/.config/i3/screenshot.png)
+
+## usage
+~~~ sh
+git clone --recursive --separate-git-dir=$HOME/.dotfiles.git https://github.com/s0rg/dotfiles.git /tmp/dots
+rsync -rvl --exclude ".git" /tmp/dots/ $HOME/
+rm -r /tmp/dots
+dotfiles submodule update --init --recursive $HOME/
+~~~

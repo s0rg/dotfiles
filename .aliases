@@ -1,5 +1,7 @@
 #vim:ft=bash
 
+## aliases
+
 # eye-candy output
 alias ls='ls --color=auto --group-directories-first'
 alias ip='ip -color=auto'
@@ -11,33 +13,37 @@ alias fgrep='fgrep --color=auto'
 alias less='less -R'
 alias ncdu='ncdu --color dark'
 
-# tools
+# misc
 alias v='vim'
 alias mc='mc -d'
 alias clr='clear'
 alias tailf='tail -f --retry'
 alias wttr='curl http://wttr.in/?format="%c:+%f+%w\n"'
 alias ru-tran='trans :ru'
-alias cal='echo; ncal -3 -M; echo'
+alias cal='echo; ncal -M -3; echo'
 
-# extras
-alias lt='exa --icons --group-directories-first --tree --level=2 --git-ignore'
-alias lx='exa --icons --group-directories-first --long --header --git --colour-scale --time-style=long-iso'
-alias df='duf --hide special'
-
-# python shortcuts
+# python
 alias bp='bpython'
 alias py='python3'
 alias py-serve='python3 -m http.server'
 alias pip-up='pip3 install -U --user $(pip3 list --user --format json | jq ".[] | flatten | .[0]" | xargs echo)'
 
-# docker stuff
+# youtube-dl
+alias yta="youtube-dl --extract-audio --audio-format best"
+alias ytv="youtube-dl -f bestvideo+bestaudio"
+
+# extras
+alias tree='exa --icons --group-directories-first --tree --level=2 --git-ignore'
+alias lsx='exa --icons --group-directories-first --long --header --git --colour-scale --time-style=long-iso'
+alias df='duf --hide special'
+
+# docker
 alias dci-up="docker images -f 'dangling=false' --format '{{.Repository}}:{{.Tag}}' | xargs -L1 docker pull"
 alias dci-clr="docker images -f 'dangling=true' -q | xargs -L1 docker rmi"
 alias dcu='docker-compose up'
 alias dcd='docker-compose down'
 
-# go
+# golang
 alias go-clean='go clean -cache -testcache -modcache'
 alias cdgo='cd $GOPATH/src/github.com/$USER'
 
@@ -53,10 +59,12 @@ alias kitty-up='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/s
 alias ssh='kitty +kitten ssh'
 alias kcat='kitty +kitten icat'
 
-# dotfiles management
+# dotfiles
 alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 # add auto-complete
 complete -W "add status commit push log checkout diff" dotfiles
+
+## functions
 
 # create a new directory and enter it
 mkd() { mkdir -p "$@" && cd "$@" || exit; }

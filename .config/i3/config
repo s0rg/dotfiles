@@ -45,7 +45,7 @@ focus_wrapping          workspace
 workspace_auto_back_and_forth no
 
 floating_minimum_size 150 x 100
-floating_maximum_size -10 x -10
+floating_maximum_size 900 x 600
 
 ## KEYS
 
@@ -117,6 +117,11 @@ bindsym $mod+w          mode "$window"
 bindsym $mod+t          mode "$toggle"
 bindsym $mod+s          mode "$split"
 #bindsym $mod+e          mode "$resize"
+
+
+bindsym $mod+f          focus mode_toggle
+bindsym $mod+a          focus parent
+bindsym $mod+d          focus child
 
 # config reload
 bindsym $mod+$ctrl+c    reload

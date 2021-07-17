@@ -16,34 +16,35 @@ alert = ${xrdb:color6:#f00}
 width = 100%
 height = 22
 radius = 0.0
-fixed-center = false
-wm-restack = i3
 line-size = 1
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
 border-size = 0
 border-color = ${colors.background}
 
-padding-left = 1
-padding-right = 1
+padding-left = 0
+padding-right = 0
 
 module-margin-left = 1
 module-margin-right = 1
+
+fixed-center = false
+enable-ipc = false
+wm-restack = i3
+
+background = ${colors.background}
+foreground = ${colors.foreground}
 
 font-0 = ubuntumono nerd font mono:pixelsize=9;0
 font-1 = ubuntumono nerd font mono:pixelsize=16;2
 font-2 = ubuntumono nerd font mono:pixelsize=10:style=Bold;0
 font-3 = ubuntumono nerd font mono:pixelsize=12;1
 
-modules-left = i3 sep xwindow
+modules-left = i3 xwindow
 modules-center = cmus
-modules-right = xkeyboard sep cpu temperature memory filesystem sep backlight pulseaudio micstatus sep date
+modules-right = xkeyboard sep cpu temperature memory filesystem wifi wired battery sep backlight pulseaudio micstatus date
 
 tray-position = right
-tray-padding = 1
-tray-maxsize = 16
+tray-padding = 2
+tray-maxsize = 12
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -143,7 +144,11 @@ label = %{T2}%{T-} %date% %time%
 type = internal/pulseaudio
 format-volume = <label-volume>
 label-volume = %{T2}墳%{T-} %percentage%%
-label-muted = %{T2}婢%{T-}
+label-muted = %{T2}婢%{T-} off
+label-volume-minlen = 16
+label-volume-maxlen = 16
+label-muted-minlen = 16
+label-muted-maxlen = 16
 sink = @DEFAULT_SINK@
 use-ui-max = false
 click-right = pavucontrol-qt &
@@ -154,6 +159,8 @@ card = intel_backlight
 use-actual-brightness = true
 format = <label>
 label = %{T2}%{T-} %percentage%%
+label-minlen = 16
+label-maxlen = 16
 
 [module/micstatus]
 type = custom/script
@@ -161,39 +168,44 @@ interval = 1.0
 format = <label>
 label-foreground = ${colors.foreground}
 label-font = 4
+label-padding-right = 1
 exec = pulse_mic --status
 
 [module/battery]
 type = internal/battery
-battery = BAT0
-adapter = AC
-full-at = 98
+battery = BAT1
+adapter = ACAD
+full-at = 96
+time-format = %H:%M
 
-format-charging = <animation-charging> <label-charging>
+label-charging = %percentage%%
+format-charging = %{T2}<animation-charging>%{T-} <label-charging>
 
-format-discharging = <animation-discharging> <label-discharging>
-;format-discharging-underline = ${self.format-charging-underline}
+label-discharging = %percentage%% %time%
+format-discharging = %{T2}<ramp-capacity>%{T-} <label-discharging>
 
-format-full-prefix = " "
-;format-full-prefix-foreground = ${colors.foreground-alt}
-;format-full-underline = ${self.format-charging-underline}
+format-full = <ramp-capacity>
+format-full-foreground = ${colors.foreground-alt}
 
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-;ramp-capacity-foreground = ${colors.foreground-alt}
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-5 = 
+ramp-capacity-6 = 
+ramp-capacity-7 = 
+ramp-capacity-8 = 
+ramp-capacity-9 = 
 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-;animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-5 = 
+; Framerate in milliseconds
 animation-charging-framerate = 750
-
-animation-discharging-0 = 
-animation-discharging-1 = 
-animation-discharging-2 = 
-;animation-discharging-foreground = ${colors.foreground-alt}
-animation-discharging-framerate = 750
 
 [module/temperature]
 type = internal/temperature
@@ -216,5 +228,22 @@ exec-if = pgrep -x cmus
 interval = 1
 label-maxlen = 100
 click-left = cmus-remote --pause
+
+[module/wifi]
+type = internal/network
+interface = wlo1
+interval = 3.0
+
+label-connected = %essid% %signal%
+format-connected = <label-connected>
+format-connected-prefix = "%{T2}直%{T-} "
+
+[module/wired]
+type = internal/network
+interface = eno1
+interval = 3.0
+
+label-connected = %linkspeed%
+format-connected-prefix = "%{T2}%{T-} "
 
 ; vim:ft=dosini
