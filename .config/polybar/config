@@ -40,7 +40,7 @@ font-3 = ubuntumono nerd font mono:pixelsize=12;1
 
 modules-left = i3 xwindow
 modules-center = cmus
-modules-right = xkeyboard sep cpu temperature memory filesystem wifi wired battery sep backlight pulseaudio micstatus date
+modules-right = xkeyboard sep cpu temperature memory filesystem battery sep backlight pulseaudio micstatus date
 
 tray-position = right
 tray-padding = 2
@@ -53,7 +53,7 @@ cursor-scroll = ns-resize
 type = internal/xwindow
 format-padding = 1
 label = %title%
-label-maxlen = 120
+label-maxlen = 90
 
 [module/xkeyboard]
 type = internal/xkeyboard

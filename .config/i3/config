@@ -28,24 +28,24 @@ set $center         move position 10 ppt 10 ppt; resize set 80 ppt 80 ppt
 set $move_pad       move scratchpad
 set $show_pad       scratchpad show
 
-floating_modifier       $mod
-workspace_layout        tabbed
+floating_modifier             $mod
+workspace_layout              tabbed
 
-default_border          pixel 1
-default_floating_border pixel 1
-default_orientation     horizontal
+default_border                pixel 1
+default_floating_border       pixel 1
+default_orientation           horizontal
 
-hide_edge_borders       smart
+hide_edge_borders             smart
 
-show_marks              no
-focus_follows_mouse     no
-mouse_warping           none
-focus_wrapping          workspace
-
+show_marks                    no
+focus_follows_mouse           no
+mouse_warping                 none
+focus_wrapping                workspace
+focus_on_window_activation    focus
 workspace_auto_back_and_forth no
 
-floating_minimum_size 150 x 100
-floating_maximum_size 900 x 600
+floating_minimum_size         300 x 200
+floating_maximum_size         900 x 600
 
 ## KEYS
 
@@ -73,11 +73,11 @@ mode "$window" {
 
 set $toggle toggle [t]ouchpad [m]ic [r]edshift [d]unst [n]otifies
 mode "$toggle" {
-    bindsym t $run touchpad_toggle,            $mode_reset
-    bindsym m $run pulse_mic --toggle,         $mode_reset
-    bindsym r $run pkill -USR1 redshift,       $mode_reset
-    bindsym n $run dunstctl close-all,         $mode_reset
-    bindsym d $run dunstctl set-paused toggle, $mode_reset
+    bindsym t $run touchpad_toggle,             $mode_reset
+    bindsym r $run pkill -USR1 redshift,        $mode_reset
+    bindsym n $run dunstctl close-all,          $mode_reset
+    bindsym d $run dunstctl set-paused toggle,  $mode_reset
+    bindsym m $run pulse_mic --toggle,          $mode_reset
 
     bindsym Escape $mode_reset
 }
@@ -87,16 +87,6 @@ mode "$split" {
     bindsym t layout toggle split splitv splith, $mode_reset
     bindsym h split h,                           $mode_reset
     bindsym v split v,                           $mode_reset
-
-    bindsym Escape $mode_reset
-}
-
-set $resize window resize
-mode "$resize" {
-    bindsym Up    resize shrink height 5 px or 5 ppt
-    bindsym Down  resize grow   height 5 px or 5 ppt
-    bindsym Left  resize shrink width  5 px or 5 ppt
-    bindsym Right resize grow   width  5 px or 5 ppt
 
     bindsym Escape $mode_reset
 }
@@ -116,19 +106,19 @@ bindsym $mod+r          mode "$rofi"
 bindsym $mod+w          mode "$window"
 bindsym $mod+t          mode "$toggle"
 bindsym $mod+s          mode "$split"
-#bindsym $mod+e          mode "$resize"
 
-
+# focus
 bindsym $mod+f          focus mode_toggle
-bindsym $mod+a          focus parent
-bindsym $mod+d          focus child
+# bindsym $mod+a          focus parent
+# bindsym $mod+d          focus child
 
 # config reload
-bindsym $mod+$ctrl+c    reload
+bindsym --release $mod+$ctrl+c reload
 # restart in-place
-bindsym $mod+$ctrl+r    restart
+bindsym --release $mod+$ctrl+r restart
 
 # media keys
+
 ## volume
 bindsym XF86AudioRaiseVolume  $run pactl set-sink-volume $vol_sink +$vol_step
 bindsym XF86AudioLowerVolume  $run pactl set-sink-volume $vol_sink -$vol_step
@@ -158,76 +148,67 @@ bindsym $mod+KP_Add           $show_pad
 for_window [urgent=latest]                     focus
 for_window [class="^kitty$"]                   focus
 
-# auto floaters
-for_window [window_role="pop-up"]              $float
-for_window [window_role="bubble"]              $float
-for_window [window_role="task_dialog"]         $float
-for_window [window_role="Preferences"]         $float
-for_window [window_type="dialog"]              $float
-for_window [window_type="menu"]                $float
-for_window [window_type="notification"]        $float
-for_window [window_type="toolbar"]             $float
-for_window [window_type="splash"]              $float
-for_window [window_type="utility"]             $float
-for_window [window_type="dropdown_menu"]       $float
-for_window [window_type="popup_menu"]          $float
-for_window [window_type="tooltip"]             $float
-for_window [window_type="dock"]                $float
-
-# scratchpad
-for_window [class="^kitty$" instance="^cmus$"] mark pad
-for_window [con_mark="pad"]                    $float, $center, $move_pad
+# floaters
+for_window [window_role="pop-up|bubble|task_dialog|Preferences"]      $float
+for_window [window_type="dialog|utility|notification|toolbar|splash"] $float
+for_window [window_type="menu|dropdown_menu|popup_menu|tooltip|dock"] $float
 
 # custom rules
-for_window [class="^pavucontrol-qt$"]          $float
-for_window [class="^zoom$"]                    $float
+for_window [class="^zoom$"]                                 $float
+for_window [class="^Firefox$" title="^About"]               $float
 
 for_window [class="^Firefox$" title="^Picture-in-Picture$"] $float, sticky enable
+for_window [class="^pavucontrol-qt$"]                       $float, sticky enable
+
+for_window [class="^Steam$" title="^Steam - News"]          kill
+
+# scratchpad
+for_window [class="^kitty$" instance="^cmus$"]              mark pad
+for_window [con_mark="pad"]                                 $float, $center, $move_pad
 
 ## WORKSPACES
 
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
+set $tty  "1"
+set $web  "2"
+set $chat "3"
+set $apps "4"
+set $zoom "5"
 #set $ws6 "6"
 
 # switch to workspace
-bindsym $mod+1 workspace number $ws1
-bindsym $mod+2 workspace number $ws2
-bindsym $mod+3 workspace number $ws3
-bindsym $mod+4 workspace number $ws4
-bindsym $mod+5 workspace number $ws5
+bindsym $mod+1 workspace number $tty
+bindsym $mod+2 workspace number $web
+bindsym $mod+3 workspace number $chat
+bindsym $mod+4 workspace number $apps
+bindsym $mod+5 workspace number $zoom
 #bindsym $mod+6 workspace number $ws6
 
 # move focused container to workspace
-bindsym $mod+$ctrl+1 move container to workspace number $ws1
-bindsym $mod+$ctrl+2 move container to workspace number $ws2
-bindsym $mod+$ctrl+3 move container to workspace number $ws3
-bindsym $mod+$ctrl+4 move container to workspace number $ws4
-bindsym $mod+$ctrl+5 move container to workspace number $ws5
+bindsym $mod+$ctrl+1 move container to workspace number $tty
+bindsym $mod+$ctrl+2 move container to workspace number $web
+bindsym $mod+$ctrl+3 move container to workspace number $chat
+bindsym $mod+$ctrl+4 move container to workspace number $apps
+bindsym $mod+$ctrl+5 move container to workspace number $zoom
 #bindsym $mod+Shift+6 move container to workspace number $ws6
 
+
 # terminal
-assign [class="^kitty$" instance="^kitty$"]  $ws1
+assign [class="^kitty$" instance="^kitty$"]  $tty
 
 # web
-assign [class="^Firefox$"]                   $ws2
-assign [class="^Tor Browser$"]               $ws2
-assign [class="^qbittorrent$"]               $ws2
+assign [class="^Firefox$|^Tor Browser$"]     $web
+assign [class="^qbittorrent$|^qutebrowser$"] $web
 
 # chat
-assign [class="^TelegramDesktop$"]           $ws3
+assign [class="^TelegramDesktop$"]           $chat
 
 # apps
-assign [class="^pcmanfm-qt$"]                $ws4
-assign [class="^FeatherPad$"]                $ws4
-assign [class="^qimgv$"]                     $ws4
-assign [title="^Steam"]                      $ws4
+assign [class="^pcmanfm-qt$|^FeatherPad$"]   $apps
+assign [class="^qimgv$|^Gimp-.+"]            $apps
+assign [title="^Steam"]                      $apps
 
 # zoom
-assign [class="^zoom$"]                      $ws5
+assign [class="^zoom$"]                      $zoom
 
 ## UI
 
@@ -258,14 +239,11 @@ exec --no-startup-id xset m 20/10 10 r rate 350 30 b on s 600
 exec --no-startup-id wal -R -n
 exec --no-startup-id feh --no-fehbg --bg-fill ~/.config/i3/wall.png
 
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
 exec --no-startup-id nm-applet
 exec --no-startup-id kbdd
 exec --no-startup-id udiskie
-
-# bar
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-# cmus for scratchpad
-#exec_always --no-startup-id i3-cmus
 
 # first terminal
 exec --no-startup-id $term

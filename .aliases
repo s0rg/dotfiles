@@ -16,11 +16,13 @@ alias ncdu='ncdu --color dark'
 # misc
 alias v='vim'
 alias mc='mc -d'
+alias si='sudo -i'
 alias cls='clear'
 alias tailf='tail -f --retry'
 alias wttr='curl http://wttr.in/?format="%c:+%f+%w\n"'
 alias ru-tran='trans :ru'
 alias cal='echo; ncal -M -3; echo'
+alias clip="xclip -sel clip"
 
 # python
 alias bp='bpython'

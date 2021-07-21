@@ -14,7 +14,7 @@ export HISTSIZE=5000
 export HISTFILESIZE=5000
 export HISTCONTROL=ignoreboth
 
-export HISTIGNORE="&:[bf]g:c:clear:history:exit:q:pwd:* --help"
+export HISTIGNORE="&:[bf]g:c:clear:history:exit:q:pwd:* --help:sudo *:si:ls"
 
 shopt -s histappend
 shopt -s checkwinsize
