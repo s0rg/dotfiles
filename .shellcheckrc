@@ -1,6 +1,10 @@
+shell=bash
+
 # Can't follow non-constant source: https://github.com/koalaman/shellcheck/wiki/SC1090
 disable=SC1090
 
 # posix sh compatability
 disable=SC2039
 
+# possible misspelling
+disable=SC2153

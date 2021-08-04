@@ -1,4 +1,8 @@
 #!/bin/bash
+#
+# this scripts runs over plugins in $HOME/.vim/bundle dir, if no file name given,
+# if so, it only updates all plugins in your bundle (git-pull'ing them), with file,
+# it also install (git clone) all missing plugins.
 
 ROOT=$HOME/.vim/bundle
 

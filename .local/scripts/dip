@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-
+#
+# prints docker container ip (for all networks available)
+# usage: dip <container-id>
+#
 import sys
 import docker
 

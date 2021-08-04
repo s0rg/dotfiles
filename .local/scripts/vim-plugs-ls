@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# this scripts runs over plugins in $HOME/.vim/bundle dir
+# and prints their remote repos uris.
 
 ROOT=$HOME/.vim/bundle
 ITEMS=$(ls -1 "$ROOT")

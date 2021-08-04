@@ -15,13 +15,15 @@ case $cmusstatus in
         exit 0
 esac
 
+iconcolor="#FFFFFF"
+
 if [ -f "$HOME/.cache/wal/colors.sh" ]; then
     . "$HOME/.cache/wal/colors.sh"
+    iconcolor="$color4"
 fi
 
-iconcolor="$color4"
-
-artist=$(echo "$output" | grep "^tag artist" | cut -c 12-)
+artist=$(echo "$output" | grep "^tag title" | cut -c 12-)
+#artist=" "
 path=$(echo "$output" | grep "^file" | cut -c 12-)
 duration=$(echo "$output" | grep -v "set " | grep -v "tag " | grep "duration " | cut -d ' ' -f 2)
 
@@ -41,7 +43,7 @@ fi
 
 if [[ $artist = *[!\ ]* ]]; then
     song=$(echo "$output" | grep "^tag title" | cut -c 11-)
-    echo -n "$icon $artist / $song $pos_info"
+    echo -n "$icon $song $pos_info"
 elif [[ $path = *[!\ ]* ]]; then
     IFS="/"
     read -ra parts <<< "$path"

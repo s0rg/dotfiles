@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
+#
+# toggles touchpad on/off, with notify
+#
 #vim:ft=py3
 
 import subprocess as sh
 
 import notify
-
 
 PAD_NEEDLE = "touchpad"
 XINPUT_BIN = "xinput"

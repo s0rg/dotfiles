@@ -1,4 +1,4 @@
-set aaa_mode=all
+set aaa_mode=album
 set altformat_current= %F
 set altformat_playlist= %f%= %d
 set altformat_title=%f
@@ -94,7 +94,7 @@ set mpris=true
 set output_plugin=pulse
 set passwd=
 set pl_sort=
-set play_library=true
+set play_library=false
 set play_sorted=false
 set repeat=false
 set repeat_current=false

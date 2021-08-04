@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+#
+# this script takes standart https zoom meeting url
+# (i.e: https://[company.]zoom.us/j/123[?pwd=secret])
+# and produce zoommtg:// url for later opening with `xdg-open`.
+
+import os
+import sys
+from urllib.parse import urlparse, parse_qs, urlencode
+
+ZOOM_BASE_URI = "zoommtg://zoom.us/join"
+
+
+def main(args):
+    if len(args) != 2:
+        print("not enough args!")
+        return 1
+
+    u = urlparse(args[1])
+    r = {
+        "action": "join",
+        "confno": os.path.basename(u.path),
+    }
+
+    q = parse_qs(u.query)
+    if "pwd" in q:
+        r["pwd"] = q["pwd"][0]
+
+    print(ZOOM_BASE_URI + "?" + urlencode(r))
+
+    return 0
+
+
+sys.exit(main(sys.argv))
+#vi:syntax=py3

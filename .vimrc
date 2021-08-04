@@ -1,72 +1,90 @@
 set nocompatible
 filetype plugin indent off
 
-set runtimepath+=$GOROOT/misc/vim
 call pathogen#infect()
 call pathogen#helptags()
 
 filetype plugin indent on
+
 syntax on
+syntax sync fromstart
 
 if (has("termguicolors"))
- set termguicolors
+    set termguicolors
+    set t_Co=256
 endif
 
 colorscheme jellybeans
 
 let &t_ut=''
 
-set wildmenu
-set tabstop=4
-set shiftwidth=4
-set softtabstop=0
-set smarttab
-set expandtab
+set encoding=utf8 fileencoding=utf-8 termencoding=utf-8
+
+set hidden
+set autoread
+set history=100
 set autoindent
+
+set wildmenu wildignore+=*.o,*~,*.pyo,*.pyc,*/.git/*,*/.hg/*
+
+set shiftwidth=4
+set expandtab smarttab tabstop=4 softtabstop=0
+
 set switchbuf=usetab,newtab
+set showmatch matchtime=10
+
+set mousehide
 set cursorline
 set number
-set lazyredraw
-set showmatch
-set encoding=utf8
-set nu
-set mousehide
-set novisualbell
-set backspace=indent,eol,start whichwrap+=<,>,[,]
-set nowrap
+set numberwidth=3
+set scrolloff=3
+set backspace=indent,eol,start
+
+set wrap
+set whichwrap+=<,>,[,]
+set textwidth=140
+
 set linebreak
-set nobackup
-set nowb
-set noswapfile
-set nospell
-set ttyfast
-set redrawtime=15000
 set cindent
+set nostartofline
+set noeol
 
-set hlsearch
-set ignorecase
-set incsearch
-set smartcase
+set nospell
+set nobackup nowb noswapfile
+set noerrorbells novisualbell
+set t_vb=
+set tm=500
 
-set titlestring=vim:\ %f
-set title
+set lazyredraw ttyfast redrawtime=15000
+set hlsearch incsearch ignorecase smartcase
 
-set foldmethod=syntax
-set foldnestmax=3
+set title titlestring=vim:\ %f
+
+set foldmethod=syntax foldnestmax=3
 set nofoldenable
 
 set completeopt=longest,menuone
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 
-set splitbelow
-set splitright
+set splitbelow splitright
 
 set termwinsize=6x0
+
+set pastetoggle=<F2>
 
 set noshowmode
 set laststatus=2
 
+" python-syntax
+
 let g:python_highlight_all = 1
+
+" fzf.vim
+nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <C-f> :Rg<CR>
+nnoremap <silent> <C-t> :Tags<CR>
+
+" lightline
 
 let g:lightline = {
     \   'colorscheme': 'jellybeans',
@@ -88,11 +106,23 @@ let g:lightline = {
     \   },
     \ }
 
+let g:lightline.tabline = {
+	\   'left': [ [ 'tabs' ] ],
+    \   'right': [],
+	\ }
+
+let g:lightline.tab = {
+	\   'active': [ 'filename', 'modified' ],
+	\   'inactive': [ 'filename', 'modified' ],
+    \ }
+
 let g:lightline#ale#indicator_checking = "\uf110"
 let g:lightline#ale#indicator_infos = "\uf129"
 let g:lightline#ale#indicator_warnings = "\uf071"
 let g:lightline#ale#indicator_errors = "\uf05e"
 let g:lightline#ale#indicator_ok = "\uf00c"
+
+" vim-go
 
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
@@ -107,7 +137,12 @@ let g:go_diagnostics_level = 2
 let g:go_imports_autosave = 0
 let g:go_jump_to_error = 0
 
-let g:tagbar_width = 60
+map <leader>gt :GoAddTags<cr>
+map <leader>gi :GoImports<cr>
+
+" tagbar
+
+let g:tagbar_width = 50
 let g:tagbar_autofocus = 1
 let g:tagbar_autoclose = 1
 let g:tagbar_compact = 2
@@ -142,10 +177,10 @@ let g:tagbar_type_go = {
     \ 'ctagsargs' : '-sort -silent'
 \ }
 
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_custom_ignore = '\v[\/](\.git|vendor)$'
-let g:ctrlp_match_window = 'bottom,order:ttb'
-let g:ctrlp_switch_buffer = 0
+nnoremap <silent> <F12> <Cmd>:TagbarToggle<CR>
+inoremap <silent> <F12> <Cmd>:TagbarToggle<CR>
+
+" nerdtree
 
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeMinimalMenu = 1
@@ -154,23 +189,36 @@ let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeStatusline = '%#NonText#'
 let NERDTreeIgnore=['\.py[c,o]$', '__pycache__']
 
+function! NERDTreeToggleInCurDir()
+  " If NERDTree is open in the current buffer
+  if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
+    exe ":NERDTreeClose"
+  else
+    exe ":NERDTreeFind"
+  endif
+endfunction
+
+nnoremap <silent> <C-n> <Cmd>:call NERDTreeToggleInCurDir()<CR>
+inoremap <silent> <C-n> <Cmd>:call NERDTreeToggleInCurDir()<CR>
+
+" ale
+
 let g:airline#extensions#ale#enabled = 0
+let g:ale_lint_on_filetype_changed = 0
+let g:ale_lint_on_insert_leave = 0
 let g:ale_popup_menu_enabled = 0
 let g:ale_completion_enabled = 0
 let g:ale_update_tagstack = 0
-let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 0
 let g:ale_hover_cursor = 0
 
-let g:ale_fix_on_save = 1
-let g:ale_lint_on_enter = 1
-let g:ale_lint_on_insert_leave = 0
-let g:ale_lint_on_filetype_changed = 0
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_delay = 50
-
-let g:ale_linters_explicit = 1
 let g:ale_use_global_executables = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_linters_explicit = 1
+let g:ale_lint_on_enter = 1
+let g:ale_set_loclist = 1
+let g:ale_fix_on_save = 1
+let g:ale_lint_delay = 100
 
 let g:ale_go_gopls_init_options = {'ui.diagnostic.analyses': {
     \ 'composites': v:false,
@@ -191,6 +239,11 @@ let g:ale_fixers = {
 let g:ale_sign_error = '->'
 let g:ale_sign_warning = ' *'
 
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+" deoplete
+
 call deoplete#custom#option({
     \ 'auto_complete_delay': 0,
     \ 'auto_complete_popup': 'manual',
@@ -209,36 +262,77 @@ call deoplete#custom#option('sources', {
 
 let g:deoplete#enable_at_startup = 1
 
+" supertab
 
-function! NERDTreeToggleInCurDir()
-  " If NERDTree is open in the current buffer
-  if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
-    exe ":NERDTreeClose"
-  else
-    exe ":NERDTreeFind"
-  endif
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+let g:SuperTabLongestHighlight = 1
+
+" remove extra spaces
+
+function! CleanExtraSpaces()
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    silent! %s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
+endfun
+
+autocmd BufWritePre * :call CleanExtraSpaces()
+
+" Toggle quickfix window.
+
+function! QuickFixToggle()
+    for i in range(1, winnr('$'))
+        let bnum = winbufnr(i)
+        if getbufvar(bnum, '&buftype') == 'quickfix'
+            cclose
+            return
+        endif
+    endfor
+
+    copen
 endfunction
 
+nnoremap <silent> <Leader>q :call QuickFixToggle()<CR>
 
-map <C-n> :call NERDTreeToggleInCurDir()<CR>
-nmap <F12> :TagbarToggle<CR>
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
+" custom filetypes
+autocmd BufNewFile,BufRead Dockerfile* set ft=dockerfile
 
-autocmd BufWritePre * %s/\s\+$//e
+" auto-check file changes (for reload)
+autocmd FocusGained,BufEnter * checktime
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Disable arrow keys in Normal mode
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" no <Up> <Nop>
-" no <Down> <Nop>
-" no <Left> <Nop>
-" no <Right> <Nop>
+" ensure tabs don't get converted to spaces in Makefiles.
+autocmd FileType make setlocal noexpandtab
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Disable arrow keys in Insert mode
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ino <Up> <Nop>
-" ino <Down> <Nop>
-" ino <Left> <Nop>
-" ino <Right> <Nop>
+autocmd BufNewFile *.sh 0put =\"#!/bin/bash\<nl>\<nl>\"|$
+autocmd BufNewFile *.py 0put=\"#!/usr/bin/env python3\"\<nl>\<nl>\"|$
+
+" don't skip wrapped lines
+nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+vnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+vnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+
+nnoremap <expr> <Up> v:count == 0 ? 'gk' : 'k'
+nnoremap <expr> <Down> v:count == 0 ? 'gj' : 'j'
+vnoremap <expr> <Up> v:count == 0 ? 'gk' : 'k'
+vnoremap <expr> <Down> v:count == 0 ? 'gj' : 'j'
+inoremap <expr> <Up> v:count == 0 ? '<C-o>gk' : '<C-o>k'
+inoremap <expr> <Down> v:count == 0 ? '<C-o>gj' : '<C-o>j'
+
+" toggle off search highlight
+map <leader><ESC> :noh<CR>
+
+
+" Try to prevent using the arrow keys for movement.
+"nnoremap <Left>  :echoe "Use h"<CR>
+"nnoremap <Right> :echoe "Use l"<CR>
+"nnoremap <Up>    :echoe "Use k"<CR>
+"nnoremap <Down>  :echoe "Use j"<CR>
+" ...and in insert mode
+"inoremap <Left>  <ESC>:echoe "Use h"<CR>
+"inoremap <Right> <ESC>:echoe "Use l"<CR>
+"inoremap <Up>    <ESC>:echoe "Use k"<CR>
+"inoremap <Down>  <ESC>:echoe "Use j"<CR>
+

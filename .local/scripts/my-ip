@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+#
+# print all current assigned ip4 addrs.
+#
+
 import sys
 import socket
 

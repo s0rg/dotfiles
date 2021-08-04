@@ -1,14 +1,18 @@
 #!/bin/bash
+#
+# start or show cmus scratchpad.
 
 cmus="cmus"
 
+show() { i3-msg "[instance=\"^cmus$\"] scratchpad show"; }
+
 if pgrep -x "$cmus" > /dev/null
 then
-    i3-msg "[instance=\"^cmus$\"] scratchpad show"
+    show
 else
     kitty --name "$cmus" "$cmus" &
     sleep 0.5
-    i3-msg "[instance=\"^cmus$\"] scratchpad show"
+    show
 fi
 
 #vim:ft=bash

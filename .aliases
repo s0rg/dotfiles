@@ -17,18 +17,37 @@ alias ncdu='ncdu --color dark'
 alias v='vim'
 alias mc='mc -d'
 alias si='sudo -i'
-alias cls='clear'
 alias tailf='tail -f --retry'
 alias wttr='curl http://wttr.in/?format="%c:+%f+%w\n"'
 alias ru-tran='trans :ru'
 alias cal='echo; ncal -M -3; echo'
-alias clip="xclip -sel clip"
+alias hig='history | grep'
+alias clip='xclip -sel clip'
+alias pub-cp='cat ~/.ssh/id_rsa.pub | clip'
+alias ncdu-home='ncdu "$HOME"'
+alias rot13='tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]"; echo'
+
+# post-traumatic syndrome
+alias q='exit'
+alias :q='exit'
+
+# fast travel
+alias cdp='cd ~/projects'
+alias cdd='cd ~/Documents'
+alias cdl='cd ~/Downloads && fresh'
+
+# system
+alias top-mem='ps -Ao user,pid,pcpu,pmem,comm --sort=-pmem | head --lines=6'
+alias top-cpu='ps -Ao user,pid,pcpu,pmem,comm --sort=-pcpu | head --lines=6'
+alias inet-ports='netstat -nape --inet'
 
 # python
-alias bp='bpython'
 alias py='python3'
+alias bp='bpython'
+alias pip-up='pip3 install --upgrade --user $(pip3 list --user --format json | jq ".[] | flatten | .[0]" | xargs echo)'
+alias pip-get='pip3 install --user --upgrade'
 alias py-serve='python3 -m http.server'
-alias pip-up='pip3 install -U --user $(pip3 list --user --format json | jq ".[] | flatten | .[0]" | xargs echo)'
+alias py-clear='find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf'
 
 # youtube-dl
 alias yta="youtube-dl --extract-audio --audio-format best"
@@ -37,7 +56,7 @@ alias ytv="youtube-dl -f bestvideo+bestaudio"
 # extras
 alias tree='exa --icons --group-directories-first --tree --level=2 --git-ignore'
 alias lsx='exa --icons --group-directories-first --long --header --git --colour-scale --time-style=long-iso'
-alias df='duf --hide special'
+alias dfx='duf --hide special'
 
 # docker
 alias dci-up="docker images -f 'dangling=false' --format '{{.Repository}}:{{.Tag}}' | xargs -L1 docker pull"
@@ -47,6 +66,7 @@ alias dcd='docker-compose down'
 
 # golang
 alias go-clean='go clean -cache -testcache -modcache'
+alias go-deps="go list -f '{{join .Deps \"\n\"}}' | xargs go list -f '{{if not .Standard}}{{.ImportPath}}{{end}}'"
 alias cdgo='cd $GOPATH/src/github.com/$USER'
 
 # git
@@ -54,22 +74,26 @@ alias git-gc='git reflog expire --all --expire=now && git gc --prune=now --aggre
 alias git-born='git log --pretty="format:%ar at %ai" --reverse | head -1'
 alias git-origin='git remote show origin'
 alias git-prune='git fetch --prune origin'
+alias git-log='git log --all --decorate --oneline --graph --stat'
+alias git-root='cd $(git rev-parse --show-toplevel)'
 
 # kitty
 source <(kitty + complete setup bash)
 alias kitty-up='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin'
 alias ssh='kitty +kitten ssh'
-alias kcat='kitty +kitten icat'
+alias kat='kitty +kitten icat'
 
 # dotfiles
-alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dots='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dots-vim-plugs='vim-plugs-ls > $HOME/.vim/plugins-list'
+
 # add auto-complete
-complete -W "add status commit push log checkout diff" dotfiles
+__git_complete dots git
 
 ## functions
 
 # create a new directory and enter it
-mkd() { mkdir -p "$@" && cd "$@" || exit; }
+md() { mkdir -p "$@" && cd "$@" || exit; }
 
 # `opn` with no arguments opens the current directory,
 # otherwise opens the given location or file
@@ -79,4 +103,14 @@ opn() {
     else
         xdg-open "$@" > /dev/null 2>&1
     fi
+}
+
+# `fresh` with no arguments shows 5 last-changed elements
+# in current dir. You can specify count i.e.: `fresh 10`
+fresh(){
+    n=5
+    if [ $# -eq 1 ]; then
+        n="$1"
+    fi
+    \ls -1ct --color=always | head --lines "$n"
 }

@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+#
+# creates profile-based firefox menu for rofi
 
 import os
 import os.path as path

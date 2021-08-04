@@ -37,10 +37,11 @@ font-0 = ubuntumono nerd font mono:pixelsize=9;0
 font-1 = ubuntumono nerd font mono:pixelsize=16;2
 font-2 = ubuntumono nerd font mono:pixelsize=10:style=Bold;0
 font-3 = ubuntumono nerd font mono:pixelsize=12;1
+font-4 = Font Awesome 5 Free:pixelsize=6:style=Solid;0
 
 modules-left = i3 xwindow
-modules-center = cmus
-modules-right = xkeyboard sep cpu temperature memory filesystem battery sep backlight pulseaudio micstatus date
+modules-center =
+modules-right = cmus xkeyboard sep temperature cpu memory filesystem battery sep backlight pulseaudio micstatus bluetooth date
 
 tray-position = right
 tray-padding = 2
@@ -53,7 +54,7 @@ cursor-scroll = ns-resize
 type = internal/xwindow
 format-padding = 1
 label = %title%
-label-maxlen = 90
+label-maxlen = 70
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -123,9 +124,31 @@ label-urgent-padding = 1
 
 [module/cpu]
 type = internal/cpu
-interval = 2
-format = <label>
-label = %{T2}%{T-} %percentage:2%%
+interval = 1.0
+format = <ramp-coreload>
+
+ramp-coreload-spacing = 0
+ramp-coreload-font = 5
+
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █
+
+ramp-coreload-0-foreground = ${colors.foreground}
+ramp-coreload-1-foreground = ${colors.foreground}
+ramp-coreload-2-foreground = ${colors.foreground}
+
+ramp-coreload-3-foreground = ${colors.foreground-alt}
+ramp-coreload-4-foreground = ${colors.foreground-alt}
+ramp-coreload-5-foreground = ${colors.foreground-alt}
+
+ramp-coreload-6-foreground = ${colors.alert}
+ramp-coreload-7-foreground = ${colors.alert}
 
 [module/memory]
 type = internal/memory
@@ -175,7 +198,7 @@ exec = pulse_mic --status
 type = internal/battery
 battery = BAT1
 adapter = ACAD
-full-at = 98
+full-at = 100
 time-format = %H:%M
 
 label-charging = %percentage%%
@@ -225,27 +248,17 @@ format-warn = <label-warn>
 
 [module/cmus]
 type = custom/script
-exec = ~/.config/polybar/cmus_status.sh
+exec = cmus-status
 exec-if = pgrep -x cmus
 interval = 1
-label-maxlen = 100
+label-maxlen = 50
 click-left = cmus-remote --pause
 
-[module/wifi]
-type = internal/network
-interface = wlo1
-interval = 3.0
-
-label-connected = %essid% %signal%
-format-connected = <label-connected>
-format-connected-prefix = "%{T2}直%{T-} "
-
-[module/wired]
-type = internal/network
-interface = eno1
-interval = 3.0
-
-label-connected = %linkspeed%
-format-connected-prefix = "%{T2}%{T-} "
+[module/bluetooth]
+type = custom/script
+exec = rofi-bluetooth --status
+interval = 1
+label-font = 2
+label-padding-right = 1
 
 ; vim:ft=dosini

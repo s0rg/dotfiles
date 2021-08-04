@@ -12,9 +12,9 @@ export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 export HISTSIZE=5000
 export HISTFILESIZE=5000
-export HISTCONTROL=ignoreboth
+export HISTCONTROL=ignoreboth:erasedups
 
-export HISTIGNORE="&:[bf]g:c:clear:history:exit:q:pwd:* --help:sudo *:si:ls"
+export HISTIGNORE="&:[bf]g:clear:history:q:* --help:sudo *:si: *:ls:cd:cd -:pwd:exit:date:mc:ru-tran *"
 
 shopt -s histappend
 shopt -s checkwinsize
@@ -68,11 +68,19 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# local aliases - last to override any others.
+if [ -f ~/.git-completion.bash ]; then
+    . ~/.git-completion.bash
+fi
+
+if [ -f ~/.go-completion.bash ]; then
+    . ~/.go-completion.bash
+fi
+
 if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi
 
+# local aliases - last to override any others.
 if [ -f ~/.aliases_local ]; then
     . ~/.aliases_local
 fi

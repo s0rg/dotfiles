@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+# this script listens for system clipboard,
+# and sends any new content to stdout.
+#
+# example: clip-pipe | xargs -P 2 -I '{}' wget '{}'
+#
+
+xcmd='xclip -selection clipboard -target STRING'
+xget="$xcmd -out"
+xset="$xcmd -in"
+
+# clean initial state
+echo -n '' | $xset
+
+sel=''
+
+while true
+do
+    cur=$($xget)
+    if [[ -n $cur && "$cur" != "$sel" ]]; then
+        echo "$cur"
+        sel=$cur
+    fi
+    sleep 0.5
+done
+
+# clean last state
+echo -n '' | $xset
+
+#vi:ft=bash

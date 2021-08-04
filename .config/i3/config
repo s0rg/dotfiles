@@ -17,13 +17,14 @@ set $alt            Mod1
 set $ctrl           Control
 
 set $term           kitty
+set $bri_step       5
 set $vol_step       5%
 set $vol_sink       @DEFAULT_SINK@
-set $bri_step       10
 
 set $run            exec --no-startup-id
 set $mode_reset     mode "default"
 set $float          floating enable
+set $sticky         sticky enable
 set $center         move position 10 ppt 10 ppt; resize set 80 ppt 80 ppt
 set $move_pad       move scratchpad
 set $show_pad       scratchpad show
@@ -49,29 +50,29 @@ floating_maximum_size         900 x 600
 
 ## KEYS
 
-set $rofi rofi [r]un [w]in [f]ox [q]uit
+set $rofi < [r]un / [w]in / [f]ox / [b]luetooth / [q]uit >
 mode "$rofi" {
     bindsym r $run "rofi -show combi -display-combi 'run '",              $mode_reset
     bindsym w $run "rofi -show window -display-window 'win '",            $mode_reset
     bindsym f $run "rofi -show rfox -modi rfox:~/.local/scripts/rofifox", $mode_reset
     bindsym q $run "rofi -show roff -modi roff:~/.local/scripts/rofioff", $mode_reset
+    bindsym b $run "rofi-bluetooth", $mode_reset
 
     bindsym Escape $mode_reset
 }
 
-set $window window [k]ill [x]kill [f]ull f[l]oat [s]ticky [m]ode
+set $window < [k]ill / [x]kill / [f]loating / [s]ticky / f[u]ll screen >
 mode "$window" {
     bindsym k kill,              $mode_reset
     bindsym x $run xkill,        $mode_reset
-    bindsym s sticky toggle,     $mode_reset
-    bindsym l floating toggle,   $mode_reset
-    bindsym f fullscreen toggle, $mode_reset
-    bindsym m focus mode_toggle, $mode_reset
+    bindsym s $sticky,           $mode_reset
+    bindsym f floating toggle,   $mode_reset
+    bindsym u fullscreen toggle, $mode_reset
 
     bindsym Escape $mode_reset
 }
 
-set $toggle toggle [t]ouchpad [m]ic [r]edshift [d]unst [n]otifies
+set $toggle < [t]ouchpad / [m]ic / [r]edshift / [d]unst / [n]otifies >
 mode "$toggle" {
     bindsym t $run touchpad_toggle,             $mode_reset
     bindsym r $run pkill -USR1 redshift,        $mode_reset
@@ -82,7 +83,7 @@ mode "$toggle" {
     bindsym Escape $mode_reset
 }
 
-set $split split [t]oggle [v]ertical [h]orizontal
+set $split < [t]oggle / [v]ertical / [h]orizontal >
 mode "$split" {
     bindsym t layout toggle split splitv splith, $mode_reset
     bindsym h split h,                           $mode_reset
@@ -100,17 +101,15 @@ bindsym $mod+Up         focus up
 bindsym $mod+Down       focus down
 bindsym $mod+Left       focus left
 bindsym $mod+Right      focus right
+bindsym $mod+Space      focus mode_toggle
+# bindsym $mod+a          focus parent
+# bindsym $mod+d          focus child
 
 # modes
 bindsym $mod+r          mode "$rofi"
 bindsym $mod+w          mode "$window"
 bindsym $mod+t          mode "$toggle"
 bindsym $mod+s          mode "$split"
-
-# focus
-bindsym $mod+f          focus mode_toggle
-# bindsym $mod+a          focus parent
-# bindsym $mod+d          focus child
 
 # config reload
 bindsym --release $mod+$ctrl+c reload
@@ -137,6 +136,7 @@ bindsym --release Print       $run i3-scrot --desk
 bindsym --release $ctrl+Print $run i3-scrot --window
 
 # scratchpad
+
 ## move window
 bindsym $mod+KP_Subtract      $move_pad
 ## show last window
@@ -149,16 +149,14 @@ for_window [urgent=latest]                     focus
 for_window [class="^kitty$"]                   focus
 
 # floaters
-for_window [window_role="pop-up|bubble|task_dialog|Preferences"]      $float
+for_window [window_role="pop-up|bubble|task_dialog"]                  $float
 for_window [window_type="dialog|utility|notification|toolbar|splash"] $float
 for_window [window_type="menu|dropdown_menu|popup_menu|tooltip|dock"] $float
 
 # custom rules
 for_window [class="^zoom$"]                                 $float
-for_window [class="^Firefox$" title="^About"]               $float
-
-for_window [class="^Firefox$" title="^Picture-in-Picture$"] $float, sticky enable
-for_window [class="^pavucontrol-qt$"]                       $float, sticky enable
+for_window [class="^pavucontrol-qt$|^Blueman-manager$"]     $float, $sticky
+for_window [class="^Firefox$" title="^Picture-in-Picture$"] $float, $sticky
 
 for_window [class="^Steam$" title="^Steam - News"]          kill
 
@@ -172,7 +170,7 @@ set $tty  "1"
 set $web  "2"
 set $chat "3"
 set $apps "4"
-set $zoom "5"
+set $meet "5"
 #set $ws6 "6"
 
 # switch to workspace
@@ -180,7 +178,7 @@ bindsym $mod+1 workspace number $tty
 bindsym $mod+2 workspace number $web
 bindsym $mod+3 workspace number $chat
 bindsym $mod+4 workspace number $apps
-bindsym $mod+5 workspace number $zoom
+bindsym $mod+5 workspace number $meet
 #bindsym $mod+6 workspace number $ws6
 
 # move focused container to workspace
@@ -188,27 +186,26 @@ bindsym $mod+$ctrl+1 move container to workspace number $tty
 bindsym $mod+$ctrl+2 move container to workspace number $web
 bindsym $mod+$ctrl+3 move container to workspace number $chat
 bindsym $mod+$ctrl+4 move container to workspace number $apps
-bindsym $mod+$ctrl+5 move container to workspace number $zoom
+bindsym $mod+$ctrl+5 move container to workspace number $meet
 #bindsym $mod+Shift+6 move container to workspace number $ws6
 
-
 # terminal
-assign [class="^kitty$" instance="^kitty$"]  $tty
+assign [class="^kitty$" instance="^kitty$"]        $tty
 
 # web
-assign [class="^Firefox$|^Tor Browser$"]     $web
-assign [class="^qbittorrent$|^qutebrowser$"] $web
+assign [class="^Firefox$|^Tor Browser$"]           $web
+assign [class="^qbittorrent$|^qutebrowser$"]       $web
 
 # chat
-assign [class="^TelegramDesktop$"]           $chat
+assign [class="^TelegramDesktop$"]                 $chat
 
 # apps
-assign [class="^pcmanfm-qt$|^FeatherPad$"]   $apps
-assign [class="^qimgv$|^Gimp-.+"]            $apps
-assign [title="^Steam"]                      $apps
+assign [class="^pcmanfm-qt$|^FeatherPad$|^Xsane$"] $apps
+assign [class="^qimgv$|^mpv$|^okular$|^Gimp-.+"]   $apps
+assign [title="^Steam"]                            $apps
 
 # zoom
-assign [class="^zoom$"]                      $zoom
+assign [class="^zoom$"]                            $meet
 
 ## UI
 
@@ -228,7 +225,7 @@ client.background             $bg
 
 ## AUTOSTART
 
-exec --no-startup-id systemctl --user import-environment DISPLAY
+exec --no-startup-id systemctl --user import-environment
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-fancy
 
 exec --no-startup-id /usr/libexec/geoclue-2.0/demos/agent
