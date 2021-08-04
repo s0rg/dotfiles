@@ -2,7 +2,7 @@ https://github.com/dense-analysis/ale.git
 https://github.com/deoplete-plugins/deoplete-jedi
 https://github.com/Shougo/deoplete.nvim.git
 https://github.com/ekalinin/Dockerfile.vim.git
-git@github.com:junegunn/fzf.vim.git
+https://github.com/junegunn/fzf.vim.git
 https://github.com/mboughaba/i3config.vim.git
 https://github.com/nanotech/jellybeans.vim.git
 https://github.com/maximbaz/lightline-ale.git
