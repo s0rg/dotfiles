@@ -14,7 +14,7 @@ export HISTSIZE=5000
 export HISTFILESIZE=5000
 export HISTCONTROL=ignoreboth:erasedups
 
-export HISTIGNORE="&:[bf]g:clear:history:q:* --help:sudo *:si: *:ls:cd:cd -:pwd:exit:date:mc:ru-tran *"
+export HISTIGNORE="&:[bf]g:clear:history:q:* --help:sudo *:si: *:ls:cd:cd -:pwd:exit:date:mc:ru-tran *:yta *:ytv *"
 
 shopt -s histappend
 shopt -s checkwinsize
@@ -74,6 +74,10 @@ fi
 
 if [ -f ~/.go-completion.bash ]; then
     . ~/.go-completion.bash
+fi
+
+if [ -f ~/.fzf-completion.bash ]; then
+    . ~/.fzf-completion.bash
 fi
 
 if [ -f ~/.aliases ]; then

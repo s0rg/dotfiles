@@ -1,3 +1,5 @@
+![WIP](https://img.shields.io/badge/status-wip-red)
+
 # dotfiles
 
 This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles) method

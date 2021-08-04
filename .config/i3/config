@@ -56,7 +56,7 @@ mode "$rofi" {
     bindsym w $run "rofi -show window -display-window 'win '",            $mode_reset
     bindsym f $run "rofi -show rfox -modi rfox:~/.local/scripts/rofifox", $mode_reset
     bindsym q $run "rofi -show roff -modi roff:~/.local/scripts/rofioff", $mode_reset
-    bindsym b $run "rofi-bluetooth", $mode_reset
+    bindsym b $run "rofi-bluetooth",                                      $mode_reset
 
     bindsym Escape $mode_reset
 }
