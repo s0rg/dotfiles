@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+# this script takes string from primary clipboard,
+# translates it with `trans`, and shows with dunst.
+#
+# example: clip-trans
+#
+
+xget='xclip -selection primary -target STRING -out'
+clip=$($xget)
+
+if [ -n "$clip" ]; then
+    tran=$(trans -no-ansi -j -w 10 \
+        -show-original n \
+        -show-original-phonetics n \
+        -show-translation-phonetics n \
+        -show-prompt-message n \
+        -show-languages n \
+        -show-alternatives n \
+        :ru "$clip")
+
+    dunstify -r 5555 -u low -t 10000 -a "trans" "" "$tran"
+fi

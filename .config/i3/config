@@ -92,8 +92,9 @@ mode "$split" {
     bindsym Escape $mode_reset
 }
 
-bindsym $mod+Return     exec $term, focus
+bindsym $mod+Return     $run $term, focus
 bindsym $mod+c          $run i3-cmus
+bindsym $mod+d          $run clip-trans
 bindsym $mod+Tab        layout toggle all
 
 # window navigation

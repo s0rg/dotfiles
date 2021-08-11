@@ -76,7 +76,6 @@ set noshowmode
 set laststatus=2
 
 " python-syntax
-
 let g:python_highlight_all = 1
 
 " fzf.vim
@@ -85,7 +84,6 @@ nnoremap <silent> <C-f> :Rg<CR>
 nnoremap <silent> <C-t> :Tags<CR>
 
 " lightline
-
 let g:lightline = {
     \   'colorscheme': 'jellybeans',
     \   'active': {'right': [['lineinfo'], ['percent'], ['lint_check','lint_err', 'lint_warn', 'lint_info', 'lint_ok'], ['gitbranch']]},
@@ -123,7 +121,6 @@ let g:lightline#ale#indicator_errors = "\uf05e"
 let g:lightline#ale#indicator_ok = "\uf00c"
 
 " vim-go
-
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
@@ -141,7 +138,6 @@ map <leader>gt :GoAddTags<cr>
 map <leader>gi :GoImports<cr>
 
 " tagbar
-
 let g:tagbar_width = 50
 let g:tagbar_autofocus = 1
 let g:tagbar_autoclose = 1
@@ -181,7 +177,6 @@ nnoremap <silent> <F12> <Cmd>:TagbarToggle<CR>
 inoremap <silent> <F12> <Cmd>:TagbarToggle<CR>
 
 " nerdtree
-
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeMinimalMenu = 1
 let g:NERDTreeMarkBookmarks = 0
@@ -202,21 +197,20 @@ nnoremap <silent> <C-n> <Cmd>:call NERDTreeToggleInCurDir()<CR>
 inoremap <silent> <C-n> <Cmd>:call NERDTreeToggleInCurDir()<CR>
 
 " ale
-
 let g:airline#extensions#ale#enabled = 0
 let g:ale_lint_on_filetype_changed = 0
 let g:ale_lint_on_insert_leave = 0
 let g:ale_popup_menu_enabled = 0
 let g:ale_completion_enabled = 0
 let g:ale_update_tagstack = 0
-let g:ale_set_quickfix = 0
 let g:ale_hover_cursor = 0
+let g:ale_set_loclist = 0
 
 let g:ale_use_global_executables = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_linters_explicit = 1
 let g:ale_lint_on_enter = 1
-let g:ale_set_loclist = 1
+let g:ale_set_quickfix = 1
 let g:ale_fix_on_save = 1
 let g:ale_lint_delay = 100
 
@@ -243,7 +237,6 @@ nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " deoplete
-
 call deoplete#custom#option({
     \ 'auto_complete_delay': 0,
     \ 'auto_complete_popup': 'manual',
@@ -262,14 +255,7 @@ call deoplete#custom#option('sources', {
 
 let g:deoplete#enable_at_startup = 1
 
-" supertab
-
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
-let g:SuperTabLongestHighlight = 1
-
 " remove extra spaces
-
 function! CleanExtraSpaces()
     let save_cursor = getpos(".")
     let old_query = getreg('/')
@@ -281,7 +267,6 @@ endfun
 autocmd BufWritePre * :call CleanExtraSpaces()
 
 " Toggle quickfix window.
-
 function! QuickFixToggle()
     for i in range(1, winnr('$'))
         let bnum = winbufnr(i)
@@ -296,6 +281,9 @@ endfunction
 
 nnoremap <silent> <Leader>q :call QuickFixToggle()<CR>
 
+autocmd BufNewFile *.sh 0put =\"#!/bin/bash\<nl>\<nl>\"|$
+autocmd BufNewFile *.py 0put=\"#!/usr/bin/env python3\"\<nl>\<nl>\"|$
+
 " custom filetypes
 autocmd BufNewFile,BufRead Dockerfile* set ft=dockerfile
 
@@ -305,25 +293,14 @@ autocmd FocusGained,BufEnter * checktime
 " ensure tabs don't get converted to spaces in Makefiles.
 autocmd FileType make setlocal noexpandtab
 
-autocmd BufNewFile *.sh 0put =\"#!/bin/bash\<nl>\<nl>\"|$
-autocmd BufNewFile *.py 0put=\"#!/usr/bin/env python3\"\<nl>\<nl>\"|$
-
 " don't skip wrapped lines
 nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
 nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
 vnoremap <expr> k v:count == 0 ? 'gk' : 'k'
 vnoremap <expr> j v:count == 0 ? 'gj' : 'j'
 
-nnoremap <expr> <Up> v:count == 0 ? 'gk' : 'k'
-nnoremap <expr> <Down> v:count == 0 ? 'gj' : 'j'
-vnoremap <expr> <Up> v:count == 0 ? 'gk' : 'k'
-vnoremap <expr> <Down> v:count == 0 ? 'gj' : 'j'
-inoremap <expr> <Up> v:count == 0 ? '<C-o>gk' : '<C-o>k'
-inoremap <expr> <Down> v:count == 0 ? '<C-o>gj' : '<C-o>j'
-
 " toggle off search highlight
 map <leader><ESC> :noh<CR>
-
 
 " Try to prevent using the arrow keys for movement.
 "nnoremap <Left>  :echoe "Use h"<CR>
@@ -335,4 +312,3 @@ map <leader><ESC> :noh<CR>
 "inoremap <Right> <ESC>:echoe "Use l"<CR>
 "inoremap <Up>    <ESC>:echoe "Use k"<CR>
 "inoremap <Down>  <ESC>:echoe "Use j"<CR>
-
