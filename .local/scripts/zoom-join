@@ -1,14 +1,18 @@
 #!/bin/bash
 #
-# this script starts zoom meeting, from clipboard url
+# this script starts zoom meeting, from clipboard url or first argument.
 
 xcmd='xclip -selection clipboard -target STRING'
 xget="$xcmd -out"
 xset="$xcmd -in"
 
-link="$($xget)"
+if [[ $# == 0 ]]; then
+    link="$($xget)"
+    echo -n '' | $xset
+else
+    link="$1"
+fi
 
-echo -n '' | $xset
 echo "starting zoom for: $link"
 xdg-open "$(zoom_url "$link")"
 

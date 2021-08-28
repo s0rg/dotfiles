@@ -2,6 +2,7 @@
 
 # dotfiles
 
+My golang-centric dev environment for linux.
 This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles) method
 
 ## software

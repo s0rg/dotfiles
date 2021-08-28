@@ -17,6 +17,7 @@ alias ncdu='ncdu --color dark'
 alias v='vim'
 alias mc='mc -d'
 alias si='sudo -i'
+alias up='uptime -p'
 alias tailf='tail -f --retry'
 alias wttr='curl http://wttr.in/?format="%c:+%f+%w\n"'
 alias enru='trans en:ru'
@@ -68,6 +69,8 @@ alias dcd='docker-compose down'
 # golang
 alias go-clean='go clean -cache -testcache -modcache'
 alias go-deps="go list -f '{{join .Deps \"\n\"}}' | xargs go list -f '{{if not .Standard}}{{.ImportPath}}{{end}}'"
+alias go-test='go test -count 1 -v .'
+alias go-bench='go test -benchmem -bench=.'
 alias cdgo='cd $GOPATH/src/github.com/$USER'
 
 # git
@@ -77,6 +80,12 @@ alias git-origin='git remote show origin'
 alias git-prune='git fetch --prune origin'
 alias git-log='git log --all --decorate --oneline --graph --stat'
 alias git-root='cd $(git rev-parse --show-toplevel)'
+alias git-forget='git update-index --assume-unchanged'
+alias git-remember='git update-index --no-assume-unchanged'
+alias gis='git status'
+alias gic='git commit -am '
+alias gia='git commit -a --amend'
+alias gip='git push'
 
 # kitty
 source <(kitty + complete setup bash)
@@ -87,9 +96,12 @@ alias kat='kitty +kitten icat'
 # dotfiles
 alias dots='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias dots-vim-plugs='vim-plugs-ls > $HOME/.vim/plugins-list'
-
-# add auto-complete
 __git_complete dots git
+
+# kubernetes
+source <(kubectl completion bash)
+alias k='kubectl'
+complete -F __start_kubectl k
 
 ## functions
 

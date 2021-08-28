@@ -47,7 +47,6 @@ set textwidth=140
 set linebreak
 set cindent
 set nostartofline
-set noeol
 
 set nospell
 set nobackup nowb noswapfile
