@@ -67,11 +67,12 @@ alias dcu='docker-compose up'
 alias dcd='docker-compose down'
 
 # golang
+alias go-proxyclr='export GOPROXY='
 alias go-clean='go clean -cache -testcache -modcache'
 alias go-deps="go list -f '{{join .Deps \"\n\"}}' | xargs go list -f '{{if not .Standard}}{{.ImportPath}}{{end}}'"
 alias go-test='go test -count 1 -v .'
 alias go-bench='go test -benchmem -bench=.'
-alias cdgo='cd $GOPATH/src/github.com/$USER'
+alias cdgo='cd "$GOPATH/src/github.com/$USER"'
 
 # git
 alias git-gc='git reflog expire --all --expire=now && git gc --prune=now --aggressive'
