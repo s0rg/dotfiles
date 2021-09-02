@@ -14,7 +14,7 @@ export GOPATH=$HOME/projects/go
 
 export MTR_OPTIONS=-t
 
-export RIPGREP_CONFIG_PATH=~/config/ripgrep/ripgreprc
+export RIPGREP_CONFIG_PATH=~/.config/ripgrep/ripgreprc
 
 export FZF_COMPLETION_OPTS='--border --info=inline'
 export FZF_DEFAULT_OPTS="--ansi \

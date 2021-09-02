@@ -161,9 +161,9 @@ label = %{T2}%{T-} %percentage_used:2%%
 [module/date]
 type = internal/date
 interval = 2
-date = "%a %Y-%m-%d"
+date = %a %Y-%m-%d
 time = %H:%M
-label = %{T2}%{T-} %date% %time%
+label = %{T2}%{T-} %date% %{T3}%time%%{T-}
 
 [module/pulseaudio]
 type = internal/pulseaudio

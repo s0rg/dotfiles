@@ -159,14 +159,13 @@ for_window [class="^Evolution-alarm-notify$"]               $float, $center
 for_window [class="^pavucontrol-qt$|^Blueman-manager$"]     $float, $sticky
 for_window [class="^Firefox$" title="^Picture-in-Picture$"] $float, $sticky
 
-for_window [class="^Steam$" title="^Steam - News"]          kill
-
 # scratchpad
 for_window [class="^kitty$" instance="^cmus$"]              mark pad
 for_window [con_mark="pad"]                                 $float, $center, $move_pad
 
-for_window  [class="^zoom$" title="^Zoom Cloud Meetings$"]  $float
-no_focus [class="^zoom$" title="^Zoom Cloud Meetings$"]
+# garbage
+for_window [class="^Steam$" title="^Steam - News"]          kill
+for_window [class="^zoom$" title="^Zoom Cloud Meetings$"]   kill
 
 ## WORKSPACES
 
