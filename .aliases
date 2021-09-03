@@ -65,6 +65,7 @@ alias dci-up="docker images -f 'dangling=false' --format '{{.Repository}}:{{.Tag
 alias dci-clr="docker images -f 'dangling=true' -q | xargs -L1 docker rmi"
 alias dcu='docker-compose up'
 alias dcd='docker-compose down'
+alias dps='docker ps -a'
 
 # golang
 alias go-proxyclr='export GOPROXY='
@@ -77,7 +78,7 @@ alias cdgo='cd "$GOPATH/src/github.com/$USER"'
 # git
 alias git-gc='git reflog expire --all --expire=now && git gc --prune=now --aggressive'
 alias git-born='git log --pretty="format:%ar at %ai" --reverse | head -1'
-alias git-origin='git remote show origin'
+alias git-origin='git config --get remote.origin.url'
 alias git-prune='git fetch --prune origin'
 alias git-log='git log --all --decorate --oneline --graph --stat'
 alias git-root='cd $(git rev-parse --show-toplevel)'
@@ -127,4 +128,18 @@ fresh(){
         n="$1"
     fi
     \ls -1ct --color=always | head --lines "$n"
+}
+
+# eye-candy man
+# see: https://boredzo.org/blog/archives/2016-08-15/colorized-man-pages-understood-and-customized
+man() {
+    env \
+    LESS_TERMCAP_mb=$'\e[01;31m' \
+    LESS_TERMCAP_md=$'\e[01;38;5;74m' \
+    LESS_TERMCAP_me=$'\e[0m' \
+    LESS_TERMCAP_se=$'\e[0m' \
+    LESS_TERMCAP_so=$'\e[46;30m' \
+    LESS_TERMCAP_ue=$'\e[0m' \
+    LESS_TERMCAP_us=$'\e[04;38;5;146m' \
+    man "$@"
 }
