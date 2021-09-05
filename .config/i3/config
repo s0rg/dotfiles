@@ -228,7 +228,7 @@ client.background             $bg
 ## AUTOSTART
 
 exec --no-startup-id systemctl --user import-environment
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-fancy
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3locker.sh
 
 exec --no-startup-id /usr/libexec/geoclue-2.0/demos/agent
 

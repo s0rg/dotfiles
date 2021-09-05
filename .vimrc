@@ -254,6 +254,24 @@ call deoplete#custom#option('sources', {
 
 let g:deoplete#enable_at_startup = 1
 
+" startify
+let g:startify_lists = [
+    \ { 'type': 'sessions',  'header': ['   Sessions']  },
+    \ { 'type': 'bookmarks', 'header': ['   Bookmarks'] },
+    \ { 'type': 'commands',  'header': ['   Commands']  },
+    \ ]
+
+let g:startify_bookmarks = [
+    \ {'v': '~/.vimrc'},
+    \ {'i': '~/.config/i3/config'},
+    \ {'b': '~/.config/polybar/config'},
+    \ ]
+
+let g:startify_session_sort = 1
+let g:startify_session_number = 5
+let g:startify_change_to_vcs_root = 1
+let g:startify_custom_indices = map(range(1,100), 'string(v:val)')
+
 " remove extra spaces
 function! CleanExtraSpaces()
     let save_cursor = getpos(".")
@@ -264,21 +282,6 @@ function! CleanExtraSpaces()
 endfun
 
 autocmd BufWritePre * :call CleanExtraSpaces()
-
-" Toggle quickfix window.
-function! QuickFixToggle()
-    for i in range(1, winnr('$'))
-        let bnum = winbufnr(i)
-        if getbufvar(bnum, '&buftype') == 'quickfix'
-            cclose
-            return
-        endif
-    endfor
-
-    copen
-endfunction
-
-nnoremap <silent> <Leader>q :call QuickFixToggle()<CR>
 
 autocmd BufNewFile *.sh 0put =\"#!/bin/bash\<nl>\<nl>\"|$
 autocmd BufNewFile *.py 0put=\"#!/usr/bin/env python3\"\<nl>\<nl>\"|$
