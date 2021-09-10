@@ -271,6 +271,7 @@ let g:startify_session_sort = 1
 let g:startify_session_number = 5
 let g:startify_change_to_vcs_root = 1
 let g:startify_custom_indices = map(range(1,100), 'string(v:val)')
+let g:startify_session_before_save = [ 'silent! tabdo NERDTreeClose' ]
 
 " remove extra spaces
 function! CleanExtraSpaces()
@@ -303,6 +304,8 @@ vnoremap <expr> j v:count == 0 ? 'gj' : 'j'
 
 " toggle off search highlight
 map <leader><ESC> :noh<CR>
+
+command Q :qall
 
 " Try to prevent using the arrow keys for movement.
 "nnoremap <Left>  :echoe "Use h"<CR>

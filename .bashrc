@@ -80,6 +80,14 @@ if [ -f ~/.fzf-completion.bash ]; then
     . ~/.fzf-completion.bash
 fi
 
+if [ -f ~/.kubectx-completion.bash ]; then
+    . ~/.kubectx-completion.bash
+fi
+
+if [ -f ~/.kubens-completion.bash ]; then
+    . ~/.kubens-completion.bash
+fi
+
 if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi

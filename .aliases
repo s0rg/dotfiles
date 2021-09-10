@@ -61,11 +61,12 @@ alias lsx='exa --icons --group-directories-first --long --header --git --colour-
 alias dfx='duf --hide special'
 
 # docker
-alias dci-up="docker images -f 'dangling=false' --format '{{.Repository}}:{{.Tag}}' | xargs -L1 docker pull"
-alias dci-clr="docker images -f 'dangling=true' -q | xargs -L1 docker rmi"
+alias di-up="docker images -f 'dangling=false' --format '{{.Repository}}:{{.Tag}}' | xargs -L1 docker pull"
+alias di-clr="docker images -f 'dangling=true' -q | xargs -L1 docker rmi"
+alias dps='docker ps -a'
 alias dcu='docker-compose up'
 alias dcd='docker-compose down'
-alias dps='docker ps -a'
+alias dcb='docker-compose build'
 
 # golang
 alias go-proxyclr='export GOPROXY='
@@ -103,7 +104,13 @@ __git_complete dots git
 # kubernetes
 source <(kubectl completion bash)
 alias k='kubectl'
+alias kns='k ns'
+alias kctx='k ctx'
+alias kpods='k get pods'
+alias kapt='k krew'
+alias kapt-up='kapt upgrade'
 complete -F __start_kubectl k
+
 
 ## functions
 
