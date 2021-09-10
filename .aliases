@@ -111,6 +111,9 @@ alias kapt='k krew'
 alias kapt-up='kapt upgrade'
 complete -F __start_kubectl k
 
+# ripgrep
+alias gr='rg'
+
 
 ## functions
 
