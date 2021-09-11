@@ -25,7 +25,7 @@ set autoread
 set history=100
 set autoindent
 
-set wildmenu wildignore+=*.o,*~,*.pyo,*.pyc,*/.git/*,*/.hg/*
+set wildmenu wildignore+=*.o,*~,*.pyo,*.pyc,*/.git/*
 
 set shiftwidth=4
 set expandtab smarttab tabstop=4 softtabstop=0
@@ -265,6 +265,7 @@ let g:startify_bookmarks = [
     \ {'v': '~/.vimrc'},
     \ {'i': '~/.config/i3/config'},
     \ {'b': '~/.config/polybar/config'},
+    \ {'n': '~/Documents/notes/local.md'},
     \ ]
 
 let g:startify_session_sort = 1

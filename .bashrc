@@ -3,27 +3,6 @@ case $- in
       *) return;;
 esac
 
-# common history for all sessions
-export SHELL_SESSION_HISTORY=0
-
-# Make new shells get the history lines from all previous
-# shells instead of the default "last window closed" history.
-export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
-
-export HISTSIZE=5000
-export HISTFILESIZE=5000
-export HISTCONTROL=ignoreboth:erasedups
-
-export HISTIGNORE="&:[bf]g:clear:history:q:* --help:sudo *:si: *:ls:cd:cd -:pwd:exit:date:mc:ru-tran *:yta *:ytv *"
-
-shopt -s histappend
-shopt -s checkwinsize
-shopt -s globstar
-shopt -s autocd
-
-# say no to flow control
-stty -ixon
-
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -68,31 +47,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-if [ -f ~/.git-completion.bash ]; then
-    . ~/.git-completion.bash
-fi
+for s in "$HOME"/.config/bashrc.d/*.bash; do
+    [ -r "$s" ] && . "$s"
+done
 
-if [ -f ~/.go-completion.bash ]; then
-    . ~/.go-completion.bash
-fi
-
-if [ -f ~/.fzf-completion.bash ]; then
-    . ~/.fzf-completion.bash
-fi
-
-if [ -f ~/.kubectx-completion.bash ]; then
-    . ~/.kubectx-completion.bash
-fi
-
-if [ -f ~/.kubens-completion.bash ]; then
-    . ~/.kubens-completion.bash
-fi
-
-if [ -f ~/.aliases ]; then
-    . ~/.aliases
-fi
-
-# local aliases - last to override any others.
-if [ -f ~/.aliases_local ]; then
-    . ~/.aliases_local
-fi
