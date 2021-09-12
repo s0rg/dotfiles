@@ -21,4 +21,3 @@ function _complete-go-dir() {
     [[ -e ${d[0]} ]] && COMPREPLY=( "${d[@]##*/}" )
 }
 
-complete -F _complete-go-dir cdgo

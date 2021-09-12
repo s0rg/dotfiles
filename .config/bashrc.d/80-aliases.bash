@@ -20,6 +20,7 @@ alias cal='echo; ncal -M -3; echo'
 # tools
 alias rot13='tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]"; echo'
 alias stats='sort | uniq -c | sort -r'
+alias heads='curl -sI'
 
 # translator
 alias enru='trans en:ru'

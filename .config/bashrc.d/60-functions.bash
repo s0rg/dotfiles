@@ -80,7 +80,7 @@ gip() {
 # acts as a git shortcut, without options - runs 'git status'
 g() {
     if [ -z "$1" ]; then
-        git status
+        git status --short --branch
     else
         git "$@"
     fi
