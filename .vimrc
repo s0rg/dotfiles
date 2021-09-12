@@ -18,7 +18,7 @@ colorscheme jellybeans
 
 let &t_ut=''
 
-set encoding=utf8 fileencoding=utf-8 termencoding=utf-8
+set encoding=utf8 fileencoding=utf-8 termencoding=utf-8 nobomb
 
 set hidden
 set autoread

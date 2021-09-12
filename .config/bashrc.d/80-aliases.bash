@@ -9,21 +9,29 @@ alias fgrep='fgrep --color=auto'
 alias less='less -R'
 alias ncdu='ncdu --color dark'
 
-# misc
+# shorthands
 alias v='vim'
 alias mc='mc -d'
 alias si='sudo -i'
 alias up='cd ..'
 alias tailf='tail -f --retry'
-alias wttr='curl http://wttr.in/?format="%c:+%f+%w\n"'
+alias cal='echo; ncal -M -3; echo'
+
+# tools
+alias rot13='tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]"; echo'
+alias stats='sort | uniq -c | sort -r'
+
+# translator
 alias enru='trans en:ru'
 alias ruen='trans ru:en'
-alias cal='echo; ncal -M -3; echo'
-alias hig='history | grep'
+
+# clipboard
 alias clip='xclip -sel clip'
 alias pub-clip='cat ~/.ssh/id_rsa.pub | clip'
-alias ncdu-home='ncdu "$HOME"'
-alias rot13='tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]"; echo'
+
+# command-history helpers
+alias higr='history | rg'
+alias hstats="history | cut -d\  -f 4- | stats | head"
 
 # post-traumatic syndrome
 alias q='exit'
@@ -32,7 +40,9 @@ alias :q='exit'
 # fast travel
 alias cdp='cd ~/projects'
 alias cdd='cd ~/Documents'
+alias cdb='cd ~/Documents/Books'
 alias cdl='cd ~/Downloads && fresh'
+alias cds='cd ~/.local/scripts'
 
 # system
 alias top-mem='ps -Ao user,pid,pcpu,pmem,comm --sort=-pmem | head --lines=6'
@@ -52,6 +62,8 @@ alias yta="youtube-dl --extract-audio --audio-format best"
 alias ytv="youtube-dl -f bestvideo+bestaudio"
 
 # extras
+alias ncdu-home='ncdu "$HOME"'
+alias wttr='curl http://wttr.in/?format="%c:+%f+%w\n"'
 alias tree='exa --icons --group-directories-first --tree --level=2 --git-ignore'
 alias lsx='exa --icons --group-directories-first --long --header --git --colour-scale --time-style=long-iso'
 alias dfx='duf --hide special'
@@ -72,20 +84,8 @@ alias go-bench='go test -benchmem -bench=.'
 alias go-test='go test -count 1 -v .'
 alias go-noproxy='export GOPROXY='
 
-# git
-alias git-gc='git reflog expire --all --expire=now && git gc --prune=now --aggressive'
-alias git-amend='git commit -a --amend'
-alias git-born='git log --pretty="format:%ar at %ai" --reverse | head -1'
-alias git-origin='git config --get remote.origin.url'
-alias git-prune='git fetch --prune origin'
-alias git-log='git log --all --decorate --oneline --graph --stat'
-alias git-root='cd $(git rev-parse --show-toplevel)'
-alias git-forget='git update-index --assume-unchanged'
-alias git-remember='git update-index --no-assume-unchanged'
-alias git-rm-merged='git branch --no-color --merged | grep -v -e "^\* " -e "^\  ma" | xargs -n 1 git branch -d'
-
-alias gis='git status'
-alias gic='git commit -am '
+# cd to git root
+alias gcd='cd $(git root)'
 
 # kitty
 alias kitty-up='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin'
@@ -95,7 +95,6 @@ alias kat='kitty +kitten icat'
 # dotfiles
 alias dots='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias dots-vim-plugs='vim-plugs-ls > $HOME/.vim/plugins-list'
-__git_complete dots git
 
 # kubernetes
 alias k='kubectl'
@@ -104,5 +103,4 @@ alias kctx='k ctx'
 alias kpods='k get pods'
 alias kapt='k krew'
 alias kapt-up='kapt upgrade'
-complete -F __start_kubectl k
 

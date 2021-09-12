@@ -1,10 +1,26 @@
 [user]
 	email = al3x.s0rg@gmail.com
 	name = Shevchenko Alexey
+
 [core]
     editor = vim
+    whitespace = cr-at-eol
+
+[push]
+    default = current
+
+[branch]
+    autosetuprebase = always
+
 [pull]
-    rebase = false
+    rebase = true
+
+[rebase]
+	instructionFormat = "[%an - %ar] %s"
+	autoStash = true
+
+[init]
+	defaultBranch = master
 
 [pager]
     diff = delta
@@ -24,3 +40,38 @@
     file-decoration-style = none
     hunk-header-style = file line-number syntax
     hunk-header-decoration-style = box
+
+[alias]
+    cm = commit -a -m
+    # log short
+    ls = log -n 20 --oneline --graph --abbrev-commit
+    # log pretty
+    ll = log --all --oneline --graph --stat --decorate
+    # amends last commit
+    amend = commit --amend --reuse-message=HEAD
+    # get repo source URL
+    origin = config --get remote.origin.url
+    # get repo root dir
+    root = rev-parse --show-toplevel
+    # list tags
+    tags = tag -l
+    # list branches
+    branches = branch -a
+    # list remote branches
+    remotes = remote -v
+    # fetch and removes deleted (at origin) branches
+    fetch-prune = fetch --prune origin
+    # get repo root dir
+    root = rev-parse --show-toplevel
+    # age of repo
+    born = !git log --pretty='format:%ar at %ai' --reverse | head -1
+    # local aliases
+    alias = !git config -l | grep ^alias | cut -c 7- | sort
+    # cleans all local branches (except current and master or main branches) that has been merged
+    rm-merged = !git branch --merged | grep -v -e '^* ' -e '^  ma' | xargs -n 1 git branch -d
+    # total cleansing
+    gc-force = !git reflog expire --all --expire=now && git gc --prune=now --aggressive
+
+[include]
+	path = "~/.gitconfig.local"
+
