@@ -7,5 +7,5 @@ shopt -s nocaseglob
 shopt -s no_empty_cmd_completion
 
 # say no to flow control
-stty -ixon
+# stty -ixon
 
