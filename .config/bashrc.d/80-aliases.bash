@@ -71,12 +71,12 @@ alias dfx='duf --hide special'
 alias gr='rg'
 
 # docker
-alias di-up="docker images -f 'dangling=false' --format '{{.Repository}}:{{.Tag}}' | xargs -L1 docker pull"
-alias di-clr="docker images -f 'dangling=true' -q | xargs -L1 docker rmi"
+alias doi-up="docker images -f 'dangling=false' --format '{{.Repository}}:{{.Tag}}' | xargs -L1 docker pull"
+alias doi-clr="docker images -f 'dangling=true' -q | xargs -L1 docker rmi"
 alias dps='docker ps -a'
-alias dcu='docker-compose up'
+alias dcu='docker-compose up --remove-orphans'
 alias dcd='docker-compose down --remove-orphans'
-alias dcb='docker-compose build'
+alias dcb='docker-compose build --force-rm --parallel --compress'
 
 # golang
 alias go-clean='go clean -cache -testcache -modcache'
@@ -85,7 +85,7 @@ alias go-bench='go test -benchmem -bench=.'
 alias go-test='go test -count 1 -v .'
 alias go-noproxy='export GOPROXY='
 
-# cd to git root
+# git
 alias gcd='cd $(git root)'
 
 # kitty
