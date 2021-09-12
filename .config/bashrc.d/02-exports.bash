@@ -1,9 +1,6 @@
-export LANG="en_US"
 export LC_ALL="en_US.UTF-8"
-export LC_TIME="ru_RU.UTF-8"
 
 export EDITOR="vim"
-export PAGER="bat"
 
 export MTR_OPTIONS=-t
 
@@ -13,9 +10,10 @@ export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig
 export RIPGREP_CONFIG_PATH=~/.config/ripgrep/ripgreprc
 
 export FZF_DEFAULT_OPTS="--ansi \
-    --height=80% \
+    --height=60% \
     --border \
     --padding 0 \
+    --reverse \
     --preview 'bat --line-range :300 {}'"
 export FZF_DEFAULT_COMMAND="rg \
     --files \
