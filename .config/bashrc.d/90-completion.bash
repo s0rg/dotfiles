@@ -4,8 +4,8 @@ elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
-for s in "$HOME"/.config/bashcomp.d/*.bash; do
-    [ -r "$s" ] && . "$s"
+for s in "${HOME}"/.config/bashcomp.d/*.bash; do
+    [ -r "${s}" ] && . "${s}"
 done
 
 source <(kitty + complete setup bash)

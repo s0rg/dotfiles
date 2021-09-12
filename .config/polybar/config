@@ -67,10 +67,10 @@ label-layout = %icon%
 label-layout-padding = 0
 label-layout-font = 3
 
-label-indicator = %icon%
-label-indicator-foreground = ${colors.foreground-alt}
-label-indicator-padding = 0
-label-indicator-margin = 0
+label-indicator-on = %icon%
+label-indicator-on-foreground = ${colors.foreground-alt}
+label-indicator-on-padding = 0
+label-indicator-on-margin = 0
 
 layout-icon-default =
 layout-icon-0 = ru;RU

@@ -6,7 +6,7 @@ export EDITOR="vim"
 export MTR_OPTIONS=-t
 
 export QT_QPA_PLATFORMTHEME=qt5ct
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig
+export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:/usr/local/lib/pkgconfig
 
 export RIPGREP_CONFIG_PATH=~/.config/ripgrep/ripgreprc
 

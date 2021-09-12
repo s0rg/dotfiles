@@ -264,7 +264,7 @@ let g:startify_lists = [
 let g:startify_bookmarks = [
     \ {'v': '~/.vimrc'},
     \ {'i': '~/.config/i3/config'},
-    \ {'b': '~/.config/polybar/config'},
+    \ {'p': '~/.config/polybar/config'},
     \ {'n': '~/Documents/notes/local.md'},
     \ ]
 

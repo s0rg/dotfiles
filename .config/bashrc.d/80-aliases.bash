@@ -63,7 +63,7 @@ alias yta="youtube-dl --extract-audio --audio-format best"
 alias ytv="youtube-dl -f bestvideo+bestaudio"
 
 # extras
-alias ncdu-home='ncdu "$HOME"'
+alias ncdu-home='ncdu "${HOME}"'
 alias wttr='curl http://wttr.in/?format="%c:+%f+%w\n"'
 alias tree='exa --icons --group-directories-first --tree --level=2 --git-ignore'
 alias lsx='exa --icons --group-directories-first --long --header --git --colour-scale --time-style=long-iso'
@@ -94,8 +94,8 @@ alias ssh='kitty +kitten ssh'
 alias kat='kitty +kitten icat'
 
 # dotfiles
-alias dots='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias dots-vim-plugs='vim-plugs-ls > $HOME/.vim/plugins-list'
+alias dots='git --git-dir=${HOME}/.dotfiles/ --work-tree=${HOME}'
+alias dots-vim-plugs='vim-plugs-ls > ${HOME}/.vim/plugins-list'
 
 # kubernetes
 alias k='kubectl'
