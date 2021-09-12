@@ -34,3 +34,36 @@ man() {
     LESS_TERMCAP_us=$'\e[04;38;5;146m' \
     man "$@"
 }
+
+# starts stopwatch with 1-second step
+stopwatch() {
+    echo -e "Started at $(date +%H:%M:%S), press ^C to stop\n";
+    start=$(date -u +%s);
+    while true; do
+        now=$(date +%s);
+        echo -ne "#=> $(date -u --date=@$(("$now" - "$start")) +%H:%M:%S)\r";
+        sleep 1;
+    done
+}
+
+# creates and switches to new feature branch
+git-feature() {
+    if [ $# -eq 0 ]; then
+        echo -n "feature name: "
+        read -r branch
+    else
+        branch="feature/$1"
+    fi
+    git checkout -b "$branch"
+}
+
+# git push
+gip() {
+    branch="$(git symbolic-ref --quiet --short HEAD 2> /dev/null)"
+    upstream="$(git rev-parse --abbrev-ref "${branch}"@\{upstream\} 2> /dev/null)"
+    if [ -z "${upstream}" ]; then
+      git push --set-upstream origin "${branch}"
+    else
+      git push
+    fi
+}

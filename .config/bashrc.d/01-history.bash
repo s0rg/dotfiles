@@ -1,3 +1,9 @@
+# append history file
+shopt -s histappend
+
+# save all lines of a multiple-line command in the same history entry
+shopt -s cmdhist
+
 # common history for all sessions
 export SHELL_SESSION_HISTORY=0
 

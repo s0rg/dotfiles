@@ -45,7 +45,13 @@ get_go_pkgs() {
 }
 
 get_go_cmds() {
-    for i in build clean env fix fmt generate get install list run test tool version vet save vendor; do
+    for i in build clean env fmt generate get install list mod run test tool version; do
+        [[ $i == $1* ]] && echo "$i"
+    done
+}
+
+get_go_mod() {
+    for i in download edit graph init tidy vendor verify why; do
         [[ $i == $1* ]] && echo "$i"
     done
 }
@@ -65,11 +71,14 @@ go_pkg_complete() {
     done
 
     local cur=${COMP_WORDS[COMP_CWORD]}
-    if grep -q '^\(install\|build\|list\|get\|test\|generate\|vet\|save\|vendor\)$' <<< "$1"; then
+    if grep -q '^\(install\|build\|list\|get\|test\|generate\|vet\)$' <<< "$1"; then
         COMPREPLY=( "$(compgen -W "$(get_go_pkgs "$cur")" -- "$cur")" )
         return
     elif grep -q '^\(tool\)$' <<< "$1"; then
         COMPREPLY=( "$(compgen -W "$(get_go_tools "$cur")" -- "$cur")" )
+        return
+    elif grep -q '^\(mod\)$' <<< "$1"; then
+        COMPREPLY=( "$(compgen -W "$(get_go_mod "$cur")" -- "$cur")" )
         return
     elif grep -q '^\(run\|fmt\)$' <<< "$1"; then
         compopt -o default
@@ -81,7 +90,7 @@ go_pkg_complete() {
         run)
             COMPREPLY=( "$(compgen -A file -G "$cur**/*.go" -- "$cur")" )
             return
-	    ;;
+        ;;
     esac
 
     [[ $2 ]] && return

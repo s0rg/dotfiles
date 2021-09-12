@@ -9,7 +9,7 @@ actions = [
     {
         "icon": "\uf023",
         "name": "lock",
-        "command": "i3locker.sh",
+        "command": "i3-betterlock",
         "confirm": False
     },
     {
