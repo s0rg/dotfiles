@@ -34,6 +34,7 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
 - eye-candy `ls`: [exa](https://the.exa.website/)
 - faster `grep`: [ripgrep](https://github.com/BurntSushi/ripgrep)
 - better `git-diff`: [delta](https://github.com/dandavison/delta)
+- document viewer: [zathura](https://pwmt.org/projects/zathura/)
 
 ## example screenshot
 ![screenshot](https://github.com/s0rg/dotfiles/blob/master/.config/i3/screenshot.png)
