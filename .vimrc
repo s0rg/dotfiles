@@ -77,11 +77,6 @@ set laststatus=2
 " python-syntax
 let g:python_highlight_all = 1
 
-" fzf.vim
-nnoremap <silent> <C-p> :Files<CR>
-nnoremap <silent> <C-f> :Rg<CR>
-nnoremap <silent> <C-t> :Tags<CR>
-
 " lightline
 let g:lightline = {
     \   'colorscheme': 'jellybeans',
@@ -132,9 +127,6 @@ let g:go_def_reuse_buffer = 1
 let g:go_diagnostics_level = 2
 let g:go_imports_autosave = 0
 let g:go_jump_to_error = 0
-
-map <leader>gt :GoAddTags<cr>
-map <leader>gi :GoImports<cr>
 
 " tagbar
 let g:tagbar_width = 50
@@ -232,8 +224,7 @@ let g:ale_fixers = {
 let g:ale_sign_error = '->'
 let g:ale_sign_warning = ' *'
 
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
+nmap <silent> <C-e> <Plug>(ale_next_wrap)
 
 " deoplete
 call deoplete#custom#option({
@@ -286,7 +277,7 @@ endfun
 autocmd BufWritePre * :call CleanExtraSpaces()
 
 autocmd BufNewFile *.sh 0put =\"#!/bin/bash\<nl>\<nl>\"|$
-autocmd BufNewFile *.py 0put=\"#!/usr/bin/env python3\"\<nl>\<nl>\"|$
+autocmd BufNewFile *.py 0put=\"#!/usr/bin/env python3\<nl>\<nl>\"|$
 
 " custom filetypes
 autocmd BufNewFile,BufRead Dockerfile* set ft=dockerfile
@@ -294,21 +285,32 @@ autocmd BufNewFile,BufRead Dockerfile* set ft=dockerfile
 " auto-check file changes (for reload)
 autocmd FocusGained,BufEnter * checktime
 
-" ensure tabs don't get converted to spaces in Makefiles.
+" ensure tabs don't get converted to spaces in Makefiles
 autocmd FileType make setlocal noexpandtab
 
-" don't skip wrapped lines
-nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
-nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
-vnoremap <expr> k v:count == 0 ? 'gk' : 'k'
-vnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+" window movement (up/down only) via ctrl
+nnoremap <C-j>    <C-w>j
+nnoremap <C-k>    <C-w>k
+nnoremap <C-Down> <C-w>j
+nnoremap <C-Up>   <C-w>k
 
 " toggle off search highlight
 map <leader><ESC> :noh<CR>
 
+" Reload VIM's configuration
+nnoremap <leader>r :source $MYVIMRC<CR>
+
+" Golang helpers
+nnoremap <leader>t :GoAddTags<CR>
+nnoremap <leader>i :GoImports<CR>
+
+" fzf.vim
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>g :Rg<CR>
+
 command Q :qall
 
-" Try to prevent using the arrow keys for movement.
+" Try to prevent using the arrow keys for movement
 "nnoremap <Left>  :echoe "Use h"<CR>
 "nnoremap <Right> :echoe "Use l"<CR>
 "nnoremap <Up>    :echoe "Use k"<CR>

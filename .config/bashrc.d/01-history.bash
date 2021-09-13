@@ -11,9 +11,8 @@ export SHELL_SESSION_HISTORY=0
 # shells instead of the default "last window closed" history.
 export PROMPT_COMMAND="history -a; ${PROMPT_COMMAND}"
 
-export HISTSIZE=9000
-export HISTFILESIZE=9000
+export HISTSIZE=16384
+export HISTFILESIZE=${HISTSIZE}
 export HISTCONTROL=ignoreboth:erasedups
-
-export HISTIGNORE="&:[bf]g:clear:history:q:* --help:sudo *:si: *:ls:cd:cd -:pwd:exit:date:mc:ru-tran *:yta *:ytv *"
+export HISTIGNORE="&:[bf]g:clear:history:q:* --help:sudo *:si: *:ls:cd:cd -:pwd:exit:date:mc:ru-tran *:yta *:ytv *:*KEY*:*TOKEN*"
 

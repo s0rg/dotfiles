@@ -28,15 +28,11 @@ alias ruen='trans ru:en'
 
 # clipboard
 alias clip='xclip -sel clip'
-alias pub-clip='cat ~/.ssh/id_rsa.pub | clip'
+alias pub-clip='cat ${HOME}/.ssh/id_rsa.pub | clip'
 
 # command-history helpers
 alias higr='history | rg'
 alias hstats="history | cut -d\  -f 4- | stats | head"
-
-# post-traumatic syndrome
-alias q='exit'
-alias :q='exit'
 
 # fast travel
 alias cdp='cd ~/projects'
@@ -63,7 +59,7 @@ alias yta="youtube-dl --extract-audio --audio-format best"
 alias ytv="youtube-dl -f bestvideo+bestaudio"
 
 # extras
-alias ncdu-home='ncdu "${HOME}"'
+alias ncdu-home='ncdu ${HOME}'
 alias wttr='curl http://wttr.in/?format="%c:+%f+%w\n"'
 alias tree='exa --icons --group-directories-first --tree --level=2 --git-ignore'
 alias lsx='exa --icons --group-directories-first --long --header --git --colour-scale --time-style=long-iso'

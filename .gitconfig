@@ -42,6 +42,7 @@
     hunk-header-decoration-style = box
 
 [alias]
+    # commit shortcut
     cm = commit -a -m
     # log short
     ls = log -n 20 --oneline --graph --abbrev-commit

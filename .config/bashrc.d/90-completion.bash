@@ -15,3 +15,12 @@ __git_complete g git
 __git_complete dots git
 complete -F __start_kubectl k
 complete -F _complete-go-dir cdgo
+
+_complete_zathura_docs() {
+    local cur;
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    mapfile -t COMPREPLY < \
+        <(compgen -o plusdirs -A file -- "$cur" | grep -P '(\.djvu|\.pdf)$')
+}
+
+complete -F _complete_zathura_docs zathura

@@ -203,8 +203,8 @@ assign [class="^Tor Browser$"]                           $web
 assign [class="^TelegramDesktop$|^Evolution$|^Slack$"]   $chat
 
 # apps
-assign [class="^pcmanfm-qt$|^FeatherPad$|^Xsane$|^mpv$"] $apps
-assign [class="^Steam|^qimgv$|^okular$|^Gimp-.+"]        $apps
+assign [class="^pcmanfm-qt$|^FeatherPad$|^Xsane$|^mpv$"]    $apps
+assign [class="^Steam|^qimgv$|^okular$|^Gimp-.+|^Zathura$"] $apps
 
 # zoom
 assign [class="^zoom$"]                                  $meet

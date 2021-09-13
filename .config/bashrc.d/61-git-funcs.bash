@@ -1,5 +1,6 @@
 # creates and switches to new feature branch
 git-feature() {
+    local branch;
     if [ ${#} -eq 0 ]; then
         echo -n "feature name: "
         read -r branch
@@ -11,6 +12,7 @@ git-feature() {
 
 # git + fzf branch helper
 git-branch() {
+    local branch;
     branch=$(git for-each-ref --format='%(refname:short)' refs/heads/* |\
         fzf --prompt="branch: " --reverse)
     if [ -n "${branch}" ]; then
@@ -20,12 +22,13 @@ git-branch() {
 
 # git smart push, sets upstream if none yet
 gip() {
+    local branch, upstream;
     branch="$(git symbolic-ref --quiet --short HEAD 2> /dev/null)"
     upstream="$(git rev-parse --abbrev-ref "${branch}"@\{upstream\} 2> /dev/null)"
     if [ -z "${upstream}" ]; then
-      git push --set-upstream origin "${branch}"
+        git push --set-upstream origin "${branch}"
     else
-      git push
+        git push
     fi
 }
 
