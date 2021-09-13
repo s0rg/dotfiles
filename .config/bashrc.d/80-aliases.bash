@@ -14,8 +14,10 @@ alias v='vim'
 alias mc='mc -d'
 alias si='sudo -i'
 alias up='cd ..'
+alias ex='7z x'
 alias tailf='tail -f --retry'
 alias cal='echo; ncal -M -3; echo'
+alias zat='zathura'
 
 # tools
 alias rot13='tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]"; echo'

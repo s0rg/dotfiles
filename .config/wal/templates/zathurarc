@@ -1,0 +1,46 @@
+set font "ubuntumono nerd font mono 15"
+set guioptions none
+set adjust-open width
+
+set selection-clipboard clipboard
+set statusbar-h-padding 0
+set statusbar-v-padding 0
+set page-padding 1
+
+set window-title-home-tilde true
+set window-title-page true
+
+set scroll-step 80
+
+map <C-r> reload
+map w adjust_window best-fit
+map e adjust_window width
+
+set recolor true
+
+set recolor-darkcolor "{foreground}"
+set default-bg "{foreground}"
+set completion-fg "{foreground}"
+set completion-highlight-bg "{foreground}"
+set inputbar-fg "{foreground}"
+set notification-fg "{foreground}"
+set notification-error-fg "{foreground}"
+set notification-warning-fg "{foreground}"
+set statusbar-fg "{foreground}"
+set index-fg "{foreground}"
+set index-active-bg "{foreground}"
+set render-loading-fg "{foreground}"
+
+set render-loading-bg "{background}"
+set index-active-fg "{background}"
+set index-bg "{background}"
+set inputbar-bg "{background}"
+set recolor-lightcolor "{background}"
+set completion-bg "{background}"
+set completion-group-bg "{background}"
+set completion-highlight-fg "{background}"
+set notification-bg "{background}"
+
+set completion-group-fg "{color2}"
+set notification-error-bg "{color1}"
+set notification-warning-bg "{color1}"

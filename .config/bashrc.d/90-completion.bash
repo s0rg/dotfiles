@@ -23,4 +23,4 @@ _complete_zathura_docs() {
         <(compgen -o plusdirs -A file -- "$cur" | grep -P '(\.djvu|\.pdf)$')
 }
 
-complete -F _complete_zathura_docs zathura
+complete -F _complete_zathura_docs zathura zat

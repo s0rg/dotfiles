@@ -147,7 +147,6 @@ bindsym $mod+KP_Add           $show_pad
 
 # auto focus
 for_window [urgent=latest]                     focus
-for_window [class="^kitty$"]                   focus
 
 # floaters
 for_window [window_role="pop-up|bubble|task_dialog"]                  $float
@@ -203,8 +202,8 @@ assign [class="^Tor Browser$"]                           $web
 assign [class="^TelegramDesktop$|^Evolution$|^Slack$"]   $chat
 
 # apps
-assign [class="^pcmanfm-qt$|^FeatherPad$|^Xsane$|^mpv$"]    $apps
-assign [class="^Steam|^qimgv$|^okular$|^Gimp-.+|^Zathura$"] $apps
+assign [class="^pcmanfm-qt$|^FeatherPad$|^Xsane$|^mpv$"] $apps
+assign [class="^Steam|^qimgv$|^Gimp-.+|^Zathura$"]       $apps
 
 # zoom
 assign [class="^zoom$"]                                  $meet
