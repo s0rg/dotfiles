@@ -54,8 +54,10 @@
     origin = config --get remote.origin.url
     # get repo root dir
     root = rev-parse --show-toplevel
-    # list tags
-    tags = tag -l
+    # push tags
+    put = push origin --tags
+    # list of last 5 tags
+    tags = !git tag -l | sort -V | tail -n 5
     # list branches
     branches = branch -a
     # list remote branches

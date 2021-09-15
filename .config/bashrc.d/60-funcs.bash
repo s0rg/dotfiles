@@ -1,6 +1,9 @@
 # create a new directory and enter it
 md() { mkdir -p "${@}" && cd "${@}" || exit; }
 
+# cd up
+up() { cd "$(printf "%0.s../" $(seq 1 "${1:-1}"))" || exit; }
+
 # `opn` with no arguments opens the current directory,
 # otherwise opens the given location or file
 opn() {
@@ -13,14 +16,7 @@ opn() {
 
 # `fresh` with no arguments shows 5 last-changed elements
 # in current dir. You can specify count i.e.: `fresh 10`
-fresh(){
-    local n;
-    n=5;
-    if [ ${#} -eq 1 ]; then
-        n="${1}";
-    fi
-    \ls -1ct --color=always | head --lines "${n}"
-}
+fresh(){ \ls -1ct --color=always | head --lines "${1:-5}"; }
 
 # starts stopwatch with 1-second step
 stopwatch() {

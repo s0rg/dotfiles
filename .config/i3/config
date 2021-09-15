@@ -155,8 +155,9 @@ for_window [window_type="menu|dropdown_menu|popup_menu|tooltip|dock"] $float
 
 # custom rules
 for_window [class="^Evolution-alarm-notify$"]               $float, $center
-for_window [class="^pavucontrol-qt$|^Blueman-manager$"]     $float, $sticky
+for_window [class="^pavucontrol-qt$"]                       $float, $sticky
 for_window [class="^Firefox$" title="^Picture-in-Picture$"] $float, $sticky
+for_window [class="^zoom$"]                                 $float
 
 # scratchpad
 for_window [class="^kitty$" instance="^cmus$"]              mark pad
@@ -173,7 +174,7 @@ set $web  "2"
 set $chat "3"
 set $apps "4"
 set $meet "5"
-set $work "6"
+set $mail "6"
 
 # switch to workspace
 bindsym $mod+1 workspace number $tty
@@ -181,7 +182,7 @@ bindsym $mod+2 workspace number $web
 bindsym $mod+3 workspace number $chat
 bindsym $mod+4 workspace number $apps
 bindsym $mod+5 workspace number $meet
-bindsym $mod+6 workspace number $work
+bindsym $mod+6 workspace number $mail
 
 # move focused container to workspace
 bindsym $mod+$ctrl+1 move container to workspace number $tty
@@ -189,24 +190,21 @@ bindsym $mod+$ctrl+2 move container to workspace number $web
 bindsym $mod+$ctrl+3 move container to workspace number $chat
 bindsym $mod+$ctrl+4 move container to workspace number $apps
 bindsym $mod+$ctrl+5 move container to workspace number $meet
-bindsym $mod+$ctrl+6 move container to workspace number $work
+bindsym $mod+$ctrl+6 move container to workspace number $mail
 
-# terminal
 assign [class="^kitty$" instance="^kitty$"]              $tty
 
-# web
-assign [class="^Firefox$|^qbittorrent$|^qutebrowser$"]   $web
-assign [class="^Tor Browser$"]                           $web
+assign [class="^Firefox$|^Tor Browser$|^qutebrowser$"]   $web
 
-# chat
-assign [class="^TelegramDesktop$|^Evolution$|^Slack$"]   $chat
+assign [class="^TelegramDesktop$|^Slack$"]               $chat
 
-# apps
-assign [class="^pcmanfm-qt$|^FeatherPad$|^Xsane$|^mpv$"] $apps
-assign [class="^Steam|^qimgv$|^Gimp-.+|^Zathura$"]       $apps
+assign [class="^pcmanfm-qt$|^FeatherPad$"]               $apps
+assign [class="^Steam|^Gimp-.+|^Zathura$"]               $apps
+assign [class="^qbittorrent$|^qimgv$|^mpv$"]             $apps
 
-# zoom
 assign [class="^zoom$"]                                  $meet
+
+assign [class="^Evolution$"]                             $mail
 
 ## UI
 

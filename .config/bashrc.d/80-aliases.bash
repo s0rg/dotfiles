@@ -6,18 +6,17 @@ alias dmesg='dmesg --color=auto'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
-alias less='less -R'
 alias ncdu='ncdu --color dark'
 
 # shorthands
 alias v='vim'
 alias mc='mc -d'
 alias si='sudo -i'
-alias up='cd ..'
 alias ex='7z x'
 alias tailf='tail -f --retry'
 alias cal='echo; ncal -M -3; echo'
 alias zat='zathura'
+alias path='echo -e ${PATH//:/\\n}'
 
 # tools
 alias rot13='tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]"; echo'
