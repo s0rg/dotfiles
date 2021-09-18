@@ -42,8 +42,8 @@
     hunk-header-decoration-style = box
 
 [alias]
-    # commit shortcut
     cm = commit -a -m
+    co = checkout
     # log short
     ls = log -n 20 --oneline --graph --abbrev-commit
     # log pretty
@@ -69,7 +69,7 @@
     # age of repo
     born = !git log --pretty='format:%ar at %ai' --reverse | head -1
     # local aliases
-    alias = !git config -l | grep ^alias | cut -c 7- | sort
+    alias = !git config -l | grep '^alias' | cut -c 7- | sort
     # cleans all local branches (except current and master or main branches) that has been merged
     rm-merged = !git branch --merged | grep -v -e '^* ' -e '^  ma' | xargs -n 1 git branch -d
     # total cleansing

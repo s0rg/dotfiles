@@ -16,8 +16,3 @@ cdgo() {
     fi
 }
 
-function _complete-go-dir() {
-    local d=("${GOSRC_ROOT}/${2}"*)
-    [[ -e ${d[0]} ]] && COMPREPLY=( "${d[@]##*/}" )
-}
-

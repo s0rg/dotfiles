@@ -1,12 +1,3 @@
-###########################################################
-#
-#   ██╗ ██████╗  ██╗    ██╗ ███╗   ███╗
-#   ██║ ╚════██╗ ██║    ██║ ████╗ ████║
-#   ██║  █████╔╝ ██║ █╗ ██║ ██╔████╔██║
-#   ██║  ╚═══██╗ ██║███╗██║ ██║╚██╔╝██║
-#   ██║ ██████╔╝ ╚███╔███╔╝ ██║ ╚═╝ ██║
-#   ╚═╝ ╚═════╝   ╚══╝╚══╝  ╚═╝     ╚═╝
-#
 # i3 config file (v4)
 #
 # Complete reference: http://i3wm.org/docs/userguide.html
@@ -46,7 +37,7 @@ focus_on_window_activation    focus
 workspace_auto_back_and_forth no
 
 floating_minimum_size         300 x 200
-floating_maximum_size         900 x 600
+floating_maximum_size         1200 x 650
 
 ## KEYS
 
@@ -144,9 +135,6 @@ bindsym $mod+KP_Subtract      $move_pad
 bindsym $mod+KP_Add           $show_pad
 
 ## WINDOW RULES
-
-# auto focus
-for_window [urgent=latest]                     focus
 
 # floaters
 for_window [window_role="pop-up|bubble|task_dialog"]                  $float

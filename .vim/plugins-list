@@ -2,15 +2,16 @@ https://github.com/dense-analysis/ale.git
 https://github.com/deoplete-plugins/deoplete-jedi
 https://github.com/Shougo/deoplete.nvim.git
 https://github.com/ekalinin/Dockerfile.vim.git
+https://github.com/editorconfig/editorconfig-vim.git
 https://github.com/junegunn/fzf.vim.git
 https://github.com/mboughaba/i3config.vim.git
 https://github.com/nanotech/jellybeans.vim.git
 https://github.com/maximbaz/lightline-ale.git
 https://github.com/itchyny/lightline.vim
-https://github.com/preservim/nerdcommenter.git
 https://github.com/scrooloose/nerdtree
 https://github.com/chr4/nginx.vim
 https://github.com/roxma/nvim-yarp.git
+https://github.com/lifepillar/pgsql.vim.git
 https://github.com/eyalz800/python-syntax.git
 https://github.com/preservim/tagbar.git
 https://github.com/ap/vim-css-color.git

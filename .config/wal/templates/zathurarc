@@ -13,8 +13,10 @@ set window-title-page true
 set scroll-step 80
 
 map <C-r> reload
-map w adjust_window best-fit
-map e adjust_window width
+map w     adjust_window best-fit
+map e     adjust_window width
+map gg    goto top
+map G     goto bottom
 
 set recolor true
 

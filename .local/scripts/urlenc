@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+#
+# the missing urlencoder/decoder
+#
+#vim:ft=py3
+
+import sys
+import argparse
+import urllib.parse as urlp
+
+parser = argparse.ArgumentParser(description="url(en/de)coder")
+parser.add_argument("-d", "--decode", action="store_true", help="decode input")
+parser.add_argument("input", nargs='?', help="input string to (en/de)code")
+
+
+def main(args):
+    args = parser.parse_args()
+
+    src = args.input
+    if src is None:
+        src = sys.stdin.read().strip()
+
+    if args.decode:
+        print(urlp.unquote(src))
+    else:
+        print(urlp.quote(src))
+
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv))

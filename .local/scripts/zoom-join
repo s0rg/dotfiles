@@ -14,6 +14,6 @@ else
 fi
 
 echo "starting zoom for: $link"
-xdg-open "$(make_zoom_url "$link")"
+xdg-open "$(mk-zoom-url "$link")"
 
 #vi:ft=bash

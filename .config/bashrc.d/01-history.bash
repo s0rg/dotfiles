@@ -3,6 +3,7 @@ shopt -s histappend
 
 # save all lines of a multiple-line command in the same history entry
 shopt -s cmdhist
+shopt -s lithist
 
 # common history for all sessions
 export SHELL_SESSION_HISTORY=0
@@ -11,8 +12,12 @@ export SHELL_SESSION_HISTORY=0
 # shells instead of the default "last window closed" history.
 export PROMPT_COMMAND="history -a; ${PROMPT_COMMAND}"
 
-export HISTSIZE=16384
+export HISTSIZE=5000
 export HISTFILESIZE=${HISTSIZE}
 export HISTCONTROL=ignoreboth:erasedups
-export HISTIGNORE="&:?:??: *:up *:cd -:cd[pdbls]:clear:hig:sudo *:pwd:exit:*KEY*:*TOKEN*"
-
+export HISTIGNORE="&: *:?:??:\
+[bf]g?( *):up?( *):rm?( *):ls?( *):\
+history?( *):hig?( *):sudo?( *):\
+si:clear:pwd:env:path:reset:cd[pdbls]:\
+*KEY*:*TOKEN*"
+export HISTTIMEFORMAT="[ %h %d %H:%M:%S ]  "

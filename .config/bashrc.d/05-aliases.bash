@@ -1,3 +1,6 @@
+# Enable aliases to be sudo’ed
+alias sudo='sudo '
+
 # eye-candy output
 alias ls='ls --color=auto --group-directories-first'
 alias ip='ip -color=auto'
@@ -13,6 +16,7 @@ alias v='vim'
 alias mc='mc -d'
 alias si='sudo -i'
 alias ex='7z x'
+alias jsp='jq -C .'
 alias tailf='tail -f --retry'
 alias cal='echo; ncal -M -3; echo'
 alias zat='zathura'
@@ -28,8 +32,9 @@ alias enru='trans en:ru'
 alias ruen='trans ru:en'
 
 # clipboard
-alias clip='xclip -sel clip'
-alias pub-clip='cat ${HOME}/.ssh/id_rsa.pub | clip'
+alias clip-get='xclip -selection clipboard -target STRING -out'
+alias clip-put='xclip -selection clipboard -target STRING -in'
+alias pub-clip='cat ${HOME}/.ssh/id_rsa.pub | clip-put'
 
 # command-history helpers
 alias higr='history | rg'
@@ -39,7 +44,7 @@ alias hstats="history | cut -d\  -f 4- | stats | head"
 alias cdp='cd ~/projects'
 alias cdd='cd ~/Documents'
 alias cdb='cd ~/Documents/Books'
-alias cdl='cd ~/Downloads && fresh'
+alias cdl='cd ~/Downloads && fr'
 alias cds='cd ~/.local/scripts'
 
 # system
@@ -73,17 +78,19 @@ alias doi-clr="docker images -f 'dangling=true' -q | xargs -L1 docker rmi"
 alias dps='docker ps -a'
 alias dcu='docker-compose up --remove-orphans'
 alias dcd='docker-compose down --remove-orphans'
-alias dcb='docker-compose build --force-rm --parallel --compress'
+alias dcb='docker-compose build --force-rm'
+alias dcl='docker-compose logs -f'
 
 # golang
 alias go-clean='go clean -cache -testcache -modcache'
 alias go-deps="go list -f '{{join .Deps \"\n\"}}' | xargs go list -f '{{if not .Standard}}{{.ImportPath}}{{end}}'"
 alias go-bench='go test -benchmem -bench=.'
 alias go-test='go test -count 1 -v .'
-alias go-noproxy='export GOPROXY='
 
 # git
+alias gs='git status'
 alias gcd='cd $(git root)'
+alias giff='git diff'
 
 # kitty
 alias kitty-up='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin'
@@ -101,4 +108,11 @@ alias kctx='k ctx'
 alias kpods='k get pods'
 alias kapt='k krew'
 alias kapt-up='kapt upgrade'
+
+# nmap
+alias nscan-base='nmap --source-port 53 -T1'
+alias nscan-net='nscan-base -sn -PP -PM --scan-delay 0.5'
+alias nscan-web='nscan-base -sS -Pn -O --osscan-guess --fuzzy -p 21-25,80,81,443,8080'
+alias nscan-host='nscan-base -sS -Pn -sV --version-light -F --top-ports 100'
+alias nscan-xray='nscan-base -sS -Pn -A'
 

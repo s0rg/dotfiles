@@ -32,11 +32,11 @@ set expandtab smarttab tabstop=4 softtabstop=0
 
 set switchbuf=usetab,newtab
 set showmatch matchtime=10
-
 set mousehide
 set cursorline
 set number
-set numberwidth=3
+set numberwidth=4
+set signcolumn=number
 set scrolloff=3
 set backspace=indent,eol,start
 
@@ -73,6 +73,16 @@ set pastetoggle=<F2>
 
 set noshowmode
 set laststatus=2
+
+set viminfo=%,<10,'10,/10,:50,h,f0,n~/.vim/cache/.viminfo
+"           |  |   |   |   |  |  |  + viminfo file path
+"           |  |   |   |   |  |  + file marks 0-9,A-Z 0=NOT stored
+"           |  |   |   |   |  + disable 'hlsearch' loading viminfo
+"           |  |   |   |   + command-line history saved
+"           |  |   |   + search history saved
+"           |  |   + files marks saved
+"           |  + lines saved each register (old name for <, vi6.2)
+"           + save/restore buffer list
 
 " python-syntax
 let g:python_highlight_all = 1
@@ -224,7 +234,7 @@ let g:ale_fixers = {
 let g:ale_sign_error = '->'
 let g:ale_sign_warning = ' *'
 
-nmap <silent> <C-e> <Plug>(ale_next_wrap)
+nmap <silent> <F3> <Plug>(ale_next_wrap)
 
 " deoplete
 call deoplete#custom#option({
@@ -248,8 +258,8 @@ let g:deoplete#enable_at_startup = 1
 " startify
 let g:startify_lists = [
     \ { 'type': 'sessions',  'header': ['   Sessions']  },
+    \ { 'type': 'files',     'header': ['   MRU']       },
     \ { 'type': 'bookmarks', 'header': ['   Bookmarks'] },
-    \ { 'type': 'commands',  'header': ['   Commands']  },
     \ ]
 
 let g:startify_bookmarks = [
@@ -259,11 +269,23 @@ let g:startify_bookmarks = [
     \ {'n': '~/Documents/notes/local.md'},
     \ ]
 
+let g:startify_padding_left = 2
+let g:startify_files_number = 4
 let g:startify_session_sort = 1
-let g:startify_session_number = 5
+let g:startify_session_number = 3
+let g:startify_session_persistence = 1
+let g:startify_change_to_dir = 0
 let g:startify_change_to_vcs_root = 1
+let g:startify_enable_special = 0
 let g:startify_custom_indices = map(range(1,100), 'string(v:val)')
 let g:startify_session_before_save = [ 'silent! tabdo NERDTreeClose' ]
+
+" pgsql
+let g:sql_type_default = 'pgsql'
+
+" editorconfig-vim
+let g:EditorConfig_disable_rules = ['tab_width']
+autocmd FileType gitcommit let b:EditorConfig_disable = 1
 
 " remove extra spaces
 function! CleanExtraSpaces()
@@ -310,7 +332,7 @@ nnoremap <leader>g :Rg<CR>
 
 command Q :qall
 
-" Try to prevent using the arrow keys for movement
+" disable cursors keys, someday, maybe...
 "nnoremap <Left>  :echoe "Use h"<CR>
 "nnoremap <Right> :echoe "Use l"<CR>
 "nnoremap <Up>    :echoe "Use k"<CR>
