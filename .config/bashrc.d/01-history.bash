@@ -17,10 +17,10 @@ export HISTTIMEFORMAT="[ %h %d %H:%M:%S ]  "
 HISTIGNORE="${HISTIGNORE}:&: *:?:??"                                    # defaults + one and two-letters commands
 HISTIGNORE="${HISTIGNORE}:[bf]g?( *):rm?( *):ls?( *):cd?( *):sudo?( *)" # nothing to remember here, move along
 HISTIGNORE="${HISTIGNORE}:clear:pwd:env:reset:tree:top:cal:pstree:htop" # tools and aliases
-HISTIGNORE="${HISTIGNORE}:up?( *):lst?( *):cd[pdbls]:path:omg:md?( *)"  #
-HISTIGNORE="${HISTIGNORE}:lsx:dfx:gotop:wttr"                           #
+HISTIGNORE="${HISTIGNORE}:up?( *):lst?( *):cd[pdbls]:opn?( *):md?( *)"  #
+HISTIGNORE="${HISTIGNORE}:lsx:dfx:gotop:wttr:path"                      #
 HISTIGNORE="${HISTIGNORE}:history?( *):hig?( *):hclear:hstats"          # history management
-HISTIGNORE="${HISTIGNORE}:dots?( *):dots-vim-plugs"                     # dot files
+HISTIGNORE="${HISTIGNORE}:dots?( *):dots-*"                             # dot files
 HISTIGNORE="${HISTIGNORE}:*KEY*:*TOKEN*"                                # extras
 
 export HISTIGNORE

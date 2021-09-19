@@ -48,10 +48,9 @@
     cm = commit -a -m
     co = checkout
     st = status
-    # log short
-    ls = log -n 10 --oneline --graph --abbrev-commit
+    ls = ls-files
     # log pretty
-    ll = log --all --oneline --graph --stat --decorate
+    ll = log --all --decorate --oneline --graph --stat
     # amends last commit
     amend = commit --amend --reuse-message=HEAD
     # get repo source URL
@@ -76,6 +75,8 @@
     rm-merged = !git branch --merged | grep -v -e '^* ' -e '^  ma' | xargs -n 1 git branch -d
     # total cleansing
     gc-force = !git reflog expire --all --expire=now && git gc --prune=now --aggressive
+    # zip
+    zip = !git archive -o "$(basename "$(git root)")".zip HEAD
 
 [include]
     path = "~/.gitconfig.local"

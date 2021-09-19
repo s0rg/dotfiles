@@ -98,7 +98,8 @@ alias kat='kitty +kitten icat'
 
 # dotfiles
 alias dots='git --git-dir=${HOME}/.dotfiles/ --work-tree=${HOME}'
-alias dots-vim-plugs='vim-plugs-ls > ${HOME}/.vim/plugins-list'
+alias dots-store='dots commit -am "WIP: $(date --rfc-3339=seconds)" && dots push'
+alias dots-plugs='vim-plugs-ls > ${HOME}/.vim/plugins-list'
 
 # kubernetes
 alias k='kubectl'
