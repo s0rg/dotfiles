@@ -31,6 +31,7 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
 - disk usage: [duf](https://github.com/muesli/duf)
 - fuzzy finder: [fzf](https://github.com/junegunn/fzf)
 - colored `cat`: [bat](https://github.com/sharkdp/bat)
+- faster `find`: [fd](https://github.com/sharkdp/fd)
 - eye-candy `ls`: [exa](https://the.exa.website/)
 - faster `grep`: [ripgrep](https://github.com/BurntSushi/ripgrep)
 - better `git-diff`: [delta](https://github.com/dandavison/delta)

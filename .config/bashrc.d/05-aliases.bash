@@ -22,6 +22,10 @@ alias cal='echo; ncal -M -3; echo'
 alias zat='zathura'
 alias path='echo -e ${PATH//:/\\n}'
 
+# lower / upper case mass rename
+alias ren-lc='rename "y/A-Z/a-z/" *'
+alias ren-uc='rename "y/a-z/A-Z/" *'
+
 # tools
 alias rot13='tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]"; echo'
 alias stats='sort | uniq -c | sort -n -r'
@@ -59,7 +63,7 @@ alias bp='bpython'
 alias pip-up='pip3 install --upgrade --user $(pip3 list --user --format json | jq ".[] | flatten | .[0]" | xargs echo)'
 alias pip-get='pip3 install --user --upgrade'
 alias py-serve='python3 -m http.server'
-alias py-clear='find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf'
+alias py-clear='find . | grep -E "(__pycache__|\.py[co]$)" | xargs rm -rf'
 
 # youtube-dl
 alias yta="youtube-dl --extract-audio --audio-format best"
