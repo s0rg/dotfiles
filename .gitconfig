@@ -1,10 +1,13 @@
 [user]
-	email = al3x.s0rg@gmail.com
-	name = Shevchenko Alexey
+    email = al3x.s0rg@gmail.com
+    name = Shevchenko Alexey
 
 [core]
     editor = vim
     whitespace = cr-at-eol
+
+[color]
+    ui = auto
 
 [push]
     default = current
@@ -16,11 +19,11 @@
     rebase = true
 
 [rebase]
-	instructionFormat = "[%an - %ar] %s"
-	autoStash = true
+    instructionFormat = "[%an - %ar] %s"
+    autoStash = true
 
 [init]
-	defaultBranch = master
+    defaultBranch = master
 
 [pager]
     diff = delta
@@ -46,7 +49,7 @@
     co = checkout
     st = status
     # log short
-    ls = log -n 20 --oneline --graph --abbrev-commit
+    ls = log -n 10 --oneline --graph --abbrev-commit
     # log pretty
     ll = log --all --oneline --graph --stat --decorate
     # amends last commit
@@ -60,9 +63,7 @@
     # list of last 5 tags
     tags = !git tag -l | sort -V | tail -n 5
     # list branches
-    branches = branch -a
-    # list remote branches
-    remotes = remote -v
+    branches = !git branch -a --no-color | tr -d "[*[:blank:]]" | grep -v "HEAD" | sed -e "s/^remotes\\\\/origin\\\\///" | sort -u
     # fetch and removes deleted (at origin) branches
     fetch-prune = fetch --prune origin
     # get repo root dir
@@ -77,5 +78,5 @@
     gc-force = !git reflog expire --all --expire=now && git gc --prune=now --aggressive
 
 [include]
-	path = "~/.gitconfig.local"
+    path = "~/.gitconfig.local"
 

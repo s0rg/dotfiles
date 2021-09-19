@@ -88,7 +88,6 @@ alias go-bench='go test -benchmem -bench=.'
 alias go-test='go test -count 1 -v .'
 
 # git
-alias gs='git status'
 alias gcd='cd $(git root)'
 alias giff='git diff'
 
@@ -115,4 +114,8 @@ alias nscan-net='nscan-base -T1 -sn -PP -PM --scan-delay 0.5'
 alias nscan-web='nscan-base -T3 -sS -Pn --open -O --osscan-guess --fuzzy -p 21-25,80,81,443,8080'
 alias nscan-host='nscan-base -T3 -sS -Pn --open -sV --version-light -F --top-ports 200'
 alias nscan-xray='nscan-base -T3 -sS -Pn --open -A'
+
+# wifi
+alias wifi-conn="nmcli device wifi connect"
+alias wifi-list="nmcli device wifi list --rescan yes"
 

@@ -23,6 +23,7 @@ lst() {
     \ls -1ct --color=always | head --lines "${1:-5}";
 }
 
+
 ## shell utils
 
 # eye-candy man
@@ -65,6 +66,7 @@ sslcerts() {
     openssl s_client -connect "${1}":443 < /dev/null | openssl x509 -text
 }
 
+
 ## vim
 
 # open script by name in vim
@@ -76,8 +78,8 @@ vs() {
     vim "$(which "${1}")";
 }
 
-# finds first existing 'main.go' or creates new and opens it in vim
-vgo() {
+# omg - open main.go: finds first existing 'main.go' or creates new and opens it in vim
+omg() {
     local name="main.go";
     local main;
     main="$(find . -type f -name "${name}" -print | head -n 1)"
@@ -86,6 +88,7 @@ vgo() {
     fi
     vim "${name}"
 }
+
 
 ## git
 
@@ -96,13 +99,22 @@ git-feature() {
         echo -n "feature name: "
         read -r branch
     else
-        branch="feature/${1}"
+        branch="${1}"
     fi
-    git checkout -b "${branch}"
+    git checkout -b "feature/${branch}"
 }
 
 # zips git repo
 git-zip() { git archive -o "$(basename "$(git root)")".zip HEAD; }
+
+# git fuzzy checkout
+gfc() {
+    local branch;
+    branch=$(git branches | fzf --preview 'git ls {}')
+    if [ -n "${branch}" ]; then
+        git checkout "${branch}"
+    fi
+}
 
 # git smart push, sets upstream if none yet
 gip() {
