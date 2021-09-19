@@ -44,6 +44,7 @@
 [alias]
     cm = commit -a -m
     co = checkout
+    st = status
     # log short
     ls = log -n 20 --oneline --graph --abbrev-commit
     # log pretty

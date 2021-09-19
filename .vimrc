@@ -35,10 +35,12 @@ set showmatch matchtime=10
 set mousehide
 set cursorline
 set number
-set numberwidth=4
 set signcolumn=number
 set scrolloff=3
 set backspace=indent,eol,start
+
+let g:netrw_banner=0
+let g:netrw_hide=1
 
 set wrap
 set whichwrap+=<,>,[,]

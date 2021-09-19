@@ -19,7 +19,10 @@ export LESSHISTFILE='-'
 
 export MTR_OPTIONS=-t
 
+export PYTHONIOENCODING='UTF-8'
+
 export QT_QPA_PLATFORMTHEME=qt5ct
+
 export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:/usr/local/lib/pkgconfig
 
 export RIPGREP_CONFIG_PATH=~/.config/ripgrep/ripgreprc
@@ -42,4 +45,5 @@ export FZF_DEFAULT_COMMAND="rg \
 export FZF_COMPLETION_OPTS="--border --info=inline"
 
 # https://secwiki.org/w/Running_nmap_as_an_unprivileged_user
-export NMAP_PRIVILEGED=''
+export NMAP_PRIVILEGED
+

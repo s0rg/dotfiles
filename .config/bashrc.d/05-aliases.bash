@@ -24,7 +24,7 @@ alias path='echo -e ${PATH//:/\\n}'
 
 # tools
 alias rot13='tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]"; echo'
-alias stats='sort | uniq -c | sort -r'
+alias stats='sort | uniq -c | sort -n -r'
 alias heads='curl -sI'
 
 # translator
