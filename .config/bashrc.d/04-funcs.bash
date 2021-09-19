@@ -1,3 +1,5 @@
+## fs tools
+
 # creates new directory and enters it
 md() { mkdir -p "${@}" && cd "${@}" || exit; }
 
@@ -14,6 +16,15 @@ opn() {
     fi
 }
 
+# `lst` with no arguments shows 5 last-changed elements
+# in current dir. You can specify count i.e.: `lst 10`
+lst() {
+    # shellcheck disable=2012
+    \ls -1ct --color=always | head --lines "${1:-5}";
+}
+
+## shell utils
+
 # eye-candy man
 # see: https://boredzo.org/blog/archives/2016-08-15/colorized-man-pages-understood-and-customized
 # note: putting this directly in your env, will break env command output, so keeping them here.
@@ -27,13 +38,6 @@ man() {
     LESS_TERMCAP_ue=$'\e[0m' \
     LESS_TERMCAP_us=$'\e[04;38;5;146m' \
     man "${@}";
-}
-
-# `fr` with no arguments shows 5 last-changed elements
-# in current dir. You can specify count i.e.: `fr 10`
-fr() {
-    # shellcheck disable=2012
-    \ls -1ct --color=always | head --lines "${1:-5}";
 }
 
 # basic math
@@ -61,6 +65,30 @@ sslcerts() {
     openssl s_client -connect "${1}":443 < /dev/null | openssl x509 -text
 }
 
+## vim
+
+# open script by name in vim
+vs() {
+    if [ ${#} -eq 0 ]; then
+        echo "need script name"
+        exit 1
+    fi
+    vim "$(which "${1}")";
+}
+
+# finds first existing 'main.go' or creates new and opens it in vim
+vgo() {
+    local name="main.go";
+    local main;
+    main="$(find . -type f -name "${name}" -print | head -n 1)"
+    if [ -n "${main}" ]; then
+        name="${main}"
+    fi
+    vim "${name}"
+}
+
+## git
+
 # creates and switches to new feature branch
 git-feature() {
     local branch;
@@ -73,6 +101,9 @@ git-feature() {
     git checkout -b "${branch}"
 }
 
+# zips git repo
+git-zip() { git archive -o "$(basename "$(git root)")".zip HEAD; }
+
 # git smart push, sets upstream if none yet
 gip() {
     local branch;
@@ -84,11 +115,6 @@ gip() {
     else
         git push
     fi
-}
-
-# zips git repo
-gitzip() {
-    git archive -o "$(basename "$(git root)")".zip HEAD
 }
 
 # acts as a git shortcut, without options - runs 'git status'

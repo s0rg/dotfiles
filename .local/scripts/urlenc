@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 #
-# the missing urlencoder/decoder
+# the missing url encoder/decoder
 #
-#vim:ft=py3
 
 import sys
 import argparse
@@ -21,12 +20,14 @@ def main(args):
         src = sys.stdin.read().strip()
 
     if args.decode:
-        print(urlp.unquote(src))
+        print(urlp.unquote_plus(src))
     else:
-        print(urlp.quote(src))
+        print(urlp.quote_plus(src))
 
     return 0
 
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv))
+
+#vim:ft=py3

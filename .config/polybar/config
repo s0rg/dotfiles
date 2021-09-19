@@ -1,9 +1,11 @@
 [settings]
 screenchange-reload = true
 
+
 [global/wm]
 margin-top = 0
 margin-bottom = 0
+
 
 [colors]
 background = ${xrdb:color0:#222}
@@ -11,6 +13,7 @@ background-alt = ${xrdb:color8:#444}
 foreground = ${xrdb:color2:#fff}
 foreground-alt = ${xrdb:color4:#eee}
 alert = ${xrdb:color6:#f00}
+
 
 [bar/mybar]
 width = 100%
@@ -52,11 +55,13 @@ tray-offset-y = -2
 cursor-click = pointer
 cursor-scroll = ns-resize
 
+
 [module/xwindow]
 type = internal/xwindow
 format-padding = 1
 label = %title%
 label-maxlen = 70
+
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -80,17 +85,20 @@ indicator-icon-default =
 indicator-icon-0 = caps lock;;CAP
 indicator-icon-1 = num lock;;NUM
 
+
 [module/sep]
 type = custom/text
 content = |
 content-padding = 0
 content-margin = 0
 
+
 [module/filesystem]
 type = internal/fs
 interval = 30
 mount-0 = /home
 label-mounted = %{T4}%{T-} %percentage_used%%
+
 
 [module/i3]
 type = internal/i3
@@ -124,6 +132,7 @@ label-urgent-foreground = ${colors.background}
 label-urgent-underline = ${colors.background}
 label-urgent-padding = 1
 
+
 [module/cpu]
 type = internal/cpu
 interval = 1.0
@@ -152,11 +161,13 @@ ramp-coreload-5-foreground = ${colors.foreground-alt}
 ramp-coreload-6-foreground = ${colors.alert}
 ramp-coreload-7-foreground = ${colors.alert}
 
+
 [module/memory]
 type = internal/memory
 interval = 2
 format = <label>
 label = %{T2}%{T-} %percentage_used:2%%
+
 
 [module/date]
 type = internal/date
@@ -164,6 +175,7 @@ interval = 2
 date = %a %Y-%m-%d
 time = %H:%M
 label = %{T2}%{T-} %date% %{T3}%time%%{T-}
+
 
 [module/pulseaudio]
 type = internal/pulseaudio
@@ -178,6 +190,7 @@ sink = @DEFAULT_SINK@
 use-ui-max = false
 click-right = pavucontrol-qt &
 
+
 [module/backlight]
 type = internal/backlight
 card = intel_backlight
@@ -187,6 +200,7 @@ label = %{T2}%{T-} %percentage%%
 label-minlen = 16
 label-maxlen = 16
 
+
 [module/micstatus]
 type = custom/script
 interval = 1.0
@@ -194,7 +208,8 @@ format = <label>
 label-foreground = ${colors.foreground}
 label-font = 4
 label-padding-right = 1
-exec = pulse_mic --status
+exec = pulse-mic --status
+
 
 [module/battery]
 type = internal/battery
@@ -234,6 +249,7 @@ animation-charging-5 = 
 ; Framerate in milliseconds
 animation-charging-framerate = 750
 
+
 [module/temperature]
 type = internal/temperature
 thermal-zone = 0
@@ -248,6 +264,7 @@ label-warn-foreground = ${colors.foreground-alt}
 label-warn-overline = ${colors.alert}
 format-warn = <label-warn>
 
+
 [module/cmus]
 type = custom/script
 exec = cmus-status
@@ -255,6 +272,7 @@ exec-if = pgrep -x cmus
 interval = 1
 label-maxlen = 50
 click-left = cmus-remote --pause
+
 
 [module/bluetooth]
 type = custom/script

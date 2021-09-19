@@ -5,6 +5,7 @@
 
 import sys
 import socket
+from ipaddress import IPv4Network
 
 import psutil
 
@@ -18,17 +19,25 @@ def get_ip4(name, addrs):
         yield (a.address, a.netmask, a.broadcast)
 
 
+def print_net(iface, ip, prefix, mask, bcast):
+    print(f"{iface}:")
+    print(f"\tip:        {ip}")
+    print(f"\tmask:      {mask} /{prefix}")
+    print(f"\tbroadcast: {bcast}\n")
+
+
 def main():
     ifaces = psutil.net_if_stats()
     iaddrs = psutil.net_if_addrs()
+
+    print("")
 
     for iface, stat in ifaces.items():
         if not stat.isup:
             continue
         for addr, mask, bcast in get_ip4(iface, iaddrs):
-            print(
-                f'{iface}:\n\tip:   {addr}\n\tmask: {mask}\n\tbroadcast: {bcast}\n'
-            )
+            prefix = IPv4Network((0, mask)).prefixlen
+            print_net(iface, addr, prefix, mask, bcast)
 
     return 0
 

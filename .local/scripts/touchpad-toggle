@@ -2,8 +2,8 @@
 #
 # toggles touchpad on/off, with notify
 #
-#vim:ft=py3
 
+import sys
 import subprocess as sh
 
 import notify
@@ -14,11 +14,15 @@ XINPUT_PROP = "Device Enabled"
 MSG_ID = 1010
 
 
+def notify_state(msg):
+    notify.send(PAD_NEEDLE, "state", msg, msg_id=MSG_ID)
+
+
 def get_pad_name(needle=PAD_NEEDLE):
     p = sh.Popen([XINPUT_BIN, "list", "--name-only"], stdout=sh.PIPE)
     l = p.communicate()[0].decode().split("\n")
     r = list(filter(lambda s: needle in s.lower(), l))
-    return r[0] if r else ""
+    return r[0] if r else None
 
 
 def get_pad_state(name):
@@ -33,10 +37,17 @@ def get_pad_state(name):
 
 def main():
     pad = get_pad_name()
+    if pad is None:
+        print("[-] no touchpad detected!", file=sys.stderr)
+        return 1
+
     v, m = (False, "disabled") if get_pad_state(pad) else (True, "enabled")
     sh.Popen([XINPUT_BIN, "--enable" if v else "--disable", pad])
-    notify.send(PAD_NEEDLE, "state", m, msg_id=MSG_ID)
+    notify_state(m)
+    return 0
 
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())
+
+#vim:ft=py3

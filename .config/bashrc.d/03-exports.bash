@@ -12,6 +12,7 @@ export BROWSER='qutebrowser'
 export MANPAGER='less -X'
 
 export LESS='-g -i -M -R -S -w -z-4'
+export LESSCHARSET=utf-8
 
 # Disable 'less' history file
 export LESSHISTFILE='-'

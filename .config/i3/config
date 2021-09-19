@@ -41,7 +41,7 @@ floating_maximum_size         1200 x 650
 
 ## KEYS
 
-set $rofi < [r]un / [w]in / [f]ox / [b]luetooth / [q]uit >
+set $rofi :: [r]un / [w]in / [f]ox / [b]luetooth / [q]uit
 mode "$rofi" {
     bindsym r $run "rofi -show combi -display-combi 'run '",              $mode_reset
     bindsym w $run "rofi -show window -display-window 'win '",            $mode_reset
@@ -52,7 +52,7 @@ mode "$rofi" {
     bindsym Escape $mode_reset
 }
 
-set $window < [k]ill / [x]kill / [f]loating / [s]ticky / f[u]ll screen >
+set $window :: [k]ill / [x]kill / [f]loating / [s]ticky / f[u]ll screen
 mode "$window" {
     bindsym k kill,              $mode_reset
     bindsym x $run xkill,        $mode_reset
@@ -63,18 +63,18 @@ mode "$window" {
     bindsym Escape $mode_reset
 }
 
-set $toggle < [t]ouchpad / [m]ic / [r]edshift / [d]unst / [n]otifies >
+set $toggle :: [t]ouchpad / [m]ic / [r]edshift / [d]unst / [n]otifies
 mode "$toggle" {
-    bindsym t $run touchpad_toggle,             $mode_reset
+    bindsym t $run touchpad-toggle,             $mode_reset
     bindsym r $run pkill -USR1 redshift,        $mode_reset
     bindsym n $run dunstctl close-all,          $mode_reset
     bindsym d $run dunstctl set-paused toggle,  $mode_reset
-    bindsym m $run pulse_mic --toggle,          $mode_reset
+    bindsym m $run pulse-mic --toggle,          $mode_reset
 
     bindsym Escape $mode_reset
 }
 
-set $split < [t]oggle / [v]ertical / [h]orizontal >
+set $split :: [t]oggle / [v]ertical / [h]orizontal
 mode "$split" {
     bindsym t layout toggle split splitv splith, $mode_reset
     bindsym h split h,                           $mode_reset
