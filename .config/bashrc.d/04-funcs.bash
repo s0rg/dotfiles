@@ -85,7 +85,7 @@ omg() {
     local name
     local main
     name="${1:-main.go}"
-    main="$(fd --hidden --type f --max-results=1 --color never --glob "${name}")"
+    main="$(fd --type f --max-results=1 --color never --glob "${name}")"
     if [ -n "${main}" ]; then
         name="${main}"
     fi
