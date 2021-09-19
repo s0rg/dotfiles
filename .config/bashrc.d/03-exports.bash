@@ -45,5 +45,5 @@ export FZF_DEFAULT_COMMAND="rg \
 export FZF_COMPLETION_OPTS="--border --info=inline"
 
 # https://secwiki.org/w/Running_nmap_as_an_unprivileged_user
-export NMAP_PRIVILEGED
+export NMAP_PRIVILEGED=''
 
