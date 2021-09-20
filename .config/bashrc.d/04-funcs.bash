@@ -1,10 +1,10 @@
 ## fs tools
 
 # creates new directory and enters it
-md() { mkdir -p "${@}" && cd "${@}" || exit; }
+md() { mkdir -p "${@}" && cd "${@}" || return; }
 
 # cd up
-up() { cd "$(printf "%0.s../" $(seq 1 "${1:-1}"))" || exit; }
+up() { cd "$(printf "%0.s../" $(seq 1 "${1:-1}"))" || return; }
 
 # `opn` with no arguments opens the current directory,
 # otherwise opens the given location or file
@@ -55,7 +55,7 @@ stopwatch() {
 sslcerts() {
     if [ ${#} -eq 0 ]; then
         echo "need host"
-        exit
+        return 1
     fi
     openssl s_client -connect "${1}":443 < /dev/null | openssl x509 -text
 }
@@ -67,13 +67,13 @@ sslcerts() {
 esn() {
     if [ ${#} -eq 0 ]; then
         echo "need script name"
-        exit 1
+        return 1
     fi
     local src
     src="$(which "${1}")"
     if [ -z "${src}" ]; then
         echo "none found"
-        exit 1
+        return 1
     fi
     ${EDITOR} "${src}"
 }
@@ -110,7 +110,7 @@ git-feature() {
 # git fuzzy checkout
 gfc() {
     local branch
-    branch=$(git branches | fzf --preview 'git log -n 15 --oneline --abbrev-commit {} 2> /dev/null || echo "-- remote branch --"')
+    branch=$(git branches | fzf --preview 'git log -n 15 --oneline --abbrev-commit {} 2> /dev/null || echo "# remote branch #"')
     if [ -n "${branch}" ]; then
         git checkout "${@}" "${branch}"
     fi

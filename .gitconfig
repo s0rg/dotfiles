@@ -49,6 +49,8 @@
     co = checkout
     st = status
     ls = ls-files
+    wat = whatchanged
+    todos = grep --break --heading --line-number -I --word-regexp -e TODO -e FIX -e BUG
     # log pretty
     ll = log --all --decorate --oneline --graph --stat
     # amends last commit
@@ -70,7 +72,7 @@
     # age of repo
     born = !git log --pretty='format:%ar at %ai' --reverse | head -1
     # local aliases
-    alias = !git config -l | grep '^alias' | cut -c 7- | sort
+    aliases = !git config -l | grep '^alias' | cut -c 7- | sort
     # cleans all local branches (except current and master or main branches) that has been merged
     rm-merged = !git branch --merged | grep -v -e '^* ' -e '^  ma' | xargs -n 1 git branch -d
     # total cleansing

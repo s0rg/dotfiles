@@ -1,4 +1,4 @@
-# Enable aliases to be sudo’ed
+# enable aliases to be sudo’ed
 alias sudo='sudo '
 
 # eye-candy output
@@ -58,7 +58,7 @@ alias top-cpu='ps -Ao user,pid,pcpu,pmem,comm --sort=-pcpu | head --lines=6'
 alias inet-ports='netstat -nape --inet'
 
 # python
-alias py='python3 '
+alias py='python3'
 alias bp='bpython'
 alias pip-up='pip3 install --upgrade --user $(pip3 list --user --format json | jq ".[] | flatten | .[0]" | xargs echo)'
 alias pip-get='pip3 install --user --upgrade'
@@ -102,7 +102,7 @@ alias kat='kitty +kitten icat'
 
 # dotfiles
 alias dots='git --git-dir=${HOME}/.dotfiles/ --work-tree=${HOME}'
-alias dots-store='dots commit -am "WIP: $(date --rfc-3339=seconds)" && dots push'
+alias dots-store='dots commit -am "stored at: $(date --rfc-3339=seconds)" && dots push'
 alias dots-plugs='vim-plugs-ls > ${HOME}/.vim/plugins-list'
 
 # kubernetes
@@ -121,6 +121,6 @@ alias nscan-host='nscan-base -T3 -sS -Pn --open -sV --version-light -F --top-por
 alias nscan-xray='nscan-base -T3 -sS -Pn --open -A'
 
 # wifi
-alias wifi-conn="nmcli device wifi connect"
-alias wifi-list="nmcli device wifi list --rescan yes"
+alias wifi-up="nmcli device wifi connect"
+alias wifi-ls="nmcli device wifi list --rescan yes"
 
