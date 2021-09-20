@@ -118,15 +118,15 @@ gfc() {
 
 # git smart push, sets upstream if none yet
 gip() {
-    local args
     local branch
     local upstream
     branch="$(git symbolic-ref --quiet --short HEAD 2> /dev/null)"
     upstream="$(git rev-parse --abbrev-ref "${branch}"@\{upstream\} 2> /dev/null)"
     if [ -z "${upstream}" ]; then
-        args="--set-upstream origin ${branch}"
+        git push --set-upstream origin "${branch}"
+    else
+        git push
     fi
-    git push "${args}"
 }
 
 # acts as a git shortcut, without options - runs 'git status'
