@@ -66,8 +66,9 @@ alias py-serve='python3 -m http.server'
 alias py-clear='find . | grep -E "(__pycache__|\.py[co]$)" | xargs rm -rf'
 
 # youtube-dl
-alias yta="youtube-dl --extract-audio --audio-format best"
-alias ytv="youtube-dl -f bestvideo+bestaudio"
+alias ytd='youtube-dl'
+alias yta='youtube-dl -f bestaudio --extract-audio'
+alias ytv='youtube-dl -f bestvideo+bestaudio'
 
 # extras
 alias wttr='curl http://wttr.in/?format="%c:+%f+%w\n"'
