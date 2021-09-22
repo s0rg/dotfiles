@@ -9,25 +9,43 @@ import urllib.parse as urlp
 
 parser = argparse.ArgumentParser(description="url(en/de)coder")
 parser.add_argument("-d", "--decode", action="store_true", help="decode input")
+parser.add_argument("-l",
+                    "--legacy",
+                    action="store_true",
+                    help="use '%20' instead of '+' to encode spaces")
 parser.add_argument("input", nargs='?', help="input string to (en/de)code")
 
 
-def main(args):
+def quote(val, is_legacy):
+    if is_legacy:
+        return urlp.quote(val)
+    return urlp.quote_plus(val)
+
+
+def unquote(val, is_legacy):
+    if is_legacy:
+        return urlp.unquote(val)
+    return urlp.unquote_plus(val)
+
+
+def main():
     args = parser.parse_args()
 
-    src = args.input
-    if src is None:
-        src = sys.stdin.read().strip()
+    val = args.input
+    if val is None:
+        val = sys.stdin.read().strip()
 
     if args.decode:
-        print(urlp.unquote_plus(src))
+        res = unquote(val, args.legacy)
     else:
-        print(urlp.quote_plus(src))
+        res = quote(val, args.legacy)
+
+    print(res)
 
     return 0
 
 
 if __name__ == '__main__':
-    sys.exit(main(sys.argv))
+    sys.exit(main())
 
 #vim:ft=py3

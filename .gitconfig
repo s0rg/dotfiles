@@ -4,6 +4,7 @@
 
 [core]
     editor = vim
+    pager = less --quit-if-one-screen
     whitespace = cr-at-eol
 
 [color]
@@ -45,22 +46,26 @@
     hunk-header-decoration-style = box
 
 [alias]
-    cm = commit -a -m
+    cm = commit -am
     co = checkout
     st = status
     ls = ls-files
+    br = branch -vv
+    bra = branch -vv -a
+    aa = add --all .
     wat = whatchanged
+    put = push origin --tags
     todos = grep --break --heading --line-number -I --word-regexp -e TODO -e FIX -e BUG
     # log pretty
     ll = log --all --decorate --oneline --graph --stat
     # amends last commit
     amend = commit --amend --reuse-message=HEAD
+    # commiter stats
+    stats = shortlog -sn
     # get repo source URL
     origin = config --get remote.origin.url
     # get repo root dir
     root = rev-parse --show-toplevel
-    # push tags
-    put = push origin --tags
     # list of last 5 tags
     tags = !git tag -l | sort -V | tail -n 5
     # list branches

@@ -36,7 +36,14 @@ man() {
 }
 
 # basic math
-calc() { printf "%s\n" "$*" | bc -l; }
+calc() {
+    local result
+    result="$(printf 'scale=4;%s\n' "${*}" | bc --mathlib | tr -d '\\\n')"
+    if [[ "$result" == *.* ]]; then
+        result=$(echo -n "${result}" | sed -e 's/^\./0./' -e 's/^-\./-0./' -e 's/0*$//;s/\.$//')
+    fi
+    echo "${result}"
+}
 
 # starts stopwatch with 1-second step
 stopwatch() {
@@ -62,21 +69,6 @@ sslcerts() {
 
 
 ## vim
-
-# Edit Script by Name
-esn() {
-    if [ ${#} -eq 0 ]; then
-        echo "need script name"
-        return 1
-    fi
-    local src
-    src="$(which "${1}")"
-    if [ -z "${src}" ]; then
-        echo "none found"
-        return 1
-    fi
-    ${EDITOR} "${src}"
-}
 
 # omg - Open Main.Go (or any other file with given name)
 # 1. finds first existing file ('main.go' by default) or creates new one

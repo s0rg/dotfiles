@@ -19,6 +19,7 @@ HISTIGNORE="${HISTIGNORE}:[bf]g?( *):rm?( *):ls?( *):cd?( *):sudo?( *)" # nothin
 HISTIGNORE="${HISTIGNORE}:clear:pwd:env:reset:tree:top:cal:pstree:htop" # tools and aliases
 HISTIGNORE="${HISTIGNORE}:up?( *):lst?( *):cd[pdbls]:opn?( *):md?( *)"  #
 HISTIGNORE="${HISTIGNORE}:lsx:dfx:gotop:wttr:path:ren-*:yt[dav]?( *)"   #
+HISTIGNORE="${HISTIGNORE}:obey:si:ex?( *):sh-*:today"                   #
 HISTIGNORE="${HISTIGNORE}:history?( *):hig?( *):hclear:hstats"          # history management
 HISTIGNORE="${HISTIGNORE}:dots?( *):dots-*"                             # dot files
 HISTIGNORE="${HISTIGNORE}:*KEY*:*TOKEN*"                                # extras

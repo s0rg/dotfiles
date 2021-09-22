@@ -1,8 +1,13 @@
 # enable aliases to be sudo’ed
 alias sudo='sudo '
 
-# eye-candy output
-alias ls='ls --color=auto --group-directories-first'
+if [ -r "$HOME"/.dircolors ]; then
+    eval "$(dircolors -b "$HOME"/.dircolors)"
+else
+    eval "$(dircolors -b)"
+fi
+
+alias ls="ls --color=auto --group-directories-first"
 alias ip='ip -color=auto'
 alias diff='diff --color=auto'
 alias dmesg='dmesg --color=auto'
@@ -16,20 +21,33 @@ alias v='vim'
 alias mc='mc -d'
 alias si='sudo -i'
 alias ex='7z x'
-alias jsp='jq -C .'
 alias tailf='tail -f --retry'
 alias cal='echo; ncal -M -3; echo'
 alias zat='zathura'
-alias path='echo -e ${PATH//:/\\n}'
+alias path='echo -n "$PATH" | tr ":" "\n" | sort'
+alias obey='sudo $(fc -ln -1)'
+alias today='date "+%Y_%m_%d"'
+
+# bash
+alias sh-reload='exec "${SHELL}" -l'
+alias sh-nohist='unset HISTFILE'
+
+# jq
+alias jsp='jq -C .'
+alias swag-urls="jq '.paths | keys | .[]'"
 
 # lower / upper case mass rename
 alias ren-lc='rename "y/A-Z/a-z/" *'
 alias ren-uc='rename "y/a-z/A-Z/" *'
 
+# curl shortcuts
+alias get='curl -OL -C -'
+alias heads='curl -sI'
+
 # tools
 alias rot13='tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]"; echo'
 alias stats='sort | uniq -c | sort -n -r'
-alias heads='curl -sI'
+alias trim='sed -e '\''s/^[[:space:]]*//g'\'' -e '\''s/[[:space:]]*\$//g'\'''
 
 # translator
 alias enru='trans en:ru'
@@ -76,18 +94,21 @@ alias tree='exa --icons --group-directories-first --tree --level=2 --git-ignore'
 alias lsx='exa --icons --group-directories-first --long --header --git --colour-scale --time-style=long-iso'
 alias dfx='duf --hide special'
 alias gr='rg'
+# Add an "alert" alias for long running commands.  Use like so: sleep 10; alert
+alias alert='notify-send --urgency=normal "alert" "$(fc -nl -1 | sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'' -e '\''s/^[[:space:]]*//'\'')"'
 
 # docker
 alias doi-up="docker images -f 'dangling=false' --format '{{.Repository}}:{{.Tag}}' | xargs -L1 docker pull"
 alias doi-clr="docker images -f 'dangling=true' -q | xargs -L1 docker rmi"
 alias dps='docker ps -a'
+alias dcc='docker-compose'
 alias dcu='docker-compose up --remove-orphans'
 alias dcd='docker-compose down --remove-orphans'
 alias dcb='docker-compose build --force-rm'
 alias dcl='docker-compose logs -f'
 
 # golang
-alias go-clean='go clean -cache -testcache -modcache'
+alias go-clean='go clean -x -cache -testcache -modcache'
 alias go-deps="go list -f '{{join .Deps \"\n\"}}' | xargs go list -f '{{if not .Standard}}{{.ImportPath}}{{end}}'"
 alias go-bench='go test -benchmem -bench=.'
 alias go-test='go test -count 1 -v .'
@@ -115,11 +136,11 @@ alias kapt='k krew'
 alias kapt-up='kapt upgrade'
 
 # nmap
-alias nscan-base='nmap --source-port 53'
-alias nscan-net='nscan-base -T1 -sn -PP -PM --scan-delay 0.5'
-alias nscan-web='nscan-base -T3 -sS -Pn --open -O --osscan-guess --fuzzy -p 21-25,80,81,443,8080'
-alias nscan-host='nscan-base -T3 -sS -Pn --open -sV --version-light -F --top-ports 200'
-alias nscan-xray='nscan-base -T3 -sS -Pn --open -A'
+alias nscan='nmap --source-port 53'
+alias nscan-net='nscan -T1 -sn -PP -PM --scan-delay 0.5'
+alias nscan-web='nscan -T3 -sS -Pn --open -O --osscan-guess --fuzzy -p 21-25,80,81,443,8080'
+alias nscan-host='nscan -T3 -sS -Pn --open -sV --version-light -F --top-ports 200'
+alias nscan-xray='nscan -T3 -sS -Pn --open -A'
 
 # wifi
 alias wifi-up="nmcli device wifi connect"

@@ -288,6 +288,8 @@ let g:sql_type_default = 'pgsql'
 " editorconfig-vim
 let g:EditorConfig_disable_rules = ['tab_width']
 autocmd FileType gitcommit let b:EditorConfig_disable = 1
+autocmd FileType gitcommit set textwidth=72
+" autocmd FileType gitcommit set colorcolumn+=51
 
 " remove extra spaces
 function! CleanExtraSpaces()
@@ -312,6 +314,9 @@ autocmd FocusGained,BufEnter * checktime
 " ensure tabs don't get converted to spaces in Makefiles
 autocmd FileType make setlocal noexpandtab
 
+autocmd FileType go nmap <leader>t :GoAddTags<CR>
+autocmd FileType go nmap <leader>i :GoImports<CR>
+
 " window movement (up/down only) via ctrl
 nnoremap <C-j>    <C-w>j
 nnoremap <C-k>    <C-w>k
@@ -323,10 +328,6 @@ map <leader><ESC> :noh<CR>
 
 " Reload VIM's configuration
 nnoremap <leader>r :source $MYVIMRC<CR>
-
-" Golang helpers
-nnoremap <leader>t :GoAddTags<CR>
-nnoremap <leader>i :GoImports<CR>
 
 " fzf.vim
 nnoremap <leader>f :Files<CR>

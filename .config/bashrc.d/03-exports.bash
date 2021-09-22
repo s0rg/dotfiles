@@ -11,7 +11,7 @@ export EMAIL='evolution'
 export BROWSER='qutebrowser'
 export MANPAGER='less -X'
 
-export LESS='-g -i -M -R -S -w -z-4 --tabs=4'
+export LESS='-g -i -M -R --tabs=4'
 export LESSCHARSET=utf-8
 
 # Disable 'less' history file
@@ -33,15 +33,8 @@ export FZF_DEFAULT_OPTS="--ansi \
     --padding 0 \
     --reverse \
     --bind 'esc:cancel' \
-    --preview 'bat -n --color=always {}'"
-export FZF_DEFAULT_COMMAND="rg \
-    --files \
-    --hidden \
-    --column \
-    --line-number \
-    --no-heading \
-    --color=always \
-    --smart-case "
+    --preview 'bat {}'"
+export FZF_DEFAULT_COMMAND="rg --files --no-heading "
 export FZF_COMPLETION_OPTS="--border --info=inline"
 
 # https://secwiki.org/w/Running_nmap_as_an_unprivileged_user

@@ -1,7 +1,10 @@
 --hidden
---follow
+--trim
 --smart-case
+--pretty
+--no-messages
 --no-require-git
 --glob=!.git
+--glob=!.cache
 --glob=!vendor
 --glob=!__pycache__

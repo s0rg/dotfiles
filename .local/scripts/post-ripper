@@ -1,0 +1,103 @@
+#!/usr/bin/env python3
+
+import sys
+import json
+import argparse
+from operator import itemgetter
+from urllib.parse import urlparse
+
+parser = argparse.ArgumentParser(
+    description="rips-out endpoints and methods from postman collections")
+parser.add_argument("-n",
+                    "--no-groups",
+                    action="store_true",
+                    help="no newline between groups")
+parser.add_argument("input", help="path to postman collection")
+
+
+def ripper(items):
+    for it in items:
+        req = it.get("request", None)
+        if req is None:
+            yield from ripper(it.get("item", []))
+        else:
+            yield (
+                it["name"],
+                req["method"],
+                req["url"],
+            )
+
+
+def prepare_env(vals):
+    return [(v["key"], v["value"]) for v in vals]
+
+
+def extract_uri(uri, env):
+    raw = uri["raw"]
+
+    for k, v in env:
+        n = "{{" + k + "}}"
+        if n in raw:
+            raw = raw.replace(n, v)
+
+    p = urlparse(raw)
+    if p.query:
+        return p.path + "?" + p.query
+
+    return p.path
+
+
+def process(col):
+    env = prepare_env(col.get("variable", []))
+    maxn, maxm = 0, 0
+
+    items = []
+
+    for n, m, u in ripper(col.get("item", [])):
+        if len(n) >= maxn:
+            maxn = len(n) + 1
+
+        if len(m) >= maxm:
+            maxm = len(m) + 1
+
+        grp = u["path"][0]  # group by first path element
+        uri = extract_uri(u, env)
+        items.append((n, m, grp, uri))
+
+    by_group = itemgetter(2)
+    items.sort(key=by_group)
+
+    return (
+        maxn,
+        maxm,
+        items,
+    )
+
+
+def display(data, plain):
+    maxn, maxm, items = data
+    curg = ""
+
+    for n, m, g, u in items:
+        if curg != g and not plain:
+            print()
+            curg = g
+
+        print(n.ljust(maxn), m.ljust(maxm), u)
+
+
+def main():
+    args = parser.parse_args()
+
+    with open(args.input, 'rt', encoding='utf8') as fd:
+        display(
+            process(json.load(fd)),
+            args.no_groups,
+        )
+
+    return 0
+
+
+sys.exit(main())
+
+#vi:syntax=py3

@@ -14,5 +14,7 @@ done
 __git_complete g git
 __git_complete dots git
 complete -F __start_kubectl k
+complete -F _docker_compose dcc
 complete -F _complete_go_home cdgo
 complete -F _complete_zathura zathura zat
+
