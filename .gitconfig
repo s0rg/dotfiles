@@ -55,9 +55,11 @@
     aa = add --all .
     wat = whatchanged
     put = push origin --tags
-    todos = grep --break --heading --line-number -I --word-regexp -e TODO -e FIX -e BUG
+    todos = grep --break --heading --line-number -I --word-regexp -e TODO -e FIXME -e BUG
     # log pretty
     ll = log --all --decorate --oneline --graph --stat
+    # cleaner diff - no contents for deleted files
+    did = diff --irreversible-delete
     # amends last commit
     amend = commit --amend --reuse-message=HEAD
     # commiter stats
@@ -71,7 +73,7 @@
     # list branches
     branches = !git branch -a --no-color | tr -d "[*[:blank:]]" | grep -v "HEAD" | sed -e "s/^remotes\\\\/origin\\\\///" | sort -u
     # fetch and removes deleted (at origin) branches
-    fetch-prune = fetch --prune origin
+    fetch-all = fetch --all --tags --prune --prune-tags origin
     # get repo root dir
     root = rev-parse --show-toplevel
     # age of repo

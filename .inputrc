@@ -1,5 +1,12 @@
 $include /etc/inputrc
 
+set bell-style none
+
+# UTF-8
+set input-meta on
+set output-meta on
+set convert-meta off
+
 TAB:menu-complete
 "\C-p":history-search-backward
 "\C-n":history-search-forward
@@ -16,7 +23,7 @@ set show-all-if-unmodified on
 
 set completion-ignore-case on
 set completion-prefix-display-length 2
-set completion-query-items 150
+set completion-query-items 200
 
 set mark-symlinked-directories on
 set menu-complete-display-prefix on

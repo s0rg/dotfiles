@@ -11,7 +11,7 @@ case "$TERM" in
 esac
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;34m\]\w\[\033[00m\] \[\033[01;32m\]\$\[\033[00m\] '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\w\[\033[00m\] \[\033[01:30m\]\$\[\033[00m\] '
 else
     PS1='${debian_chroot:+($debian_chroot)}\w \$ '
 fi
@@ -26,7 +26,11 @@ xterm*|rxvt*)
     ;;
 esac
 
-for s in "$HOME"/.config/bashrc.d/*.bash; do
-    [ -r "$s" ] && . "$s"
-done
+export XDG_CONFIG_HOME="${HOME}"/.config
+export XDG_CACHE_HOME="${HOME}"/.cache
+export XDG_DATA_HOME="${HOME}"/.local/share
 
+for src in "${XDG_CONFIG_HOME}"/bashrc.d/*.bash; do
+    [ -r "${src}" ] && . "${src}"
+done
+unset src

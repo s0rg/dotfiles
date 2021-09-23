@@ -1,13 +1,14 @@
 # enable aliases to be sudo’ed
 alias sudo='sudo '
 
-if [ -r "$HOME"/.dircolors ]; then
-    eval "$(dircolors -b "$HOME"/.dircolors)"
+if [ -r "${XDG_CONFIG_HOME}"/dircolors.jellybeans ]; then
+    eval "$(dircolors -b "${XDG_CONFIG_HOME}"/dircolors.jellybeans)"
 else
     eval "$(dircolors -b)"
 fi
 
-alias ls="ls --color=auto --group-directories-first"
+alias ls='ls --color=auto --group-directories-first'
+alias ll='ls -hAlF --time-style=+"%Y-%m-%d %H:%M:%S"'
 alias ip='ip -color=auto'
 alias diff='diff --color=auto'
 alias dmesg='dmesg --color=auto'
@@ -31,6 +32,8 @@ alias today='date "+%Y_%m_%d"'
 # bash
 alias sh-reload='exec "${SHELL}" -l'
 alias sh-nohist='unset HISTFILE'
+alias sh-timer='fancy_timer'
+alias sh-funlist='compgen -A function | sort -u'
 
 # jq
 alias jsp='jq -C .'
@@ -41,7 +44,7 @@ alias ren-lc='rename "y/A-Z/a-z/" *'
 alias ren-uc='rename "y/a-z/A-Z/" *'
 
 # curl shortcuts
-alias get='curl -OL -C -'
+alias get='curl --silent --progress-meter -OL -C -'
 alias heads='curl -sI'
 
 # tools
@@ -78,8 +81,8 @@ alias inet-ports='netstat -nape --inet'
 # python
 alias py='python3'
 alias bp='bpython'
-alias pip-up='pip3 install --upgrade --user $(pip3 list --user --format json | jq ".[] | flatten | .[0]" | xargs echo)'
 alias pip-get='pip3 install --user --upgrade'
+alias pip-up='pip3 freeze --user | cut -d= -f1 | xargs -n1 pip3 install --user --upgrade'
 alias py-serve='python3 -m http.server'
 alias py-clear='find . | grep -E "(__pycache__|\.py[co]$)" | xargs rm -rf'
 
@@ -94,6 +97,7 @@ alias tree='exa --icons --group-directories-first --tree --level=2 --git-ignore'
 alias lsx='exa --icons --group-directories-first --long --header --git --colour-scale --time-style=long-iso'
 alias dfx='duf --hide special'
 alias gr='rg'
+
 # Add an "alert" alias for long running commands.  Use like so: sleep 10; alert
 alias alert='notify-send --urgency=normal "alert" "$(fc -nl -1 | sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'' -e '\''s/^[[:space:]]*//'\'')"'
 
@@ -136,11 +140,12 @@ alias kapt='k krew'
 alias kapt-up='kapt upgrade'
 
 # nmap
-alias nscan='nmap --source-port 53'
-alias nscan-net='nscan -T1 -sn -PP -PM --scan-delay 0.5'
-alias nscan-web='nscan -T3 -sS -Pn --open -O --osscan-guess --fuzzy -p 21-25,80,81,443,8080'
-alias nscan-host='nscan -T3 -sS -Pn --open -sV --version-light -F --top-ports 200'
-alias nscan-xray='nscan -T3 -sS -Pn --open -A'
+alias _nmp='nmap --source-port 53'
+alias nscan-net='_nmp -T1 -sn -PP -PM --scan-delay 0.5'
+alias nscan-web='_nmp -T3 -sS -Pn --open -O --osscan-guess --fuzzy -p 21-25,80,81,443,8080'
+alias nscan-host='_nmp -T3 -sS -Pn --open -sV --version-light -F --top-ports 200'
+alias nscan-xray='_nmp -T3 -sS -Pn --open -A'
+unset _nmp
 
 # wifi
 alias wifi-up="nmcli device wifi connect"

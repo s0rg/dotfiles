@@ -20,6 +20,10 @@ let &t_ut=''
 
 set encoding=utf8 fileencoding=utf-8 termencoding=utf-8 nobomb
 
+" defeat the rats!
+set mouse=""
+set mousehide
+
 set hidden
 set autoread
 set history=100
@@ -28,11 +32,11 @@ set autoindent
 set wildmenu wildignore+=*.o,*~,*.pyo,*.pyc,*/.git/*
 
 set shiftwidth=4
+set shiftround
 set expandtab smarttab tabstop=4 softtabstop=0
 
 set switchbuf=usetab,newtab
 set showmatch matchtime=10
-set mousehide
 set cursorline
 set number
 set signcolumn=number
@@ -41,6 +45,8 @@ set backspace=indent,eol,start
 
 let g:netrw_banner=0
 let g:netrw_hide=1
+
+set nrformats-=octal
 
 set wrap
 set whichwrap+=<,>,[,]
@@ -64,7 +70,8 @@ set title titlestring=vim:\ %f
 set foldmethod=syntax foldnestmax=3
 set nofoldenable
 
-set completeopt=longest,menuone
+set complete=.,w,b,u
+set completeopt=longest,menuone,preview
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 
 set splitbelow splitright
@@ -185,7 +192,7 @@ let g:NERDTreeMinimalMenu = 1
 let g:NERDTreeMarkBookmarks = 0
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeStatusline = '%#NonText#'
-let NERDTreeIgnore=['\.py[c,o]$', '__pycache__']
+let NERDTreeIgnore=['vendor', '\.py[c,o]$', '__pycache__']
 
 function! NERDTreeToggleInCurDir()
   " If NERDTree is open in the current buffer
@@ -233,8 +240,8 @@ let g:ale_fixers = {
     \ 'python': ['yapf'],
     \ }
 
-let g:ale_sign_error = '->'
-let g:ale_sign_warning = ' *'
+let g:ale_sign_error = 'E'
+let g:ale_sign_warning = '*'
 
 nmap <silent> <F3> <Plug>(ale_next_wrap)
 
@@ -316,6 +323,8 @@ autocmd FileType make setlocal noexpandtab
 
 autocmd FileType go nmap <leader>t :GoAddTags<CR>
 autocmd FileType go nmap <leader>i :GoImports<CR>
+
+nmap <silent> <F4> :set invnumber<CR>
 
 " window movement (up/down only) via ctrl
 nnoremap <C-j>    <C-w>j

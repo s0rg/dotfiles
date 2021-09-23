@@ -6,13 +6,15 @@ elif [ -f /etc/bash_completion ]; then
 fi
 
 # custom
-for s in "${HOME}"/.config/bashcomp.d/*.bash; do
-    [ -r "${s}" ] && . "${s}"
+for src in "${XDG_CONFIG_HOME}"/bashcomp.d/*.bash; do
+    [ -r "${src}" ] && . "${src}"
 done
+unset src
 
 # extra aliases
 __git_complete g git
 __git_complete dots git
+
 complete -F __start_kubectl k
 complete -F _docker_compose dcc
 complete -F _complete_go_home cdgo

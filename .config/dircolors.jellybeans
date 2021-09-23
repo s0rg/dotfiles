@@ -142,10 +142,10 @@ EXEC 0;38;5;154
 .pdf             01;38;5;5
 .markdown        01;38;5;5
 .md              01;38;5;5
-*README          01;38;5;200
-*README.md       01;38;5;200
-*README.txt      01;38;5;200
-*readme.txt      01;38;5;200
+*README          01;38;5;180
+*README.md       01;38;5;180
+*README.txt      01;38;5;180
+*readme.txt      01;38;5;180
 *LICENSE         01;38;5;165
 *LICENSE.txt     01;38;5;165
 *AUTHORS         01;38;5;165

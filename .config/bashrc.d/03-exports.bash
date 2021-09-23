@@ -25,18 +25,23 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 
 export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:/usr/local/lib/pkgconfig
 
-export RIPGREP_CONFIG_PATH=~/.config/ripgrep/ripgreprc
-
 export FZF_DEFAULT_OPTS="--ansi \
+    --no-mouse \
     --height=60% \
     --border \
     --padding 0 \
     --reverse \
-    --bind 'esc:cancel' \
+    --extended \
+    --bind 'f2:toggle-preview,esc:cancel' \
+    --preview-window right:60% \
     --preview 'bat {}'"
-export FZF_DEFAULT_COMMAND="rg --files --no-heading "
+export FZF_DEFAULT_COMMAND="rg --files --no-heading"
 export FZF_COMPLETION_OPTS="--border --info=inline"
 
 # https://secwiki.org/w/Running_nmap_as_an_unprivileged_user
 export NMAP_PRIVILEGED=''
 
+export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}"/ripgrep/ripgreprc
+
+# theme for bat + delta
+export BAT_THEME=gruvbox-dark
