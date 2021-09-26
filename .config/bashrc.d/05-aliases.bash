@@ -1,12 +1,6 @@
 # enable aliases to be sudo’ed
 alias sudo='sudo '
 
-if [ -r "${XDG_CONFIG_HOME}"/dircolors.jellybeans ]; then
-    eval "$(dircolors -b "${XDG_CONFIG_HOME}"/dircolors.jellybeans)"
-else
-    eval "$(dircolors -b)"
-fi
-
 alias ls='ls --color=auto --group-directories-first'
 alias ll='ls -hAlF --time-style=+"%Y-%m-%d %H:%M:%S"'
 alias ip='ip -color=auto'
@@ -18,39 +12,48 @@ alias fgrep='fgrep --color=auto'
 alias ncdu='ncdu --color dark'
 
 # shorthands
+alias t='touch'
 alias v='vim'
+alias vi='vim'
 alias mc='mc -d'
 alias si='sudo -i'
 alias ex='7z x'
+alias chx='chmod u+x'
 alias tailf='tail -f --retry'
 alias cal='echo; ncal -M -3; echo'
 alias zat='zathura'
-alias path='echo -n "$PATH" | tr ":" "\n" | sort'
 alias obey='sudo $(fc -ln -1)'
 alias today='date "+%Y_%m_%d"'
 
-# bash
+# extras
+alias tree='exa --icons --group-directories-first --tree --level=2 --git-ignore'
+alias lsx='exa --icons --group-directories-first --long --header --git --colour-scale --time-style=long-iso'
+alias dfx='duf --hide special'
+alias gr='rg'
+
+# shell tools
 alias sh-reload='exec "${SHELL}" -l'
 alias sh-nohist='unset HISTFILE'
 alias sh-timer='fancy_timer'
 alias sh-funlist='compgen -A function | sort -u'
+alias sh-path='echo -n "$PATH" | tr ":" "\n" | sort'
+
+alias sh-rot13='tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]"; echo'
+alias sh-stats='sort | uniq -c | sort -n -r'
+alias sh-trim='sed -e '\''s/^[[:space:]]*//g'\'' -e '\''s/[[:space:]]*\$//g'\'''
+alias sh-strip-ansi="sed 's/\x1b\[[0-9;]*m//g'"
+alias sh-ren-lc='rename "y/A-Z/a-z/" *'
+alias sh-ren-uc='rename "y/a-z/A-Z/" *'
 
 # jq
 alias jsp='jq -C .'
 alias swag-urls="jq '.paths | keys | .[]'"
 
-# lower / upper case mass rename
-alias ren-lc='rename "y/A-Z/a-z/" *'
-alias ren-uc='rename "y/a-z/A-Z/" *'
-
-# curl shortcuts
-alias get='curl --silent --progress-meter -OL -C -'
+# curl
+alias get='curl --silent --progress-bar -OL'
 alias heads='curl -sI'
-
-# tools
-alias rot13='tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]"; echo'
-alias stats='sort | uniq -c | sort -n -r'
-alias trim='sed -e '\''s/^[[:space:]]*//g'\'' -e '\''s/[[:space:]]*\$//g'\'''
+alias ip-ext='curl ifconfig.co'
+alias wttr='echo; curl http://wttr.in/?format="%c:+%f+%w\n"; echo'
 
 # translator
 alias enru='trans en:ru'
@@ -90,13 +93,6 @@ alias py-clear='find . | grep -E "(__pycache__|\.py[co]$)" | xargs rm -rf'
 alias ytd='youtube-dl'
 alias yta='youtube-dl -f bestaudio --extract-audio'
 alias ytv='youtube-dl -f bestvideo+bestaudio'
-
-# extras
-alias wttr='curl http://wttr.in/?format="%c:+%f+%w\n"'
-alias tree='exa --icons --group-directories-first --tree --level=2 --git-ignore'
-alias lsx='exa --icons --group-directories-first --long --header --git --colour-scale --time-style=long-iso'
-alias dfx='duf --hide special'
-alias gr='rg'
 
 # Add an "alert" alias for long running commands.  Use like so: sleep 10; alert
 alias alert='notify-send --urgency=normal "alert" "$(fc -nl -1 | sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'' -e '\''s/^[[:space:]]*//'\'')"'

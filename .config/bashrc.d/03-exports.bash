@@ -22,6 +22,8 @@ export MTR_OPTIONS=-t
 export PYTHONIOENCODING='UTF-8'
 
 export QT_QPA_PLATFORMTHEME=qt5ct
+export QT_PLATFORMTHEME=qt5ct
+export QT_PLATFORM_PLUGIN=qt5ct
 
 export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:/usr/local/lib/pkgconfig
 
@@ -42,6 +44,15 @@ export FZF_COMPLETION_OPTS="--border --info=inline"
 export NMAP_PRIVILEGED=''
 
 export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}"/ripgrep/ripgreprc
+export DOCKER_CONFIG="${XDG_CONFIG_HOME}"/docker
 
 # theme for bat + delta
 export BAT_THEME=gruvbox-dark
+
+# dircolors setup
+if [ -r "${XDG_CONFIG_HOME}"/dircolors.jellybeans ]; then
+    eval "$(dircolors -b "${XDG_CONFIG_HOME}"/dircolors.jellybeans)"
+else
+    eval "$(dircolors -b)"
+fi
+

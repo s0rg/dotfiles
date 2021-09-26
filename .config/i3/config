@@ -137,9 +137,10 @@ bindsym $mod+KP_Add           $show_pad
 ## WINDOW RULES
 
 # floaters
-for_window [window_role="pop-up|bubble|task_dialog"]                  $float
-for_window [window_type="dialog|utility|notification|toolbar|splash"] $float
-for_window [window_type="menu|dropdown_menu|popup_menu|tooltip|dock"] $float
+for_window [window_role="pop-up|bubble|task_dialog"]        $float
+for_window [window_type="dialog|utility|notification"]      $float
+for_window [window_type="menu|dropdown_menu|popup_menu"]    $float
+for_window [window_type="toolbar|splash|tooltip|dock"]      $float
 
 # custom rules
 for_window [class="^Evolution-alarm-notify$"]               $float, $center
@@ -180,19 +181,19 @@ bindsym $mod+$ctrl+4 move container to workspace number $apps
 bindsym $mod+$ctrl+5 move container to workspace number $meet
 bindsym $mod+$ctrl+6 move container to workspace number $mail
 
-assign [class="^kitty$" instance="^kitty$"]              $tty
+assign [class="^kitty$" instance="^kitty$"]             $tty
 
-assign [class="^Firefox$|^Tor Browser$|^qutebrowser$"]   $web
+assign [class="^Firefox$|^Tor Browser$|^qutebrowser$"]  $web
 
-assign [class="^TelegramDesktop$|^Slack$"]               $chat
+assign [class="^TelegramDesktop$|^Slack$"]              $chat
 
-assign [class="^pcmanfm-qt$|^FeatherPad$"]               $apps
-assign [class="^Steam|^Gimp-.+|^Zathura$"]               $apps
-assign [class="^qbittorrent$|^qimgv$|^mpv$"]             $apps
+assign [class="^pcmanfm-qt$|^FeatherPad$"]              $apps
+assign [class="^Steam|^Gimp-.+|^Zathura$"]              $apps
+assign [class="^qbittorrent$|^qimgv$|^mpv$"]            $apps
 
-assign [class="^zoom$"]                                  $meet
+assign [class="^zoom$"]                                 $meet
 
-assign [class="^Evolution$"]                             $mail
+assign [class="^Evolution$"]                            $mail
 
 ## UI
 
@@ -213,9 +214,10 @@ client.background             $bg
 ## AUTOSTART
 
 exec --no-startup-id systemctl --user import-environment
+exec --no-startup-id /usr/libexec/geoclue-2.0/demos/agent
+
 exec --no-startup-id setxkbmap -model pc105 -layout us,ru -option terminate:ctrl_alt_bksp,grp:ctrl_shift_toggle
 exec --no-startup-id xset m 20/10 10 r rate 350 30 b on s 600
-exec --no-startup-id /usr/libexec/geoclue-2.0/demos/agent
 
 exec --no-startup-id wal -R -n
 exec --no-startup-id feh --no-fehbg --bg-fill ~/.config/i3/wall.png

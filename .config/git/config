@@ -46,8 +46,11 @@
     hunk-header-decoration-style = box
 
 [alias]
+    # shortcuts
     cm = commit -am
     co = checkout
+    cob = checkout -b
+    cof = checkout -f
     st = status
     ls = ls-files
     br = branch -vv
@@ -73,7 +76,7 @@
     # list branches
     branches = !git branch -a --no-color | tr -d "[*[:blank:]]" | grep -v "HEAD" | sed -e "s/^remotes\\\\/origin\\\\///" | sort -u
     # fetch and removes deleted (at origin) branches
-    fetch-all = fetch --all --tags --prune --prune-tags origin
+    fetch-all = fetch --tags --prune --prune-tags --all
     # get repo root dir
     root = rev-parse --show-toplevel
     # age of repo
@@ -88,5 +91,4 @@
     zip = !git archive -o "$(basename "$(git root)")".zip HEAD
 
 [include]
-    path = "~/.gitconfig.local"
-
+    path = "urls.local"

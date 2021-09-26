@@ -17,40 +17,40 @@ endif
 colorscheme jellybeans
 
 let &t_ut=''
+let g:netrw_dirhistmax = 0
+let g:netrw_banner=0
+let g:netrw_hide=1
+
+set mouse="" mousehide
 
 set encoding=utf8 fileencoding=utf-8 termencoding=utf-8 nobomb
-
-" defeat the rats!
-set mouse=""
-set mousehide
 
 set hidden
 set autoread
 set history=100
 set autoindent
 
-set wildmenu wildignore+=*.o,*~,*.pyo,*.pyc,*/.git/*
+set wildmenu wildignore+=*.o,*~,*.pyo,*.pyc,*/.git/*,*/vendor/*
 
-set shiftwidth=4
-set shiftround
+set shiftwidth=4 shiftround
 set expandtab smarttab tabstop=4 softtabstop=0
 
 set switchbuf=usetab,newtab
 set showmatch matchtime=10
 set cursorline
+set scrolloff=3
+
 set number
 set signcolumn=number
-set scrolloff=3
-set backspace=indent,eol,start
 
-let g:netrw_banner=0
-let g:netrw_hide=1
+set backspace=indent,eol,start
 
 set nrformats-=octal
 
 set wrap
 set whichwrap+=<,>,[,]
-set textwidth=140
+set textwidth=121
+set colorcolumn=+1
 
 set linebreak
 set cindent
@@ -58,6 +58,7 @@ set nostartofline
 
 set nospell
 set nobackup nowb noswapfile
+
 set noerrorbells novisualbell
 set t_vb=
 set tm=500
@@ -67,21 +68,16 @@ set hlsearch incsearch ignorecase smartcase
 
 set title titlestring=vim:\ %f
 
-set foldmethod=syntax foldnestmax=3
-set nofoldenable
+set foldmethod=syntax foldlevel=99
 
 set complete=.,w,b,u
-set completeopt=longest,menuone,preview
+set completeopt=longest,menuone
+
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 
-set splitbelow splitright
+set splitbelow splitright termwinsize=6x0
 
-set termwinsize=6x0
-
-set pastetoggle=<F2>
-
-set noshowmode
-set laststatus=2
+set noshowmode laststatus=2
 
 set viminfo=%,<10,'10,/10,:50,h,f0,n~/.vim/cache/.viminfo
 "           |  |   |   |   |  |  |  + viminfo file path
@@ -93,13 +89,21 @@ set viminfo=%,<10,'10,/10,:50,h,f0,n~/.vim/cache/.viminfo
 "           |  + lines saved each register (old name for <, vi6.2)
 "           + save/restore buffer list
 
+" ## PLUGINS
+
 " python-syntax
 let g:python_highlight_all = 1
+
 
 " lightline
 let g:lightline = {
     \   'colorscheme': 'jellybeans',
-    \   'active': {'right': [['lineinfo'], ['percent'], ['lint_check','lint_err', 'lint_warn', 'lint_info', 'lint_ok'], ['gitbranch']]},
+    \   'active': {'right': [
+    \       ['lineinfo'],
+    \       ['percent'],
+    \       ['lint_check','lint_err', 'lint_warn', 'lint_info', 'lint_ok'],
+    \       ['gitbranch']
+    \   ]},
     \   'component_function': {'gitbranch': 'gitbranch#name'},
     \   'component_expand': {
     \       'lint_check': 'lightline#ale#checking',
@@ -133,6 +137,7 @@ let g:lightline#ale#indicator_warnings = "\uf071"
 let g:lightline#ale#indicator_errors = "\uf05e"
 let g:lightline#ale#indicator_ok = "\uf00c"
 
+
 " vim-go
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
@@ -147,14 +152,16 @@ let g:go_diagnostics_level = 2
 let g:go_imports_autosave = 0
 let g:go_jump_to_error = 0
 
+
 " tagbar
+let g:no_status_line = 1
 let g:tagbar_width = 50
 let g:tagbar_autofocus = 1
 let g:tagbar_autoclose = 1
 let g:tagbar_compact = 2
-let g:no_status_line = 1
 let g:tagbar_silent = 1
 let g:tagbar_show_visibility = 0
+let g:tagbar_map_togglefold = "<space>"
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
     \ 'kinds'     : [
@@ -183,8 +190,6 @@ let g:tagbar_type_go = {
     \ 'ctagsargs' : '-sort -silent'
 \ }
 
-nnoremap <silent> <F12> <Cmd>:TagbarToggle<CR>
-inoremap <silent> <F12> <Cmd>:TagbarToggle<CR>
 
 " nerdtree
 let g:NERDTreeMinimalUI = 1
@@ -192,19 +197,11 @@ let g:NERDTreeMinimalMenu = 1
 let g:NERDTreeMarkBookmarks = 0
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeStatusline = '%#NonText#'
-let NERDTreeIgnore=['vendor', '\.py[c,o]$', '__pycache__']
+let NERDTreeIgnore=[
+    \ '\.py[c,o]$', '__pycache__',
+    \ 'vendor', 'go\.mod', 'go\.sum'
+    \ ]
 
-function! NERDTreeToggleInCurDir()
-  " If NERDTree is open in the current buffer
-  if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
-    exe ":NERDTreeClose"
-  else
-    exe ":NERDTreeFind"
-  endif
-endfunction
-
-nnoremap <silent> <C-n> <Cmd>:call NERDTreeToggleInCurDir()<CR>
-inoremap <silent> <C-n> <Cmd>:call NERDTreeToggleInCurDir()<CR>
 
 " ale
 let g:airline#extensions#ale#enabled = 0
@@ -215,14 +212,20 @@ let g:ale_completion_enabled = 0
 let g:ale_update_tagstack = 0
 let g:ale_hover_cursor = 0
 let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 0
+let g:ale_open_list = 0
 
+let g:ale_echo_delay = 50
+let g:ale_echo_msg_format = '[%severity% : %linter%] %code %%s'
 let g:ale_use_global_executables = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_linters_explicit = 1
 let g:ale_lint_on_enter = 1
-let g:ale_set_quickfix = 1
 let g:ale_fix_on_save = 1
-let g:ale_lint_delay = 100
+let g:ale_lint_delay = 250
+
+let g:ale_sign_error = '!'
+let g:ale_sign_warning = '?'
 
 let g:ale_go_gopls_init_options = {'ui.diagnostic.analyses': {
     \ 'composites': v:false,
@@ -240,10 +243,6 @@ let g:ale_fixers = {
     \ 'python': ['yapf'],
     \ }
 
-let g:ale_sign_error = 'E'
-let g:ale_sign_warning = '*'
-
-nmap <silent> <F3> <Plug>(ale_next_wrap)
 
 " deoplete
 call deoplete#custom#option({
@@ -251,7 +250,7 @@ call deoplete#custom#option({
     \ 'auto_complete_popup': 'manual',
     \ 'on_text_changed_i': v:false,
     \ 'on_insert_enter': v:false,
-    \ 'max_list': 50,
+    \ 'max_list': 20,
     \ })
 
 call deoplete#custom#option('omni_patterns', {
@@ -263,6 +262,7 @@ call deoplete#custom#option('sources', {
     \ })
 
 let g:deoplete#enable_at_startup = 1
+
 
 " startify
 let g:startify_lists = [
@@ -279,9 +279,9 @@ let g:startify_bookmarks = [
     \ ]
 
 let g:startify_padding_left = 2
-let g:startify_files_number = 4
+let g:startify_files_number = 5
 let g:startify_session_sort = 1
-let g:startify_session_number = 3
+let g:startify_session_number = 2
 let g:startify_session_persistence = 1
 let g:startify_change_to_dir = 0
 let g:startify_change_to_vcs_root = 1
@@ -289,14 +289,26 @@ let g:startify_enable_special = 0
 let g:startify_custom_indices = map(range(1,100), 'string(v:val)')
 let g:startify_session_before_save = [ 'silent! tabdo NERDTreeClose' ]
 
+
 " pgsql
 let g:sql_type_default = 'pgsql'
 
+
 " editorconfig-vim
 let g:EditorConfig_disable_rules = ['tab_width']
-autocmd FileType gitcommit let b:EditorConfig_disable = 1
-autocmd FileType gitcommit set textwidth=72
-" autocmd FileType gitcommit set colorcolumn+=51
+
+
+" ## FUNCTIONS
+
+" tree for current file
+function! NERDTreeToggleInCurDir()
+  " If NERDTree is open in the current buffer
+  if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
+    exe ":NERDTreeClose"
+  else
+    exe ":NERDTreeFind"
+  endif
+endfunction
 
 " remove extra spaces
 function! CleanExtraSpaces()
@@ -307,6 +319,9 @@ function! CleanExtraSpaces()
     call setreg('/', old_query)
 endfun
 
+" auto-check file changes (for reload)
+autocmd FocusGained,BufEnter * checktime
+
 autocmd BufWritePre * :call CleanExtraSpaces()
 
 autocmd BufNewFile *.sh 0put =\"#!/bin/bash\<nl>\<nl>\"|$
@@ -315,16 +330,23 @@ autocmd BufNewFile *.py 0put=\"#!/usr/bin/env python3\<nl>\<nl>\"|$
 " custom filetypes
 autocmd BufNewFile,BufRead Dockerfile* set ft=dockerfile
 
-" auto-check file changes (for reload)
-autocmd FocusGained,BufEnter * checktime
-
 " ensure tabs don't get converted to spaces in Makefiles
 autocmd FileType make setlocal noexpandtab
 
-autocmd FileType go nmap <leader>t :GoAddTags<CR>
-autocmd FileType go nmap <leader>i :GoImports<CR>
+autocmd FileType gitcommit let b:EditorConfig_disable = 1
+autocmd FileType gitcommit set textwidth=72
 
+" ## KEYS
+
+nnoremap <silent> <C-n> <Cmd>:call NERDTreeToggleInCurDir()<CR>
+inoremap <silent> <C-n> <Cmd>:call NERDTreeToggleInCurDir()<CR>
+
+" F-keys
+set pastetoggle=<F2>
+nmap <silent> <F3> <Plug>(ale_next_wrap)
 nmap <silent> <F4> :set invnumber<CR>
+nnoremap <silent> <F12> <Cmd>:TagbarToggle<CR>
+inoremap <silent> <F12> <Cmd>:TagbarToggle<CR>
 
 " window movement (up/down only) via ctrl
 nnoremap <C-j>    <C-w>j
@@ -335,14 +357,28 @@ nnoremap <C-Up>   <C-w>k
 " toggle off search highlight
 map <leader><ESC> :noh<CR>
 
-" Reload VIM's configuration
+" reload VIM's configuration
 nnoremap <leader>r :source $MYVIMRC<CR>
 
 " fzf.vim
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>g :Rg<CR>
 
-command Q :qall
+" toggle fold
+nnoremap <space> za
+
+" vim-commentary
+noremap cc :Commentary<CR>
+
+" vim-go
+autocmd FileType go nmap <leader>t :GoAddTags<CR>
+autocmd FileType go nmap <leader>i :GoImports<CR>
+autocmd FileType go nmap <leader>l :GoImplements<CR>
+
+" For text file, wrap all the text
+autocmd FileType text setlocal formatoptions=tjl1
+" For all other files, wrap comments but not the text
+autocmd FileType * setlocal formatoptions=cjl1
 
 " disable cursors keys, someday, maybe...
 "nnoremap <Left>  :echoe "Use h"<CR>

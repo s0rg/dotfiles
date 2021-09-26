@@ -22,7 +22,7 @@ lst() {
 }
 
 # backup copy of file
-bak() { [ -n "${1}" ] && cp "${1}" "${1}.bak"; }
+bak() { [ -n "${1}" ] && cp -r "${1}" "${1}.bak"; }
 
 
 ## shell utils

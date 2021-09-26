@@ -11,9 +11,10 @@ case "$TERM" in
 esac
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\w\[\033[00m\] \[\033[01:30m\]\$\[\033[00m\] '
+    PS1='\[\033[30m\](\[\033[00m\] ${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\W\[\033[00m\] \[\033[30m\])$\[\033[00m\] '
+    PS2='\[\033[30m\]>\[\033[00m\] '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\w \$ '
+    PS1='( ${debian_chroot:+($debian_chroot)}\W )\$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -25,10 +26,6 @@ xterm*|rxvt*)
 *)
     ;;
 esac
-
-export XDG_CONFIG_HOME="${HOME}"/.config
-export XDG_CACHE_HOME="${HOME}"/.cache
-export XDG_DATA_HOME="${HOME}"/.local/share
 
 for src in "${XDG_CONFIG_HOME}"/bashrc.d/*.bash; do
     [ -r "${src}" ] && . "${src}"
