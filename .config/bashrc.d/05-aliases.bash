@@ -37,6 +37,7 @@ alias sh-nohist='unset HISTFILE'
 alias sh-timer='fancy_timer'
 alias sh-funlist='compgen -A function | sort -u'
 alias sh-path='echo -n "$PATH" | tr ":" "\n" | sort'
+alias sh-colors='colortest-python --ansicodes'
 
 alias sh-rot13='tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]"; echo'
 alias sh-stats='sort | uniq -c | sort -n -r'
@@ -106,12 +107,6 @@ alias dcu='docker-compose up --remove-orphans'
 alias dcd='docker-compose down --remove-orphans'
 alias dcb='docker-compose build --force-rm'
 alias dcl='docker-compose logs -f'
-
-# golang
-alias go-clean='go clean -x -cache -testcache -modcache'
-alias go-deps="go list -f '{{join .Deps \"\n\"}}' | xargs go list -f '{{if not .Standard}}{{.ImportPath}}{{end}}'"
-alias go-bench='go test -benchmem -bench=.'
-alias go-test='go test -count 1 -v .'
 
 # git
 alias gcd='cd $(git root)'

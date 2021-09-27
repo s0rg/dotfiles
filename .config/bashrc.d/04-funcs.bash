@@ -8,7 +8,7 @@ md() {
 }
 
 # cd up
-up() { cd "$(printf "%0.s../" $(seq 1 "${1:-1}"))" || return; }
+up() { cd "$(printf "%0.s../" $(seq 1 "${1:-1}"))" || return; echo -e "\033[0;30m$(pwd)\033[0m\n"; }
 
 # `o` with no arguments open current directory,
 # otherwise open the given location or file

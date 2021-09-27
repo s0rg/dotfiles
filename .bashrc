@@ -27,6 +27,31 @@ xterm*|rxvt*)
     ;;
 esac
 
+export XDG_CONFIG_HOME="${HOME}"/.config
+export XDG_CACHE_HOME="${HOME}"/.cache
+export XDG_DATA_HOME="${HOME}"/.local/share
+
+if [ -d "${HOME}/.local/bin" ]; then
+    PATH=${PATH}:${HOME}/.local/bin
+fi
+
+if [ -d "${HOME}/.local/scripts" ]; then
+    PATH=${PATH}:${HOME}/.local/scripts
+fi
+
+if [ -d "${HOME}/.krew" ]; then
+    PATH=${PATH}:${HOME}/.krew/bin
+fi
+
+export PATH=${PATH}:/snap/bin:${HOME}/Telegram
+
+case $- in
+*i*)
+    ;;
+*) return
+    ;;
+esac
+
 for src in "${XDG_CONFIG_HOME}"/bashrc.d/*.bash; do
     [ -r "${src}" ] && . "${src}"
 done

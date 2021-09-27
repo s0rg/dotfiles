@@ -193,11 +193,13 @@ let g:tagbar_type_go = {
 
 " nerdtree
 let g:NERDTreeMinimalUI = 1
+let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeMinimalMenu = 1
 let g:NERDTreeMarkBookmarks = 0
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeStatusline = '%#NonText#'
-let NERDTreeIgnore=[
+let g:NERDTreeMapActivateNode='<space>'
+let g:NERDTreeIgnore=[
     \ '\.py[c,o]$', '__pycache__',
     \ 'vendor', 'go\.mod', 'go\.sum'
     \ ]
@@ -335,6 +337,12 @@ autocmd FileType make setlocal noexpandtab
 
 autocmd FileType gitcommit let b:EditorConfig_disable = 1
 autocmd FileType gitcommit set textwidth=72
+
+" ## RipGrep
+
+" Bind vim grep to ripgrep
+set grepprg=rg\ --no-heading\ --vimgrep
+set grepformat=%f:%l:%c:%m
 
 " ## KEYS
 
