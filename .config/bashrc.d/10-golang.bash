@@ -1,5 +1,6 @@
 GOVERSION='1.17'
 
+export GO111MODULE=on
 export GOSUMDB=off
 export GOROOT=/usr/local/go${GOVERSION}
 export GOPATH=${HOME}/projects/go

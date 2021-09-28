@@ -226,19 +226,20 @@ let g:ale_lint_on_enter = 1
 let g:ale_fix_on_save = 1
 let g:ale_lint_delay = 250
 
-let g:ale_sign_error = '!'
-let g:ale_sign_warning = '?'
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
 
 let g:ale_go_gopls_init_options = {'ui.diagnostic.analyses': {
-    \ 'composites': v:false,
     \ 'unusedparams': v:true,
+    \ 'composites': v:false,
     \ 'shadow': v:true,
     \ }}
 
 let g:ale_linters = {
-    \ 'go': ['gopls', 'govet'],
     \ 'python': ['pylint'],
+    \ 'yaml': ['yamllint'],
     \ 'sh': ['shellcheck'],
+    \ 'go': ['gopls', 'govet'],
     \ }
 
 let g:ale_fixers = {
@@ -381,12 +382,14 @@ noremap cc :Commentary<CR>
 " vim-go
 autocmd FileType go nmap <leader>t :GoAddTags<CR>
 autocmd FileType go nmap <leader>i :GoImports<CR>
-autocmd FileType go nmap <leader>l :GoImplements<CR>
+autocmd FileType go nmap <leader>m :GoImplements<CR>
 
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2
 " For text file, wrap all the text
 autocmd FileType text setlocal formatoptions=tjl1
 " For all other files, wrap comments but not the text
 autocmd FileType * setlocal formatoptions=cjl1
+
 
 " disable cursors keys, someday, maybe...
 "nnoremap <Left>  :echoe "Use h"<CR>

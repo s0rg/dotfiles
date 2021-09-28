@@ -1,13 +1,13 @@
 [general]
 auto_display_list = False
-hist_duplicates=False
+hist_duplicates = False
 hist_file = ~/.cache/bpython_history
 hist_length = 100
 
 # Color schemes should be put in $XDG_CONFIG_HOME/bpython/ e.g. to use the theme
 # $XDG_CONFIG_HOME/bpython/foo.theme set color_scheme = foo. Leave blank or set
 # to "default" to use the default theme
-# color_scheme = default
+color_scheme = zenburn
 
 editor = vim
 save_append_py = True
