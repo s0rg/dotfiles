@@ -301,6 +301,17 @@ let g:sql_type_default = 'pgsql'
 let g:EditorConfig_disable_rules = ['tab_width']
 
 
+" markdown
+
+let g:markdown_folding = 1
+let g:markdown_fenced_languages = [
+    \ 'python',
+    \ 'bash=sh',
+    \ 'sql',
+    \ 'go',
+    \ ]
+
+
 " ## FUNCTIONS
 
 " tree for current file

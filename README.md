@@ -26,9 +26,10 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
 
 ### helpers
 
-- http cli: [httpie](https://httpie.io/)
+- http cli: [httpie](https://httpie.io/) + [http-prompt](https://github.com/httpie/http-prompt)
 - sql client: [usql](https://github.com/xo/usql)
 - disk usage: [duf](https://github.com/muesli/duf)
+- hex view: [hexyl](https://github.com/sharkdp/hexyl)
 - fuzzy finder: [fzf](https://github.com/junegunn/fzf)
 - faster `find`: [fd](https://github.com/sharkdp/fd)
 - colored `cat`: [bat](https://github.com/sharkdp/bat)
