@@ -12,73 +12,47 @@ syntax sync fromstart
 if (has("termguicolors"))
     set termguicolors
     set t_Co=256
+    set t_ut=
 endif
 
 colorscheme jellybeans
 
-let &t_ut=''
-let g:netrw_dirhistmax = 0
-let g:netrw_banner=0
-let g:netrw_hide=1
-
-set mouse="" mousehide
-
-set encoding=utf8 fileencoding=utf-8 termencoding=utf-8 nobomb
-
 set hidden
 set autoread
 set history=100
-set autoindent
+" set switchbuf=usetab,newtab
 
-set wildmenu wildignore+=*.o,*~,*.pyo,*.pyc,*/.git/*,*/vendor/*
-
-set shiftwidth=4 shiftround
-set expandtab smarttab tabstop=4 softtabstop=0
-
-set switchbuf=usetab,newtab
-set showmatch matchtime=10
-set cursorline
-set scrolloff=3
-
-set number
-set signcolumn=number
-
-set backspace=indent,eol,start
+let g:netrw_hide=1
+let g:netrw_banner=0
+let g:netrw_dirhistmax=0
 
 set nrformats-=octal
-
-set wrap
-set whichwrap+=<,>,[,]
-set textwidth=121
-set colorcolumn=+1
-
-set linebreak
-set cindent
-set nostartofline
-
-set nospell
-set nobackup nowb noswapfile
-
-set noerrorbells novisualbell
-set t_vb=
-set tm=500
-
-set lazyredraw ttyfast redrawtime=15000
-set hlsearch incsearch ignorecase smartcase
-
+set fillchars+=vert:│
+let &showbreak = '↪ '
+set mouse="" mousehide
+set autoindent cindent
+set showmatch matchtime=10
+set cursorline scrolloff=3
+set shiftwidth=4 shiftround
+set noshowmode laststatus=2
+set number signcolumn=number
 set title titlestring=vim:\ %f
-
+set backspace=indent,eol,start
+set textwidth=121 colorcolumn=+1
+set completeopt+=longest,menuone
 set foldmethod=syntax foldlevel=99
+set wrap linebreak whichwrap+=<,>,[,]
+set lazyredraw ttyfast redrawtime=5000
+set splitbelow splitright termwinsize=6x0
+set expandtab smarttab tabstop=4 softtabstop=0
+set sessionoptions=buffers,curdir,folds,tabpages
+set nobackup nowritebackup noswapfile noundofile
+set hlsearch incsearch ignorecase smartcase wrapscan
+set nospell nostartofline noerrorbells novisualbell t_vb=
+set encoding=utf-8 fileencoding=utf-8 termencoding=utf-8 nobomb
 
-set complete=.,w,b,u
-set completeopt=longest,menuone
 
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
-
-set splitbelow splitright termwinsize=6x0
-
-set noshowmode laststatus=2
-
 set viminfo=%,<10,'10,/10,:50,h,f0,n~/.vim/cache/.viminfo
 "           |  |   |   |   |  |  |  + viminfo file path
 "           |  |   |   |   |  |  + file marks 0-9,A-Z 0=NOT stored
@@ -88,6 +62,12 @@ set viminfo=%,<10,'10,/10,:50,h,f0,n~/.vim/cache/.viminfo
 "           |  |   + files marks saved
 "           |  + lines saved each register (old name for <, vi6.2)
 "           + save/restore buffer list
+set wildmenu wildignore+=*.o,*~,*.pyo,*.pyc,*/.git/*,*/vendor/*,*/__pycache__/*,go.mod,go.sum
+
+" ripgrep as vim's grep
+set grepprg=rg\ --no-heading\ --vimgrep
+set grepformat=%f:%l:%c:%m
+
 
 " ## PLUGINS
 
@@ -98,13 +78,13 @@ let g:python_highlight_all = 1
 " lightline
 let g:lightline = {
     \   'colorscheme': 'jellybeans',
-    \   'active': {'right': [
-    \       ['lineinfo'],
-    \       ['percent'],
-    \       ['lint_check','lint_err', 'lint_warn', 'lint_info', 'lint_ok'],
-    \       ['gitbranch']
+    \   'active': { 'right': [
+    \       [ 'lineinfo' ],
+    \       [ 'percent' ],
+    \       [ 'lint_check', 'lint_err', 'lint_warn', 'lint_info', 'lint_ok' ],
+    \       [ 'gitbranch' ]
     \   ]},
-    \   'component_function': {'gitbranch': 'gitbranch#name'},
+    \   'component_function': { 'gitbranch': 'gitbranch#name' },
     \   'component_expand': {
     \       'lint_check': 'lightline#ale#checking',
     \       'lint_info': 'lightline#ale#infos',
@@ -122,13 +102,13 @@ let g:lightline = {
     \ }
 
 let g:lightline.tabline = {
-	\   'left': [ [ 'tabs' ] ],
-    \   'right': [],
+	\ 'left': [ [ 'tabs' ] ],
+    \ 'right': [],
 	\ }
 
 let g:lightline.tab = {
-	\   'active': [ 'filename', 'modified' ],
-	\   'inactive': [ 'filename', 'modified' ],
+	\ 'active': [ 'filename', 'modified' ],
+	\ 'inactive': [ 'filename', 'modified' ],
     \ }
 
 let g:lightline#ale#indicator_checking = "\uf110"
@@ -161,10 +141,10 @@ let g:tagbar_autoclose = 1
 let g:tagbar_compact = 2
 let g:tagbar_silent = 1
 let g:tagbar_show_visibility = 0
-let g:tagbar_map_togglefold = "<space>"
+let g:tagbar_map_togglefold = '<space>'
 let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
+    \ 'ctagstype': 'go',
+    \ 'kinds': [
         \ 'p:package',
         \ 'i:imports:1',
         \ 'c:constants',
@@ -177,83 +157,81 @@ let g:tagbar_type_go = {
         \ 'r:constructor',
         \ 'f:functions'
     \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
+    \ 'sro': '.',
+    \ 'kind2scope': {
+        \ 't': 'ctype',
+        \ 'n': 'ntype'
     \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
+    \ 'scope2kind': {
+        \ 'ctype': 't',
+        \ 'ntype': 'n'
     \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }
+    \ 'ctagsbin': 'gotags',
+    \ 'ctagsargs': '-sort -silent'
+    \ }
 
 
 " nerdtree
 let g:NERDTreeMinimalUI = 1
-let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeMinimalMenu = 1
+let g:NERDTreeNaturalSort = 1
 let g:NERDTreeMarkBookmarks = 0
-let g:NERDTreeAutoDeleteBuffer = 1
+let g:NERDTreeRespectWildIgnore = 1
 let g:NERDTreeStatusline = '%#NonText#'
-let g:NERDTreeMapActivateNode='<space>'
-let g:NERDTreeIgnore=[
-    \ '\.py[c,o]$', '__pycache__',
-    \ 'vendor', 'go\.mod', 'go\.sum'
-    \ ]
+let g:NERDTreeMapCustomOpen = '<space>'
+let g:NERDTreeCustomOpenArgs = { 'file': { 'where': 't', 'keepopen': 1 } }
 
 
 " ale
-let g:airline#extensions#ale#enabled = 0
-let g:ale_lint_on_filetype_changed = 0
-let g:ale_lint_on_insert_leave = 0
-let g:ale_popup_menu_enabled = 0
-let g:ale_completion_enabled = 0
-let g:ale_update_tagstack = 0
-let g:ale_hover_cursor = 0
+let g:ale_open_list = 0
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 0
-let g:ale_open_list = 0
+let g:ale_hover_cursor = 0
+let g:ale_update_tagstack = 0
+let g:ale_popup_menu_enabled = 0
+let g:ale_completion_enabled = 0
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_filetype_changed = 0
+let g:airline#extensions#ale#enabled = 0
 
-let g:ale_echo_delay = 50
-let g:ale_echo_msg_format = '[%severity% : %linter%] %code %%s'
-let g:ale_use_global_executables = 1
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_linters_explicit = 1
-let g:ale_lint_on_enter = 1
-let g:ale_fix_on_save = 1
+let g:ale_echo_delay = 10
 let g:ale_lint_delay = 250
+
+let g:ale_fix_on_save = 1
+let g:ale_lint_on_enter = 1
+let g:ale_linters_explicit = 1
+let g:ale_use_global_executables = 1
 
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_echo_msg_format = '[%severity% : %linter%] %code %%s'
 
-let g:ale_go_gopls_init_options = {'ui.diagnostic.analyses': {
+let g:ale_go_gopls_init_options = { 'ui.diagnostic.analyses': {
     \ 'unusedparams': v:true,
     \ 'composites': v:false,
     \ 'shadow': v:true,
     \ }}
 
 let g:ale_linters = {
-    \ 'python': ['pylint'],
-    \ 'yaml': ['yamllint'],
-    \ 'sh': ['shellcheck'],
-    \ 'go': ['gopls', 'govet'],
+    \ 'python': [ 'pylint' ],
+    \ 'yaml': [ 'yamllint' ],
+    \ 'sh': [ 'shellcheck' ],
+    \ 'go': [ 'gopls', 'govet' ],
     \ }
 
 let g:ale_fixers = {
-    \ 'python': ['yapf'],
+    \ 'python': [ 'yapf' ],
     \ }
 
 
 " deoplete
 call deoplete#custom#option({
-    \ 'auto_complete_delay': 0,
-    \ 'auto_complete_popup': 'manual',
-    \ 'on_text_changed_i': v:false,
-    \ 'on_insert_enter': v:false,
     \ 'max_list': 20,
+    \ 'auto_complete_delay': 10,
+    \ 'auto_complete_popup': 'manual',
+    \ 'on_insert_enter': v:false,
+    \ 'on_text_changed_i': v:false,
     \ })
 
 call deoplete#custom#option('omni_patterns', {
@@ -261,36 +239,37 @@ call deoplete#custom#option('omni_patterns', {
     \ })
 
 call deoplete#custom#option('sources', {
-    \ '_': ['ale'],
+    \ '_': [ 'ale' ],
     \ })
 
 let g:deoplete#enable_at_startup = 1
 
 
 " startify
+let g:startify_padding_left = 2
+let g:startify_files_number = 4
+let g:startify_session_sort = 1
+let g:startify_change_to_dir = 0
+let g:startify_enable_special = 0
+let g:startify_session_number = 2
+let g:startify_change_to_vcs_root = 1
+let g:startify_session_persistence = 1
+
+let g:startify_custom_indices = map(range(1,100), 'string(v:val)')
+let g:startify_session_before_save = [ 'silent! tabdo NERDTreeClose' ]
+
 let g:startify_lists = [
-    \ { 'type': 'sessions',  'header': ['   Sessions']  },
-    \ { 'type': 'files',     'header': ['   MRU']       },
-    \ { 'type': 'bookmarks', 'header': ['   Bookmarks'] },
+    \ { 'type': 'sessions',  'header': [ '> sessions'  ] },
+    \ { 'type': 'files',     'header': [ '> MRU'       ] },
+    \ { 'type': 'bookmarks', 'header': [ '> bookmarks' ] },
     \ ]
 
 let g:startify_bookmarks = [
-    \ {'v': '~/.vimrc'},
-    \ {'i': '~/.config/i3/config'},
-    \ {'p': '~/.config/polybar/config'},
-    \ {'n': '~/Documents/notes/local.md'},
+    \ { 'v': '~/.vimrc'                   },
+    \ { 'i': '~/.config/i3/config'        },
+    \ { 'p': '~/.config/polybar/config'   },
+    \ { 'n': '~/Documents/notes/local.md' },
     \ ]
-
-let g:startify_padding_left = 2
-let g:startify_files_number = 5
-let g:startify_session_sort = 1
-let g:startify_session_number = 2
-let g:startify_session_persistence = 1
-let g:startify_change_to_dir = 0
-let g:startify_change_to_vcs_root = 1
-let g:startify_enable_special = 0
-let g:startify_custom_indices = map(range(1,100), 'string(v:val)')
-let g:startify_session_before_save = [ 'silent! tabdo NERDTreeClose' ]
 
 
 " pgsql
@@ -298,7 +277,7 @@ let g:sql_type_default = 'pgsql'
 
 
 " editorconfig-vim
-let g:EditorConfig_disable_rules = ['tab_width']
+let g:EditorConfig_disable_rules = [ 'tab_width' ]
 
 
 " markdown
@@ -335,26 +314,18 @@ endfun
 
 " auto-check file changes (for reload)
 autocmd FocusGained,BufEnter * checktime
-
+autocmd CompleteDone * pclose
 autocmd BufWritePre * :call CleanExtraSpaces()
 
 autocmd BufNewFile *.sh 0put =\"#!/bin/bash\<nl>\<nl>\"|$
 autocmd BufNewFile *.py 0put=\"#!/usr/bin/env python3\<nl>\<nl>\"|$
-
-" custom filetypes
 autocmd BufNewFile,BufRead Dockerfile* set ft=dockerfile
 
-" ensure tabs don't get converted to spaces in Makefiles
 autocmd FileType make setlocal noexpandtab
 
 autocmd FileType gitcommit let b:EditorConfig_disable = 1
 autocmd FileType gitcommit set textwidth=72
 
-" ## RipGrep
-
-" Bind vim grep to ripgrep
-set grepprg=rg\ --no-heading\ --vimgrep
-set grepformat=%f:%l:%c:%m
 
 " ## KEYS
 
@@ -395,7 +366,7 @@ autocmd FileType go nmap <leader>t :GoAddTags<CR>
 autocmd FileType go nmap <leader>i :GoImports<CR>
 autocmd FileType go nmap <leader>m :GoImplements<CR>
 
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2
+autocmd FileType yaml setlocal ts=2 sw=2
 " For text file, wrap all the text
 autocmd FileType text setlocal formatoptions=tjl1
 " For all other files, wrap comments but not the text
