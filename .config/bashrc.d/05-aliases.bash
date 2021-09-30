@@ -12,39 +12,41 @@ alias fgrep='fgrep --color=auto'
 alias ncdu='ncdu --color dark'
 
 # shorthands
-alias t='touch'
 alias v='vim'
-alias vi='vim'
+alias t='touch'
 alias mc='mc -d'
+alias unx='7z x'
 alias si='sudo -i'
-alias ex='7z x'
+alias zat='zathura'
+alias mtr='mtr -bze'
 alias chx='chmod u+x'
 alias tailf='tail -f --retry'
-alias cal='echo; ncal -M -3; echo'
-alias zat='zathura'
 alias obey='sudo $(fc -ln -1)'
 alias today='date "+%Y_%m_%d"'
+alias cal='echo; ncal -M -3; echo'
 
 # extras
 alias tree='exa --icons --group-directories-first --tree --level=2 --git-ignore'
 alias lsx='exa --icons --group-directories-first --long --header --git --colour-scale --time-style=long-iso'
-alias dfx='duf --hide special'
+alias duf='duf --hide special'
 alias gr='rg'
 
 # shell tools
 alias sh-reload='exec "${SHELL}" -l'
 alias sh-nohist='unset HISTFILE'
-alias sh-timer='fancy_timer'
 alias sh-funlist='compgen -A function | sort -u'
 alias sh-path='echo -n "$PATH" | tr ":" "\n" | sort'
-alias sh-colors='colortest-python --ansicodes'
 
+# shell extras
+alias sh-timer='fancy_timer'
+alias sh-colors='colortest-python --ansicodes'
 alias sh-rot13='tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]"; echo'
 alias sh-stats='sort | uniq -c | sort -n -r'
 alias sh-trim='sed -e '\''s/^[[:space:]]*//g'\'' -e '\''s/[[:space:]]*\$//g'\'''
+alias sh-size='fs_size'
 alias sh-strip-ansi="sed 's/\x1b\[[0-9;]*m//g'"
-alias sh-ren-lc='rename "y/A-Z/a-z/" *'
-alias sh-ren-uc='rename "y/a-z/A-Z/" *'
+alias sh-lcren='rename "y/A-Z/a-z/" *'
+alias sh-ucren='rename "y/a-z/A-Z/" *'
 
 # jq
 alias jsp='jq -C .'

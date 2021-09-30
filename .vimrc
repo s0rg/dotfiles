@@ -7,7 +7,9 @@ call pathogen#helptags()
 filetype plugin indent on
 
 syntax on
-syntax sync fromstart
+" syntax sync fromstart
+syntax sync minlines=500
+set synmaxcol=300
 
 if (has("termguicolors"))
     set termguicolors
@@ -17,10 +19,10 @@ endif
 
 colorscheme jellybeans
 
-set hidden
-set autoread
-set history=100
-" set switchbuf=usetab,newtab
+set history=50
+set cmdheight=1
+set pumheight=15
+set shortmess+=c
 
 let g:netrw_hide=1
 let g:netrw_banner=0
@@ -29,12 +31,15 @@ let g:netrw_dirhistmax=0
 set nrformats-=octal
 set fillchars+=vert:│
 let &showbreak = '↪ '
+set autoread autowrite
 set mouse="" mousehide
 set autoindent cindent
+set formatoptions=cjl1
 set showmatch matchtime=10
 set cursorline scrolloff=3
 set shiftwidth=4 shiftround
 set noshowmode laststatus=2
+set switchbuf=usetab,newtab
 set number signcolumn=number
 set title titlestring=vim:\ %f
 set backspace=indent,eol,start
@@ -51,7 +56,6 @@ set hlsearch incsearch ignorecase smartcase wrapscan
 set nospell nostartofline noerrorbells novisualbell t_vb=
 set encoding=utf-8 fileencoding=utf-8 termencoding=utf-8 nobomb
 
-
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 set viminfo=%,<10,'10,/10,:50,h,f0,n~/.vim/cache/.viminfo
 "           |  |   |   |   |  |  |  + viminfo file path
@@ -62,7 +66,10 @@ set viminfo=%,<10,'10,/10,:50,h,f0,n~/.vim/cache/.viminfo
 "           |  |   + files marks saved
 "           |  + lines saved each register (old name for <, vi6.2)
 "           + save/restore buffer list
-set wildmenu wildignore+=*.o,*~,*.pyo,*.pyc,*/.git/*,*/vendor/*,*/__pycache__/*,go.mod,go.sum
+set wildmenu
+set wildignore+=*.o,*~,*/.git/*
+set wildignore+=*/vendor/*,go.mod,go.sum
+set wildignore+=*.pyo,*.pyc,*/__pycache__/*
 
 " ripgrep as vim's grep
 set grepprg=rg\ --no-heading\ --vimgrep
@@ -119,19 +126,22 @@ let g:lightline#ale#indicator_ok = "\uf00c"
 
 
 " vim-go
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
 let g:go_highlight_function_parameters = 1
+let g:go_highlight_function_calls = 1
 let g:go_highlight_generate_tags = 1
-let g:go_highlight_string_spellcheck = 0
-let g:go_auto_type_info = 1
-let g:go_def_reuse_buffer = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_operators = 1
 let g:go_diagnostics_level = 2
+let g:go_highlight_fields = 1
+let g:go_def_reuse_buffer = 1
+let g:go_highlight_types = 1
+let g:go_auto_type_info = 1
+let g:go_term_enabled = 1
+let g:go_term_reuse = 1
+
+let g:go_highlight_string_spellcheck = 0
 let g:go_imports_autosave = 0
 let g:go_jump_to_error = 0
-
 
 " tagbar
 let g:no_status_line = 1
@@ -227,7 +237,7 @@ let g:ale_fixers = {
 
 " deoplete
 call deoplete#custom#option({
-    \ 'max_list': 20,
+    \ 'max_list': 15,
     \ 'auto_complete_delay': 10,
     \ 'auto_complete_popup': 'manual',
     \ 'on_insert_enter': v:false,
@@ -284,8 +294,9 @@ let g:EditorConfig_disable_rules = [ 'tab_width' ]
 
 let g:markdown_folding = 1
 let g:markdown_fenced_languages = [
-    \ 'python',
     \ 'bash=sh',
+    \ 'python',
+    \ 'yaml',
     \ 'sql',
     \ 'go',
     \ ]
@@ -319,18 +330,21 @@ autocmd BufWritePre * :call CleanExtraSpaces()
 
 autocmd BufNewFile *.sh 0put =\"#!/bin/bash\<nl>\<nl>\"|$
 autocmd BufNewFile *.py 0put=\"#!/usr/bin/env python3\<nl>\<nl>\"|$
-autocmd BufNewFile,BufRead Dockerfile* set ft=dockerfile
 
+autocmd BufNewFile,BufRead Dockerfile* set ft=dockerfile
 autocmd FileType make setlocal noexpandtab
 
 autocmd FileType gitcommit let b:EditorConfig_disable = 1
-autocmd FileType gitcommit set textwidth=72
+autocmd FileType gitcommit setlocal textwidth=72
 
 
 " ## KEYS
 
 nnoremap <silent> <C-n> <Cmd>:call NERDTreeToggleInCurDir()<CR>
 inoremap <silent> <C-n> <Cmd>:call NERDTreeToggleInCurDir()<CR>
+
+nmap <Leader>j :SplitjoinJoin<cr>
+nmap <Leader>s :SplitjoinSplit<cr>
 
 " F-keys
 set pastetoggle=<F2>
@@ -369,8 +383,6 @@ autocmd FileType go nmap <leader>m :GoImplements<CR>
 autocmd FileType yaml setlocal ts=2 sw=2
 " For text file, wrap all the text
 autocmd FileType text setlocal formatoptions=tjl1
-" For all other files, wrap comments but not the text
-autocmd FileType * setlocal formatoptions=cjl1
 
 
 " disable cursors keys, someday, maybe...

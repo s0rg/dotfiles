@@ -14,6 +14,7 @@
     default = current
 
 [branch]
+    sort = -committerdate
     autosetuprebase = always
 
 [pull]
@@ -56,6 +57,7 @@
     br = branch -vv
     bra = branch -vv -a
     aa = add --all .
+    pl = pull
     wat = whatchanged
     put = push origin --tags
     todos = grep --break --heading --line-number -I --word-regexp -e TODO -e FIXME -e BUG
@@ -76,7 +78,7 @@
     # list branches
     branches = !git branch -a --no-color | tr -d "[*[:blank:]]" | grep -v "HEAD" | sed -e "s/^remotes\\\\/origin\\\\///" | sort -u
     # fetch and removes deleted (at origin) branches
-    fetch-all = fetch --tags --prune --prune-tags --all
+    ff = fetch --tags --prune --prune-tags --all
     # get repo root dir
     root = rev-parse --show-toplevel
     # age of repo

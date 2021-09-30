@@ -24,6 +24,8 @@ lst() {
 # backup copy of file
 bak() { [ -n "${1}" ] && cp -r "${1}" "${1}.bak"; }
 
+# determine size of a file or total size of a directory
+fs_size() { du -sbh -- "${@:-.}"; }
 
 ## shell utils
 
