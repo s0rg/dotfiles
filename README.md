@@ -33,10 +33,13 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
 - fuzzy finder: [fzf](https://github.com/junegunn/fzf)
 - faster `find`: [fd](https://github.com/sharkdp/fd)
 - colored `cat`: [bat](https://github.com/sharkdp/bat)
+- eye-saver: [redshift](https://github.com/jonls/redshift)
 - eye-candy `ls`: [exa](https://the.exa.website/)
 - faster `grep`: [ripgrep](https://github.com/BurntSushi/ripgrep)
 - better `git-diff`: [delta](https://github.com/dandavison/delta)
 - document viewer: [zathura](https://pwmt.org/projects/zathura/)
+- markdown viewer: [glow](https://github.com/charmbracelet/glow)
+- assembly compiler: [fasm](https://flatassembler.net)
 
 ## example screenshot
 ![screenshot](https://github.com/s0rg/dotfiles/blob/master/.config/i3/screenshot.png)
