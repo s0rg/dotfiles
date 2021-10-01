@@ -66,10 +66,11 @@ set viminfo=%,<10,'10,/10,:50,h,f0,n~/.vim/cache/.viminfo
 "           |  |   + files marks saved
 "           |  + lines saved each register (old name for <, vi6.2)
 "           + save/restore buffer list
+
 set wildmenu
-set wildignore+=*.o,*~,*/.git/*
-set wildignore+=*/vendor/*,go.mod,go.sum
-set wildignore+=*.pyo,*.pyc,*/__pycache__/*
+set wildignore+=*.o,*~,.git
+set wildignore+=*.pyo,*.pyc,__pycache__
+set wildignore+=vendor,go.mod,go.sum
 
 " ripgrep as vim's grep
 set grepprg=rg\ --no-heading\ --vimgrep
@@ -309,6 +310,7 @@ let g:fzf_colors = {
     \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
     \ 'hl+':     ['fg', 'Statement'],
     \ 'info':    ['fg', 'PreProc'],
+    \ 'border':  ['fg', 'Ignore'],
     \ 'prompt':  ['fg', 'Conditional'],
     \ 'pointer': ['fg', 'Exception'],
     \ 'marker':  ['fg', 'Keyword'],
@@ -339,7 +341,7 @@ function! CleanExtraSpaces()
 endfun
 
 autocmd FocusGained,BufEnter * checktime
-autocmd CompleteDone * pclose
+autocmd CompleteDone * silent! pclose
 autocmd BufWritePre * :call CleanExtraSpaces()
 
 autocmd BufNewFile *.sh 0put =\"#!/bin/bash\<nl>\<nl>\"|$
