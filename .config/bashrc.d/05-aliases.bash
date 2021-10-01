@@ -124,6 +124,9 @@ alias dots='git --git-dir=${HOME}/.dotfiles/ --work-tree=${HOME}'
 alias dots-store='dots commit -am "stored at: $(date --rfc-3339=seconds)" && dots push'
 alias dots-plugs='vim-plugs-ls > ${HOME}/.vim/plugins-list'
 
+# zoom
+alias z8j='zoom-join'
+
 # kubernetes
 alias k='kubectl'
 alias kns='k ns'

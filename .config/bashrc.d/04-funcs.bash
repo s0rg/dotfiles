@@ -97,10 +97,10 @@ total:             %{time_total}\n\n"
 
 ## vim
 
-# omg - Open Main.Go (or any other file with given name)
+# om - Open Main.go (or any other file with given name)
 # 1. finds first existing file ('main.go' by default) or creates new one
-# 2. opens it with EDITOR
-omg() {
+# 2. opens it with $EDITOR
+om() {
     local name
     local main
     name="${1:-main.go}"
@@ -124,14 +124,14 @@ git-feature() {
     git checkout -b "feature/${branch}"
 }
 
-# git fuzzy checkout
+# fuzzy checkout
 gfc() {
     local branch
     branch=$(git branches | fzf --preview 'git log -n 15 --oneline --abbrev-commit {} 2> /dev/null || echo "# remote branch #"')
     [ -n "${branch}" ] && git checkout "${@}" "${branch}"
 }
 
-# git smart push, sets upstream if none yet
+# smart push, sets upstream if none yet
 gip() {
     local branch
     local upstream
@@ -152,3 +152,13 @@ g() {
         git "${@}"
     fi
 }
+
+## docker
+
+# executes usql for given container
+dpg() {
+    local container
+    container="${1:-postgres_container}"
+    usql "postgresql://postgres:postgres@$(docker-ip --raw "${container}"):5432/postgres?sslmode=disable"
+}
+
