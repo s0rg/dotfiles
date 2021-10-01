@@ -23,7 +23,7 @@
 #
 #
 # 256 color support
-# see here: http://www.mail-archive.com/bug-coreutils@gnu.org/msg11030.html)
+# https://jonasjacek.github.io/colors/
 #
 # Text 256 color coding:
 # 38;5;COLOR_NUMBER
@@ -42,7 +42,7 @@ FILE 00
 RESET 0
 
 # Directory
-DIR 0;38;5;2
+DIR 01;38;5;2
 
 # Symbolic link. (If you set this to 'target' instead of a
 # numerical value, the color is as for the file pointed to.)
@@ -85,7 +85,7 @@ OTHER_WRITABLE 38;5;110
 STICKY_OTHER_WRITABLE 48;5;64;38;5;230
 
 # This is for files with execute permission:
-EXEC 0;38;5;154
+EXEC 00;38;5;154
 
 # Code
 .s               01;38;5;123
@@ -94,39 +94,37 @@ EXEC 0;38;5;154
 .cpp             01;38;5;064
 .go              01;38;5;081
 *_test.go        01;38;5;025
-.rb              00;38;5;160
-.ru              01;38;5;088
+.py              01;38;5;064
 .lua             01;38;5;025
 .js              01;38;5;003
 .sh              01;38;5;067
 
-*Makefile        0;38;5;243
-*Rakefile        0;38;5;124
-*Gemfile         0;38;5;3
-*Gemfile.lock    0;38;5;239
-.gemspec         0;38;5;3
-*Procfile        0;38;5;244
-*Gopkg.toml      0;38;5;3
-*Gopkg.lock      0;38;5;239
+# Data
+.json            0;38;5;3
+.ndjson          0;38;5;3
+.ldjson          0;38;5;3
+.yml             0;38;5;3
+.yaml            0;38;5;3
+.xml             0;38;5;3
+.csv             0;38;5;3
+
+# dev files
 .gitignore       0;38;5;243
 .gitattributes   0;38;5;243
+.dockerignore    0;38;5;243
+.editorconfig    0;38;5;243
+.golangci.yml    0;38;5;243
+.env             01;38;5;245
+*Dockerfile      01;38;5;34
+*Makefile        01;38;5;34
 
 # Templates
-.erb             01;38;5;012
-.html            01;38;5;012
-.slim            01;38;5;012
-.haml            01;38;5;012
-.sass            01;38;5;012
-.scss            01;38;5;012
-
-# Data
-.json            01;38;5;3
-.ndjson          01;38;5;3
-.ldjson          01;38;5;3
-.yml             01;38;5;3
-.yaml            01;38;5;3
-.xml             01;38;5;3
-.csv             01;38;5;3
+.erb             0;38;5;012
+.html            0;38;5;012
+.slim            0;38;5;012
+.haml            0;38;5;012
+.sass            0;38;5;012
+.scss            0;38;5;012
 
 # Binary serialization formats
 .pb              01;38;5;201
@@ -139,20 +137,15 @@ EXEC 0;38;5;154
 .nfo             01;38;5;5
 .rdf             01;38;5;5
 .docx            01;38;5;5
+.xlsx            01;38;5;5
 .pdf             01;38;5;5
 .markdown        01;38;5;5
 .md              01;38;5;5
 *README          01;38;5;180
 *README.md       01;38;5;180
-*README.txt      01;38;5;180
-*readme.txt      01;38;5;180
 *LICENSE         01;38;5;165
-*LICENSE.txt     01;38;5;165
 *AUTHORS         01;38;5;165
 *COPYRIGHT       01;38;5;165
-*CONTRIBUTORS    01;38;5;165
-*CONTRIBUTING.md 01;38;5;165
-*PATENTS         01;38;5;165
 
 # Files of special interest
 .torrent         00;38;5;120
@@ -175,6 +168,7 @@ EXEC 0;38;5;154
 .temp            00;38;5;239
 .o               00;38;5;239
 .pyc             00;38;5;239
+.pyo             00;38;5;239
 .class           00;38;5;239
 .cache           00;38;5;239
 .rdb             00;38;5;239

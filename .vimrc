@@ -9,7 +9,7 @@ filetype plugin indent on
 syntax on
 " syntax sync fromstart
 syntax sync minlines=500
-set synmaxcol=300
+set synmaxcol=200
 
 if (has("termguicolors"))
     set termguicolors
@@ -48,9 +48,9 @@ set completeopt+=longest,menuone
 set foldmethod=syntax foldlevel=99
 set wrap linebreak whichwrap+=<,>,[,]
 set lazyredraw ttyfast redrawtime=5000
+set sessionoptions=curdir,folds,tabpages
 set splitbelow splitright termwinsize=6x0
 set expandtab smarttab tabstop=4 softtabstop=0
-set sessionoptions=buffers,curdir,folds,tabpages
 set nobackup nowritebackup noswapfile noundofile
 set hlsearch incsearch ignorecase smartcase wrapscan
 set nospell nostartofline noerrorbells novisualbell t_vb=
@@ -277,7 +277,6 @@ let g:startify_lists = [
 let g:startify_bookmarks = [
     \ { 'v': '~/.vimrc'                   },
     \ { 'i': '~/.config/i3/config'        },
-    \ { 'p': '~/.config/polybar/config'   },
     \ { 'n': '~/Documents/notes/local.md' },
     \ ]
 
@@ -291,7 +290,6 @@ let g:EditorConfig_disable_rules = [ 'tab_width' ]
 
 
 " markdown
-
 let g:markdown_folding = 1
 let g:markdown_fenced_languages = [
     \ 'bash=sh',
@@ -300,6 +298,23 @@ let g:markdown_fenced_languages = [
     \ 'sql',
     \ 'go',
     \ ]
+
+
+" fzf
+let g:fzf_colors = {
+    \ 'fg':      ['fg', 'Normal'],
+    \ 'bg':      ['bg', 'Normal'],
+    \ 'hl':      ['fg', 'Comment'],
+    \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+    \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+    \ 'hl+':     ['fg', 'Statement'],
+    \ 'info':    ['fg', 'PreProc'],
+    \ 'prompt':  ['fg', 'Conditional'],
+    \ 'pointer': ['fg', 'Exception'],
+    \ 'marker':  ['fg', 'Keyword'],
+    \ 'spinner': ['fg', 'Label'],
+    \ 'header':  ['fg', 'Comment'],
+    \ }
 
 
 " ## FUNCTIONS
@@ -323,7 +338,6 @@ function! CleanExtraSpaces()
     call setreg('/', old_query)
 endfun
 
-" auto-check file changes (for reload)
 autocmd FocusGained,BufEnter * checktime
 autocmd CompleteDone * pclose
 autocmd BufWritePre * :call CleanExtraSpaces()
@@ -340,40 +354,48 @@ autocmd FileType gitcommit setlocal textwidth=72
 
 " ## KEYS
 
-nnoremap <silent> <C-n> <Cmd>:call NERDTreeToggleInCurDir()<CR>
-inoremap <silent> <C-n> <Cmd>:call NERDTreeToggleInCurDir()<CR>
-
+" split-join keys
 nmap <Leader>j :SplitjoinJoin<cr>
 nmap <Leader>s :SplitjoinSplit<cr>
 
 " F-keys
 set pastetoggle=<F2>
 nmap <silent> <F3> <Plug>(ale_next_wrap)
-nmap <silent> <F4> :set invnumber<CR>
-nnoremap <silent> <F12> <Cmd>:TagbarToggle<CR>
-inoremap <silent> <F12> <Cmd>:TagbarToggle<CR>
+map <silent> <F4> :set invnumber<CR>
+map <silent> <F5> :set invwrap<CR>
+
+nmap <silent> <F12> <Cmd>:TagbarToggle<CR>
 
 " window movement (up/down only) via ctrl
-nnoremap <C-j>    <C-w>j
-nnoremap <C-k>    <C-w>k
-nnoremap <C-Down> <C-w>j
-nnoremap <C-Up>   <C-w>k
+nmap <C-j>    <C-w>j
+nmap <C-k>    <C-w>k
+nmap <C-Down> <C-w>j
+nmap <C-Up>   <C-w>k
+
+" tab switching
+nmap <Tab>    gt
+nmap <S-Tab>  gT
+
+" toggle text wrapping on/off
 
 " toggle off search highlight
 map <leader><ESC> :noh<CR>
 
+" toggle nerdtree
+nmap <Leader><space> <Cmd>:call NERDTreeToggleInCurDir()<CR>
+
 " reload VIM's configuration
-nnoremap <leader>r :source $MYVIMRC<CR>
+nmap <leader>r :source $MYVIMRC<CR>
 
 " fzf.vim
-nnoremap <leader>f :Files<CR>
-nnoremap <leader>g :Rg<CR>
+nmap <leader>f :Files<CR>
+nmap <leader>g :Rg<CR>
 
 " toggle fold
-nnoremap <space> za
+nmap <space> za
 
 " vim-commentary
-noremap cc :Commentary<CR>
+nmap cc :Commentary<CR>
 
 " vim-go
 autocmd FileType go nmap <leader>t :GoAddTags<CR>
