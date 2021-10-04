@@ -8,6 +8,7 @@ export EDITOR='vim'
 export VISUAL='vim'
 export PAGER='less'
 export EMAIL='evolution'
+export PDF='zathura'
 export BROWSER='qutebrowser'
 export MANPAGER='less -X'
 

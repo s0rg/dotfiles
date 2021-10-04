@@ -137,8 +137,6 @@ let g:go_highlight_fields = 1
 let g:go_def_reuse_buffer = 1
 let g:go_highlight_types = 1
 let g:go_auto_type_info = 1
-let g:go_term_enabled = 1
-let g:go_term_reuse = 1
 
 let g:go_highlight_string_spellcheck = 0
 let g:go_imports_autosave = 0

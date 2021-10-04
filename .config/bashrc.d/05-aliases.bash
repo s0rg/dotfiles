@@ -53,6 +53,7 @@ alias jsp='jq -C .'
 alias swag-urls="jq '.paths | keys | .[]'"
 
 # curl
+alias curl='curl --user-agent "$(rnd-ua)"'
 alias get='curl --silent --progress-bar -OL'
 alias heads='curl -sI'
 alias ip-ext='curl ifconfig.co'
