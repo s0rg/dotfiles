@@ -28,6 +28,7 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
 
 - http cli: [httpie](https://httpie.io/) + [http-prompt](https://github.com/httpie/http-prompt)
 - sql client: [usql](https://github.com/xo/usql)
+- code stats: [scc](https://github.com/boyter/scc)
 - disk usage: [duf](https://github.com/muesli/duf)
 - hex view: [hexyl](https://github.com/sharkdp/hexyl)
 - fuzzy finder: [fzf](https://github.com/junegunn/fzf)

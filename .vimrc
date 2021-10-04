@@ -382,7 +382,7 @@ nmap <S-Tab>  gT
 map <leader><ESC> :noh<CR>
 
 " toggle nerdtree
-nmap <Leader><space> <Cmd>:call NERDTreeToggleInCurDir()<CR>
+map <C-z> <Cmd>:call NERDTreeToggleInCurDir()<CR>
 
 " reload VIM's configuration
 nmap <leader>r :source $MYVIMRC<CR>
