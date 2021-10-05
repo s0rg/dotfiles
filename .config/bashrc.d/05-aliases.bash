@@ -14,6 +14,7 @@ alias ncdu='ncdu --color dark'
 # shorthands
 alias v='vim'
 alias t='touch'
+alias w='which'
 alias mc='mc -d'
 alias unx='7z x'
 alias si='sudo -i'

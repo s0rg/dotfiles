@@ -359,6 +359,10 @@ nmap <Leader>j :SplitjoinJoin<cr>
 nmap <Leader>s :SplitjoinSplit<cr>
 
 " F-keys
+inoremap <F1> <ESC>
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
+
 set pastetoggle=<F2>
 nmap <silent> <F3> <Plug>(ale_next_wrap)
 map <silent> <F4> :set invnumber<CR>
@@ -376,13 +380,17 @@ nmap <C-Up>   <C-w>k
 nmap <Tab>    gt
 nmap <S-Tab>  gT
 
-" toggle text wrapping on/off
+nnoremap <S-Up> <Up>
+nnoremap <S-Down> <Down>
 
 " toggle off search highlight
 map <leader><ESC> :noh<CR>
 
 " toggle nerdtree
 map <C-z> <Cmd>:call NERDTreeToggleInCurDir()<CR>
+
+" fast exit
+map <C-q> :qall!<CR>
 
 " reload VIM's configuration
 nmap <leader>r :source $MYVIMRC<CR>
@@ -400,7 +408,12 @@ nmap cc :Commentary<CR>
 " vim-go
 autocmd FileType go nmap <leader>t :GoAddTags<CR>
 autocmd FileType go nmap <leader>i :GoImports<CR>
-autocmd FileType go nmap <leader>m :GoImplements<CR>
+autocmd FileType go nmap <leader>s :GoImplements<CR>
+
+" gotests-vim
+autocmd FileType go nmap tf :GoTests<CR>
+autocmd FileType go nmap ta :GoTestsAll<CR>
+
 
 autocmd FileType yaml setlocal ts=2 sw=2
 " For text file, wrap all the text
