@@ -18,7 +18,7 @@ _go_cpu_profile() {
     go test -benchtime "${t}" -cpuprofile cpu.profile -bench=. || return
 
     echo -e "\n[+] exporting pdf..."
-    go tool pprof -pdf cpu.profile > cpu_profile.pdf || return
+    go tool pprof -pdf cpu.profile >cpu_profile.pdf || return
 
     echo "[+] starting ${PDF}..."
     ${PDF} cpu_profile.pdf
@@ -35,6 +35,15 @@ cdgo() {
     fi
 }
 
+# extract stacktrace from logger raw json
+go-get-trace() {
+    local trace
+    trace=$(jq '.stacktrace' "$@" | sed -e 's/\"$//' -e 's/^\"//')
+    if [ -n "${trace}" ]; then
+        echo -e "${trace}"
+    fi
+}
+
 # aliases
 alias go-clean='go clean -x -cache -testcache -modcache'
 alias go-bench='go test -benchmem -bench=.'
@@ -43,4 +52,3 @@ alias go-cpu='_go_cpu_profile'
 alias go-mod-init='go mod init; go mod tidy'
 alias go-mod-up='go get -u ./...; go mod tidy'
 alias go-mod-ls="go list -f '{{join .Deps \"\n\"}}' | xargs go list -f '{{if not .Standard}}{{.ImportPath}}{{end}}'"
-

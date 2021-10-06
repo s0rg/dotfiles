@@ -8,11 +8,14 @@ md() {
 }
 
 # cd up
-up() { cd "$(printf "%0.s../" $(seq 1 "${1:-1}"))" || return; echo -e "\033[0;30m$(pwd)\033[0m\n"; }
+up() {
+    cd "$(printf "%0.s../" $(seq 1 "${1:-1}"))" || return
+    echo -e "\033[0;30m$(pwd)\033[0m\n"
+}
 
 # `o` with no arguments open current directory,
 # otherwise open the given location or file
-o() { xdg-open "${@:-.}" > /dev/null 2>&1; }
+o() { xdg-open "${@:-.}" >/dev/null 2>&1; }
 
 # `lst` with no arguments show 5 last-changed elements
 # in current dir. You can specify count i.e.: `lst 10`
@@ -34,14 +37,14 @@ fs_size() { du -sbh -- "${@:-.}"; }
 # note: putting this directly in your env, will break env command output, so keeping them here
 man() {
     env \
-    LESS_TERMCAP_mb=$'\e[01;36m' \
-	LESS_TERMCAP_md=$'\e[01;32m' \
-	LESS_TERMCAP_me=$'\e[0m' \
-	LESS_TERMCAP_so=$'\e[01;40;1m' \
-	LESS_TERMCAP_se=$'\e[0m' \
-	LESS_TERMCAP_us=$'\e[01;33m' \
-    LESS_TERMCAP_ue=$'\e[0m' \
-    man "${@}"
+        LESS_TERMCAP_mb=$'\e[01;36m' \
+        LESS_TERMCAP_md=$'\e[01;32m' \
+        LESS_TERMCAP_me=$'\e[0m' \
+        LESS_TERMCAP_so=$'\e[01;40;1m' \
+        LESS_TERMCAP_se=$'\e[0m' \
+        LESS_TERMCAP_us=$'\e[01;33m' \
+        LESS_TERMCAP_ue=$'\e[0m' \
+        man "${@}"
 }
 
 # basic math
@@ -73,14 +76,13 @@ sslcerts() {
         echo "need host"
         return 1
     fi
-    openssl s_client -connect "${1}":443 < /dev/null | openssl x509 -text
+    openssl s_client -connect "${1}":443 </dev/null | openssl x509 -text
 }
 
 # show network timings for host
 net-test() {
     local addr
     addr="${1:-google.com}"
-
     local tmpl="\
 resolve:           %{time_namelookup}s as %{remote_ip}\n\
 handshake:         %{time_appconnect}s\n\
@@ -90,11 +92,9 @@ redirect:          %{time_redirect}s\n\
 start-transfer:    %{time_starttransfer}s\n\
 --\n
 total:             %{time_total}s\n\n"
-
     echo -e "\nstats for:         \e[32m${addr}\e[0m"
     curl --silent -o /dev/null -w "${tmpl}" "${addr}"
 }
-
 
 ## vim
 
@@ -110,7 +110,6 @@ om() {
     ${EDITOR} "${name}"
 }
 
-
 ## git
 
 # fuzzy checkout
@@ -124,8 +123,8 @@ gfc() {
 gip() {
     local branch
     local upstream
-    branch="$(git symbolic-ref --quiet --short HEAD 2> /dev/null)"
-    upstream="$(git rev-parse --abbrev-ref "${branch}"@\{upstream\} 2> /dev/null)"
+    branch="$(git symbolic-ref --quiet --short HEAD 2>/dev/null)"
+    upstream="$(git rev-parse --abbrev-ref "${branch}"@\{upstream\} 2>/dev/null)"
     if [ -z "${upstream}" ]; then
         git push --set-upstream origin "${branch}"
     else
@@ -150,4 +149,3 @@ dcql() {
     container="${1:-postgres_container}"
     usql "postgresql://postgres:postgres@$(docker-ip --raw "${container}"):5432/postgres?sslmode=disable"
 }
-
