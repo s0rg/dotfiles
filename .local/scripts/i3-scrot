@@ -5,61 +5,61 @@
 
 _conf=$HOME/.config/i3-scrot.conf
 
-if ! [ -f $_conf ]; then
-	echo "scrot_dir=$(xdg-user-dir PICTURES)" > $_conf
+if ! [ -f "$_conf" ]; then
+    echo "scrot_dir=$(xdg-user-dir PICTURES)" >"$_conf"
 fi
 
-source $_conf
+source "$_conf"
 
-if ! [ -d $scrot_dir ]; then
-	mkdir -p $scrot_dir
+if ! [ -d "$scrot_dir" ]; then
+    mkdir -p "$scrot_dir"
 fi
 
-if ! [[ -z "$2" ]]; then
+if [ -n "$2" ]; then
     cmd="scrot -d $2"
 else
     cmd='scrot'
 fi
 
 case "$1" in
-	--desk|-d|$NULL)
-		cd $scrot_dir
-	        $cmd &&
-		sleep 1 &&
-		notify-send "screenshot has been saved in $scrot_dir"
-		;;
-	--window|-w)
-		cd $scrot_dir
-		$cmd -u &&
-		sleep 1 &&
-		notify-send "screenshot has been saved in $scrot_dir"
-		;;
-	--select|-s)
-		cd $scrot_dir
-		notify-send 'select an area for the screenshot' &
-		scrot -s &&
-		sleep 1 && notify-send "screenshot has been saved in $scrot_dir"
-		;;
-	--desk-to-clipboard|-dc|$NULL)
-		cd $scrot_dir
-	  scrot -e 'xclip -selection clipboard -t image/png -i $f && rm $f' &&
-		sleep 1 &&
-		notify-send "screenshot has been copied to clipboard"
-		;;
-	--window-to-clipboard|-wc)
-		cd $scrot_dir
-		scrot -u -e 'xclip -selection clipboard -t image/png -i $f && rm $f' &&
-		sleep 1 &&
-		notify-send "screenshot has been copied to clipboard"
-		;;
-	--select-to-clipboard|-sc)
-		cd $scrot_dir
-		notify-send 'select an area for the screenshot' &
-	  scrot -s -e 'xclip -selection clipboard -t image/png -i $f && rm $f' &&
-		sleep 1 && notify-send "screenshot has been copied to clipboard"
-		;;
-	--help|-h)
-		echo "
+--desk | -d | "$NULL")
+    cd "$scrot_dir"
+    $cmd &&
+        sleep 1 &&
+        notify-send "screenshot has been saved in $scrot_dir"
+    ;;
+--window | -w)
+    cd "$scrot_dir"
+    $cmd -u &&
+        sleep 1 &&
+        notify-send "screenshot has been saved in $scrot_dir"
+    ;;
+--select | -s)
+    cd "$scrot_dir"
+    notify-send 'select an area for the screenshot' &
+    scrot -s &&
+        sleep 1 && notify-send "screenshot has been saved in $scrot_dir"
+    ;;
+--desk-to-clipboard | -dc | "$NULL")
+    cd "$scrot_dir"
+    scrot -e 'xclip -selection clipboard -t image/png -i $f && rm $f' &&
+        sleep 1 &&
+        notify-send "screenshot has been copied to clipboard"
+    ;;
+--window-to-clipboard | -wc)
+    cd "$scrot_dir"
+    scrot -u -e 'xclip -selection clipboard -t image/png -i $f && rm $f' &&
+        sleep 1 &&
+        notify-send "screenshot has been copied to clipboard"
+    ;;
+--select-to-clipboard | -sc)
+    cd "$scrot_dir"
+    notify-send 'select an area for the screenshot' &
+    scrot -s -e 'xclip -selection clipboard -t image/png -i $f && rm $f' &&
+        sleep 1 && notify-send "screenshot has been copied to clipboard"
+    ;;
+--help | -h)
+    echo "
 available options:
 -d  | --desk                  full screen
 -w  | --window                active window
@@ -78,9 +78,9 @@ Default option is 'full screen'.
 The file destination can be set in ${_conf}.
 Default is $scrot_dir
 "
-		;;
-	*)
-		echo "
+    ;;
+*)
+    echo "
 == ! i3-scrot: missing or wrong argument ! ==
 
 available options:
@@ -98,7 +98,8 @@ The file destination can be set in ${_conf}.
 Default is $scrot_dir
 "
 
-        exit 2
+    exit 2
+    ;;
 esac
 
 exit 0

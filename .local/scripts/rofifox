@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
+# source: https://github.com/s0rg/dotfiles
 #
 # creates profile-based firefox menu for rofi
-
+#
 import os
 import os.path as path
 import configparser

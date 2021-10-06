@@ -1,4 +1,5 @@
 #!/bin/bash
+# source: https://github.com/s0rg/dotfiles
 #
 # connects to postgesql instance in kubernetes with usql
 #
@@ -7,10 +8,10 @@ ARG="$1"
 
 NEEDLE="$ARG.$ARG-psql"
 
-SECRET=$(kubectl get pods -o json | \
-    jq '.items[].spec.containers[].env[]?.valueFrom.secretKeyRef.name' | \
-    grep "$NEEDLE" | \
-    head -n 1 | \
+SECRET=$(kubectl get pods -o json |
+    jq '.items[].spec.containers[].env[]?.valueFrom.secretKeyRef.name' |
+    grep "$NEEDLE" |
+    head -n 1 |
     tr -d \")
 
 CREDS=$(kubectl get secret \
@@ -26,4 +27,3 @@ kubectl port-forward "$ARG-psql-0" 15432:5432 &
 sleep 1 # wait for forwarding starts
 
 usql "$DSN_URI"
-

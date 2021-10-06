@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
+# source: https://github.com/s0rg/dotfiles
 #
 # this script takes standart https zoom meeting url
-# (i.e: https://[company.]zoom.us/j/123[?pwd=secret])
-# and produce zoommtg:// url for later opening with `xdg-open`.
+# i.e: https://[company.]zoom.us/j/123[?pwd=secret] and
+# produce zoommtg:// url for later opening with `xdg-open`.
+#
 
 import os
 import sys

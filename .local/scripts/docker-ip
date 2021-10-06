@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# source: https://github.com/s0rg/dotfiles
 #
 # prints docker container ip (for all networks available)
 # usage: dip <container-id>

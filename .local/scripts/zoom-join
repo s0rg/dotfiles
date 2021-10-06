@@ -1,6 +1,8 @@
 #!/bin/bash
+# source: https://github.com/s0rg/dotfiles
 #
 # this script starts zoom meeting, from clipboard url or first argument.
+#
 
 xcmd='xclip -selection clipboard -target STRING'
 xget="$xcmd -out"

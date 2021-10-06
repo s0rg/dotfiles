@@ -6,8 +6,7 @@ cmus="cmus"
 
 show() { i3-msg "[instance=\"^cmus$\"] scratchpad show"; }
 
-if pgrep -x "$cmus" > /dev/null
-then
+if pgrep -x "$cmus" >/dev/null; then
     show
 else
     kitty --name "$cmus" "$cmus" &

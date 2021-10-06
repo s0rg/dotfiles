@@ -1,7 +1,9 @@
 #!/bin/bash
+# source: https://github.com/s0rg/dotfiles
 #
 # this scripts runs over plugins in $HOME/.vim/bundle dir
 # and prints their remote repos uris.
+#
 
 ROOT=$HOME/.vim/bundle
 ITEMS=$(ls -1 "$ROOT")

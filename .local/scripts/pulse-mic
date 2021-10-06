@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
+# source: https://github.com/s0rg/dotfiles
 #
 # get or toggle mic status
 #
 import argparse
 
 from pulsectl import Pulse
-
 import notify
 
 client_name = "pulse-mic"

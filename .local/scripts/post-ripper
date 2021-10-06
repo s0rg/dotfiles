@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# source: https://github.com/s0rg/dotfiles
+#
 
 import sys
 import json
@@ -7,7 +9,7 @@ from operator import itemgetter
 from urllib.parse import urlparse
 
 parser = argparse.ArgumentParser(
-    description="rips-out endpoints and methods from postman collections")
+    description="rips-out endpoints from postman collections")
 parser.add_argument("-n",
                     "--no-groups",
                     action="store_true",
@@ -21,11 +23,7 @@ def ripper(items):
         if req is None:
             yield from ripper(it.get("item", []))
         else:
-            yield (
-                it["name"],
-                req["method"],
-                req["url"],
-            )
+            yield (it["name"], req["method"], req["url"])
 
 
 def prepare_env(vals):
@@ -66,12 +64,7 @@ def process(col):
 
     by_group = itemgetter(2)
     items.sort(key=by_group)
-
-    return (
-        maxn,
-        maxm,
-        items,
-    )
+    return (maxn, maxm, items)
 
 
 def display(data, plain):
