@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # source: https://github.com/s0rg/dotfiles
 #
-# jwt decoder
+# JWT decoder
 #
 
 import sys
@@ -14,12 +14,12 @@ from pygments import highlight, lexers, formatters
 lexer = lexers.JsonLexer()
 tform = formatters.TerminalFormatter()
 
-parser = argparse.ArgumentParser(description="jwr decoder")
+parser = argparse.ArgumentParser(description="JWT-tokens decoder")
 parser.add_argument("-s",
                     "--sign",
                     action="store_true",
                     help="also show signature block")
-parser.add_argument("input", nargs='?', help="input string to (en/de)code")
+parser.add_argument("input", nargs='?', help="JWT to decode")
 
 
 def fancy_json(v):
