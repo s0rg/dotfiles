@@ -30,6 +30,7 @@ alias cal='echo; ncal -M -3; echo'
 alias tree='exa --icons --group-directories-first --tree --level=2 --git-ignore'
 alias lsx='exa --icons --group-directories-first --long --header --git --colour-scale --time-style=long-iso'
 alias duf='duf --hide special'
+alias hx='hexyl'
 alias gr='rg'
 
 # shell tools
@@ -72,7 +73,7 @@ alias pub-clip='cat ${HOME}/.ssh/id_rsa.pub | clip-put'
 # command-history helpers
 alias hig='history | rg'
 alias hclear='history -c; history -w'
-alias hstats='history | cut -d"]" -f 2- | stats | head'
+alias hstats='history | cut -d"]" -f 2- | sh-stats | head'
 
 # fast travel
 alias cdp='cd ~/projects'

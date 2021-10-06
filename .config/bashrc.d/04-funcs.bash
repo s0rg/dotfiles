@@ -21,7 +21,7 @@ lst() {
     \ls -1ct --color=always | head --lines "${1:-5}"
 }
 
-# backup copy of file
+# backup copy of file or dir
 bak() { [ -n "${1}" ] && cp -r "${1}" "${1}.bak"; }
 
 # determine size of a file or total size of a directory
@@ -82,13 +82,14 @@ net-test() {
     addr="${1:-google.com}"
 
     local tmpl="\
-resolve:           %{time_namelookup} ( %{remote_ip} )\n\
-connect:           %{time_connect}\n\
-pre-transfer:      %{time_pretransfer}\n\
-redirect:          %{time_redirect}\n\
-start-transfer:    %{time_starttransfer}\n\
+resolve:           %{time_namelookup}s as %{remote_ip}\n\
+handshake:         %{time_appconnect}s\n\
+connect:           %{time_connect}s\n\
+pre-transfer:      %{time_pretransfer}s\n\
+redirect:          %{time_redirect}s\n\
+start-transfer:    %{time_starttransfer}s\n\
 --\n
-total:             %{time_total}\n\n"
+total:             %{time_total}s\n\n"
 
     echo -e "\nstats for:         \e[32m${addr}\e[0m"
     curl --silent -o /dev/null -w "${tmpl}" "${addr}"
@@ -98,7 +99,7 @@ total:             %{time_total}\n\n"
 ## vim
 
 # om - Open Main.go (or any other file with given name)
-# 1. finds first existing file ('main.go' by default) or creates new one
+# 1. finds first existing file ('main.go' by default) or creates new one in cwd
 # 2. opens it with $EDITOR
 om() {
     local name
@@ -111,18 +112,6 @@ om() {
 
 
 ## git
-
-# creates and switches to new feature branch
-git-feature() {
-    local branch
-    if [ ${#} -eq 0 ]; then
-        echo -n "feature name: "
-        read -r branch
-    else
-        branch="${1}"
-    fi
-    git checkout -b "feature/${branch}"
-}
 
 # fuzzy checkout
 gfc() {
@@ -155,8 +144,8 @@ g() {
 
 ## docker
 
-# executes usql for given container
-dpg() {
+# executes usql for given postgres container
+dcql() {
     local container
     container="${1:-postgres_container}"
     usql "postgresql://postgres:postgres@$(docker-ip --raw "${container}"):5432/postgres?sslmode=disable"

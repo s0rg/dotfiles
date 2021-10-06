@@ -354,9 +354,18 @@ autocmd FileType gitcommit setlocal textwidth=72
 
 " ## KEYS
 
-" split-join keys
+" split-join
+let g:splitjoin_split_mapping = ''
+let g:splitjoin_join_mapping = ''
 nmap <Leader>j :SplitjoinJoin<cr>
 nmap <Leader>s :SplitjoinSplit<cr>
+
+" vim-move
+let g:move_map_keys = 0
+vmap <A-Down> <Plug>MoveBlockDown
+vmap <A-Up>   <Plug>MoveBlockUp
+nmap <A-Down> <Plug>MoveLineDown
+nmap <A-Up>   <Plug>MoveLineUp
 
 " F-keys
 inoremap <F1> <ESC>
@@ -376,6 +385,9 @@ nmap <C-k>    <C-w>k
 nmap <C-Down> <C-w>j
 nmap <C-Up>   <C-w>k
 
+nmap <A-Left>  ^
+nmap <A-Right> $
+
 " tab switching
 nmap <Tab>    gt
 nmap <S-Tab>  gT
@@ -392,6 +404,9 @@ map <C-z> <Cmd>:call NERDTreeToggleInCurDir()<CR>
 " fast exit
 map <C-q> :qall!<CR>
 
+" no ex mode
+noremap Q <Nop>
+
 " reload VIM's configuration
 nmap <leader>r :source $MYVIMRC<CR>
 
@@ -401,6 +416,7 @@ nmap <leader>g :Rg<CR>
 
 " toggle fold
 nmap <space> za
+vmap <space> za
 
 " vim-commentary
 nmap cc :Commentary<CR>
@@ -408,7 +424,7 @@ nmap cc :Commentary<CR>
 " vim-go
 autocmd FileType go nmap <leader>t :GoAddTags<CR>
 autocmd FileType go nmap <leader>i :GoImports<CR>
-autocmd FileType go nmap <leader>s :GoImplements<CR>
+autocmd FileType go nmap <leader>l :GoImplements<CR>
 
 " gotests-vim
 autocmd FileType go nmap tf :GoTests<CR>
