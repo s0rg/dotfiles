@@ -37,8 +37,8 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
 - eye-saver: [redshift](https://github.com/jonls/redshift)
 - eye-candy `ls`: [exa](https://the.exa.website/)
 - faster `grep`: [ripgrep](https://github.com/BurntSushi/ripgrep)
-- markdown viewer: [glow](https://github.com/charmbracelet/glow)
 - better `git-diff`: [delta](https://github.com/dandavison/delta)
+- markdown viewer: [glow](https://github.com/charmbracelet/glow)
 - assembly compiler: [fasm](https://flatassembler.net)
 - document viewer: [zathura](https://pwmt.org/projects/zathura/)
 
