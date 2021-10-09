@@ -1,0 +1,74 @@
+#!/usr/bin/env python3
+# source: https://github.com/s0rg/dotfiles
+#
+# starts stopwatch or timer
+# usage: timer         # runs stopwatch
+#        timer 15:30   # runs timer for given period (HH:MM:SS / MM:SS / SS)
+#
+
+import sys
+import time
+from datetime import (
+    datetime,
+    timedelta,
+)
+
+
+def parse_period(v):
+    f, c = "%S", v.count(":")
+    if c == 1:
+        f = "%M:%S"
+    elif c == 2:
+        f = "%H:%M:%S"
+
+    t = datetime.strptime(v, f)
+    return timedelta(
+        hours=t.hour,
+        minutes=t.minute,
+        seconds=t.second,
+    )
+
+
+def print_delta(s, c):
+    d = int((c - s).total_seconds())
+    print("\r⌚ \x1B[32m{:02}:{:02}\x1B[0m ".format(d // 60, d % 60), end="")
+
+
+def start_stopwatch(n, p):
+    cur, end = n, n + p
+    while cur < end:
+        cur = datetime.now()
+        print_delta(cur, end)
+        time.sleep(0.1)
+
+
+def start_timer(n):
+    while True:
+        cur = datetime.now()
+        print_delta(n, cur)
+        time.sleep(0.1)
+
+
+def main(args):
+    fn = start_timer
+
+    if len(args) > 1:
+        p = parse_period(args[1])
+        fn = lambda n: start_stopwatch(n, p)
+
+    now = datetime.now()
+    print("= started at \x1B[34m{}\x1B[0m".format(now.strftime("%H:%M:%S")))
+    print("= press ^C to stop...\n")
+
+    try:
+        fn(now)
+    except KeyboardInterrupt:
+        pass
+
+    cur = datetime.now()
+    print("\n\n=> \x1B[97m{}\x1B[0m".format(cur - now))
+
+    return 0
+
+
+sys.exit(main(sys.argv))

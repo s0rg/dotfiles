@@ -40,7 +40,7 @@ alias sh-funlist='compgen -A function | sort -u'
 alias sh-path='echo -n "$PATH" | tr ":" "\n" | sort'
 
 # shell extras
-alias sh-timer='fancy_timer'
+alias sh-timer='py-timer'
 alias sh-colors='colortest-python --ansicodes'
 alias sh-rot13='tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]"; echo'
 alias sh-stats='sort | uniq -c | sort -n -r'
@@ -149,4 +149,3 @@ unset _nmp
 # wifi
 alias wifi-up="nmcli device wifi connect"
 alias wifi-ls="nmcli device wifi list --rescan yes"
-

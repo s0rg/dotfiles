@@ -15,7 +15,7 @@ up() {
 
 # `o` with no arguments open current directory,
 # otherwise open the given location or file
-o() { xdg-open "${@:-.}" >/dev/null 2>&1; }
+o() { xdg-open "${@:-.}" disown >/dev/null 2>&1; }
 
 # `lst` with no arguments show 5 last-changed elements
 # in current dir. You can specify count i.e.: `lst 10`
@@ -55,19 +55,6 @@ calc() {
         result=$(echo -n "${result}" | sed -e 's/^\./0./' -e 's/^-\./-0./' -e 's/0*$//;s/\.$//')
     fi
     echo "${result}"
-}
-
-# timer with 1-second step
-fancy_timer() {
-    local start
-    local now
-    start=$(date -u +%s)
-    echo -e "Started at \e[34m$(date --date=@$(("${start}")) +%H:%M:%S)\e[0m, press ^C to stop\n"
-    while true; do
-        now=$(date +%s)
-        echo -ne "\r⌚ \e[32m$(date -u --date=@$(("${now}" - "${start}")) +%H:%M:%S)\e[0m "
-        sleep 1
-    done
 }
 
 # dump ssl certificate info
