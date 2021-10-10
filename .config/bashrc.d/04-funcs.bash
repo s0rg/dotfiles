@@ -83,6 +83,26 @@ total:             %{time_total}s\n\n"
     curl --silent -o /dev/null -w "${tmpl}" "${addr}"
 }
 
+# show the public IP via opendns.
+myip() {
+    local CMD
+    CMD="dig +short +timeout=1 +retry=1 myip.opendns.com @resolver1.opendns.com"
+    local IP4
+    IP4="$(${CMD} -4 A | grep -v '^;;')"
+    local IP6
+    IP6="$(${CMD} -6 AAAA | grep -v '^;;')"
+
+    [ -n "${IP4}" ] && echo "IPv4: ${IP4}"
+    [ -n "${IP6}" ] && echo "IPv6: ${IP6}"
+}
+
+# serve directory by http
+serve() {
+    local PORT
+    PORT="${1:-8090}"
+    python3 -m http.server "${PORT}"
+}
+
 ## vim
 
 # om - Open Main.go (or any other file with given name)
@@ -134,5 +154,9 @@ g() {
 dcql() {
     local container
     container="${1:-postgres_container}"
-    usql "postgresql://postgres:postgres@$(docker-ip --raw "${container}"):5432/postgres?sslmode=disable"
+    local user
+    user="${POSTGRES_USER:-postgres}"
+    local pass
+    pass="${POSTGRES_PASSWORD:-postgres}"
+    usql "postgresql://${user}:${pass}@$(docker-ip --raw "${container}"):5432/postgres?sslmode=disable"
 }

@@ -59,7 +59,7 @@ alias swag-urls="jq '.paths | keys | .[]'"
 alias curl='curl --user-agent "$(rnd-ua)"'
 alias get='curl --silent --progress-bar -OL'
 alias heads='curl -sI'
-alias ip-ext='curl ifconfig.co'
+alias ifco='\curl ifconfig.co'
 alias wttr='echo; curl http://wttr.in/?format="%c:+%f+%w\n"; echo'
 
 # translator
@@ -93,7 +93,6 @@ alias py='python3'
 alias bp='bpython'
 alias pip-get='pip3 install --user --upgrade'
 alias pip-up='pip3 freeze --user | cut -d= -f1 | xargs -n1 pip3 install --user --upgrade'
-alias py-serve='python3 -m http.server'
 alias py-clear='find . | grep -E "(__pycache__|\.py[co]$)" | xargs rm -rf'
 
 # youtube-dl
