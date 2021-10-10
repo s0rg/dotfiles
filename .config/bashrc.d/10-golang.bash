@@ -49,6 +49,7 @@ alias go-clean='go clean -x -cache -testcache -modcache'
 alias go-bench='go test -benchmem -bench=.'
 alias go-test='go test -count 1 -v .'
 alias go-cpu='_go_cpu_profile'
+alias go-noproxy='export GOPROXY="direct"'
 alias go-mod-init='go mod init; go mod tidy'
 alias go-mod-up='go get -u ./...; go mod tidy'
 alias go-mod-ls="go list -f '{{join .Deps \"\n\"}}' | xargs go list -f '{{if not .Standard}}{{.ImportPath}}{{end}}'"
