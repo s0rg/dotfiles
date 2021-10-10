@@ -19,20 +19,18 @@ endif
 
 colorscheme jellybeans
 
-set shell=/bin/bash
+let g:netrw_hide=1
+let g:netrw_banner=0
+let g:netrw_dirhistmax=0
+let &showbreak='↪ '
 
 set history=50
 set cmdheight=1
 set pumheight=15
 set shortmess+=c
-
-let g:netrw_hide=1
-let g:netrw_banner=0
-let g:netrw_dirhistmax=0
-
+set shell=/bin/bash
 set nrformats-=octal
 set fillchars+=vert:│
-let &showbreak = '↪ '
 set autoread autowrite
 set mouse="" mousehide
 set autoindent cindent
@@ -139,6 +137,7 @@ let g:go_highlight_fields = 1
 let g:go_def_reuse_buffer = 1
 let g:go_highlight_types = 1
 let g:go_auto_type_info = 1
+let g:go_term_enabled = 1
 
 let g:go_highlight_string_spellcheck = 0
 let g:go_imports_autosave = 0
@@ -288,7 +287,9 @@ let g:sql_type_default = 'pgsql'
 
 
 " editorconfig-vim
-let g:EditorConfig_disable_rules = [ 'tab_width' ]
+let g:EditorConfig_disable_rules = [
+    \ 'tab_width',
+    \ ]
 
 
 " markdown
@@ -318,7 +319,7 @@ let g:fzf_colors = {
     \ 'spinner': ['fg', 'Label'],
     \ 'header':  ['fg', 'Comment'],
     \ }
-
+let g:fzf_action = {'ctrl-t':'tab split'}
 
 " ## FUNCTIONS
 
@@ -377,8 +378,8 @@ vnoremap <F1> <ESC>
 
 set pastetoggle=<F2>
 nmap <silent> <F3> <Plug>(ale_next_wrap)
-map <silent> <F4> :set invnumber<CR>
-map <silent> <F5> :set invwrap<CR>
+map  <silent> <F4> :set invnumber<CR>
+map  <silent> <F5> :set invwrap<CR>
 
 nmap <silent> <F12> <Cmd>:TagbarToggle<CR>
 
@@ -395,7 +396,7 @@ nmap <A-Right> $
 nmap <Tab>    gt
 nmap <S-Tab>  gT
 
-nnoremap <S-Up> <Up>
+nnoremap <S-Up>   <Up>
 nnoremap <S-Down> <Down>
 
 " toggle off search highlight
@@ -434,7 +435,7 @@ autocmd FileType go nmap tf :GoTests<CR>
 autocmd FileType go nmap ta :GoTestsAll<CR>
 
 
-autocmd FileType yaml setlocal ts=2 sw=2
+autocmd FileType yaml,json setlocal ts=2 sw=2
 " For text file, wrap all the text
 autocmd FileType text setlocal formatoptions=tjl1
 
