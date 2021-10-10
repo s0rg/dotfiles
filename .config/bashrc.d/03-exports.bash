@@ -35,7 +35,7 @@ export FZF_DEFAULT_OPTS="--ansi \
     --padding 0 \
     --reverse \
     --extended \
-    --bind 'f2:toggle-preview,esc:cancel' \
+    --bind 'space:toggle-preview,esc:cancel,ctrl-a:select-all' \
     --preview-window right:60% \
     --preview 'bat {}'"
 export FZF_DEFAULT_COMMAND="rg --files --no-heading"
@@ -56,4 +56,3 @@ if [ -r "${XDG_CONFIG_HOME}"/dircolors.jellybeans ]; then
 else
     eval "$(dircolors -b)"
 fi
-

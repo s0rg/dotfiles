@@ -19,6 +19,8 @@ endif
 
 colorscheme jellybeans
 
+set shell=/bin/bash
+
 set history=50
 set cmdheight=1
 set pumheight=15
@@ -420,7 +422,7 @@ nmap <space> za
 vmap <space> za
 
 " vim-commentary
-nmap cc :Commentary<CR>
+map cc :Commentary<CR>
 
 " vim-go
 autocmd FileType go nmap <leader>t :GoAddTags<CR>

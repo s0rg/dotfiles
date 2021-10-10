@@ -1,5 +1,6 @@
 # append history file
 shopt -s histappend
+shopt -s histreedit
 
 # save all lines of a multiple-line command in the same history entry
 shopt -s cmdhist
