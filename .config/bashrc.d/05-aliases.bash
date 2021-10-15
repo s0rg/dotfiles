@@ -26,6 +26,9 @@ alias obey='sudo $(fc -ln -1)'
 alias today='date "+%Y_%m_%d"'
 alias cal='echo; ncal -M -3; echo'
 
+# more is less
+alias more='less'
+
 # extras
 alias tree='exa --icons --group-directories-first --tree --level=2 --git-ignore'
 alias lsx='exa --icons --group-directories-first --long --header --git --colour-scale --time-style=long-iso'

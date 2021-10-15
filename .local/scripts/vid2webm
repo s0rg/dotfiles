@@ -1,38 +1,35 @@
 #!/bin/bash
 # source: https://github.com/s0rg/dotfiles
 #
-# this script convert given mp4 to webm with constant quality
+# this script convert given video to webm with constant quality
 #
 
 IN=${1}
 if [ -z "${IN}" ]; then
-    echo "need arg!"
-    return
+    echo "USAGE: ${0} <video> <quality:0-63, defaults: 33>"
+    exit 1
 fi
 
 OUT="${IN%%.*}".webm
-CRF=${2:-33}
+CRF="${2:-33}"
+START=$(date +'%s')
 
-ffmpeg \
-    -i "${IN}" \
-    -pass 1 \
+ffmpeg -hide_banner -i "${IN}" -crf "${CRF}" -pass 1 \
     -c:v libvpx-vp9 -b:v 0 \
-    -crf "${CRF}" \
-    -threads 4 -speed 4 -row-mt 1 \
-    -f null /dev/null || return
+    -f null /dev/null || exit
 
-ffmpeg \
-    -i "${IN}" \
-    -pass 2 \
-    -c:v libvpx-vp9 -b:v 0 \
-    -c:a libopus -b:a 64k \
-    -crf "${CRF}" \
-    -threads 4 -speed 2 -row-mt 1 \
-    -f webm "${OUT}" || return
+ffmpeg -hide_banner -i "${IN}" -crf "${CRF}" -pass 2 \
+    -c:v libvpx-vp9 -b:v 0 -c:a libopus -b:a 64k \
+    -f webm "${OUT}" || exit
 
 rm ffmpeg2pass-0.log
 
-echo "OLD: $(du -sh "${IN}")"
-echo "NEW: $(du -sh "${OUT}")"
+SEC="$(($(date +'%s') - START))"
+
+echo "OLD : $(du -sh "${IN}")"
+echo "NEW : $(du -sh "${OUT}")"
+echo "TIME: $(((SEC / 60) % 60))m $((SEC % 60))s"
+
+exit 0
 
 #vi:ft=bash

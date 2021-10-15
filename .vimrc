@@ -192,6 +192,7 @@ let g:NERDTreeStatusline = '%#NonText#'
 let g:NERDTreeMapCustomOpen = '<space>'
 let g:NERDTreeCustomOpenArgs = { 'file': { 'where': 't', 'keepopen': 1 } }
 
+let g:DevIconsEnableFoldersOpenClose = 1
 
 " ale
 let g:ale_open_list = 0
