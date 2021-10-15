@@ -17,6 +17,9 @@
     sort = -committerdate
     autosetuprebase = always
 
+[fetch]
+    prune = true
+
 [pull]
     rebase = true
 

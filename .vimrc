@@ -1,4 +1,8 @@
 set nocompatible
+
+" need to be set BEFORE ale loaded
+let g:ale_completion_enabled = 0
+
 filetype plugin indent off
 
 call pathogen#infect()
@@ -201,7 +205,6 @@ let g:ale_set_quickfix = 0
 let g:ale_hover_cursor = 0
 let g:ale_update_tagstack = 0
 let g:ale_popup_menu_enabled = 0
-let g:ale_completion_enabled = 0
 let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_filetype_changed = 0
 let g:airline#extensions#ale#enabled = 0
@@ -233,6 +236,7 @@ let g:ale_linters = {
     \ }
 
 let g:ale_fixers = {
+    \ '*': [ 'remove_trailing_lines', 'trim_whitespace' ],
     \ 'python': [ 'yapf' ],
     \ 'sh': [ 'shfmt' ],
     \ }
@@ -323,30 +327,9 @@ let g:fzf_colors = {
     \ }
 let g:fzf_action = {'ctrl-t':'tab split'}
 
-" ## FUNCTIONS
-
-" tree for current file
-function! NERDTreeToggleInCurDir()
-  " If NERDTree is open in the current buffer
-  if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
-    exe ":NERDTreeClose"
-  else
-    exe ":NERDTreeFind"
-  endif
-endfunction
-
-" remove extra spaces
-function! CleanExtraSpaces()
-    let save_cursor = getpos(".")
-    let old_query = getreg('/')
-    silent! %s/\s\+$//e
-    call setpos('.', save_cursor)
-    call setreg('/', old_query)
-endfun
 
 autocmd FocusGained,BufEnter * checktime
 autocmd CompleteDone * silent! pclose
-autocmd BufWritePre * :call CleanExtraSpaces()
 
 autocmd BufNewFile *.sh 0put =\"#!/bin/bash\<nl>\<nl>\"|$
 autocmd BufNewFile *.py 0put=\"#!/usr/bin/env python3\<nl>\<nl>\"|$
@@ -404,7 +387,16 @@ nnoremap <S-Down> <Down>
 " toggle off search highlight
 map <leader><ESC> :noh<CR>
 
-" toggle nerdtree
+" tree for current file
+function! NERDTreeToggleInCurDir()
+  " If NERDTree is open in the current buffer
+  if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
+    exe ":NERDTreeClose"
+  else
+    exe ":NERDTreeFind"
+  endif
+endfunction
+
 map <C-z> <Cmd>:call NERDTreeToggleInCurDir()<CR>
 
 " fast exit
