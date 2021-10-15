@@ -1,0 +1,38 @@
+#!/bin/bash
+# source: https://github.com/s0rg/dotfiles
+#
+# this script convert given mp4 to webm with constant quality
+#
+
+IN=${1}
+if [ -z "${IN}" ]; then
+    echo "need arg!"
+    return
+fi
+
+OUT="${IN%%.*}".webm
+CRF=${2:-33}
+
+ffmpeg \
+    -i "${IN}" \
+    -pass 1 \
+    -c:v libvpx-vp9 -b:v 0 \
+    -crf "${CRF}" \
+    -threads 4 -speed 4 -row-mt 1 \
+    -f null /dev/null || return
+
+ffmpeg \
+    -i "${IN}" \
+    -pass 2 \
+    -c:v libvpx-vp9 -b:v 0 \
+    -c:a libopus -b:a 64k \
+    -crf "${CRF}" \
+    -threads 4 -speed 2 -row-mt 1 \
+    -f webm "${OUT}" || return
+
+rm ffmpeg2pass-0.log
+
+echo "OLD: $(du -sh "${IN}")"
+echo "NEW: $(du -sh "${OUT}")"
+
+#vi:ft=bash

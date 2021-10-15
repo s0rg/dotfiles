@@ -424,7 +424,7 @@ nmap <space> za
 vmap <space> za
 
 " vim-commentary
-map cc :Commentary<CR>
+map // :Commentary<CR>
 
 " vim-go
 autocmd FileType go nmap <leader>t :GoAddTags<CR>
