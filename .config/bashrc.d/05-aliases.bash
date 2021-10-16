@@ -49,21 +49,24 @@ alias sh-rot13='tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]"; echo'
 alias sh-rot47='tr !-~ P-~!-O; echo'
 alias sh-stats='sort | uniq -c | sort -n -r'
 alias sh-trim='sed -e '\''s/^[[:space:]]*//g'\'' -e '\''s/[[:space:]]*\$//g'\'''
-alias sh-size='fs_size'
+alias sh-size='_fn_size'
 alias sh-strip-ansi="sed 's/\x1b\[[0-9;]*m//g'"
-alias sh-lcren='rename "y/A-Z/a-z/" *'
-alias sh-ucren='rename "y/a-z/A-Z/" *'
+alias sh-lc-all='rename "y/A-Z/a-z/" *'
+alias sh-uc-all='rename "y/a-z/A-Z/" *'
+
+# list taken from: https://techblog.willshouse.com/2012/01/03/most-common-user-agents/
+alias sh-rnd-ua='shuf -n 1 "${XDG_DATA_HOME}"/rand_ua.list'
 
 # jq
 alias jsp='jq -C .'
 alias swag-urls="jq '.paths | keys | .[]'"
 
 # curl
-alias curl='curl --user-agent "$(rnd-ua)"'
+alias curl='curl --user-agent "$(sh-rnd-ua)"'
 alias get='curl --silent --progress-bar -OL'
 alias heads='curl -sI'
 alias ifco='\curl ifconfig.co'
-alias wttr='echo; curl http://wttr.in/?format="%c:+%f+%w\n"; echo'
+alias wttr='echo; \curl http://wttr.in/?format="%c:+%f+%w\n"; echo'
 
 # translator
 alias enru='trans en:ru'
@@ -85,6 +88,9 @@ alias cdd='cd ~/Documents'
 alias cdb='cd ~/Documents/Books'
 alias cdl='cd ~/Downloads && lst'
 alias cds='cd ~/.local/scripts'
+
+# fast open
+alias omc='cd "${XDG_CONFIG_HOME}"; om 00-base.bash'
 
 # system
 alias top-mem='ps -Ao user,pid,pcpu,pmem,comm --sort=-pmem | head --lines=6'
@@ -118,7 +124,7 @@ alias dcl='docker-compose logs -f'
 
 # git
 alias gcd='cd $(git root)'
-alias giff='git diff'
+alias gif='git diff'
 
 # kitty
 alias kitty-up='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin'

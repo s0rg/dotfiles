@@ -378,8 +378,10 @@ nmap <A-Left>  ^
 nmap <A-Right> $
 
 " tab switching
-nmap <Tab>    gt
-nmap <S-Tab>  gT
+nmap <Tab>     gt
+nmap <S-Tab>   gT
+nmap <C-Left>  :tabmove -1<CR>
+nmap <C-Right> :tabmove +1<CR>
 
 nnoremap <S-Up>   <Up>
 nnoremap <S-Down> <Down>

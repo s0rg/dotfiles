@@ -6,7 +6,7 @@
 
 IN=${1}
 if [ -z "${IN}" ]; then
-    echo "USAGE: ${0} <video> <quality:0-63, defaults: 33>"
+    echo "USAGE: ${0} <video> <quality:[0-63], default: 33>"
     exit 1
 fi
 
@@ -16,11 +16,11 @@ START=$(date +'%s')
 
 ffmpeg -hide_banner -i "${IN}" -crf "${CRF}" -pass 1 \
     -c:v libvpx-vp9 -b:v 0 \
-    -f null /dev/null || exit
+    -f null /dev/null || exit 1
 
 ffmpeg -hide_banner -i "${IN}" -crf "${CRF}" -pass 2 \
     -c:v libvpx-vp9 -b:v 0 -c:a libopus -b:a 64k \
-    -f webm "${OUT}" || exit
+    -f webm "${OUT}" || exit 1
 
 rm ffmpeg2pass-0.log
 

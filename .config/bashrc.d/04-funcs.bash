@@ -28,7 +28,7 @@ lst() {
 bak() { [ -n "${1}" ] && cp -r "${1}" "${1}.bak"; }
 
 # determine size of a file or total size of a directory
-fs_size() { du -sbh -- "${@:-.}"; }
+_fn_size() { du -sbh -- "${@:-.}"; }
 
 ## shell utils
 
@@ -154,9 +154,13 @@ g() {
 dcql() {
     local container
     container="${1:-postgres_container}"
+    local db
+    db="${2:-postgres}"
     local user
     user="${POSTGRES_USER:-postgres}"
     local pass
     pass="${POSTGRES_PASSWORD:-postgres}"
-    usql "postgresql://${user}:${pass}@$(docker-ip --raw "${container}"):5432/postgres?sslmode=disable"
+    local port
+    port="${POSTGRES_PORT:-5432}"
+    usql "postgresql://${user}:${pass}@$(docker-ip --raw "${container}"):${port}/${db}?sslmode=disable"
 }
