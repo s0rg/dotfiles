@@ -23,10 +23,10 @@ endif
 
 colorscheme jellybeans
 
+let &showbreak='↪ '
 let g:netrw_hide=1
 let g:netrw_banner=0
 let g:netrw_dirhistmax=0
-let &showbreak='↪ '
 
 set history=50
 set cmdheight=1
@@ -34,7 +34,7 @@ set pumheight=15
 set shortmess+=c
 set shell=/bin/bash
 set nrformats-=octal
-set fillchars+=vert:│
+set fillchars+=fold:\ ,vert:│
 set autoread autowrite
 set mouse="" mousehide
 set autoindent cindent
@@ -49,9 +49,9 @@ set title titlestring=vim:\ %f
 set backspace=indent,eol,start
 set textwidth=121 colorcolumn=+1
 set completeopt+=longest,menuone
-set foldmethod=syntax foldlevel=99
 set wrap linebreak whichwrap+=<,>,[,]
 set lazyredraw ttyfast redrawtime=5000
+set foldmethod=syntax foldlevelstart=99
 set sessionoptions=curdir,folds,tabpages
 set splitbelow splitright termwinsize=6x0
 set expandtab smarttab tabstop=4 softtabstop=0
@@ -136,17 +136,22 @@ let g:go_highlight_function_calls = 1
 let g:go_highlight_generate_tags = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_operators = 1
-let g:go_diagnostics_level = 2
 let g:go_highlight_fields = 1
-let g:go_def_reuse_buffer = 1
 let g:go_highlight_types = 1
+
+let g:go_diagnostics_level = 2
+
+let g:go_def_reuse_buffer = 1
 let g:go_auto_type_info = 1
-let g:go_term_enabled = 1
-let g:go_term_mode = "split"
 
 let g:go_highlight_string_spellcheck = 0
 let g:go_imports_autosave = 0
 let g:go_jump_to_error = 0
+let g:go_list_type = "quickfix"
+
+let g:go_term_enabled = 1
+let g:go_term_mode = "split"
+
 
 " tagbar
 let g:no_status_line = 1
@@ -214,10 +219,11 @@ let g:ale_lint_delay = 250
 
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_enter = 1
+let g:ale_set_highlights = 1
 let g:ale_linters_explicit = 1
 let g:ale_use_global_executables = 1
 
-let g:ale_sign_error = '✘'
+let g:ale_sign_error = '⤫'
 let g:ale_sign_warning = '⚠'
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_echo_msg_format = '[%severity% : %linter%] %code %%s'
@@ -327,6 +333,7 @@ let g:fzf_colors = {
     \ }
 let g:fzf_action = {'ctrl-t':'tab split'}
 
+highlight Folded guibg=Black ctermbg=Black
 
 autocmd FocusGained,BufEnter * checktime
 autocmd CompleteDone * silent! pclose
@@ -340,6 +347,10 @@ autocmd FileType make setlocal noexpandtab
 autocmd FileType gitcommit let b:EditorConfig_disable = 1
 autocmd FileType gitcommit setlocal textwidth=72
 
+" git conflict highlighting & navigation
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
+nnoremap <silent> <Leader>c /^\(<\\|=\\|>\)\{7\}\([^=].\+\)\?$<CR>
 
 " ## KEYS
 
