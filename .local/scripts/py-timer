@@ -13,6 +13,12 @@ from datetime import (
     timedelta,
 )
 
+from colors import (
+    green,
+    blue,
+    white,
+)
+
 
 def parse_period(v):
     f, c = "%S", v.count(":")
@@ -31,7 +37,7 @@ def parse_period(v):
 
 def print_delta(s, c):
     d = int((c - s).total_seconds())
-    print("\r⌚ \x1B[32m{:02}:{:02}\x1B[0m ".format(d // 60, d % 60), end="")
+    print("\r⌚ " + green("{:02}:{:02}".format(d // 60, d % 60)) + " ", end="")
 
 
 def start_stopwatch(n, p):
@@ -57,7 +63,7 @@ def main(args):
         fn = lambda n: start_stopwatch(n, p)
 
     now = datetime.now()
-    print("= started at \x1B[34m{}\x1B[0m".format(now.strftime("%H:%M:%S")))
+    print("= started at " + blue(now.strftime("%H:%M:%S")))
     print("= press ^C to stop...\n")
 
     try:
@@ -66,7 +72,7 @@ def main(args):
         pass
 
     cur = datetime.now()
-    print("\n\n=> \x1B[97m{}\x1B[0m".format(cur - now))
+    print("\n\n=> " + white(str(cur - now), True))
 
     return 0
 
