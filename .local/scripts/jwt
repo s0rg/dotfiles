@@ -8,6 +8,7 @@ import sys
 import argparse
 import json
 from base64 import urlsafe_b64decode
+from datetime import datetime
 
 from pygments import highlight, lexers, formatters
 
@@ -23,8 +24,9 @@ parser.add_argument("input", nargs='?', help="JWT to decode")
 
 
 def fancy_json(v):
-    v = json.dumps(json.loads(v), sort_keys=True, indent=4)
-    return highlight(v, lexer, tform)
+    r = json.loads(v)
+    v = json.dumps(r, sort_keys=True, indent=4)
+    return (r, highlight(v, lexer, tform))
 
 
 def decode(p):
@@ -43,13 +45,28 @@ def main():
         print("malformed jwt!", file=sys.stderr)
         return 1
 
-    print()
-    print("HEADER: " + fancy_json(decode(parts[0])))
-    print("BODY: " + fancy_json(decode(parts[1])))
+    raw = json.loads(decode(parts[0]))
+    if raw.get("typ", "") != "JWT":
+        print("non-jwt!", file=sys.stderr)
+        return 1
+
+    alg = raw["alg"]
+
+    print("\n---")
+
+    raw, fancy = fancy_json(decode(parts[1]))
+    exp = datetime.utcfromtimestamp(raw["exp"]).strftime("%Y-%m-%d %H:%M:%S")
+
+    print(fancy)
+    print(f"\x1B[30mexpire at\x1B[0m: \x1B[1;37m{exp}\x1B[0m UTC")
+    print(f"\x1B[30malgorithm\x1B[0m: \x1B[32m{alg}\x1B[0m")
 
     if args.sign:
-        print("SIGNATURE: " + decode(parts[2]).hex())
+        sig = decode(parts[2]).hex()
+        print(f"\x1B[30msignature\x1B[0m: \x1B[32m{sig}\x1B[0m")
         print()
+
+    print("---\n")
 
     return 0
 

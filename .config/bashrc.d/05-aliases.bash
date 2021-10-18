@@ -14,7 +14,7 @@ alias ncdu='ncdu --color dark'
 # shorthands
 alias v='vim'
 alias t='touch'
-alias w='which'
+alias wh='which'
 alias mc='mc -d'
 alias unx='7z x'
 alias si='sudo -i'
@@ -148,7 +148,7 @@ alias kapt='k krew'
 alias kapt-up='kapt upgrade'
 
 # nmap
-alias _nmp='nmap --source-port 53'
+alias _nmp='proxychains nmap --source-port 53'
 alias nscan-net='_nmp -T1 -sn -PP -PM --scan-delay 0.5'
 alias nscan-web='_nmp -T3 -sS -Pn --open -O --osscan-guess --fuzzy -p 21-25,80,81,443,8080'
 alias nscan-host='_nmp -T3 -sS -Pn --open -sV --version-light -F --top-ports 200'

@@ -1,0 +1,15 @@
+#!/bin/bash
+# source: https://github.com/s0rg/dotfiles
+#
+# this script checks local TCP port state
+#
+
+PID=$(lsof -t -iTCP:"${1}" -sTCP:LISTEN)
+
+if [ -z "${PID}" ]; then
+    exit 1
+fi
+
+exit 0
+
+#vim:ft=bash

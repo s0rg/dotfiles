@@ -5,25 +5,26 @@
 #
 
 ARG="$1"
+PORT=$(get-tcp-port)
 
-NEEDLE="$ARG.$ARG-psql"
+NEEDLE="${ARG}.${ARG}-psql"
 
 SECRET=$(kubectl get pods -o json |
     jq '.items[].spec.containers[].env[]?.valueFrom.secretKeyRef.name' |
-    grep "$NEEDLE" |
+    grep "${NEEDLE}" |
     head -n 1 |
     tr -d \")
 
 CREDS=$(kubectl get secret \
-    "$SECRET" \
+    "${SECRET}" \
     -o go-template='{{.data.username|base64decode}}:{{.data.password|base64decode}}')
 
-DSN_URI="postgres://$CREDS@localhost:15432/$ARG"
+DSN_URI="postgres://${CREDS}@localhost:${PORT}/${ARG}"
 
 trap "exit" INT TERM ERR
 trap "kill 0" EXIT
 
-kubectl port-forward "$ARG-psql-0" 15432:5432 &
+kubectl port-forward "$ARG-psql-0" "${PORT}":5432 &
 sleep 1 # wait for forwarding starts
 
 usql "$DSN_URI"

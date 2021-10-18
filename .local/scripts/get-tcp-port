@@ -1,0 +1,19 @@
+#!/bin/bash
+# source: https://github.com/s0rg/dotfiles
+#
+# this script returns first unused TCP port
+#
+
+START=${1:-20000}
+STOP=32000 # sane default to prevent "phantom" connection issues
+
+for port in $(seq "${START}" "${STOP}"); do
+    if ! is-tcp-port-inuse "${port}"; then
+        echo -n "$port"
+        exit 0
+    fi
+done
+
+exit 1
+
+#vim:ft=bash
