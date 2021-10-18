@@ -2,7 +2,7 @@
 # source: https://github.com/s0rg/dotfiles
 #
 # prints docker container ip (for all networks available)
-# usage: dip <container-id>
+# usage: dip <container>
 #
 
 import sys
@@ -10,13 +10,20 @@ import argparse
 
 import docker
 
-parser = argparse.ArgumentParser(
-    description="docker-ip finds out ip for container")
-parser.add_argument("--net", help="specify network name")
-parser.add_argument("--raw",
-                    action="store_true",
-                    help="do not decorate output")
-parser.add_argument("target", help="target container id or name")
+parser = argparse.ArgumentParser(description="get container ip")
+parser.add_argument(
+    "--net",
+    help="specify network name",
+)
+parser.add_argument(
+    "--raw",
+    action="store_true",
+    help="do not decorate output",
+)
+parser.add_argument(
+    "target",
+    help="target container id or name",
+)
 
 
 def get_container_addrs(c):
@@ -64,4 +71,5 @@ def main():
 
 
 sys.exit(main())
+
 #vi:syntax=py3

@@ -8,13 +8,17 @@ import argparse
 from operator import itemgetter
 from urllib.parse import urlparse
 
-parser = argparse.ArgumentParser(
-    description="rips-out endpoints from postman collections")
-parser.add_argument("-n",
-                    "--no-groups",
-                    action="store_true",
-                    help="no newline between groups")
-parser.add_argument("input", help="path to postman collection")
+parser = argparse.ArgumentParser(description="get endpoints from postman json")
+parser.add_argument(
+    "-n",
+    "--no-groups",
+    action="store_true",
+    help="no newline between groups",
+)
+parser.add_argument(
+    "input",
+    help="path to postman collection",
+)
 
 
 def ripper(items):

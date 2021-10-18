@@ -9,22 +9,33 @@ import argparse
 import urllib.parse as urlp
 
 parser = argparse.ArgumentParser(description="url(en/de)coder")
-parser.add_argument("-d", "--decode", action="store_true", help="decode input")
-parser.add_argument("-l",
-                    "--legacy",
-                    action="store_true",
-                    help="use '%20' instead of '+' to encode spaces")
-parser.add_argument("input", nargs='?', help="input string to (en/de)code")
+parser.add_argument(
+    "-d",
+    "--decode",
+    action="store_true",
+    help="decode input",
+)
+parser.add_argument(
+    "-l",
+    "--legacy",
+    action="store_true",
+    help="use '%20' instead of '+' to encode spaces",
+)
+parser.add_argument(
+    "input",
+    nargs='?',
+    help="input string to (en/de)code",
+)
 
 
-def quote(val, is_legacy):
-    if is_legacy:
+def quote(val, legacy):
+    if legacy:
         return urlp.quote(val)
     return urlp.quote_plus(val)
 
 
-def unquote(val, is_legacy):
-    if is_legacy:
+def unquote(val, legacy):
+    if legacy:
         return urlp.unquote(val)
     return urlp.unquote_plus(val)
 

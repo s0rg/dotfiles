@@ -16,10 +16,18 @@ icon_off = "\uF131"
 notify_id = 1000
 notify_span_fmt = "<span font='32'>{}</span>"
 
-parser = argparse.ArgumentParser(description=client_name + " cli tool")
+parser = argparse.ArgumentParser(description=client_name)
 group = parser.add_mutually_exclusive_group(required=True)
-group.add_argument("--toggle", action="store_true", help="toggle status")
-group.add_argument("--status", action="store_true", help="status icon")
+group.add_argument(
+    "--toggle",
+    action="store_true",
+    help="toggle status",
+)
+group.add_argument(
+    "--status",
+    action="store_true",
+    help="status icon",
+)
 
 
 def first_by_name(name, it):

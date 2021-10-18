@@ -5,10 +5,10 @@
 #
 
 START=${1:-20000}
-STOP=32000 # sane default to prevent "phantom" connection issues
+STOP=${2:-32000} # sane default to prevent "phantom" connection issues
 
 for port in $(seq "${START}" "${STOP}"); do
-    if ! is-tcp-port-inuse "${port}"; then
+    if ! tcp-port-inuse "${port}"; then
         echo -n "$port"
         exit 0
     fi
