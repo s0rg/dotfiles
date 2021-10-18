@@ -13,10 +13,10 @@ from datetime import (
     timedelta,
 )
 
-from colors import (
+from term_colors import (
     green,
     blue,
-    white,
+    gray,
 )
 
 
@@ -72,7 +72,7 @@ def main(args):
         pass
 
     cur = datetime.now()
-    print("\n\n=> " + white(cur - now, True))
+    print("\n\n=> " + gray(cur - now, True))
 
     return 0
 

@@ -12,8 +12,8 @@ from datetime import datetime
 
 from pygments import highlight, lexers, formatters
 
-from colors import (
-    gray,
+from term_colors import (
+    black,
     red,
     green,
 )
@@ -21,11 +21,19 @@ from colors import (
 lexer = lexers.JsonLexer()
 tform = formatters.TerminalFormatter()
 
-parser = argparse.ArgumentParser(description="JWT-tokens decoder")
-parser.add_argument("-s",
-                    "--sign",
-                    action="store_true",
-                    help="show signature block")
+parser = argparse.ArgumentParser(description="JWT decoder")
+parser.add_argument(
+    "-r",
+    "--raw",
+    action="store_true",
+    help="show only body",
+)
+parser.add_argument(
+    "-s",
+    "--sign",
+    action="store_true",
+    help="show signature block",
+)
 parser.add_argument("input", nargs='?', help="JWT to decode")
 
 
@@ -55,25 +63,32 @@ def main():
         print("non-jwt!", file=sys.stderr)
         return 1
 
+    dec = decode(parts[1])
+
+    if args.raw:
+        print(dec.decode('utf8'))
+        return 0
+
     algstr = raw["alg"]
 
-    raw = json.loads(decode(parts[1]))
+    raw = json.loads(dec)
     exp = datetime.utcfromtimestamp(raw["exp"])
     expstr = exp.strftime("%Y-%m-%d %H:%M:%S UTC")
 
     color = green if exp > datetime.utcnow() else red
 
-    print("\n---")
+    print("\n" + black("---- BODY") + ":")
     print(fancy_json(raw))
-    print(gray("expire at") + ": " + color(expstr, True))
-    print(gray("algorithm") + ": " + green(algstr))
+
+    print(black("---- INFO") + ":")
+    print(black("expire at") + ": " + color(expstr, True))
+    print(black("algorithm") + ": " + green(algstr))
 
     if args.sign:
         sig = decode(parts[2]).hex()
-        print(gray("signature") + ": " + green(sig))
-        print()
+        print(black("signature") + ": " + green(sig))
 
-    print("---\n")
+    print()
 
     return 0
 
