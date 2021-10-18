@@ -1,11 +1,11 @@
 def _mkcolor(code):
-    def _color_fn(value, bold=False):
-        raw = "\x1B["
+    def _inner(value, bold=False):
+        head = "\x1B["
         if bold:
-            raw += "1;"
-        return raw + code + "m" + value + "\x1B[0m"
+            head += "1;"
+        return head + code + "m" + str(value) + "\x1B[0m"
 
-    return _color_fn
+    return _inner
 
 
 gray = _mkcolor("30")

@@ -72,7 +72,7 @@ def main(args):
         pass
 
     cur = datetime.now()
-    print("\n\n=> " + white(str(cur - now), True))
+    print("\n\n=> " + white(cur - now, True))
 
     return 0
 
