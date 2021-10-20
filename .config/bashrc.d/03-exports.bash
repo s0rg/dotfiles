@@ -50,9 +50,6 @@ export DOCKER_CONFIG="${XDG_CONFIG_HOME}"/docker
 # theme for bat + delta
 export BAT_THEME=gruvbox-dark
 
-# dircolors setup
-if [ -r "${XDG_CONFIG_HOME}"/dircolors.jellybeans ]; then
-    eval "$(dircolors -b "${XDG_CONFIG_HOME}"/dircolors.jellybeans)"
-else
-    eval "$(dircolors -b)"
-fi
+dir_colors=$(vivid generate jellybeans)
+export LS_COLORS="${dir_colors}"
+unset dir_colors
