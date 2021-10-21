@@ -8,16 +8,9 @@
 
 import sys
 import time
-from datetime import (
-    datetime,
-    timedelta,
-)
+from datetime import datetime, timedelta
 
-from term_colors import (
-    green,
-    blue,
-    gray,
-)
+from term_colors import green, blue, gray
 
 
 def parse_period(v):

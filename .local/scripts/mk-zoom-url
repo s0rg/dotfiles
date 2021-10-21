@@ -8,11 +8,7 @@
 
 import os
 import sys
-from urllib.parse import (
-    urlparse,
-    parse_qs,
-    urlencode,
-)
+from urllib.parse import urlparse, parse_qs, urlencode
 
 ZOOM_BASE_URI = "zoommtg://zoom.us/join"
 

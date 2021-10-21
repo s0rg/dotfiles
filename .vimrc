@@ -44,16 +44,16 @@ set cursorline scrolloff=3
 set shiftwidth=4 shiftround
 set noshowmode laststatus=2
 set switchbuf=usetab,newtab
-set number signcolumn=number
 set title titlestring=vim:\ %f
 set backspace=indent,eol,start
-set textwidth=121 colorcolumn=+1
+set textwidth=120 colorcolumn=+1
 set completeopt+=longest,menuone
 set wrap linebreak whichwrap+=<,>,[,]
 set lazyredraw ttyfast redrawtime=5000
 set foldmethod=syntax foldlevelstart=99
 set sessionoptions=curdir,folds,tabpages
 set splitbelow splitright termwinsize=6x0
+set number numberwidth=5 signcolumn=number
 set expandtab smarttab tabstop=4 softtabstop=0
 set nobackup nowritebackup noswapfile noundofile
 set hlsearch incsearch ignorecase smartcase wrapscan
@@ -431,6 +431,10 @@ vmap <space> za
 
 " vim-commentary
 map // :Commentary<CR>
+
+nnoremap <leader>d "_d
+xnoremap <leader>d "_d
+xnoremap <leader>p "_dP
 
 " vim-go
 autocmd FileType go nmap <leader>t :GoAddTags<CR>

@@ -12,12 +12,9 @@ from datetime import datetime
 
 from pygments import highlight, lexers, formatters
 
-from term_colors import (
-    black,
-    red,
-    green,
-)
+from term_colors import black, red, green
 
+# pylint: disable=no-member
 lexer = lexers.JsonLexer()
 tform = formatters.TerminalFormatter()
 
@@ -41,13 +38,29 @@ parser.add_argument(
 )
 
 
-def fancy_json(raw):
+def highlight_json(raw):
     v = json.dumps(raw, sort_keys=True, indent=4)
     return highlight(v, lexer, tform)
 
 
-def decode(p):
+def url_b64(p):
     return urlsafe_b64decode(p + "==")
+
+
+def decode_jwt(val):
+    parts = val.split(".")
+    if len(parts) != 3:
+        raise ValueError("wrong number of parts")
+
+    raw = json.loads(url_b64(parts[0]))
+    if raw.get("typ", "") != "JWT":
+        raise ValueError("not JWT type")
+
+    return (
+        raw["alg"],
+        url_b64(parts[1]),
+        url_b64(parts[2]),
+    )
 
 
 def main():
@@ -57,40 +70,34 @@ def main():
     if val is None:
         val = sys.stdin.read().strip()
 
-    parts = val.split(".")
-    if len(parts) != 3:
-        print("malformed jwt!", file=sys.stderr)
+    try:
+        alg, body, sign = decode_jwt(val)
+    except ValueError as ex:
+        print(ex)
         return 1
-
-    raw = json.loads(decode(parts[0]))
-    if raw.get("typ", "") != "JWT":
-        print("non-jwt!", file=sys.stderr)
-        return 1
-
-    dec = decode(parts[1])
 
     if args.raw:
-        print(dec.decode('utf8'))
+        print(body.decode("utf8"))
         return 0
 
-    algstr = raw["alg"]
+    raw = json.loads(body)
+    dexp = datetime.utcfromtimestamp(raw["exp"])
+    exp = dexp.strftime("%Y-%m-%d %H:%M:%S UTC")
 
-    raw = json.loads(dec)
-    exp = datetime.utcfromtimestamp(raw["exp"])
-    expstr = exp.strftime("%Y-%m-%d %H:%M:%S UTC")
+    clr, stt = red, "exiped"
+    if dexp > datetime.utcnow():
+        clr, stt = green, "valid"
 
-    color = green if exp > datetime.utcnow() else red
-
-    print("\n" + black("---- BODY") + ":")
-    print(fancy_json(raw))
+    print()
+    print(black("---- BODY") + ":")
+    print(highlight_json(raw))
 
     print(black("---- INFO") + ":")
-    print(black("expire at") + ": " + color(expstr, True))
-    print(black("algorithm") + ": " + green(algstr))
+    print(black("expire at") + ": " + clr(exp, True) + " [ " + clr(stt) + " ]")
+    print(black("algorithm") + ": " + green(alg))
 
     if args.sign:
-        sig = decode(parts[2]).hex()
-        print(black("signature") + ": " + green(sig))
+        print(black("signature") + ": " + green(sign.hex()))
 
     print()
 
