@@ -62,6 +62,8 @@
     bra = branch -vv -a
     aa = add --all .
     pl = pull
+    gr = grep -ni
+    mm = merge master
     wat = whatchanged
     put = push origin --tags
     todos = grep --break --heading --line-number -I --word-regexp -e TODO -e FIXME -e BUG

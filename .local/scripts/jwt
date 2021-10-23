@@ -84,20 +84,17 @@ def main():
     dexp = datetime.utcfromtimestamp(raw["exp"])
     exp = dexp.strftime("%Y-%m-%d %H:%M:%S UTC")
 
-    clr, stt = red, "exiped"
+    clr, stt = red, "expired"
     if dexp > datetime.utcnow():
         clr, stt = green, "valid"
 
-    print()
-    print(black("---- BODY") + ":")
-    print(highlight_json(raw))
+    sexp = clr(exp) + " " + clr(stt, True)
 
-    print(black("---- INFO") + ":")
-    print(black("expire at") + ": " + clr(exp, True) + " [ " + clr(stt) + " ]")
-    print(black("algorithm") + ": " + green(alg))
+    print(black("INFO") + ": " + green(alg) + " " + sexp)
+    print(black("BODY") + ": " + highlight_json(raw))
 
     if args.sign:
-        print(black("signature") + ": " + green(sign.hex()))
+        print(black("SIGN") + ": " + green(sign.hex()))
 
     print()
 

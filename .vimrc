@@ -34,7 +34,6 @@ set pumheight=15
 set shortmess+=c
 set shell=/bin/bash
 set nrformats-=octal
-set fillchars+=fold:\ ,vert:│
 set autoread autowrite
 set mouse="" mousehide
 set autoindent cindent
@@ -44,16 +43,17 @@ set cursorline scrolloff=3
 set shiftwidth=4 shiftround
 set noshowmode laststatus=2
 set switchbuf=usetab,newtab
+set fillchars+=fold:\ ,vert:│
 set title titlestring=vim:\ %f
 set backspace=indent,eol,start
 set textwidth=120 colorcolumn=+1
-set completeopt+=longest,menuone
 set wrap linebreak whichwrap+=<,>,[,]
 set lazyredraw ttyfast redrawtime=5000
 set foldmethod=syntax foldlevelstart=99
 set sessionoptions=curdir,folds,tabpages
 set splitbelow splitright termwinsize=6x0
 set number numberwidth=5 signcolumn=number
+set completeopt+=longest,menuone complete-=it
 set expandtab smarttab tabstop=4 softtabstop=0
 set nobackup nowritebackup noswapfile noundofile
 set hlsearch incsearch ignorecase smartcase wrapscan
@@ -202,6 +202,21 @@ let g:NERDTreeMapCustomOpen = '<space>'
 let g:NERDTreeCustomOpenArgs = { 'file': { 'where': 't', 'keepopen': 1 } }
 
 let g:DevIconsEnableFoldersOpenClose = 1
+
+" Close all open buffers on entering a window if the only
+" buffer that's left is the NERDTree buffer
+function! s:CloseIfOnlyNerdTreeLeft()
+  if exists("t:NERDTreeBufName")
+    if bufwinnr(t:NERDTreeBufName) != -1
+      if winnr("$") == 1
+        q
+      endif
+    endif
+  endif
+endfunction
+
+" Close nerdtree when it's the only buffer left open
+autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
 " ale
 let g:ale_open_list = 0
@@ -430,7 +445,7 @@ nmap <space> za
 vmap <space> za
 
 " vim-commentary
-map // :Commentary<CR>
+map <leader>/ :Commentary<CR>
 
 nnoremap <leader>d "_d
 xnoremap <leader>d "_d
