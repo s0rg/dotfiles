@@ -51,26 +51,25 @@
 
 [alias]
     # shortcuts
+    aa = add --all .
+    br = branch -vv
     cm = commit -am
     co = checkout
+    gr = grep -ni
+    st = status
+    ll = log --all --decorate --oneline --graph --stat
+    ls = ls-files
+    bra = branch -vv -a
     cob = checkout -b
     cof = checkout -f
-    com = co master
-    st = status
-    ls = ls-files
-    br = branch -vv
-    bra = branch -vv -a
-    aa = add --all .
-    pl = pull
-    gr = grep -ni
-    mm = merge master
+    com = !git co master && git pull
+    mem = merge master
     wat = whatchanged
     put = push origin --tags
-    todos = grep --break --heading --line-number -I --word-regexp -e TODO -e FIXME -e BUG
-    # log pretty
-    ll = log --all --decorate --oneline --graph --stat
     # cleaner diff - no contents for deleted files
     did = diff --irreversible-delete
+    # list of "places of interest"
+    todos = grep --break --heading --line-number -I --word-regexp -e TODO -e FIXME -e BUG
     # amends last commit
     amend = commit --amend --reuse-message=HEAD
     # commiter stats
@@ -80,7 +79,7 @@
     # get repo root dir
     root = rev-parse --show-toplevel
     # list of last 5 tags
-    tags = !git tag -l | sort -V | tail -n 5
+    tags = !git tag -l | sort --version-sort | tail -n 5
     # list branches
     branches = !git branch -a --no-color | tr -d "[*[:blank:]]" | grep -v "HEAD" | sed -e "s/^remotes\\\\/origin\\\\///" | sort -u
     # fetch and removes deleted (at origin) branches

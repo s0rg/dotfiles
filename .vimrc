@@ -441,8 +441,8 @@ nmap <leader>f :Files<CR>
 nmap <leader>g :Rg<CR>
 
 " toggle fold
-nmap <space> za
-vmap <space> za
+nmap <leader><space> za
+vmap <leader><space> za
 
 " vim-commentary
 map <leader>/ :Commentary<CR>
