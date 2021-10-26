@@ -119,13 +119,6 @@ om() {
 
 ## git
 
-# fuzzy checkout
-gfc() {
-    local branch
-    branch=$(git branches | fzf --preview 'git log -n 15 --oneline --abbrev-commit {} 2> /dev/null || echo "# remote branch #"')
-    [ -n "${branch}" ] && git checkout "${@}" "${branch}"
-}
-
 # smart push, sets upstream if none yet
 gip() {
     local branch
