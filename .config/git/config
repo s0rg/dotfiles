@@ -59,6 +59,7 @@
     st = status
     ll = log --all --decorate --oneline --graph --stat
     ls = ls-files
+    ta = tag -m '' -a
     bra = branch -vv -a
     cob = checkout -b
     cof = checkout -f
