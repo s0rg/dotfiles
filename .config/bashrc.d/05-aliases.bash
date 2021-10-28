@@ -78,9 +78,9 @@ alias clip-put='xclip -selection clipboard -target STRING -in'
 alias pub-clip='cat ${HOME}/.ssh/id_rsa.pub | clip-put'
 
 # command-history helpers
-alias hig='history | rg'
-alias hclear='history -c; history -w'
-alias hstats='history | cut -d"]" -f 2- | sh-stats | head'
+alias hsg='history | rg'
+alias hs-clr='history -c; history -w'
+alias hs-stats='history | cut -d"]" -f 2- | sh-stats | head'
 
 # fast travel
 alias cdp='cd ~/projects'

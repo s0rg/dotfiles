@@ -15,7 +15,7 @@ syntax on
 syntax sync minlines=500
 set synmaxcol=200
 
-if (has("termguicolors"))
+if (has('termguicolors'))
     set termguicolors
     set t_Co=256
     set t_ut=
@@ -123,11 +123,11 @@ let g:lightline.tab = {
 	\ 'inactive': [ 'filename', 'modified' ],
     \ }
 
-let g:lightline#ale#indicator_checking = "\uf110"
-let g:lightline#ale#indicator_infos = "\uf129"
-let g:lightline#ale#indicator_warnings = "\uf071"
-let g:lightline#ale#indicator_errors = "\uf05e"
-let g:lightline#ale#indicator_ok = "\uf00c"
+let g:lightline#ale#indicator_checking = '\uf110'
+let g:lightline#ale#indicator_infos = '\uf129'
+let g:lightline#ale#indicator_warnings = '\uf071'
+let g:lightline#ale#indicator_errors = '\uf05e'
+let g:lightline#ale#indicator_ok = '\uf00c'
 
 
 " vim-go
@@ -147,11 +147,13 @@ let g:go_auto_type_info = 1
 let g:go_highlight_string_spellcheck = 0
 let g:go_imports_autosave = 0
 let g:go_jump_to_error = 0
-let g:go_list_type = "quickfix"
+let g:go_list_type = 'quickfix'
 
 let g:go_term_enabled = 1
-let g:go_term_mode = "split"
+let g:go_term_mode = 'split'
 
+" gotests-vim
+let g:gotests_bin = 'gotests-gen'
 
 " tagbar
 let g:no_status_line = 1
@@ -206,9 +208,9 @@ let g:DevIconsEnableFoldersOpenClose = 1
 " Close all open buffers on entering a window if the only
 " buffer that's left is the NERDTree buffer
 function! s:CloseIfOnlyNerdTreeLeft()
-  if exists("t:NERDTreeBufName")
+  if exists('t:NERDTreeBufName')
     if bufwinnr(t:NERDTreeBufName) != -1
-      if winnr("$") == 1
+      if winnr('$') == 1
         q
       endif
     endif
@@ -353,8 +355,8 @@ highlight Folded guibg=Black ctermbg=Black
 autocmd FocusGained,BufEnter * checktime
 autocmd CompleteDone * silent! pclose
 
-autocmd BufNewFile *.sh 0put =\"#!/bin/bash\<nl>\<nl>\"|$
-autocmd BufNewFile *.py 0put=\"#!/usr/bin/env python3\<nl>\<nl>\"|$
+autocmd BufNewFile *.sh 0put =\'#!/bin/bash\<nl>\<nl>\'|$
+autocmd BufNewFile *.py 0put=\'#!/usr/bin/env python3\<nl>\<nl>\'|$
 
 autocmd BufNewFile,BufRead Dockerfile* set ft=dockerfile
 autocmd FileType make setlocal noexpandtab
@@ -382,16 +384,24 @@ vmap <A-Up>   <Plug>MoveBlockUp
 nmap <A-Down> <Plug>MoveLineDown
 nmap <A-Up>   <Plug>MoveLineUp
 
-" F-keys
-inoremap <F1> <ESC>
-nnoremap <F1> <ESC>
-vnoremap <F1> <ESC>
+" tree for current file
+function! NERDTreeToggleInCurDir()
+  ' If NERDTree is open in the current buffer
+  if (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)
+    exe ':NERDTreeClose'
+  else
+    exe ':NERDTreeFind'
+  endif
+endfunction
 
-set pastetoggle=<F2>
-nmap <silent> <F3> <Plug>(ale_next_wrap)
-map  <silent> <F4> :set invnumber<CR>
-map  <silent> <F5> :set invwrap<CR>
+inoremap <silent> <F1> <Cmd>:call NERDTreeToggleInCurDir()<CR>
+nnoremap <silent> <F1> <Cmd>:call NERDTreeToggleInCurDir()<CR>
+vnoremap <silent> <F1> <Cmd>:call NERDTreeToggleInCurDir()<CR>
 
+nmap <silent> <F2> <Plug>(ale_next_wrap)
+map  <silent> <F3> :set invwrap<CR>
+
+map  <silent> <F11> :set invnumber<CR>
 nmap <silent> <F12> <Cmd>:TagbarToggle<CR>
 
 " window movement (up/down only) via ctrl
@@ -415,23 +425,12 @@ nnoremap <S-Down> <Down>
 " toggle off search highlight
 map <leader><ESC> :noh<CR>
 
-" tree for current file
-function! NERDTreeToggleInCurDir()
-  " If NERDTree is open in the current buffer
-  if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
-    exe ":NERDTreeClose"
-  else
-    exe ":NERDTreeFind"
-  endif
-endfunction
-
-map <C-z> <Cmd>:call NERDTreeToggleInCurDir()<CR>
-
 " fast exit
 map <C-q> :qall!<CR>
 
 " no ex mode
-noremap Q <Nop>
+noremap Q     <Nop>
+noremap <C-z> <Nop>
 
 " reload VIM's configuration
 nmap <leader>r :source $MYVIMRC<CR>
@@ -467,12 +466,12 @@ autocmd FileType text setlocal formatoptions=tjl1
 
 
 " disable cursors keys, someday, maybe...
-"nnoremap <Left>  :echoe "Use h"<CR>
-"nnoremap <Right> :echoe "Use l"<CR>
-"nnoremap <Up>    :echoe "Use k"<CR>
-"nnoremap <Down>  :echoe "Use j"<CR>
+"nnoremap <Left>  :echoe 'Use h'<CR>
+"nnoremap <Right> :echoe 'Use l'<CR>
+"nnoremap <Up>    :echoe 'Use k'<CR>
+"nnoremap <Down>  :echoe 'Use j'<CR>
 " ...and in insert mode
-"inoremap <Left>  <ESC>:echoe "Use h"<CR>
-"inoremap <Right> <ESC>:echoe "Use l"<CR>
-"inoremap <Up>    <ESC>:echoe "Use k"<CR>
-"inoremap <Down>  <ESC>:echoe "Use j"<CR>
+"inoremap <Left>  <ESC>:echoe 'Use h'<CR>
+"inoremap <Right> <ESC>:echoe 'Use l'<CR>
+"inoremap <Up>    <ESC>:echoe 'Use k'<CR>
+"inoremap <Down>  <ESC>:echoe 'Use j'<CR>

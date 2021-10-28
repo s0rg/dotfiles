@@ -50,7 +50,6 @@
     hunk-header-decoration-style = box
 
 [alias]
-    # shortcuts
     aa = add --all .
     br = branch -vv
     cm = commit -am
@@ -97,6 +96,7 @@
     gc-force = !git reflog expire --all --expire=now && git gc --prune=now --aggressive
     # zip
     zip = !git archive -o "$(basename "$(git root)")".zip HEAD
+    tag-rm = push --delete origin
 
 [include]
     path = "urls.local"
