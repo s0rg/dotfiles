@@ -310,6 +310,8 @@ let g:startify_bookmarks = [
     \ { 'n': '~/Documents/notes/local.md' },
     \ ]
 
+let g:startify_custom_header =
+            \ startify#pad(split(system('fortune pratchett tao wisdom | cowsay'), '\n'))
 
 " pgsql
 let g:sql_type_default = 'pgsql'

@@ -7,7 +7,7 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
 fi
 
 case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
+xterm-color | *-256color) color_prompt=yes ;;
 esac
 
 if [ "$color_prompt" = yes ]; then
@@ -20,11 +20,11 @@ unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
+xterm* | rxvt*)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
     ;;
-*)
-    ;;
+*) ;;
+
 esac
 
 export XDG_CONFIG_HOME="${HOME}"/.config
@@ -46,9 +46,10 @@ fi
 export PATH=${PATH}:/snap/bin:${HOME}/Telegram
 
 case $- in
-*i*)
-    ;;
-*) return
+*i*) ;;
+
+*)
+    return
     ;;
 esac
 

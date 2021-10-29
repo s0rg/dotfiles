@@ -14,27 +14,22 @@ alias ncdu='ncdu --color dark'
 # shorthands
 alias v='vim'
 alias t='touch'
-alias wh='which'
 alias mc='mc -d'
-alias unx='7z x'
 alias si='sudo -i'
-alias zat='zathura'
-alias mtr='mtr -bze'
-alias chx='chmod u+x'
-alias tailf='tail -f --retry'
-alias obey='sudo $(fc -ln -1)'
-alias today='date "+%Y_%m_%d"'
+alias wh='which'
 alias cal='echo; ncal -M -3; echo'
+alias chx='chmod u+x'
+alias duf='duf --hide special'
+alias unx='7z x'
+alias hdx='hexyl'
+alias mtr='mtr -bze'
+alias zat='zathura'
+alias obey='sudo $(fc -ln -1)'
+alias tailf='tail -f --retry'
+alias today='date "+%Y_%m_%d"'
 
 # more is less
 alias more='less'
-
-# extras
-alias tree='exa --icons --group-directories-first --tree --level=2 --git-ignore'
-alias lsx='exa --icons --group-directories-first --long --header --git --colour-scale --time-style=long-iso'
-alias duf='duf --hide special'
-alias hx='hexyl'
-alias gr='rg'
 
 # shell tools
 alias sh-reload='exec "${SHELL}" -l'
@@ -148,7 +143,7 @@ alias kapt='k krew'
 alias kapt-up='kapt upgrade'
 
 # nmap
-alias _nmp='proxychains nmap --source-port 53'
+alias _nmp='nmap --source-port 53'
 alias nscan-net='_nmp -T1 -sn -PP -PM --scan-delay 0.5'
 alias nscan-web='_nmp -T3 -sS -Pn --open -O --osscan-guess --fuzzy -p 21-25,80,81,443,8080'
 alias nscan-host='_nmp -T3 -sS -Pn --open -sV --version-light -F --top-ports 200'
