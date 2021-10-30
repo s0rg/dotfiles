@@ -7,14 +7,18 @@ from dbus_next.constants import BusType, MessageType
 
 
 async def _notify(app, title, message, urgency, timeout, msg_id):
-    body = [app,  # Application name
-            msg_id,  # id
-            "",  # icon
-            title,  # summary
-            message,  # body
-            [],  # actions
-            {"urgency": Variant("y", urgency)},  # hints
-            timeout]  # timeout
+    body = [
+        app,  # Application name
+        msg_id,  # id
+        "",  # icon
+        title,  # summary
+        message,  # body
+        [],  # actions
+        {
+            "urgency": Variant("y", urgency)
+        },  # hints
+        timeout
+    ]  # timeout
 
     bus = await MessageBus(bus_type=BusType.SESSION).connect()
 

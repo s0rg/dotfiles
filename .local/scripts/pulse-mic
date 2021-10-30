@@ -6,6 +6,7 @@
 import argparse
 
 from pulsectl import Pulse
+
 import notify
 
 client_name = "pulse-mic"

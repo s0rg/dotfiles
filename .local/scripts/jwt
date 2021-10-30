@@ -4,15 +4,15 @@
 # JWT decoder
 #
 
-import sys
 import argparse
 import json
+import sys
 from base64 import urlsafe_b64decode
 from datetime import datetime
 
-from pygments import highlight, lexers, formatters
+from pygments import formatters, highlight, lexers
 
-from term_colors import black, red, green
+from term_colors import black, green, red
 
 # pylint: disable=no-member
 lexer = lexers.JsonLexer()

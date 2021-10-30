@@ -3,10 +3,10 @@
 #
 # creates profile-based firefox menu for rofi
 #
-import os
-import os.path as path
 import configparser
 import json
+import os
+import os.path as path
 from operator import itemgetter
 
 import rofi_menu

@@ -4,8 +4,8 @@
 # toggles touchpad on/off, with notify
 #
 
-import sys
 import subprocess as sh
+import sys
 
 import notify
 

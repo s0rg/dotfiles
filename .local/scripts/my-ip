@@ -4,8 +4,8 @@
 # print all current assigned ip4 addrs.
 #
 
-import sys
 import socket
+import sys
 from ipaddress import IPv4Network
 
 import psutil

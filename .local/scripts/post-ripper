@@ -2,9 +2,9 @@
 # source: https://github.com/s0rg/dotfiles
 #
 
-import sys
-import json
 import argparse
+import json
+import sys
 from operator import itemgetter
 from urllib.parse import urlparse
 

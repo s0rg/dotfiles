@@ -5,8 +5,8 @@
 # usage: dip <container>
 #
 
-import sys
 import argparse
+import sys
 
 import docker
 

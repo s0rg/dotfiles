@@ -4,8 +4,8 @@
 # the missing url encoder/decoder
 #
 
-import sys
 import argparse
+import sys
 import urllib.parse as urlp
 
 parser = argparse.ArgumentParser(description="url(en/de)coder")
