@@ -1,0 +1,5 @@
+# Excludes
+--exclude=.git
+--exclude=vendor
+--exclude=\*.bak
+--exclude=test.\*

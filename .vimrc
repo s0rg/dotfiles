@@ -388,7 +388,7 @@ nmap <A-Up>   <Plug>MoveLineUp
 
 " tree for current file
 function! NERDTreeToggleInCurDir()
-  ' If NERDTree is open in the current buffer
+  " If NERDTree is open in the current buffer
   if (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)
     exe ':NERDTreeClose'
   else
@@ -398,7 +398,6 @@ endfunction
 
 inoremap <silent> <F1> <Cmd>:call NERDTreeToggleInCurDir()<CR>
 nnoremap <silent> <F1> <Cmd>:call NERDTreeToggleInCurDir()<CR>
-vnoremap <silent> <F1> <Cmd>:call NERDTreeToggleInCurDir()<CR>
 
 nmap <silent> <F2> <Plug>(ale_next_wrap)
 map  <silent> <F3> :set invwrap<CR>
@@ -412,8 +411,8 @@ nmap <C-k>    <C-w>k
 nmap <C-Down> <C-w>j
 nmap <C-Up>   <C-w>k
 
-nmap <A-Left>  ^
-nmap <A-Right> $
+nnoremap <A-Left>  ^
+nnoremap <A-Right> $
 
 " tab switching
 nmap <Tab>     gt
