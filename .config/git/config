@@ -71,7 +71,7 @@
     # list of "places of interest"
     todos = grep --break --heading --line-number -I --word-regexp -e TODO -e FIXME -e BUG
     # amends last commit
-    amend = commit --amend --reuse-message=HEAD
+    amend = commit -a --amend --reuse-message=HEAD
     # commiter stats
     stats = shortlog -sn
     # get repo source URL

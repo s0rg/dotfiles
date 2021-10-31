@@ -11,10 +11,11 @@ xterm-color | *-256color) color_prompt=yes ;;
 esac
 
 if [ "$color_prompt" = yes ]; then
-    PS1='\[\033[30m\](\[\033[00m\] ${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\W\[\033[00m\] \[\033[30m\])$\[\033[00m\] '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\W\[\033[00m\] \[\033[30m\]▶\[\033[00m\] '
     PS2='\[\033[30m\]>\[\033[00m\] '
 else
-    PS1='( ${debian_chroot:+($debian_chroot)}\W )\$ '
+    PS1='( ${debian_chroot:+($debian_chroot)}\W )\▶ '
+    PS2='> '
 fi
 unset color_prompt force_color_prompt
 
