@@ -84,7 +84,7 @@ alias cdb='cd ~/Documents/Books'
 alias cdl='cd ~/Downloads && lst'
 alias cds='cd ~/.local/scripts'
 
-# fast open
+# fast open for configs
 alias omc='cd "${XDG_CONFIG_HOME}"; om 00-base.bash'
 
 # system
@@ -95,6 +95,7 @@ alias inet-ports='netstat -nape --inet'
 # python
 alias py='python3'
 alias bp='bpython'
+alias uuid='python3 -c "from uuid import uuid4; print(uuid4())"'
 alias pip-get='pip3 install --user --upgrade'
 alias pip-up='pip3 freeze --user | cut -d= -f1 | xargs -n1 pip3 install --user --upgrade'
 alias py-clear='find . | grep -E "(__pycache__|\.py[co]$)" | xargs rm -rf'
@@ -128,8 +129,9 @@ alias kat='kitty +kitten icat'
 
 # dotfiles
 alias dots='git --git-dir=${HOME}/.dotfiles/ --work-tree=${HOME}'
-alias dots-store='dots commit -am "stored at: $(date --rfc-3339=seconds)" && dots push'
+alias dots-push='dots commit -am "stored at: $(date --rfc-3339=seconds)" && dots push'
 alias dots-plugs='vim-plugs-ls > ${HOME}/.vim/plugins-list'
+alias dots-state='dots st'
 
 # zoom
 alias z8j='zoom-join'
@@ -151,5 +153,9 @@ alias nscan-xray='_nmp -T3 -sS -Pn --open -A'
 unset _nmp
 
 # wifi
-alias wifi-up="nmcli device wifi connect"
-alias wifi-ls="nmcli device wifi list --rescan yes"
+alias wifi-up='nmcli device wifi connect'
+alias wifi-ls='nmcli device wifi list --rescan yes'
+
+# scc
+alias scc='scc --wide --exclude-dir vendor'
+alias scc-gocode='scc --generated-markers "DO NOT EDIT" --no-gen --include-ext go --not-match "_test\.go$"'
