@@ -7,8 +7,8 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
 ## software
 
 - wm: [i3](https://i3wm.org/)
+- shell: [zsh](https://www.zsh.org/)
 - editor: [vim](https://www.vim.org/)
-- shell: [bash](https://www.gnu.org/software/bash/)
 - menus: [rofi](https://github.com/davatorium/rofi)
 - music: [cmus](https://cmus.github.io/)
 - terminal: [kitty](https://sw.kovidgoyal.net/kitty/)
