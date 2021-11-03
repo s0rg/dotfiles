@@ -44,12 +44,14 @@ export FZF_COMPLETION_OPTS="--border --info=inline"
 # https://secwiki.org/w/Running_nmap_as_an_unprivileged_user
 export NMAP_PRIVILEGED=''
 
+export XDG_CONFIG_HOME="${HOME}"/.config
+export XDG_CACHE_HOME="${HOME}"/.cache
+export XDG_DATA_HOME="${HOME}"/.local/share
+
 export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}"/ripgrep/ripgreprc
 export DOCKER_CONFIG="${XDG_CONFIG_HOME}"/docker
 
 # theme for bat + delta
 export BAT_THEME=gruvbox-dark
 
-dir_colors=$(vivid generate jellybeans)
-export LS_COLORS="${dir_colors}"
-unset dir_colors
+export HISTSIZE=500

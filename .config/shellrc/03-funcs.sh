@@ -21,7 +21,7 @@ o() { xdg-open "${@:-.}" disown >/dev/null 2>&1; }
 # in current dir. You can specify count i.e.: `lst 10`
 lst() {
     # shellcheck disable=2012
-    \ls -1ct --color=always | head --lines "${1:-5}"
+    \ls -1ct --color=always --quoting-style=literal | head --lines "${1:-5}"
 }
 
 # backup copy of file or dir

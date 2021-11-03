@@ -1,0 +1,3 @@
+AUTO_NOTIFY_IGNORE+=("mc" "man" "v")
+
+ZSH_TAB_TITLE_ADDITIONAL_TERMS='kitty'

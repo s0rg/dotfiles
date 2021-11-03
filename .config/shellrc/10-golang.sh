@@ -7,7 +7,7 @@ export GOPATH=${HOME}/projects/go
 
 export PATH=${PATH}:/usr/local/go${GOVERSION}/bin:${GOPATH}/bin
 
-GOSRC_ROOT="${GOPATH}/src/github.com/${USER}"
+cd_aliases+=([cdgo]="${GOPATH}/src/github.com/${USER}")
 
 _go_cpu_profile() {
     local t
@@ -25,14 +25,6 @@ _go_cpu_profile() {
 
     t="$(basename "$(pwd)").test"
     [ -f "${t}" ] && rm -f "${t}"
-}
-
-cdgo() {
-    if [ ! $# -eq 1 ]; then
-        cd "${GOSRC_ROOT}" || return
-    else
-        cd "${GOSRC_ROOT}/${1}" || return
-    fi
 }
 
 # extract stacktrace from logger raw json

@@ -85,7 +85,7 @@ alias cdl='cd ~/Downloads && lst'
 alias cds='cd ~/.local/scripts'
 
 # fast open for configs
-alias omc='cd "${XDG_CONFIG_HOME}"; om 00-base.bash'
+alias omc='cd "${XDG_CONFIG_HOME}"; om 00-shell.sh'
 
 # system
 alias top-mem='ps -Ao user,pid,pcpu,pmem,comm --sort=-pmem | head --lines=6'
@@ -137,12 +137,12 @@ alias dots-state='dots st'
 alias z8j='zoom-join'
 
 # kubernetes
-alias k='kubectl'
 alias kns='k ns'
 alias kctx='k ctx'
-alias kpods='k get pods'
 alias kapt='k krew'
 alias kapt-up='kapt upgrade'
+alias kpods='kubecolor get pods'
+alias kevents='kubecolor get events -w'
 
 # nmap
 alias _nmp='nmap --source-port 53'

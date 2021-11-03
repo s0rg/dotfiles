@@ -1,0 +1,8 @@
+MichaelAquilina/zsh-auto-notify
+marlonrichert/zcolors
+trystan2k/zsh-tab-title
+dbz/kube-aliases
+greymd/docker-zsh-completion
+Aloxaf/fzf-tab
+joshskidmore/zsh-fzf-history-search
+zdharma-continuum/fast-syntax-highlighting

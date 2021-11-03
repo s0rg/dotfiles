@@ -22,6 +22,10 @@
 
 [pull]
     rebase = true
+    ff = only
+
+[merge]
+	ff = only
 
 [rebase]
     instructionFormat = "[%an - %ar] %s"
