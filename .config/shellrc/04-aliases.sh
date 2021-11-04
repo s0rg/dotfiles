@@ -78,9 +78,6 @@ alias hs-clr='history -c; history -w'
 alias hs-stats='history | cut -d"]" -f 2- | sh-stats | head'
 
 # fast travel
-alias cdp='cd ~/projects'
-alias cdd='cd ~/Documents'
-alias cdb='cd ~/Documents/Books'
 alias cdl='cd ~/Downloads && lst'
 alias cds='cd ~/.local/scripts'
 
@@ -120,7 +117,6 @@ alias dcl='docker-compose logs -f'
 
 # git
 alias gcd='cd $(git root)'
-alias gif='git diff'
 
 # kitty
 alias kitty-up='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin'

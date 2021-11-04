@@ -31,4 +31,9 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' menu select=2
 
+cd_aliases+=(
+    [cdp]="${HOME}/projects"
+    [cdc]="${XDG_CONFIG_HOME}"
+)
+
 alias sh-plugs-up='antibody bundle < "${SHELLRC_HOME}"/zsh_plugins.txt > "${SHELLRC_HOME}"/zshrc.d/01-plugins.zsh'
