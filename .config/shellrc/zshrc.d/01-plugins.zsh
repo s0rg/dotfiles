@@ -12,5 +12,7 @@ source /home/s0rg/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-Alo
 fpath+=( /home/s0rg/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-Aloxaf-SLASH-fzf-tab )
 source /home/s0rg/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-joshskidmore-SLASH-zsh-fzf-history-search/zsh-fzf-history-search.plugin.zsh
 fpath+=( /home/s0rg/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-joshskidmore-SLASH-zsh-fzf-history-search )
+source /home/s0rg/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+fpath+=( /home/s0rg/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-autosuggestions )
 source /home/s0rg/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zdharma-continuum-SLASH-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 fpath+=( /home/s0rg/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zdharma-continuum-SLASH-fast-syntax-highlighting )

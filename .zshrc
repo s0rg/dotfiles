@@ -1,17 +1,17 @@
 # Set up the prompt
 
-autoload -Uz promptinit;promptinit
-autoload -Uz colors;colors
+autoload -Uz promptinit compinit colors
+
+colors
+promptinit
 
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
 
 fpath+="/home/s0rg/.config/shellrc/zshcomp.d"
-
-# Use modern completion system
-autoload -Uz compinit;compinit
-
 source /home/s0rg/.config/shellrc/path
+
+compinit
 
 typeset -A cd_aliases
 
