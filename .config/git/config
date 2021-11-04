@@ -104,3 +104,61 @@
 
 [include]
     path = "urls.local"
+[diff]
+	colorMoved = zebra
+[color "status"]
+	branch = normal
+	added = 10 normal
+	updated = 10 normal
+	localbranch = normal
+	changed = 11 normal
+	header = normal
+	remotebranch = normal
+	nobranch = normal
+	unmerged = 9 normal
+	untracked = normal dim
+[color "branch"]
+	plain = normal
+	remote = normal
+	current = normal
+	local = normal
+	upstream = normal
+[color "remote"]
+	hint = normal dim
+	success = 2 normal
+	error = 1 normal
+	warning = 3 normal
+[color "interactive"]
+	header = normal
+	prompt = 15 4
+	help = normal
+	error = normal
+[color "diff"]
+	commit = normal
+	newMoved = 14 normal
+	oldMovedAlternativeDimmed = 4 normal dim
+	frag = normal
+	oldMovedAlternative = 12 normal dim
+	contextBold = normal bold
+	newBold = 10 normal bold
+	context = normal
+	oldMoved = 14 normal dim
+	oldBold = 9 normal dim bold
+	newMovedDimmed = 6 normal
+	func = normal
+	meta = normal
+	newDimmed = 2 normal
+	newMovedAlternative = 12 normal
+	new = 10 normal
+	newMovedAlternativeDimmed = 4 normal
+	whitespace = normal 9
+	oldMovedDimmed = 6 normal dim
+	oldDimmed = 1 normal dim
+	old = 9 normal dim
+[color "decorate"]
+	branch = normal
+	tag = normal
+	remotebranch = normal
+	stash = normal
+	grafted = normal
+	HEAD = normal

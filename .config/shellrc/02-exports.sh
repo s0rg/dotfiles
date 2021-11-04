@@ -35,7 +35,7 @@ export FZF_DEFAULT_OPTS="--ansi \
     --padding 0 \
     --reverse \
     --extended \
-    --bind 'space:toggle-preview,esc:cancel,ctrl-a:select-all' \
+    --bind 'change:first,backward-eof:abort,tab:down,space:toggle-preview,esc:cancel,ctrl-z:ignore' \
     --preview-window right:60% \
     --preview 'bat {}'"
 export FZF_DEFAULT_COMMAND="rg --files --no-heading"
@@ -47,6 +47,8 @@ export NMAP_PRIVILEGED=''
 export XDG_CONFIG_HOME="${HOME}"/.config
 export XDG_CACHE_HOME="${HOME}"/.cache
 export XDG_DATA_HOME="${HOME}"/.local/share
+
+export SHELLRC_HOME="${HOME}"/.config/shellrc
 
 export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}"/ripgrep/ripgreprc
 export DOCKER_CONFIG="${XDG_CONFIG_HOME}"/docker
