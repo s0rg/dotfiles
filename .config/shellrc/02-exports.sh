@@ -31,7 +31,6 @@ export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:/usr/local/lib/pkgconfig
 export FZF_DEFAULT_OPTS="--ansi \
     --no-mouse \
     --height=40% \
-    --border \
     --padding 0 \
     --reverse \
     --extended \
