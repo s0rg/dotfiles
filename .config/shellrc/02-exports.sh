@@ -30,14 +30,13 @@ export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:/usr/local/lib/pkgconfig
 
 export FZF_DEFAULT_OPTS="--ansi \
     --no-mouse \
-    --height=60% \
+    --height=40% \
     --border \
     --padding 0 \
     --reverse \
     --extended \
     --bind 'change:first,backward-eof:abort,tab:down,space:toggle-preview,esc:cancel,ctrl-z:ignore' \
-    --preview-window right:60% \
-    --preview 'bat {}'"
+    --preview-window right:50%"
 export FZF_DEFAULT_COMMAND="rg --files --no-heading"
 export FZF_COMPLETION_OPTS="--border --info=inline"
 

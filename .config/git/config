@@ -54,7 +54,7 @@
     hunk-header-decoration-style = box
 
 [alias]
-    aa = add --all .
+    aa = add --all
     br = branch -vv
     cm = commit -am
     co = checkout
@@ -72,6 +72,7 @@
     put = push origin --tags
     # cleaner diff - no contents for deleted files
     did = diff --irreversible-delete
+    dis = did --staged
     # list of "places of interest"
     todos = grep --break --heading --line-number -I --word-regexp -e TODO -e FIXME -e BUG
     # amends last commit
@@ -101,6 +102,7 @@
     # zip
     zip = !git archive -o "$(basename "$(git root)")".zip HEAD
     tag-rm = push --delete origin
+    undo = "!f() { git reset HEAD~${1:-1}; }; f"
 
 [include]
     path = "urls.local"

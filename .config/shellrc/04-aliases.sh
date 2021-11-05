@@ -48,6 +48,7 @@ alias sh-size='_fn_size'
 alias sh-strip-ansi="sed 's/\x1b\[[0-9;]*m//g'"
 alias sh-lc-all='rename "y/A-Z/a-z/" *'
 alias sh-uc-all='rename "y/a-z/A-Z/" *'
+alias sh-fetch='clear; neofetch --backend "kitty"'
 
 # list taken from: https://techblog.willshouse.com/2012/01/03/most-common-user-agents/
 alias sh-rnd-ua='shuf -n 1 "${XDG_DATA_HOME}"/rand_ua.list'
@@ -63,17 +64,13 @@ alias heads='curl -sI'
 alias ifco='\curl ifconfig.co'
 alias wttr='echo; \curl http://wttr.in/?format="%c:+%f+%w\n"; echo'
 
-# translator
-alias enru='trans en:ru'
-alias ruen='trans ru:en'
-
 # clipboard
 alias clip-get='xclip -selection clipboard -target STRING -out'
 alias clip-put='xclip -selection clipboard -target STRING -in'
 alias pub-clip='cat ${HOME}/.ssh/id_rsa.pub | clip-put'
 
 # command-history helpers
-alias hsg='history | rg'
+alias hs-g='history | rg'
 alias hs-clr='history -c; history -w'
 alias hs-stats='history | cut -d"]" -f 2- | sh-stats | head'
 
@@ -137,7 +134,7 @@ alias kns='k ns'
 alias kctx='k ctx'
 alias kapt='k krew'
 alias kapt-up='kapt upgrade'
-alias kpods='kubecolor get pods'
+alias knode='kubecolor describe node'
 alias kevents='kubecolor get events -w'
 
 # nmap

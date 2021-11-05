@@ -24,8 +24,26 @@ lst() {
     \ls -1ct --color=always --quoting-style=literal | head --lines "${1:-5}"
 }
 
-# backup copy of file or dir
-bak() { [ -n "${1}" ] && cp -r "${1}" "${1}.bak"; }
+# (un)backups file or dir
+bak() {
+    local t
+    t="${1}"
+
+    if [ -z "$t" ]; then
+        echo "need argument"
+        return
+    fi
+
+    if [[ "${t:0-1}" = "/" ]]; then
+        t="${t%%/}"
+    fi
+
+    if [[ "${t:0-4}" = ".bak" ]]; then
+        mv -v -i "$t" "${t%%.bak}"
+    else
+        cp -v -i -r "$t"{,.bak}
+    fi
+}
 
 # determine size of a file or total size of a directory
 _fn_size() { du -sbh -- "${@:-.}"; }
@@ -138,6 +156,17 @@ g() {
         git status --short --branch
     else
         git "${@}"
+    fi
+}
+
+## kubernetes
+
+# show all pods or describe given
+kpod() {
+    if [ -z "${1}" ]; then
+        kubecolor get pods -o wide
+    else
+        kubecolor describe pod "${@}"
     fi
 }
 

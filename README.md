@@ -36,7 +36,6 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
 - colored `cat`: [bat](https://github.com/sharkdp/bat)
 - eye-saver: [redshift](https://github.com/jonls/redshift)
 - faster `grep`: [ripgrep](https://github.com/BurntSushi/ripgrep)
-- better `ls/tree`: [broot](https://github.com/Canop/broot)
 - better `git-diff`: [delta](https://github.com/dandavison/delta)
 - markdown viewer: [glow](https://github.com/charmbracelet/glow)
 - assembly compiler: [fasm](https://flatassembler.net)

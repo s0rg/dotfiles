@@ -12,8 +12,8 @@ zstyle ':vcs_info:*'     enable    git
 zstyle ':vcs_info:git:*' check-for-staged-changes true
 zstyle ':vcs_info:*'     unstagedstr   "%F{$COLORS_GIT_UNSTAGED}*"
 zstyle ':vcs_info:*'     stagedstr     "%F{$COLORS_GIT_STAGED}+"
-zstyle ':vcs_info:git:*' formats       "%F{$COLORS_GIT_BRANCH}%b %u%c"
-zstyle ':vcs_info:git:*' actionformats "%F{$COLORS_GIT_BRANCH}%b|%a %u%c"
+zstyle ':vcs_info:git:*' formats       " %F{$COLORS_GIT_BRANCH}%b %u%c"
+zstyle ':vcs_info:git:*' actionformats " %F{$COLORS_GIT_BRANCH}%b|%a %u%c"
 
 _host() {
   local me

@@ -32,7 +32,7 @@ set history=50
 set cmdheight=1
 set pumheight=15
 set shortmess+=c
-set shell=/bin/zsh
+set shell=/bin/bash
 set nrformats-=octal
 set autoread autowrite
 set mouse="" mousehide

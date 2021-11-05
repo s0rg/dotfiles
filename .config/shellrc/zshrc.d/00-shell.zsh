@@ -21,7 +21,10 @@ zstyle ':completion:*' keep-prefix true
 zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zcompcache
 zstyle ':completion:*' completer _extensions _complete _approximate
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' matcher-list \
+    'm:{a-zA-Z}={A-Za-z}' \
+    'r:|[._-]=* r:|=*' \
+    'l:|=* r:|=*'
 zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:complete:*:options' sort false
 
@@ -41,5 +44,32 @@ done
 unset src
 
 source "${XDG_CACHE_HOME}"/zcolors
+
+declare -aU IGNORE_CMD=(
+    "?" "??" "[bf]g" "sh-*"                     # one / two-letters commands and tools
+    "fc *" "dots-*" "dots *" "hs-*# *"          # dotfiles and history management
+    "rm *" "kill *" "killall *"                 # one-shot commands, literally
+    "ps *" "pstree" "[h]top" "gotop"            # process / system info
+    "man *" "* --help" "* --version"            # info and manuals
+    "obey" "si" "sudo *" "*KEY*" "*TOKEN*"      # secutity
+    "l[ls]#( *)" "up# *" "cd# *" "bak *" "md *" # all others
+    "omc" "top-*" "uuid" "nscan-*" "t *" "wttr"
+    "ex *" "clear" "reset" "exit" "cd[cpls]# *"
+    "get *" "heads *" "yt[dav] *" "dps" "gcd"
+    "pwd" "cal" "env" "si" "z8[dj]" "lst# *"
+)
+
+joined=""
+
+for i in "${IGNORE_CMD[@]}"; do
+    if [ -n "${joined}" ]; then
+        joined="${joined}|${i}"
+    else
+        joined="${i}"
+    fi
+done
+
+export HISTORY_IGNORE="(${joined})"
+unset joined
 
 alias sh-plugs-up='antibody bundle < "${SHELLRC_HOME}"/zsh_plugins.txt > "${SHELLRC_HOME}"/plugins.zsh'
