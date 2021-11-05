@@ -1,7 +1,7 @@
 # enable aliases to be sudo’ed
 alias sudo='sudo '
 
-alias ls='ls --color=auto --group-directories-first -vG'
+alias ls='ls --color=auto --group-directories-first -v'
 alias ll='ls -hAlF --time-style=+"%Y-%m-%d %H:%M:%S"'
 alias ip='ip -color=auto'
 alias diff='diff --color=auto'

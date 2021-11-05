@@ -3,7 +3,7 @@ tabs -4
 
 umask 022
 
-stty -ixon
+# stty -ixon
 
 unlimit
 

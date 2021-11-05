@@ -1,17 +1,18 @@
 # Set up the prompt
 
-autoload -Uz promptinit compinit colors
+autoload -Uz colors compinit
 
 colors
-promptinit
 
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
 
-fpath+="/home/s0rg/.config/shellrc/zshcomp.d"
-source /home/s0rg/.config/shellrc/path
-
 compinit
+
+source /home/s0rg/.config/shellrc/path
+source /home/s0rg/.config/shellrc/plugins.zsh
+
+fpath+=(/home/s0rg/.config/shellrc/zsh-completions)
 
 typeset -A cd_aliases
 
@@ -40,5 +41,3 @@ for kk in "${(@kk)cd_aliases}"; do
     compdef _$kk $kk
 done
 unset kk
-
-source /home/s0rg/.config/broot/launcher/bash/br

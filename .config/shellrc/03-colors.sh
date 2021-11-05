@@ -1,5 +1,2 @@
-dir_colors=$(vivid generate jellybeans)
-export LS_COLORS="${dir_colors}"
-unset dir_colors
-
-source "${XDG_CACHE_HOME}"/zcolors
+# shellcheck disable=2155
+export LS_COLORS="$(vivid generate jellybeans)"
