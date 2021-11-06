@@ -21,7 +21,7 @@ for _ in "${ZSH_COMPDUMP}"(#qN.mh+6); do
     local zwc
     zwc="${ZSH_COMPDUMP}".zwc
     if [[ (! -f "${zwc}" || "${ZSH_COMPDUMP}" -nt "${zwc}") ]]; then
-        zcompile -M "${ZSH_COMPDUMP}" &
+        zcompile -M "${ZSH_COMPDUMP}"
     fi
 done
 setopt NO_EXTENDEDGLOB
