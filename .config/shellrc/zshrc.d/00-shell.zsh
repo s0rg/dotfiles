@@ -20,7 +20,6 @@ zstyle ':completion:*' menu select=2
 zstyle ':completion:*' keep-prefix true
 zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zcompcache
 zstyle ':completion:*' completer _extensions _complete _approximate
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' matcher-list \
     'm:{a-zA-Z}={A-Za-z}' \
     'r:|[._-]=* r:|=*' \
@@ -43,7 +42,7 @@ for src in "${HOME}"/.config/shellrc/*.sh; do
 done
 unset src
 
-source "${XDG_CACHE_HOME}"/zcolors
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 declare -aU IGNORE_CMD=(
     "?" "??" "[bf]g" "sh-*"                     # one / two-letters commands and tools
@@ -54,9 +53,10 @@ declare -aU IGNORE_CMD=(
     "obey" "si" "sudo *" "*KEY*" "*TOKEN*"      # secutity
     "l[ls]#( *)" "up# *" "cd# *" "bak *" "md *" # all others
     "omc" "top-*" "uuid" "nscan-*" "t *" "wttr"
-    "ex *" "clear" "reset" "exit" "cd[cpls]# *"
-    "get *" "heads *" "yt[dav] *" "dps" "gcd"
-    "pwd" "cal" "env" "si" "z8[dj]" "lst# *"
+    "heads *" "yt[dav] *" "dps" "groot" "chx *"
+    "cd[cplst]# *" "cal" "si" "z8[dj]" "clear"
+    "ex *" "reset" "exit" "pwd" "env" "get *"
+    "unx *" "mtr" "pub-clip" "bp" "pip-get *"
 )
 
 joined=""

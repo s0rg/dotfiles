@@ -17,6 +17,7 @@ alias t='touch'
 alias mc='mc -d'
 alias si='sudo -i'
 alias wh='which'
+alias cdt='cd $(mktemp -d)'
 alias cal='echo; ncal -M -3; echo'
 alias chx='chmod u+x'
 alias duf='duf --hide special'
@@ -49,6 +50,7 @@ alias sh-strip-ansi="sed 's/\x1b\[[0-9;]*m//g'"
 alias sh-lc-all='rename "y/A-Z/a-z/" *'
 alias sh-uc-all='rename "y/a-z/A-Z/" *'
 alias sh-fetch='clear; neofetch --backend "kitty"'
+alias sh-fresh='_last_changed'
 
 # list taken from: https://techblog.willshouse.com/2012/01/03/most-common-user-agents/
 alias sh-rnd-ua='shuf -n 1 "${XDG_DATA_HOME}"/rand_ua.list'
@@ -70,12 +72,12 @@ alias clip-put='xclip -selection clipboard -target STRING -in'
 alias pub-clip='cat ${HOME}/.ssh/id_rsa.pub | clip-put'
 
 # command-history helpers
-alias hs-g='history | rg'
+alias hs-gr='history | rg'
 alias hs-clr='history -c; history -w'
 alias hs-stats='history | cut -d"]" -f 2- | sh-stats | head'
 
 # fast travel
-alias cdl='cd ~/Downloads && lst'
+alias cdl='cd ~/Downloads && sh-fresh'
 alias cds='cd ~/.local/scripts'
 
 # fast open for configs
@@ -113,7 +115,7 @@ alias dcb='docker-compose build --force-rm'
 alias dcl='docker-compose logs -f'
 
 # git
-alias gcd='cd $(git root)'
+alias groot='cd $(git root)'
 
 # kitty
 alias kitty-up='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin'

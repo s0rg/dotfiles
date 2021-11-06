@@ -16,16 +16,13 @@ setopt EXTENDEDGLOB
 export ZSH_COMPDUMP=${HOME}/.cache/zcompdump
 
 for _ in "${ZSH_COMPDUMP}"(#qN.mh+6); do
-    echo "init compdump, please wait.."
     compinit -i -d "${ZSH_COMPDUMP}"
     compdump -d "${ZSH_COMPDUMP}"
     local zwc
     zwc="${ZSH_COMPDUMP}".zwc
     if [[ (! -f "${zwc}" || "${ZSH_COMPDUMP}" -nt "${zwc}") ]]; then
-        echo "compile..."
-        zcompile -M "${ZSH_COMPDUMP}"
+        zcompile -M "${ZSH_COMPDUMP}" &
     fi
-    echo "done!"
 done
 setopt NO_EXTENDEDGLOB
 

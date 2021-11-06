@@ -17,14 +17,7 @@ up() {
 # otherwise open the given location or file
 o() { xdg-open "${@:-.}" disown >/dev/null 2>&1; }
 
-# `lst` with no arguments show 5 last-changed elements
-# in current dir. You can specify count i.e.: `lst 10`
-lst() {
-    # shellcheck disable=2012
-    \ls -1ct --color=always --quoting-style=literal | head --lines "${1:-5}"
-}
-
-# (un)backups file or dir
+# (un-)backups file or dir
 bak() {
     local t
     t="${1}"
@@ -43,6 +36,12 @@ bak() {
     else
         cp -v -i -r "$t"{,.bak}
     fi
+}
+
+# `_last_changed` show N (5 by deafult) last-changed elements in cwd
+_last_changed() {
+    # shellcheck disable=2012
+    \ls -1ct --color=always --quoting-style=literal | head --lines "${1:-5}"
 }
 
 # determine size of a file or total size of a directory
@@ -172,8 +171,8 @@ kpod() {
 
 ## docker
 
-# executes usql for given postgres container
-dcql() {
+# executes usql for given docker container with postgres
+dsql() {
     local container
     container="${1:-postgres_container}"
     local db

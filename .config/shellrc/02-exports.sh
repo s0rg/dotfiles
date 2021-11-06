@@ -34,7 +34,7 @@ export FZF_DEFAULT_OPTS="--ansi \
     --padding 0 \
     --reverse \
     --extended \
-    --bind 'change:first,backward-eof:abort,tab:down,space:toggle-preview,esc:cancel,ctrl-z:ignore' \
+    --bind 'change:first,backward-eof:abort,tab:down,space:toggle-preview,esc:cancel,ctrl-z:ignore,ctrl-r:toggle-sort' \
     --preview-window right:50%"
 export FZF_DEFAULT_COMMAND="rg --files --no-heading"
 export FZF_COMPLETION_OPTS="--border --info=inline"
