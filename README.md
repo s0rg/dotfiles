@@ -4,18 +4,22 @@
 
 This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles) method
 
+## screenshot
+
+![screenshot](https://github.com/s0rg/dotfiles/blob/master/.config/i3/screenshot.png)
+
 ## software
 
 - wm: [i3](https://i3wm.org/)
-- shell: [zsh](https://www.zsh.org/) plugins (managed by [antibody](https://github.com/getantibody/antibody)):
-  * [MichaelAquilina/zsh-auto-notify](https://github.com/MichaelAquilina/zsh-auto-notify)
-  * [trystan2k/zsh-tab-title](https://github.com/trystan2k/zsh-tab-title)
-  * [Dbz/kube-aliases](https://github.com/Dbz/kube-aliases)
-  * [Aloxaf/fzf-tab](https://github.com/Aloxaf/fzf-tab)
-  * [joshskidmore/zsh-fzf-history-search](https://github.com/joshskidmore/zsh-fzf-history-search)
-  * [zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
-  * [zdharma-continuum/fast-syntax-highlighting](https://github.com/zdharma-continuum/fast-syntax-highlighting)
-- editor: [vim](https://www.vim.org/) plugins (managed by [pathogen](https://github.com/tpope/vim-pathogen)):
+- shell: [zsh](https://www.zsh.org/) (*plugins* managed by [antibody](https://github.com/getantibody/antibody)):
+  * Notify on long or failed tasks: [MichaelAquilina/zsh-auto-notify](https://github.com/MichaelAquilina/zsh-auto-notify)
+  * Sets window titile: [trystan2k/zsh-tab-title](https://github.com/trystan2k/zsh-tab-title)
+  * Kubernetes autocomplete+aliases: [Dbz/kube-aliases](https://github.com/Dbz/kube-aliases)
+  * FZF for anything: [Aloxaf/fzf-tab](https://github.com/Aloxaf/fzf-tab)
+  * ..and history too: [joshskidmore/zsh-fzf-history-search](https://github.com/joshskidmore/zsh-fzf-history-search)
+  * fishy thing: [zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+  * eye-candy cli: [zdharma-continuum/fast-syntax-highlighting](https://github.com/zdharma-continuum/fast-syntax-highlighting)
+- editor: [vim](https://www.vim.org/) (*plugins* managed by [pathogen](https://github.com/tpope/vim-pathogen)):
   * Async linters/fixers: [dense-analysis/ale](https://github.com/dense-analysis/ale.git)
   * Async autocomplete: [Shougo/deoplete](https://github.com/Shougo/deoplete.nvim.git)
   * `.editorconfig` support: [editorconfig/editorconfig-vim](https://github.com/editorconfig/editorconfig-vim.git)
@@ -69,10 +73,8 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
 - assembly compiler: [fasm](https://flatassembler.net)
 - document viewer: [zathura](https://pwmt.org/projects/zathura/)
 
-## example screenshot
-![screenshot](https://github.com/s0rg/dotfiles/blob/master/.config/i3/screenshot.png)
-
 ## usage
+
 ~~~ sh
 git clone --recursive --separate-git-dir=$HOME/.dotfiles.git https://github.com/s0rg/dotfiles.git /tmp/dots
 rsync -rvl --exclude ".git" /tmp/dots/ $HOME/
