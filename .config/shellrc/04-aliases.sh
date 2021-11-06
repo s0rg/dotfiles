@@ -11,26 +11,26 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias ncdu='ncdu --color dark'
 
-# shorthands
-alias v='vim'
 alias t='touch'
+alias v='vim'
+alias cp='cp -riv'
 alias mc='mc -d'
+alias mv='mv -iv'
 alias si='sudo -i'
 alias wh='which'
-alias cdt='cd $(mktemp -d)'
 alias cal='echo; ncal -M -3; echo'
+alias cdt='cd $(mktemp -d)'
 alias chx='chmod u+x'
 alias duf='duf --hide special'
-alias unx='7z x'
 alias hdx='hexyl'
+alias unx='7z x'
 alias mtr='mtr -bze'
 alias zat='zathura'
 alias obey='sudo $(fc -ln -1)'
+alias more='less'
+alias mkdir='mkdir -pv'
 alias tailf='tail -f --retry'
 alias today='date "+%Y_%m_%d"'
-
-# more is less
-alias more='less'
 
 # shell tools
 alias sh-reload='exec "${SHELL}" -l'

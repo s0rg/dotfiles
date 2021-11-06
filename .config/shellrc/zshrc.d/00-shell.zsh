@@ -12,12 +12,21 @@ setopt APPEND_HISTORY INC_APPEND_HISTORY
 setopt HIST_SAVE_NO_DUPS HIST_IGNORE_ALL_DUPS
 setopt HIST_EXPIRE_DUPS_FIRST HIST_FIND_NO_DUPS
 
+set zle_bracketed_paste  # Explicitly restore this zsh default
+
+autoload -Uz bracketed-paste-magic url-quote-magic
+
+zle -N bracketed-paste bracketed-paste-magic
+zle -N self-insert url-quote-magic
+
 typeset -U path cdpath fpath manpath
 
 zstyle ':completion:*' rehash true
 zstyle ':completion:*' use-cache on
+zstyle ':completion:*' group-name ''
 zstyle ':completion:*' menu select=2
 zstyle ':completion:*' keep-prefix true
+zstyle ':completion:*' insert-tab pending
 zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zcompcache
 zstyle ':completion:*' completer _extensions _complete _approximate
 zstyle ':completion:*' matcher-list \

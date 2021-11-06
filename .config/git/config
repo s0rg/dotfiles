@@ -53,61 +53,6 @@
     hunk-header-style = file line-number syntax
     hunk-header-decoration-style = box
 
-[alias]
-    aa = add --all
-    br = branch -vv
-    cm = commit -am
-    co = checkout
-    gr = grep -ni
-    st = status
-    ll = log --all --decorate --oneline --graph --stat
-    ls = ls-files
-    ta = tag -m '' -a
-    bra = branch -vv -a
-    cob = checkout -b
-    cof = checkout -f
-    com = !git co master && git pull
-    mem = merge master
-    wat = whatchanged
-    put = push origin --tags
-    # cleaner diff - no contents for deleted files
-    did = diff --irreversible-delete
-    dis = did --staged
-    # list of "places of interest"
-    todos = grep --break --heading --line-number -I --word-regexp -e TODO -e FIXME -e BUG
-    # amends last commit
-    amend = commit -a --amend --reuse-message=HEAD
-    # commiter stats
-    stats = shortlog -sn
-    # get repo source URL
-    origin = config --get remote.origin.url
-    # get repo root dir
-    root = rev-parse --show-toplevel
-    # list of last 5 tags
-    tags = !git tag -l | sort --version-sort | tail -n 5
-    # list branches
-    branches = !git branch -a --no-color | tr -d "[*[:blank:]]" | grep -v "HEAD" | sed -e "s/^remotes\\\\/origin\\\\///" | sort -u
-    # fetch and removes deleted (at origin) branches
-    ff = fetch --tags --prune --prune-tags --all
-    # get repo root dir
-    root = rev-parse --show-toplevel
-    # age of repo
-    born = !git log --pretty='format:%ar at %ai' --reverse | head -1
-    # local aliases
-    aliases = !git config -l | grep '^alias' | cut -c 7- | sort
-    # Remove BRanches MeRged
-    rbrmr = !git branch --merged | grep -v -e '^* ' -e '^  ma' | xargs -n 1 git branch -d
-    # total cleansing
-    gc-force = !git reflog expire --all --expire=now && git gc --prune=now --aggressive
-    # zip
-    zip = !git archive -o "$(basename "$(git root)")".zip HEAD
-    tag-rm = push --delete origin
-    undo = "!f() { git reset HEAD~${1:-1}; }; f"
-
-[include]
-    path = "urls.local"
-[diff]
-	colorMoved = zebra
 [color "status"]
 	branch = normal
 	added = 10 normal
@@ -119,48 +64,34 @@
 	nobranch = normal
 	unmerged = 9 normal
 	untracked = normal dim
+
 [color "branch"]
 	plain = normal
 	remote = normal
 	current = normal
 	local = normal
 	upstream = normal
+
 [color "remote"]
 	hint = normal dim
 	success = 2 normal
 	error = 1 normal
 	warning = 3 normal
+
 [color "interactive"]
 	header = normal
 	prompt = 15 4
 	help = normal
 	error = normal
-[color "diff"]
-	commit = normal
-	newMoved = 14 normal
-	oldMovedAlternativeDimmed = 4 normal dim
-	frag = normal
-	oldMovedAlternative = 12 normal dim
-	contextBold = normal bold
-	newBold = 10 normal bold
-	context = normal
-	oldMoved = 14 normal dim
-	oldBold = 9 normal dim bold
-	newMovedDimmed = 6 normal
-	func = normal
-	meta = normal
-	newDimmed = 2 normal
-	newMovedAlternative = 12 normal
-	new = 10 normal
-	newMovedAlternativeDimmed = 4 normal
-	whitespace = normal 9
-	oldMovedDimmed = 6 normal dim
-	oldDimmed = 1 normal dim
-	old = 9 normal dim
+
 [color "decorate"]
 	branch = normal
 	tag = normal
 	remotebranch = normal
 	stash = normal
 	grafted = normal
-	HEAD = normal
+    HEAD = normal
+
+[include]
+    path = "aliases"
+    path = "urls.work"

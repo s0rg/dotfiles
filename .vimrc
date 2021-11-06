@@ -162,7 +162,12 @@ let g:tagbar_autofocus = 1
 let g:tagbar_autoclose = 1
 let g:tagbar_compact = 2
 let g:tagbar_silent = 1
+let g:tagbar_indent = 1
 let g:tagbar_show_visibility = 0
+let g:tagbar_show_balloon = 0
+let g:tagbar_show_tag_count = 1
+let g:tagbar_autoshowtag = 1
+let g:tagbar_scrolloff = 5
 let g:tagbar_map_togglefold = '<space>'
 let g:tagbar_type_go = {
     \ 'ctagstype': 'go',

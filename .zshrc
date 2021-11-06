@@ -1,5 +1,3 @@
-# Set up the prompt
-
 autoload -Uz colors compinit
 
 colors

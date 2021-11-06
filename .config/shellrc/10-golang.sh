@@ -39,7 +39,7 @@ go-get-trace() {
 # aliases
 alias go-clean='go clean -cache -testcache -modcache'
 alias go-bench='go test -benchmem -bench=.'
-alias go-test='go test -count 1 -v .'
+alias go-test='richgo test -count 1 -v .'
 alias go-cpu='_go_cpu_profile'
 alias go-noproxy='export GOPROXY="direct"'
 alias go-mod-init='go mod init; go mod tidy'
