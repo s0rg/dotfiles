@@ -15,7 +15,7 @@ setopt EXTENDEDGLOB
 
 export ZSH_COMPDUMP=${HOME}/.cache/zcompdump
 
-for _ in "${ZSH_COMPDUMP}"(#qN.mh+6); do
+for _ in "${ZSH_COMPDUMP}"(#qN.mh+8); do
     compinit -i -d "${ZSH_COMPDUMP}"
     compdump -d "${ZSH_COMPDUMP}"
     local zwc

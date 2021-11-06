@@ -1,8 +1,7 @@
 AUTO_NOTIFY_IGNORE=(
-    "mc" "man" "v" "om" "omc"
-    "top" "htop" "gotop"
-    "less" "tailf" "tail"
-    "g *" "dots *"
+    "mc" "man" "v" "om" "omc" "si"
+    "top" "htop" "gotop" "less" "tailf" "tail"
+    "g ll" "g did" "dots ll" "dots did"
 )
 
 declare -U AUTO_NOTIFY_IGNORE
