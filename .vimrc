@@ -21,6 +21,14 @@ if (has('termguicolors'))
     set t_ut=
 endif
 
+let &t_SI .= "\<Esc>[3 q"
+let &t_EI .= "\<Esc>[5 q"
+
+augroup ResetCursorShape
+    au!
+    autocmd VimEnter * normal! :startinsert :stopinsert
+augroup END
+
 colorscheme jellybeans
 
 let &showbreak='↪ '
@@ -437,8 +445,9 @@ map <leader><ESC> :noh<CR>
 map <C-q> :qall!<CR>
 
 " no ex mode
-noremap Q     <Nop>
-noremap <C-z> <Nop>
+noremap  Q     <Nop>
+noremap  <C-z> <Nop>
+nnoremap Y     y$
 
 " reload VIM's configuration
 nmap <leader>r :source $MYVIMRC<CR>

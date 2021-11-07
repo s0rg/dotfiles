@@ -1,0 +1,2 @@
+#compdef zat
+compdef '_files -g "*.pdf"' zat
