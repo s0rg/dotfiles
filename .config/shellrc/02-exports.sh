@@ -34,10 +34,13 @@ export FZF_DEFAULT_OPTS="--ansi \
     --padding 0 \
     --reverse \
     --extended \
-    --bind 'change:first,backward-eof:abort,tab:down,space:toggle-preview,esc:cancel,ctrl-z:ignore,ctrl-r:toggle-sort' \
-    --preview-window right:50%"
-export FZF_DEFAULT_COMMAND="rg --files --no-heading"
-export FZF_COMPLETION_OPTS="--border --info=inline"
+    --bind 'change:first,backward-eof:abort' \
+    --bind 'tab:down,space:toggle-preview,esc:cancel' \
+    --bind 'ctrl-z:ignore,ctrl-s:toggle-sort' \
+    --preview-window hidden,right:50% \
+    --preview 'bat --style=numbers --color=always --line-range :200 {}'"
+export FZF_DEFAULT_COMMAND='fd --type f'
+# export FZF_CTRL_T_COMMAND='rg --files --no-heading'
 
 # https://secwiki.org/w/Running_nmap_as_an_unprivileged_user
 export NMAP_PRIVILEGED=''
