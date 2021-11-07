@@ -11,24 +11,28 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias ncdu='ncdu --color dark'
 
-alias t='touch'
-alias v='vim'
+# make them verbose ain interacive bt default
 alias cp='cp -riv'
+alias ln='ln -iv'
 alias mc='mc -d'
 alias mv='mv -iv'
+alias cal='echo; ncal -M -3; echo'
+alias mtr='mtr -bze'
+alias more='less'
+alias mkdir='mkdir -pv'
+
+# shortcuts
+alias t='touch'
+alias v='vim'
 alias si='sudo -i'
 alias wh='which'
-alias cal='echo; ncal -M -3; echo'
 alias cdt='cd $(mktemp -d)'
 alias chx='chmod u+x'
 alias duf='duf --hide special'
 alias hdx='hexyl'
 alias unx='7z x'
-alias mtr='mtr -bze'
 alias zat='zathura'
 alias obey='sudo $(fc -ln -1)'
-alias more='less'
-alias mkdir='mkdir -pv'
 alias tailf='tail -f --retry'
 alias today='date "+%Y_%m_%d"'
 
@@ -69,6 +73,7 @@ alias wttr='echo; \curl http://wttr.in/?format="%c:+%f+%w\n"; echo'
 # clipboard
 alias clip-get='xclip -selection clipboard -target STRING -out'
 alias clip-put='xclip -selection clipboard -target STRING -in'
+alias clip-clr='echo -n "" | clip-put'
 alias pub-clip='cat ${HOME}/.ssh/id_rsa.pub | clip-put'
 
 # command-history helpers
@@ -100,9 +105,6 @@ alias py-clear='find . | grep -E "(__pycache__|\.py[co]$)" | xargs rm -rf'
 alias ytd='youtube-dl'
 alias yta='youtube-dl -f bestaudio --extract-audio'
 alias ytv='youtube-dl -f bestvideo+bestaudio'
-
-# Add an "alert" alias for long running commands.  Use like so: sleep 10; alert
-alias alert='notify-send --urgency=normal "alert" "$(fc -nl -1 | sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'' -e '\''s/^[[:space:]]*//'\'')"'
 
 # docker
 alias doi-up="docker images -f 'dangling=false' --format '{{.Repository}}:{{.Tag}}' | xargs -L1 docker pull"
