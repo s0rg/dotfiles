@@ -1,17 +1,13 @@
-autoload -Uz colors compinit
-
-colors
-
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
 
-source /home/s0rg/.config/shellrc/path
-
 fpath+=(/home/s0rg/.config/shellrc/zsh-completions)
 
-setopt EXTENDEDGLOB
-
 export ZSH_COMPDUMP=${HOME}/.cache/zcompdump
+
+autoload -Uz compinit
+
+setopt EXTENDEDGLOB
 
 for _ in "${ZSH_COMPDUMP}"(#qN.mh+8); do
     compinit -i -d "${ZSH_COMPDUMP}"
