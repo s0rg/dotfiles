@@ -126,7 +126,6 @@ alias kat='kitty +kitten icat'
 alias dots='git --git-dir=${HOME}/.dotfiles/ --work-tree=${HOME}'
 alias dots-push='dots commit -am "stored at: $(date --rfc-3339=seconds)" && dots push'
 alias dots-plugs='vim-plugs-ls > ${HOME}/.vim/plugins-list'
-alias dots-state='dots st'
 
 # zoom
 alias z8j='zoom-join'
