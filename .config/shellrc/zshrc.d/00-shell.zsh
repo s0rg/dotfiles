@@ -62,18 +62,19 @@ unset src
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 declare -aU IGNORE_CMD=(
-    "?" "??" "[bf]g" "sh-*"                     # one / two-letters commands and tools
-    "fc *" "dots-*" "dots *" "hs-*# *"          # dotfiles and history management
-    "rm *" "kill *" "killall *"                 # one-shot commands, literally
-    "ps *" "pstree" "[h]top" "gotop"            # process / system info
-    "man *" "* --help" "* --version"            # info and manuals
-    "obey" "si" "sudo *" "*KEY*" "*TOKEN*"      # secutity
-    "l[ls]#( *)" "up# *" "cd# *" "bak *" "md *" # all others
-    "omc" "top-*" "uuid" "nscan-*" "t *" "wttr"
-    "heads *" "yt[dav] *" "dps" "groot" "chx *"
-    "cd[cplst]# *" "cal" "si" "z8[dj]" "clear"
-    "ex *" "reset" "exit" "pwd" "env" "get *"
-    "unx *" "mtr" "pub-clip" "bp" "pip-get *"
+    "?" "??" "[bf]g" "pwd" "clear" "env"   # one / two-letters commands and tools
+    "exit" "reset"
+    "fc *" "dots-*" "dots *" "higr *"      # dotfiles and history management
+    "rm *" "kill *" "killall *"            # one-shot commands, literally
+    "ps *" "pstree" "[h]top" "gotop"       # process / system info
+    "man *" "* --help" "* --version"       # info and manuals
+    "obey" "sudo *" "*KEY*" "*TOKEN*"      # secutity
+    "l[ls]#( *)" "up# *" "cd# *" "md *"    # all others
+    "omc" "top-*" "uuid" "nscan-*" "t *"
+    "wttr" "heads *" "yt[dav] *" "dps"
+    "groot" "chx *" "cd[cplst]# *" "cal"
+    "z8[dj]" "ex *" "get *" "unx *" "mtr"
+    "pub-clip" "pip-get *" "bak *" "sh-*" 
 )
 
 joined=""

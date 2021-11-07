@@ -76,10 +76,8 @@ alias clip-put='xclip -selection clipboard -target STRING -in'
 alias clip-clr='echo -n "" | clip-put'
 alias pub-clip='cat ${HOME}/.ssh/id_rsa.pub | clip-put'
 
-# command-history helpers
-alias hs-gr='history | rg'
-alias hs-clr='history -c; history -w'
-alias hs-stats='history | cut -d"]" -f 2- | sh-stats | head'
+# command-history grep
+alias higr='fc -l 1 | rg'
 
 # fast travel
 alias cdl='cd ~/Downloads && sh-fresh'
