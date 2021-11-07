@@ -34,7 +34,7 @@ zstyle ':completion:*' menu select=2
 zstyle ':completion:*' keep-prefix true
 zstyle ':completion:*' insert-tab pending
 zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zcompcache
-zstyle ':completion:*' completer _extensions _complete _approximate
+zstyle ':completion:*' completer _extensions _complete _ignored _approximate
 zstyle ':completion:*' matcher-list \
     'm:{a-zA-Z}={A-Za-z}' \
     'r:|[._-]=* r:|=*' \
@@ -46,6 +46,8 @@ zstyle ':completion:complete:*:options' sort false
 # zstyle ':completion:*:(rm|kill|diff):*' ignore-line yes
 
 zstyle ':completion:*:*:make:*' tag-order 'targets'
+zstyle ":completion:*:*:kill:*:processes" list-colors "=(#b) #([0-9]#)*=0=01;31"
+zstyle ":completion:*:kill:*" command "ps -u $USER -o pid,%cpu,%mem,cmd"
 
 cd_aliases+=(
     [cdp]="${HOME}/projects"

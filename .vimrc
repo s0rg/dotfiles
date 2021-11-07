@@ -259,6 +259,7 @@ let g:ale_go_gopls_init_options = { 'ui.diagnostic.analyses': {
 let g:ale_linters = {
     \ 'python': [ 'pylint' ],
     \ 'yaml': [ 'yamllint' ],
+    \ 'zsh': [ 'shellcheck' ],
     \ 'sh': [ 'shellcheck' ],
     \ 'go': [ 'gopls', 'govet' ],
     \ }
@@ -266,6 +267,7 @@ let g:ale_linters = {
 let g:ale_fixers = {
     \ '*': [ 'remove_trailing_lines', 'trim_whitespace' ],
     \ 'python': [ 'yapf', 'isort' ],
+    \ 'zsh': [ 'shfmt' ],
     \ 'sh': [ 'shfmt' ],
     \ }
 

@@ -3,26 +3,32 @@ bindkey -e
 
 fpath+=(/home/s0rg/.config/shellrc/zsh-completions)
 
+source /home/s0rg/.config/shellrc/plugins.zsh
+
 export ZSH_COMPDUMP=${HOME}/.cache/zcompdump
 
 autoload -Uz compinit
 
-setopt EXTENDEDGLOB
-
-for _ in "${ZSH_COMPDUMP}"(#qN.mh+8); do
+_setup_compdump() {
     compinit -i -d "${ZSH_COMPDUMP}"
-    compdump -d "${ZSH_COMPDUMP}"
     local zwc
     zwc="${ZSH_COMPDUMP}".zwc
     if [[ (! -f "${zwc}" || "${ZSH_COMPDUMP}" -nt "${zwc}") ]]; then
         zcompile -M "${ZSH_COMPDUMP}"
     fi
-done
-setopt NO_EXTENDEDGLOB
+}
+
+if [ ! -f "${ZSH_COMPDUMP}" ]; then
+    _setup_compdump
+else
+    setopt EXTENDEDGLOB
+    for _ in "${ZSH_COMPDUMP}"(#qN.mh+8); do
+        _setup_compdump
+    done
+    setopt NO_EXTENDEDGLOB
+fi
 
 compinit -C -d "${ZSH_COMPDUMP}"
-
-source /home/s0rg/.config/shellrc/plugins.zsh
 
 typeset -A cd_aliases
 
