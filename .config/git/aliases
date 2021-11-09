@@ -17,6 +17,7 @@
     mem = merge master
     wat = whatchanged
     put = push origin --tags
+    url = remote get-url origin
     # cleaner diff - no contents for deleted files
     did = diff --irreversible-delete
     dis = did --staged

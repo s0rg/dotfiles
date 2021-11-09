@@ -37,7 +37,7 @@ go-get-trace() {
 }
 
 # aliases
-alias go-clean='go clean -cache -testcache -modcache'
+alias go-clean='go clean -cache -testcache -modcache; golangci-lint cache clean'
 alias go-bench='go test -benchmem -bench=.'
 alias go-test='richgo test -count 1 -v .'
 alias go-cpu='_go_cpu_profile'
