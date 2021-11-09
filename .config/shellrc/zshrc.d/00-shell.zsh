@@ -12,11 +12,22 @@ setopt ALWAYS_TO_END
 setopt SHARE_HISTORY
 setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
+setopt HIST_FCNTL_LOCK
 setopt HIST_REDUCE_BLANKS
 setopt HIST_SAVE_NO_DUPS
 setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_EXPIRE_DUPS_FIRST
+
+setopt HIST_NO_STORE
+setopt HIST_NO_FUNCTIONS
+
+setopt NO_AUTO_CD
+setopt NO_PUSHD_TO_HOME
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+
+export DIRSTACKSIZE=10
 
 set zle_bracketed_paste  # Explicitly restore this zsh default
 
@@ -65,7 +76,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 declare -aU IGNORE_CMD=(
     "?" "??" "[bf]g" "pwd" "clear" "env"   # one / two-letters commands and tools
     "exit" "reset"
-    "fc *" "dots-*" "dots *" "higr *"      # dotfiles and history management
+    "dots-*" "dots *" "higr *"             # dotfiles and history management
     "rm *" "kill *" "killall *"            # one-shot commands, literally
     "ps *" "pstree" "[h]top" "gotop"       # process / system info
     "man *" "* --help" "* --version"       # info and manuals
