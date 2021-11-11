@@ -29,6 +29,8 @@ setopt PUSHD_IGNORE_DUPS
 
 export DIRSTACKSIZE=10
 
+export ZLE_SPACE_SUFFIX_CHARS='&|'
+
 set zle_bracketed_paste  # Explicitly restore this zsh default
 
 autoload -Uz bracketed-paste-magic url-quote-magic

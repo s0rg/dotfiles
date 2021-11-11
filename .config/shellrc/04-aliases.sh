@@ -137,7 +137,9 @@ alias kctx='k ctx'
 alias kapt='k krew'
 alias kapt-up='kapt upgrade'
 alias knode='kubecolor describe node'
-alias kevents='kubecolor get events -w'
+alias klogs='kubecolor logs -f'
+alias klogs-all='kubecolor logs -f --all-containers'
+alias kevents='kubecolor get events --sort-by=.metadata.creationTimestamp'
 
 # nmap
 alias _nmp='nmap --source-port 53'
