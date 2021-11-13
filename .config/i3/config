@@ -228,6 +228,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id nm-applet
 exec --no-startup-id kbdd
 exec --no-startup-id udiskie
+exec --no-startup-id cbatticon -u 10 --critical-level 10 --command-critical-level "systemctl suspend"
 
 # first terminal
 exec --no-startup-id $term

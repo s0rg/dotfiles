@@ -44,7 +44,7 @@ font-4 = Font Awesome 5 Free:pixelsize=6:style=Solid;0
 
 modules-left = i3 xwindow
 modules-center =
-modules-right = cmus xkeyboard sep temperature cpu memory filesystem battery sep backlight pulseaudio micstatus bluetooth date
+modules-right = cmus xkeyboard sep temperature cpu memory filesyste sep backlight pulseaudio micstatus bluetooth date
 
 tray-position = right
 tray-padding = 2
@@ -209,45 +209,6 @@ label-foreground = ${colors.foreground}
 label-font = 4
 label-padding-right = 1
 exec = pulse-mic --status
-
-
-[module/battery]
-type = internal/battery
-battery = BAT1
-adapter = ACAD
-full-at = 100
-time-format = %H:%M
-
-label-charging = %percentage%%
-format-charging = %{T2}<animation-charging>%{T-} <label-charging>
-
-label-discharging = %percentage%% ~ %time%
-format-discharging = <ramp-capacity> <label-discharging>
-
-label-full = %percentage%%
-format-full = <label-full>
-format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
-format-full-overline = ${colors.foreground-alt}
-
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-3 = 
-ramp-capacity-4 = 
-ramp-capacity-5 = 
-ramp-capacity-6 = 
-ramp-capacity-7 = 
-ramp-capacity-8 = 
-
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-3 = 
-animation-charging-4 = 
-animation-charging-5 = 
-; Framerate in milliseconds
-animation-charging-framerate = 750
 
 
 [module/temperature]
