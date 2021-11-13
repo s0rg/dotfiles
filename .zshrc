@@ -1,9 +1,9 @@
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
 
-fpath+=(/home/s0rg/.config/shellrc/zsh-completions)
+fpath+=("${HOME}/.config/shellrc/zsh-completions")
 
-source /home/s0rg/.config/shellrc/plugins.zsh
+source "${HOME}/.config/shellrc/plugins.zsh"
 
 export ZSH_COMPDUMP=${HOME}/.cache/zcompdump
 

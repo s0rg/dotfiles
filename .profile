@@ -1,1 +1,1 @@
-source /home/s0rg/.config/shellrc/path
+source "${HOME}/.config/shellrc/path"
