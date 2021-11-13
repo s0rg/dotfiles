@@ -13,9 +13,9 @@ up() {
     echo -e "\033[0;30m$(pwd)\033[0m\n"
 }
 
-# `o` with no arguments open current directory,
+# `opn` with no arguments open current directory,
 # otherwise open the given location or file
-o() { xdg-open "${@:-.}" disown >/dev/null 2>&1; }
+opn() { xdg-open "${@:-.}" disown >/dev/null 2>&1; }
 
 # (un-)backups file or dir
 bak() {
@@ -161,7 +161,7 @@ g() {
 ## kubernetes
 
 # show all pods or describe given
-kpod() {
+kpods() {
     if [ -z "${1}" ]; then
         kubecolor get pods -o wide
     else
@@ -183,5 +183,7 @@ dsql() {
     pass="${POSTGRES_PASSWORD:-postgres}"
     local port
     port="${POSTGRES_PORT:-5432}"
-    usql "postgresql://${user}:${pass}@$(docker-ip --raw "${container}"):${port}/${db}?sslmode=disable"
+    local addr
+    addr=$(docker-ip --raw "${container}")
+    usql "postgresql://${user}:${pass}@${addr}:${port}/${db}?sslmode=disable"
 }

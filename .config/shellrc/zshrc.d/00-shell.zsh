@@ -1,5 +1,8 @@
+setopt NO_BEEP NO_HIST_BEEP NO_LIST_BEEP
 setopt NO_FLOW_CONTROL
 setopt NO_MAIL_WARNING
+setopt NO_AUTO_CD 
+setopt NO_PUSHD_TO_HOME
 
 setopt ALIASES 
 setopt CLOBBER
@@ -9,6 +12,9 @@ setopt TRANSIENT_RPROMPT
 
 setopt COMPLETE_IN_WORD
 setopt ALWAYS_TO_END
+
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
 
 setopt SHARE_HISTORY
 setopt APPEND_HISTORY
@@ -22,11 +28,6 @@ setopt HIST_EXPIRE_DUPS_FIRST
 
 setopt HIST_NO_STORE
 setopt HIST_NO_FUNCTIONS
-
-setopt NO_AUTO_CD
-setopt NO_PUSHD_TO_HOME
-setopt AUTO_PUSHD
-setopt PUSHD_IGNORE_DUPS
 
 export DIRSTACKSIZE=10
 
@@ -76,20 +77,19 @@ unset src
 
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
+
 declare -aU IGNORE_CMD=(
-    "?" "??" "[bf]g" "pwd" "clear" "env"   # one / two-letters commands and tools
-    "exit" "reset"
-    "dots-*" "dots *" "higr *"             # dotfiles and history management
-    "rm *" "kill *" "killall *"            # one-shot commands, literally
-    "ps *" "pstree" "[h]top" "gotop"       # process / system info
-    "man *" "* --help" "* --version"       # info and manuals
-    "obey" "sudo *" "*KEY*" "*TOKEN*"      # secutity
-    "l[ls]#( *)" "up# *" "cd# *" "md *"    # all others
-    "omc" "top-*" "uuid" "nscan-*" "t *"
-    "wttr" "heads *" "yt[dav] *" "dps"
-    "groot" "chx *" "cd[cplst]# *" "cal"
-    "z8[dj]" "ex *" "get *" "unx *" "mtr"
-    "pub-clip" "pip-get *" "bak *" "sh-*" 
+    "?" "??" "[bf]g" "pwd" "clear" "env" "exit" "reset" # one / two-letters commands and tools
+    "dots-*" "dots *" "higr *"                          # dotfiles and history management
+    "rm *" "kill *" "killall *"                         # one-shot commands, literally
+    "ps *" "pstree" "[h]top" "gotop"                    # process / system info
+    "man *" "* --help" "* --version"                    # info and manuals
+    "obey" "sudo *" "*KEY*" "*TOKEN*"                   # security
+    "l[ls]#( *)" "up# *" "cd# *" "md *" "omc" "top-*"   # all others
+    "uuid" "nscan-*" "t *" "wttr" "heads *" "yt[dav] *"
+    "dps" "groot" "chx *" "cd[cplst]# *" "cal" "z8[dj]"
+    "ex *" "get *" "unx *" "mtr" "pub-clip" "pip-get *"
+    "bak *" "sh-*" 
 )
 
 joined=""

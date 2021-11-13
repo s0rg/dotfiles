@@ -11,7 +11,7 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias ncdu='ncdu --color dark'
 
-# make them verbose ain interacive bt default
+# make them verbose and interacive by default
 alias cp='cp -riv'
 alias ln='ln -iv'
 alias mc='mc -d'
@@ -40,7 +40,6 @@ alias today='date "+%Y_%m_%d"'
 # shell tools
 alias sh-reload='exec "${SHELL}" -l'
 alias sh-nohist='unset HISTFILE'
-alias sh-funlist='compgen -A function | sort -u'
 alias sh-path='echo -n "$PATH" | tr ":" "\n" | sort'
 
 # shell extras
@@ -52,10 +51,10 @@ alias sh-stats='sort | uniq -c | sort -n -r'
 alias sh-trim='sed -e '\''s/^[[:space:]]*//g'\'' -e '\''s/[[:space:]]*\$//g'\'''
 alias sh-size='_fn_size'
 alias sh-strip-ansi="sed 's/\x1b\[[0-9;]*m//g'"
-alias sh-lc-all='rename "y/A-Z/a-z/" *'
-alias sh-uc-all='rename "y/a-z/A-Z/" *'
 alias sh-fetch='clear; neofetch --backend "kitty"'
-alias sh-fresh='_last_changed'
+alias sh-last='_last_changed'
+alias sh-to-lower='rename "y/A-Z/a-z/" *'
+alias sh-to-upper='rename "y/a-z/A-Z/" *'
 
 # list taken from: https://techblog.willshouse.com/2012/01/03/most-common-user-agents/
 alias sh-rnd-ua='shuf -n 1 "${XDG_DATA_HOME}"/rand_ua.list'
@@ -81,11 +80,11 @@ alias pub-clip='cat ${HOME}/.ssh/id_rsa.pub | clip-put'
 alias higr='fc -l 1 | rg'
 
 # fast travel
-alias cdl='cd ~/Downloads && sh-fresh'
+alias cdl='cd ~/Downloads && sh-last'
 alias cds='cd ~/.local/scripts'
 
 # fast open for configs
-alias omc='cd "${XDG_CONFIG_HOME}"; om 00-shell.sh'
+alias omc='cdc; om 00-shell.sh'
 
 # system
 alias top-mem='ps -Ao user,pid,pcpu,pmem,comm --sort=-pmem | head --lines=6'
@@ -150,7 +149,6 @@ alias nscan-xray='_nmp -T3 -sS -Pn --open -A'
 unset _nmp
 
 # wifi
-alias wifi-up='nmcli device wifi connect'
 alias wifi-ls='nmcli device wifi list --rescan yes'
 
 # scc
