@@ -66,7 +66,7 @@ zstyle ":completion:*:kill:*" command "ps --forest -u $USER -o pid,%cpu,%mem,cmd
 
 cd_aliases+=(
     [cdp]="${HOME}/projects"
-    [cdc]="${XDG_CONFIG_HOME}"
+    [cdc]="${HOME}/.config"
 )
 
 for src in "${HOME}"/.config/shellrc/*.sh; do

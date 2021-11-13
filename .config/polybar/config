@@ -44,7 +44,7 @@ font-4 = Font Awesome 5 Free:pixelsize=6:style=Solid;0
 
 modules-left = i3 xwindow
 modules-center =
-modules-right = cmus xkeyboard sep temperature cpu memory filesyste sep backlight pulseaudio micstatus bluetooth date
+modules-right = mpd xkeyboard sep temperature cpu memory filesyste sep backlight pulseaudio micstatus bluetooth date
 
 tray-position = right
 tray-padding = 2
@@ -225,15 +225,20 @@ label-warn-foreground = ${colors.foreground-alt}
 label-warn-overline = ${colors.alert}
 format-warn = <label-warn>
 
+[module/mpd]
+type = internal/mpd
 
-[module/cmus]
-type = custom/script
-exec = cmus-status
-exec-if = pgrep -x cmus
+host = 127.0.0.1
+port = 6600
+password =
 interval = 1
-label-maxlen = 50
-click-left = cmus-remote --pause
-
+format-offline = "mpd offline"
+format-offline-foreground = ${colors.alert}
+format-stopped = ""
+format-playing = 契 <label-song> [ <label-time> ]
+format-paused =   <label-song>
+label-song = %artist% - %title%
+label-time = %elapsed% / %total%
 
 [module/bluetooth]
 type = custom/script

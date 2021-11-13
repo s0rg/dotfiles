@@ -40,7 +40,7 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
   * Less annoiyng quickfix/location lists: [romainl/vim-qf](https://github.com/romainl/vim-qf.git)
   * Handy startscreen: [mhinz/vim-startify](https://github.com/mhinz/vim-startify.git)
 - menus: [rofi](https://github.com/davatorium/rofi)
-- music: [cmus](https://cmus.github.io/)
+- music: [mpd](https://www.musicpd.org/)
 - terminal: [kitty](https://sw.kovidgoyal.net/kitty/)
 - panel: [polybar](https://polybar.github.io/)
 - system info: [gotop](https://github.com/xxxserxxx/gotop)

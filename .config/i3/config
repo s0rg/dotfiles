@@ -43,11 +43,12 @@ floating_maximum_size         1200 x 650
 
 set $rofi :: [r]un / [w]in / [f]ox / [b]luetooth / [q]uit
 mode "$rofi" {
+    bindsym b $run "rofi-bluetooth",                                      $mode_reset
+    bindsym f $run "rofi -show rfox -modi rfox:~/.local/scripts/rofifox", $mode_reset
+    bindsym m $run "rofi-mpd -a",                                         $mode_reset
+    bindsym q $run "rofi -show roff -modi roff:~/.local/scripts/rofioff", $mode_reset
     bindsym r $run "rofi -show combi -display-combi 'run '",              $mode_reset
     bindsym w $run "rofi -show window -display-window 'win '",            $mode_reset
-    bindsym f $run "rofi -show rfox -modi rfox:~/.local/scripts/rofifox", $mode_reset
-    bindsym q $run "rofi -show roff -modi roff:~/.local/scripts/rofioff", $mode_reset
-    bindsym b $run "rofi-bluetooth",                                      $mode_reset
 
     bindsym Escape $mode_reset
 }
@@ -84,7 +85,6 @@ mode "$split" {
 }
 
 bindsym $mod+Return     $run $term, focus
-bindsym $mod+c          $run i3-cmus
 bindsym $mod+d          $run clip-trans
 bindsym $mod+Tab        layout toggle all
 
@@ -116,9 +116,9 @@ bindsym XF86AudioLowerVolume  $run pactl set-sink-volume $vol_sink -$vol_step
 bindsym XF86AudioMute         $run pactl set-sink-mute $vol_sink toggle
 
 ## cmus
-bindsym XF86AudioPlay         $run cmus-remote --pause
-bindsym XF86AudioNext         $run cmus-remote --next
-bindsym XF86AudioPrev         $run cmus-remote --prev
+bindsym XF86AudioPlay         $run mpc toggle
+bindsym XF86AudioNext         $run mpc next
+bindsym XF86AudioPrev         $run mpc prev
 
 ## backlight
 bindsym XF86MonBrightnessUp   $run xbacklight -inc $bri_step
@@ -126,8 +126,6 @@ bindsym XF86MonBrightnessDown $run xbacklight -dec $bri_step
 
 bindsym --release Print       $run i3-scrot --desk
 bindsym --release $ctrl+Print $run i3-scrot --window
-
-# scratchpad
 
 ## move window
 bindsym $mod+KP_Subtract      $move_pad
@@ -147,10 +145,6 @@ for_window [class="^Evolution-alarm-notify$"]               $float, $center
 for_window [class="^pavucontrol-qt$"]                       $float, $sticky
 for_window [class="^Firefox$" title="^Picture-in-Picture$"] $float, $sticky
 for_window [class="^zoom$"]                                 $float
-
-# scratchpad
-for_window [class="^kitty$" instance="^cmus$"]              mark pad
-for_window [con_mark="pad"]                                 $float, $center, $move_pad
 
 # garbage
 for_window [class="^Steam$" title="^Steam - News"]          kill

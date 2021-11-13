@@ -481,6 +481,8 @@ autocmd FileType yaml,json setlocal ts=2 sw=2
 " For text file, wrap all the text
 autocmd FileType text setlocal formatoptions=tjl1
 
+autocmd BufNewFile,BufRead *.asm set ft=fasm
+autocmd BufNewFile,BufRead *.inc set ft=fasm
 
 " disable cursors keys, someday, maybe...
 "nnoremap <Left>  :echoe 'Use h'<CR>
