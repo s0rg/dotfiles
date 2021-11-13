@@ -2,7 +2,7 @@
 alias sudo='sudo '
 
 alias ls='ls --color=auto --group-directories-first -v'
-alias ll='ls -hAlF --time-style=+"%Y-%m-%d %H:%M:%S"'
+alias ll='ls -hAlFG --time-style=+"%Y-%m-%d %H:%M:%S"'
 alias ip='ip -color=auto'
 alias diff='diff --color=auto'
 alias dmesg='dmesg --color=auto'

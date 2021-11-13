@@ -1,6 +1,7 @@
 setopt NO_FLOW_CONTROL
 setopt NO_MAIL_WARNING
 
+setopt ALIASES 
 setopt CLOBBER
 setopt HASH_LIST_ALL
 setopt AUTO_PARAM_SLASH
@@ -47,7 +48,7 @@ zstyle ':completion:*' menu select=2
 zstyle ':completion:*' keep-prefix true
 zstyle ':completion:*' insert-tab pending
 zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zcompcache
-zstyle ':completion:*' completer _expand _extensions _complete _ignore _approximate
+zstyle ':completion:*' completer _expand _extensions _complete _ignored _approximate
 zstyle ':completion:*' matcher-list \
     'm:{a-zA-Z}={A-Za-z}' \
     'r:|[._-]=* r:|=*' \
