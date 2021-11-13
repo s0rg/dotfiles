@@ -42,6 +42,8 @@ zle -N self-insert url-quote-magic
 
 typeset -U path cdpath fpath manpath
 
+zle_highlight+=(paste:none)
+
 zstyle ':completion:*' rehash true
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' group-name ''

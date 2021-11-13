@@ -464,8 +464,9 @@ vmap <leader><space> za
 map <leader>/ :Commentary<CR>
 
 nnoremap <leader>d "_dd
-xnoremap <leader>d "_dd
-xnoremap <leader>p "_dP
+vnoremap <leader>d "_dd
+
+nnoremap <C-o> <C-o>zz
 
 " vim-go
 autocmd FileType go nmap <leader>t :GoAddTags<CR>
