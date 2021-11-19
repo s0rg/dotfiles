@@ -68,6 +68,9 @@ set hlsearch incsearch ignorecase smartcase wrapscan
 set nospell nostartofline noerrorbells novisualbell t_vb=
 set encoding=utf-8 fileencoding=utf-8 termencoding=utf-8 nobomb
 
+" enable Normal mode keys in ru layout
+set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
+
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 set viminfo=%,<10,'10,/10,:50,h,f0,n~/.vim/cache/.viminfo
 "           |  |   |   |   |  |  |  + viminfo file path

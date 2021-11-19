@@ -44,7 +44,7 @@ font-4 = Font Awesome 5 Free:pixelsize=6:style=Solid;0
 
 modules-left = i3 xwindow
 modules-center =
-modules-right = mpd xkeyboard sep temperature cpu memory filesyste sep backlight pulseaudio micstatus bluetooth date
+modules-right = mpd xkeyboard sep temperature cpu memory filesystem sep backlight pulseaudio micstatus bluetooth date
 
 tray-position = right
 tray-padding = 2
@@ -60,7 +60,7 @@ cursor-scroll = ns-resize
 type = internal/xwindow
 format-padding = 1
 label = %title%
-label-maxlen = 70
+label-maxlen = 60
 
 
 [module/xkeyboard]
