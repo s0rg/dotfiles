@@ -41,7 +41,7 @@ floating_maximum_size         1200 x 650
 
 ## KEYS
 
-set $rofi :: [r]un / [w]in / [f]ox / [b]luetooth / [q]uit
+set $rofi :: [r]un / [w]in / [f]ox / [b]luetooth / [m]pd / [q]uit
 mode "$rofi" {
     bindsym b $run "rofi-bluetooth",                                      $mode_reset
     bindsym f $run "rofi -show rfox -modi rfox:~/.local/scripts/rofifox", $mode_reset
