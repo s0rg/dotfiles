@@ -34,9 +34,8 @@ export FZF_DEFAULT_OPTS="--ansi \
     --padding 0 \
     --reverse \
     --extended \
-    --bind 'change:first,backward-eof:abort' \
-    --bind 'tab:down,space:toggle-preview,esc:cancel' \
-    --bind 'ctrl-z:ignore,ctrl-s:toggle-sort' \
+    --bind 'change:first,backward-eof:abort,tab:down,esc:cancel' \
+    --bind 'ctrl-z:ignore,ctrl-s:toggle-sort,ctrl-/:toggle-preview' \
     --preview-window hidden,right:50% \
     --preview 'bat --style=numbers --color=always --line-range :200 {}'"
 export FZF_DEFAULT_COMMAND='fd --type f'
