@@ -34,9 +34,10 @@ export FZF_DEFAULT_OPTS="--ansi \
     --padding 0 \
     --reverse \
     --extended \
+    --marker='*' \
+    --preview-window hidden,right:50% \
     --bind 'change:first,backward-eof:abort,tab:down,esc:cancel' \
     --bind 'ctrl-z:ignore,ctrl-s:toggle-sort,ctrl-/:toggle-preview' \
-    --preview-window hidden,right:50% \
     --preview 'bat --style=numbers --color=always --line-range :200 {}'"
 export FZF_DEFAULT_COMMAND='fd --type f'
 # export FZF_CTRL_T_COMMAND='rg --files --no-heading'
