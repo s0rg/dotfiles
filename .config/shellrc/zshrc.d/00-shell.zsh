@@ -18,7 +18,7 @@ setopt PUSHD_IGNORE_DUPS
 
 setopt SHARE_HISTORY
 setopt APPEND_HISTORY
-setopt INC_APPEND_HISTORY
+# setopt INC_APPEND_HISTORY
 setopt HIST_FCNTL_LOCK
 setopt HIST_REDUCE_BLANKS
 setopt HIST_SAVE_NO_DUPS
@@ -79,6 +79,9 @@ unset src
 
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
+# don't append "not found command" to history
+# https://www.zsh.org/mla/users//2014/msg00715.html
+zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
 
 declare -aU IGNORE_CMD=(
     "?" "??" "[bf]g" "pwd" "clear" "env" "exit" "reset" # one / two-letters commands and tools

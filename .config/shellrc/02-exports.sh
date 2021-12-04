@@ -37,8 +37,8 @@ export FZF_DEFAULT_OPTS="--ansi \
     --marker='*' \
     --preview-window hidden,right:50% \
     --bind 'change:first,backward-eof:abort,tab:down,esc:cancel' \
-    --bind 'ctrl-z:ignore,ctrl-s:toggle-sort,ctrl-/:toggle-preview' \
-    --preview 'bat --style=numbers --color=always --line-range :200 {}'"
+    --bind 'ctrl-z:ignore,ctrl-s:toggle-sort,ctrl-/:toggle-preview'"
+
 export FZF_DEFAULT_COMMAND='fd --type f'
 # export FZF_CTRL_T_COMMAND='rg --files --no-heading'
 
