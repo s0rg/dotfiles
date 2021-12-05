@@ -110,4 +110,4 @@ done
 export HISTORY_IGNORE="(${joined})"
 unset joined
 
-alias sh-plugs-up='antibody bundle < "${SHELLRC_HOME}"/zsh_plugins.txt > "${SHELLRC_HOME}"/plugins.zsh'
+alias sh-plugs-up='antibody bundle < "${SHELLRC_HOME}"/zsh_plugins.txt > "${SHELLRC_HOME}"/plugins.zsh; antibody update'
