@@ -94,7 +94,7 @@ declare -aU IGNORE_CMD=(
     "uuid" "nscan-*" "t *" "wttr" "heads *" "yt[dav] *"
     "dps" "groot" "chx *" "cd[cplst]# *" "cal" "z8[dj]"
     "ex *" "get *" "unx *" "mtr" "pub-clip" "pip-get *"
-    "bak *" "sh-*" 
+    "bak *" "sh-*" "upp"
 )
 
 joined=""
