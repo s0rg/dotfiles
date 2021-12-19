@@ -330,7 +330,7 @@ let g:startify_bookmarks = [
     \ ]
 
 let g:startify_commands = [
-    \ {'s': ['scratchpad', 'setlocal buftype=nofile | enew']},
+    \ {'s': ['scratchpad', 'enew | setlocal buftype=nofile']},
     \ ]
 
 let g:startify_skiplist = [
