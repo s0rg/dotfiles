@@ -104,6 +104,7 @@ let g:lightline = {
     \   'active': { 'right': [
     \       [ 'lineinfo' ],
     \       [ 'percent' ],
+    \       [ 'filetype' ],
     \       [ 'lint_check', 'lint_err', 'lint_warn', 'lint_info', 'lint_ok' ],
     \       [ 'gitbranch' ]
     \   ]},
@@ -318,18 +319,27 @@ let g:startify_session_before_save = [ 'silent! tabdo NERDTreeClose' ]
 
 let g:startify_lists = [
     \ { 'type': 'sessions',  'header': [ '> sessions'  ] },
-    \ { 'type': 'files',     'header': [ '> MRU'       ] },
+    \ { 'type': 'files',     'header': [ '> last'      ] },
     \ { 'type': 'bookmarks', 'header': [ '> bookmarks' ] },
+    \ { 'type': 'commands',  'header': [ '> commands'  ] },
     \ ]
 
 let g:startify_bookmarks = [
     \ { 'v': '~/.vimrc'                   },
-    \ { 'i': '~/.config/i3/config'        },
     \ { 'n': '~/Documents/notes/local.md' },
     \ ]
 
+let g:startify_commands = [
+    \ {'s': ['scratchpad', 'setlocal buftype=nofile | enew']},
+    \ ]
+
+let g:startify_skiplist = [
+    \ '/.vimrc$',
+    \ '/local.md$',
+    \ ]
+
 let g:startify_custom_header =
-            \ startify#pad(split(system('fortune pratchett tao wisdom | cowsay'), '\n'))
+    \ startify#pad(split(system('fortune -s pratchett tao wisdom | cowsay'), '\n'))
 
 " pgsql
 let g:sql_type_default = 'pgsql'
