@@ -14,11 +14,7 @@ alias ncdu='ncdu --color dark'
 # make them verbose and interacive by default
 alias cp='cp -riv'
 alias ln='ln -iv'
-alias mc='mc -d'
 alias mv='mv -iv'
-alias cal='echo; ncal -M -3; echo'
-alias mtr='mtr -bze'
-alias more='less'
 alias mkdir='mkdir -pv'
 
 # shortcuts
@@ -33,8 +29,12 @@ alias hdx='hexyl'
 alias unx='7z x'
 alias upp='uptime --pretty'
 alias zat='zathura'
+alias cal='echo; ncal -M -3; echo'
 alias calc='noglob calc'
-alias obey='sudo $(fc -ln -1)'
+alias obey='sudo !!'
+alias mc='mc -d'
+alias mtr='mtr -bze'
+alias more='less'
 alias tailf='tail -f --retry'
 alias today='date "+%Y_%m_%d"'
 
@@ -54,8 +54,8 @@ alias sh-size='_fn_size'
 alias sh-strip-ansi="sed 's/\x1b\[[0-9;]*m//g'"
 alias sh-fetch='clear; neofetch --backend "kitty"'
 alias sh-last='_last_changed'
-alias sh-to-lower='rename "y/A-Z/a-z/" *'
-alias sh-to-upper='rename "y/a-z/A-Z/" *'
+alias sh-tolower='rename "y/A-Z/a-z/" *'
+alias sh-toupper='rename "y/a-z/A-Z/" *'
 
 # list taken from: https://techblog.willshouse.com/2012/01/03/most-common-user-agents/
 alias sh-rnd-ua='shuf -n 1 "${XDG_DATA_HOME}"/rand_ua.list'
@@ -76,9 +76,6 @@ alias clip-get='xclip -selection clipboard -target STRING -out'
 alias clip-put='xclip -selection clipboard -target STRING -in'
 alias clip-clr='echo -n "" | clip-put'
 alias pub-clip='cat ${HOME}/.ssh/id_rsa.pub | clip-put'
-
-# command-history grep
-alias higr='fc -l 1 | rg'
 
 # fast travel
 alias cdl='cd ~/Downloads && sh-last'

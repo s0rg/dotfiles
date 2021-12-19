@@ -83,17 +83,16 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
 
 declare -aU IGNORE_CMD=(
-    "?" "??" "[bf]g" "pwd" "clear" "env" "exit" "reset" # one / two-letters commands and tools
-    "dots-*" "dots *" "higr *"                          # dotfiles and history management
-    "rm *" "kill *" "killall *"                         # one-shot commands, literally
-    "ps *" "pstree" "[h]top" "gotop"                    # process / system info
-    "man *" "* --help" "* --version"                    # info and manuals
-    "obey" "sudo *" "*KEY*" "*TOKEN*"                   # security
-    "l[ls]#( *)" "up# *" "cd# *" "md *" "omc" "top-*"   # all others
-    "uuid" "nscan-*" "t *" "wttr" "heads *" "yt[dav] *"
-    "dps" "groot" "chx *" "cd[cplst]# *" "cal" "z8[dj]"
-    "ex *" "get *" "unx *" "mtr" "pub-clip" "pip-get *"
-    "bak *" "sh-*" "upp"
+    "?" "??" "[bf]g" "clear" "exit" "reset"   # one / two-letters commands and tools
+    "dots *" "sudo *"                         # dotfiles and sudo
+    "rm *" "kill *" "killall *"               # one-shot commands, literally
+    "man *" "* --help" "* --version"          # info and manuals
+    "*KEY*" "*TOKEN*"                         # security
+    "l[ls]#( *)" "up# *" "cd# *" "md *" "omc" # all others
+    "top-*" "nscan-*" "t *" "wttr" "heads *" 
+    "yt[dav] *" "chx *" "cd[cplst]# *" "cal"
+    "get *" "unx *" "mtr" "pip-get *" "bak *"
+    "sh-*" "upp" "ps *"
 )
 
 joined=""
