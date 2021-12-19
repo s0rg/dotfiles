@@ -12,12 +12,12 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
 
 - wm: [i3](https://i3wm.org/)
 - shell: [zsh](https://www.zsh.org/) (*plugins* managed by [antibody](https://github.com/getantibody/antibody)):
-  * Notify on long or failed tasks: [MichaelAquilina/zsh-auto-notify](https://github.com/MichaelAquilina/zsh-auto-notify)
-  * Sets window titile: [trystan2k/zsh-tab-title](https://github.com/trystan2k/zsh-tab-title)
-  * Kubernetes autocomplete+aliases: [Dbz/kube-aliases](https://github.com/Dbz/kube-aliases)
+  * Notify on long (or failed) tasks: [MichaelAquilina/zsh-auto-notify](https://github.com/MichaelAquilina/zsh-auto-notify)
+  * Window title from shell: [trystan2k/zsh-tab-title](https://github.com/trystan2k/zsh-tab-title)
+  * Kubernetes autocomplete + aliases: [Dbz/kube-aliases](https://github.com/Dbz/kube-aliases)
   * FZF for anything: [Aloxaf/fzf-tab](https://github.com/Aloxaf/fzf-tab)
-  * ..and history too: [joshskidmore/zsh-fzf-history-search](https://github.com/joshskidmore/zsh-fzf-history-search)
-  * fishy thing: [zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+  * ...and history too: [joshskidmore/zsh-fzf-history-search](https://github.com/joshskidmore/zsh-fzf-history-search)
+  * fishy things: [zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
   * eye-candy cli: [zdharma-continuum/fast-syntax-highlighting](https://github.com/zdharma-continuum/fast-syntax-highlighting)
 - editor: [vim](https://www.vim.org/) (*plugins* managed by [pathogen](https://github.com/tpope/vim-pathogen)):
   * Async linters/fixers: [dense-analysis/ale](https://github.com/dense-analysis/ale.git)
