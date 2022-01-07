@@ -490,7 +490,6 @@ autocmd FileType go nmap <leader>l :GoImplements<CR>
 autocmd FileType go nmap tf :GoTests<CR>
 autocmd FileType go nmap ta :GoTestsAll<CR>
 
-
 autocmd FileType yaml,json setlocal ts=2 sw=2
 " For text file, wrap all the text
 autocmd FileType text setlocal formatoptions=tjl1

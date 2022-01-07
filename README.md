@@ -13,7 +13,6 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
 - wm: [i3](https://i3wm.org/)
 - shell: [zsh](https://www.zsh.org/) (*plugins* managed by [antibody](https://github.com/getantibody/antibody)):
   * Notify on long (or failed) tasks: [MichaelAquilina/zsh-auto-notify](https://github.com/MichaelAquilina/zsh-auto-notify)
-  * Window title from shell: [trystan2k/zsh-tab-title](https://github.com/trystan2k/zsh-tab-title)
   * Kubernetes autocomplete + aliases: [Dbz/kube-aliases](https://github.com/Dbz/kube-aliases)
   * FZF for anything: [Aloxaf/fzf-tab](https://github.com/Aloxaf/fzf-tab)
   * ...and history too: [joshskidmore/zsh-fzf-history-search](https://github.com/joshskidmore/zsh-fzf-history-search)
@@ -58,7 +57,7 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
 
 ### helpers
 
-- http cli: [httpie](https://httpie.io/) + [http-prompt](https://github.com/httpie/http-prompt)
+- http cli: [httpie](https://httpie.io/)
 - sql client: [usql](https://github.com/xo/usql)
 - code stats: [scc](https://github.com/boyter/scc)
 - disk usage: [duf](https://github.com/muesli/duf)
