@@ -220,7 +220,7 @@ exec --no-startup-id systemctl --user import-environment
 exec --no-startup-id /usr/libexec/geoclue-2.0/demos/agent
 
 exec --no-startup-id setxkbmap -model pc105 -layout us,ru -option terminate:ctrl_alt_bksp,grp:ctrl_shift_toggle
-exec --no-startup-id xset m 20/10 10 r rate 350 30 b on s 600
+exec --no-startup-id xset m 20/10 10 r rate 350 30 b on s 1200
 
 exec --no-startup-id wal -R -n
 exec --no-startup-id feh --no-fehbg --bg-fill ~/.config/i3/wall.png

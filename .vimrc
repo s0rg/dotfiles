@@ -476,8 +476,8 @@ vmap <leader><space> za
 " vim-commentary
 map <leader>/ :Commentary<CR>
 
-nnoremap <leader>d "_dd
-vnoremap <leader>d "_dd
+nnoremap d "_d
+vnoremap d "_d
 
 nnoremap <C-o> <C-o>zz
 
