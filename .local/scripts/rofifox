@@ -21,7 +21,7 @@ PROFILE_PREFIX = "Profile"
 NAME_KEY = "Name"
 DEFAULT_KEY = "Default"
 
-ROFI_VERSION = "1.5"
+ROFI_VERSION = "1.6"
 ROFI_PROMPT = "\uF269 rfox "
 
 

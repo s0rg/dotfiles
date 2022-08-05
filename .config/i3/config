@@ -143,7 +143,7 @@ for_window [window_type="toolbar|splash|tooltip|dock"]      $float
 # custom rules
 for_window [class="^Evolution-alarm-notify$"]               $float, $center
 for_window [class="^pavucontrol-qt$"]                       $float, $sticky
-for_window [class="^Firefox$" title="^Picture-in-Picture$"] $float, $sticky
+for_window [class="^firefox$" title="^Picture-in-Picture$"] $float, $sticky
 for_window [class="^zoom$"]                                 $float
 
 # garbage
@@ -186,7 +186,7 @@ bindsym $mod+$ctrl+9 move container to workspace number $ext3
 
 assign [class="^kitty$" instance="^kitty$"]             $tty
 
-assign [class="^Firefox$|^Tor Browser$|^qutebrowser$"]  $web
+assign [class="^firefox$|^Tor Browser$|^qutebrowser$"]  $web
 
 assign [class="^TelegramDesktop$|^Slack$"]              $chat
 

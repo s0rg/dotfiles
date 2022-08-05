@@ -1,39 +1,39 @@
-GOVERSION='1.18'
+GOVERSION='1.19'
 
 export GO111MODULE=on
 export GOSUMDB=off
-export GOROOT=/usr/local/go${GOVERSION}
-export GOPATH=${HOME}/projects/go
+export GOROOT="/usr/local/go${GOVERSION}"
+export GOPATH="${HOME}/projects/go"
 
-export PATH=${PATH}:/usr/local/go${GOVERSION}/bin:${GOPATH}/bin
+export PATH="${PATH}:/usr/local/go${GOVERSION}/bin:${GOPATH}/bin"
 
 cd_aliases+=([cdgo]="${GOPATH}/src/github.com/${USER}")
 
 _go_cpu_profile() {
-    local t
-    t="${1:-1}"s
+	local t
+	t="${1:-1}"s
 
-    echo -e "[+] benchmarking for ${t}...\n"
-    rm -f cpu.profile cpu_profile.pdf
-    go test -benchtime "${t}" -cpuprofile cpu.profile -bench=. || return
+	echo -e "[+] benchmarking for ${t}...\n"
+	rm -f cpu.profile cpu_profile.pdf
+	go test -benchtime "${t}" -cpuprofile cpu.profile -bench=. || return
 
-    echo -e "\n[+] exporting pdf..."
-    go tool pprof -pdf cpu.profile >cpu_profile.pdf || return
+	echo -e "\n[+] exporting pdf..."
+	go tool pprof -pdf cpu.profile >cpu_profile.pdf || return
 
-    echo "[+] starting ${PDF}..."
-    ${PDF} cpu_profile.pdf
+	echo "[+] starting ${PDF}..."
+	${PDF} cpu_profile.pdf
 
-    t="$(basename "$(pwd)").test"
-    [ -f "${t}" ] && rm -f "${t}"
+	t="$(basename "$(pwd)").test"
+	[ -f "${t}" ] && rm -f "${t}"
 }
 
 # extract stacktrace from logger raw json
 go-get-trace() {
-    local trace
-    trace=$(jq '.stacktrace' "$@" | sed -e 's/\"$//' -e 's/^\"//')
-    if [ -n "${trace}" ]; then
-        echo -e "${trace}"
-    fi
+	local trace
+	trace=$(jq '.stacktrace' "$@" | sed -e 's/\"$//' -e 's/^\"//')
+	if [ -n "${trace}" ]; then
+		echo -e "${trace}"
+	fi
 }
 
 # aliases

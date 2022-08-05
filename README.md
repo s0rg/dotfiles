@@ -11,7 +11,7 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
 ## software
 
 - wm: [i3](https://i3wm.org/)
-- shell: [zsh](https://www.zsh.org/) (*plugins* managed by [antibody](https://github.com/getantibody/antibody)):
+- shell: [zsh](https://www.zsh.org/) (*plugins* managed by [antidote](https://getantidote.github.io/)):
   * Notify on long (or failed) tasks: [MichaelAquilina/zsh-auto-notify](https://github.com/MichaelAquilina/zsh-auto-notify)
   * Kubernetes autocomplete + aliases: [Dbz/kube-aliases](https://github.com/Dbz/kube-aliases)
   * FZF for anything: [Aloxaf/fzf-tab](https://github.com/Aloxaf/fzf-tab)

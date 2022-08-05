@@ -1,9 +1,9 @@
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
 
-fpath+=("${HOME}/.config/shellrc/zsh-completions")
+# auto-completion
 
-source "${HOME}/.config/shellrc/plugins.zsh"
+fpath+=("${HOME}/.config/shellrc/zsh-completions")
 
 export ZSH_COMPDUMP=${HOME}/.cache/zcompdump
 
@@ -30,6 +30,15 @@ fi
 
 compinit -C -d "${ZSH_COMPDUMP}"
 
+# plugins
+
+source "${HOME}/.local/antidote/antidote.zsh"
+export ZDOTDIR="${HOME}/.config/shellrc"
+
+antidote load
+
+# other goodies
+
 typeset -A cd_aliases
 
 for src in "${HOME}"/.config/shellrc/zshrc.d/*.zsh; do
@@ -37,8 +46,13 @@ for src in "${HOME}"/.config/shellrc/zshrc.d/*.zsh; do
 done
 unset src
 
-export SAVEHIST=5000
+# history setup
+
+export SAVEHIST=1000
+export HISTSIZE=1000
 export HISTFILE="${XDG_CACHE_HOME}/zsh_history"
+
+# create 'magic' aliases for contents of cd_aliases array
 
 for kk in "${(@kk)cd_aliases}"; do
     function $kk() {

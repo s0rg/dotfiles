@@ -1,6 +1,0 @@
-MichaelAquilina/zsh-auto-notify
-dbz/kube-aliases
-Aloxaf/fzf-tab
-joshskidmore/zsh-fzf-history-search
-zsh-users/zsh-autosuggestions
-zdharma-continuum/fast-syntax-highlighting

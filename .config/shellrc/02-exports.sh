@@ -56,5 +56,3 @@ export DOCKER_CONFIG="${XDG_CONFIG_HOME}"/docker
 
 # theme for bat + delta
 export BAT_THEME=gruvbox-dark
-
-export HISTSIZE=500

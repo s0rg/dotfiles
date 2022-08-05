@@ -10,5 +10,5 @@ if [ -d "${HOME}/.krew" ]; then
     PATH=${PATH}:${HOME}/.krew/bin
 fi
 
-export PATH=${PATH}:/snap/bin:${HOME}/Telegram
+export PATH=${PATH}:/snap/bin:${HOME}/Telegram:${HOME}/.local/kitty.app/bin
 #vi:ft=bash
