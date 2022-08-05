@@ -35,6 +35,8 @@ compinit -C -d "${ZSH_COMPDUMP}"
 source "${HOME}/.local/antidote/antidote.zsh"
 export ZDOTDIR="${HOME}/.config/shellrc"
 
+export FORGIT_NO_ALIASES="1"
+
 antidote load
 
 # other goodies

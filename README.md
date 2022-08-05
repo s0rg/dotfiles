@@ -15,7 +15,8 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
   * Notify on long (or failed) tasks: [MichaelAquilina/zsh-auto-notify](https://github.com/MichaelAquilina/zsh-auto-notify)
   * Kubernetes autocomplete + aliases: [Dbz/kube-aliases](https://github.com/Dbz/kube-aliases)
   * FZF for anything: [Aloxaf/fzf-tab](https://github.com/Aloxaf/fzf-tab)
-  * ...and history too: [joshskidmore/zsh-fzf-history-search](https://github.com/joshskidmore/zsh-fzf-history-search)
+  * ...and history: [joshskidmore/zsh-fzf-history-search](https://github.com/joshskidmore/zsh-fzf-history-search)
+  * ...and Git: [wfxr/forgit](https://github.com/wfxr/forgit)
   * fishy things: [zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
   * eye-candy cli: [zdharma-continuum/fast-syntax-highlighting](https://github.com/zdharma-continuum/fast-syntax-highlighting)
 - editor: [vim](https://www.vim.org/) (*plugins* managed by [pathogen](https://github.com/tpope/vim-pathogen)):
@@ -42,7 +43,6 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
 - music: [mpd](https://www.musicpd.org/)
 - terminal: [kitty](https://sw.kovidgoyal.net/kitty/)
 - panel: [polybar](https://polybar.github.io/)
-- system info: [gotop](https://github.com/xxxserxxx/gotop)
 - notifications: [dunst](https://dunst-project.org/)
 - theme generation:
   * GUI: [pywal](https://github.com/dylanaraps/pywal)

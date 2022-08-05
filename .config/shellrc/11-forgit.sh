@@ -1,11 +1,5 @@
-# integration for https://github.com/wfxr/forgit
-FORGIT_DIR="${HOME}"/.local/forgit
+export PATH="/home/s0rg/.cache/antidote/wfxr/forgit/bin:$PATH"
 
-if [ -d "${FORGIT_DIR}" ]; then
-    export FORGIT_NO_ALIASES="1"
-    export PATH=${PATH}:"${FORGIT_DIR}"/bin
-    source "${FORGIT_DIR}"/forgit.plugin.sh
-
-    alias gco='git forgit checkout_commit'
-    alias gcb='git forgit checkout_branch'
-fi
+alias gco='git forgit checkout_commit'
+alias gcb='git forgit checkout_branch'
+alias glo='git forgit log'

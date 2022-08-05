@@ -66,6 +66,8 @@ zstyle ':completion:*:functions' ignored-patterns '_*'
 zstyle ":completion:*:*:kill:*:processes" list-colors "=(#b) #([0-9]#)*=0=01;31"
 zstyle ":completion:*:kill:*" command "ps --forest -u $USER -o pid,%cpu,%mem,cmd"
 
+zstyle ':antidote:bundle' use-friendly-names 'yes'
+
 cd_aliases+=(
     [cdp]="${HOME}/projects"
     [cdc]="${HOME}/.config"
@@ -108,6 +110,4 @@ done
 export HISTORY_IGNORE="(${joined})"
 unset joined
 
-alias sh-plugs-up='antidote bundle < "${SHELLRC_HOME}/.zsh_plugins.txt > "${SHELLRC_HOME}/.zsh_plugins.zsh; antidote update'
-
-# antibody bundle < "${SHELLRC_HOME}"/zsh_plugins.txt > "${SHELLRC_HOME}"/plugins.zsh; antibody update'
+alias sh-plugs-up='antidote bundle < "${SHELLRC_HOME}"/.zsh_plugins.txt > "${SHELLRC_HOME}"/.zsh_plugins.zsh; antidote update'
