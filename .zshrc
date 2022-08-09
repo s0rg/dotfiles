@@ -5,7 +5,7 @@ bindkey -e
 
 fpath+=("${HOME}/.config/shellrc/zsh-completions")
 
-export ZSH_COMPDUMP=${HOME}/.cache/zcompdump
+export ZSH_COMPDUMP="${HOME}"/.cache/zcompdump
 
 autoload -Uz compinit
 
@@ -38,6 +38,8 @@ export ZDOTDIR="${HOME}/.config/shellrc"
 export FORGIT_NO_ALIASES="1"
 
 antidote load
+
+export ZDOTDIR="${HOME}"
 
 # other goodies
 
