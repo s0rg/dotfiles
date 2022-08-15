@@ -1,4 +1,2 @@
-\set SYNTAX_HL true
-\set SYNTAX_HL_FORMAT terminal16m
-\set SYNTAX_HL_OVERRIDE_BG true
+\set SYNTAX_HL_FORMAT terminal256
 \set SYNTAX_HL_STYLE monokai
