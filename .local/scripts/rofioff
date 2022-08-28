@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 
-import rofi_menu
+import math
+from datetime import timedelta
 
-#ROFI_VERSION = "1.7"
-ROFI_PROMPT = "\uF011 roff "
+import rofi_menu
 
 actions = [
     {
-        "icon": "\uf023",
+        "icon": "\uF023",
         "name": "lock",
         "command": "i3-betterlock",
         "confirm": False
     },
     {
-        "icon": "\uf9b1",
+        "icon": "\uF9B1",
         "name": "suspend",
         "command": "systemctl suspend",
         "confirm": True
@@ -33,6 +33,14 @@ actions = [
 ]
 
 
+def _get_uptime():
+    with open("/proc/uptime", "r") as fd:
+        seconds = float(fd.readline().split(maxsplit=1)[0])
+        seconds = math.floor(seconds)
+
+    return timedelta(seconds=seconds)
+
+
 def _make_confirm_entry(action):
     confirm = "yes, <b>{name}</b>".format(**action)
     return rofi_menu.Menu(prompt="sure?",
@@ -45,20 +53,24 @@ def _make_confirm_entry(action):
 
 def _make_action_entry(action):
     title = "{icon} {name}".format(**action)
+
     if not action["confirm"]:
         return rofi_menu.ShellItem(title, action["command"])
+
     return rofi_menu.NestedMenu(
         title,
         _make_confirm_entry(action),
     )
 
 
-def _make_menu(prompt):
-    return rofi_menu.Menu(prompt=prompt,
-                          items=[_make_action_entry(a) for a in actions])
+def _make_menu():
+    up = _get_uptime()
+
+    return rofi_menu.Menu(
+        prompt=f"uptime {up} ",
+        items=[_make_action_entry(a) for a in actions],
+    )
 
 
 if __name__ == "__main__":
-    rofi_menu.run(_make_menu(ROFI_PROMPT),
-                  #rofi_version=ROFI_VERSION,
-                  )
+    rofi_menu.run(_make_menu())
