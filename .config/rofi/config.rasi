@@ -1,7 +1,7 @@
 configuration {
     modi: "window,drun,combi";
     lines: 8;
-    font: "ubuntumono nerd font mono 14";
+    font: "ubuntumono nerd font mono 18";
     show-icons: true;
     terminal: "kitty";
     combi-modi: "drun";

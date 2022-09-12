@@ -81,6 +81,7 @@ alias pub-clip='cat ${HOME}/.ssh/id_rsa.pub | clip-put'
 # fast travel
 alias cdl='cd ~/Downloads && sh-last'
 alias cds='cd ~/.local/scripts'
+alias cdm="cd /media/\${USER}"
 
 # fast open for configs
 alias omc='cdc; om 00-shell.sh'

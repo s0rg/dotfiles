@@ -16,13 +16,23 @@ BROWSER = "firefox"
 CACHE_PATH = path.expanduser("~/.cache/rofifox/")
 CACHE_NAME = "profiles.json"
 
-PROFILE = path.expanduser("~/.mozilla/firefox/profiles.ini")
 PROFILE_PREFIX = "Profile"
 NAME_KEY = "Name"
 DEFAULT_KEY = "Default"
 
 ROFI_VERSION = "1.6"
 ROFI_PROMPT = "\uF269 rfox "
+
+
+def _detect_profile():
+    profiles = "/.mozilla/firefox/profiles.ini"
+    snap_path = path.expanduser("~/snap/firefox/common" + profiles)
+    if path.exists(snap_path):
+        return snap_path
+    return path.expanduser("~" + profiles)
+
+
+PROFILE = _detect_profile()
 
 
 def _firefox_cmd(profile):

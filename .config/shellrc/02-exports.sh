@@ -26,7 +26,7 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 export QT_PLATFORMTHEME=qt5ct
 export QT_PLATFORM_PLUGIN=qt5ct
 
-export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:/usr/local/lib/pkgconfig
+export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}":/usr/local/lib/pkgconfig
 
 export FZF_DEFAULT_OPTS="--ansi \
     --no-mouse \

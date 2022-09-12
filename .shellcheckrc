@@ -3,8 +3,14 @@ shell=zsh
 # Can't follow non-constant source: https://github.com/koalaman/shellcheck/wiki/SC1090
 disable=SC1090
 
-# posix sh compatability
-disable=SC2039
-
 # possible misspelling
 disable=SC2153
+
+# posix sh compatability
+disable=SC2039
+disable=SC3003
+disable=SC3009
+disable=SC3010
+disable=SC3037
+disable=SC3043
+disable=SC3057

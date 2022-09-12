@@ -1,13 +1,24 @@
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
 
+# plugins
+source "${HOME}/.local/antidote/antidote.zsh"
+
+export ZDOTDIR="${HOME}/.config/shellrc"
+export FORGIT_NO_ALIASES="1"
+
+antidote load
+
+# restore ZDOTDIR
+export ZDOTDIR="${HOME}"
+
 # auto-completion
 
 fpath+=("${HOME}/.config/shellrc/zsh-completions")
 
 export ZSH_COMPDUMP="${HOME}"/.cache/zcompdump
 
-autoload -Uz compinit
+autoload -Uz compinit 
 
 _setup_compdump() {
     compinit -i -d "${ZSH_COMPDUMP}"
@@ -29,17 +40,6 @@ else
 fi
 
 compinit -C -d "${ZSH_COMPDUMP}"
-
-# plugins
-
-source "${HOME}/.local/antidote/antidote.zsh"
-export ZDOTDIR="${HOME}/.config/shellrc"
-
-export FORGIT_NO_ALIASES="1"
-
-antidote load
-
-export ZDOTDIR="${HOME}"
 
 # other goodies
 

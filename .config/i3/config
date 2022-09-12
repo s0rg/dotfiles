@@ -121,8 +121,8 @@ bindsym XF86AudioNext         $run mpc next
 bindsym XF86AudioPrev         $run mpc prev
 
 ## backlight
-bindsym XF86MonBrightnessUp   $run xbacklight -inc $bri_step
-bindsym XF86MonBrightnessDown $run xbacklight -dec $bri_step
+bindsym XF86MonBrightnessUp   $run light -A $bri_step
+bindsym XF86MonBrightnessDown $run light -U $bri_step
 
 bindsym --release Print       $run i3-scrot --desk
 bindsym --release $ctrl+Print $run i3-scrot --window
@@ -203,8 +203,8 @@ assign [class="^Evolution$"]                            $mail
 # remove all decorations
 font                          pango:monospace 0px
 set_from_resource             $bg i3wm.color0 #000000
-set_from_resource             $fg i3wm.color2 #00FF00
-set_from_resource             $ag i3wm.color4 #0000FF
+set_from_resource             $fg i3wm.color8 #00FF00
+set_from_resource             $ag i3wm.color1 #0000FF
 
 # <colorclass>               <border> <background> <text> <indicator> <child_border>
 client.focused                $ag      $bg          $bg    $bg         $fg
@@ -221,6 +221,7 @@ exec --no-startup-id /usr/libexec/geoclue-2.0/demos/agent
 exec --no-startup-id redshift
 
 exec --no-startup-id setxkbmap -model pc105 -layout us,ru -option terminate:ctrl_alt_bksp,grp:ctrl_shift_toggle
+exec --no-startup-id lxqt-config-input --load-touchpad
 exec --no-startup-id xset m 20/10 10 r rate 350 30 b on s 1200
 
 exec --no-startup-id wal -R -n
