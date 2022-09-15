@@ -1,0 +1,104 @@
+#!/usr/bin/env python3
+
+import os
+
+import requests
+import xdg
+
+XDG_USER_DIRS = 'user-dirs.dirs'
+VERSION_CACHE = 'zoom.up.ver'
+VERSION_REST = 'https://zoom.us/rest/download?os=linux'
+DOWNLOAD_URI_TPL = 'https://zoom.us/client/{}/zoom_amd64.deb'
+DOWNLOAD_OUT_TPL = 'zoom_amd64_{}.deb'
+
+
+def need_update(version):
+    target = os.path.join(
+        xdg.xdg_cache_home(),
+        VERSION_CACHE,
+    )
+
+    with open(target, "r+") as fd:
+        ln = fd.read()
+        if ln.strip() == version:
+            return False
+
+        fd.seek(0)
+        fd.write(version)
+        fd.flush()
+
+        return True
+
+
+def update(version, store):
+    uri = DOWNLOAD_URI_TPL.format(version)
+    rv = requests.get(uri, stream=True)
+    rv.raise_for_status()
+
+    total = int(rv.headers["content-length"])
+    curr = 0
+
+    print(f"downloading {uri} to {store}: ")
+
+    result = os.path.join(store, DOWNLOAD_OUT_TPL.format(version))
+
+    with open(result, 'wb') as fd:
+        for chunk in rv.iter_content(chunk_size=32768):
+            fd.write(chunk)
+            curr += len(chunk)
+            print(f"{curr} of {total} {curr/total:.0%}", end='\r', flush=True)
+
+    print(f"saved to: {result}")
+
+
+def get_xdg_dirs():
+    root = xdg.xdg_config_home()
+    res = {}
+    with open(os.path.join(root, XDG_USER_DIRS)) as fd:
+        for ln in fd:
+            if ln.startswith("#"):
+                continue
+            ln = ln.strip()
+            if not ln:
+                continue
+
+            key, path = ln.split("=")
+            res[key] = os.path.expandvars(path).strip('"')
+
+    return res
+
+
+def main():
+    rv = requests.get(VERSION_REST)
+    rv.raise_for_status()
+
+    data = rv.json()
+    if not data["status"]:
+        print("empty or false status")
+        return
+
+    errc = data.get("errorCode", 666)
+    if errc != 0:
+        print("non-zero or empty errorCode: ", errc)
+        return
+
+    ver = data.get("result", {}).\
+             get("downloadVO", {}).\
+             get("zoom", {}).\
+             get("version")
+
+    if not ver:
+        print("empty version data")
+        return
+
+    if not need_update(ver):
+        print("version is up-to-date: ", ver)
+        return
+
+    xdirs = get_xdg_dirs()
+    update(ver, xdirs["XDG_DOWNLOAD_DIR"])
+
+    return
+
+
+main()
