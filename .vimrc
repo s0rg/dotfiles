@@ -40,7 +40,7 @@ set history=50
 set cmdheight=1
 set pumheight=15
 set shortmess+=c
-set shell=/bin/bash
+set shell=/bin/zsh
 set nrformats-=octal
 set autoread autowrite
 set mouse="" mousehide
@@ -143,8 +143,13 @@ let g:lightline#ale#indicator_ok = "\uf00c"
 
 
 " vim-go
+let g:go_highlight_string_spellcheck = 0
+
 let g:go_highlight_function_parameters = 1
+let g:go_highlight_build_constraints = 1
 let g:go_highlight_function_calls = 1
+let g:go_highlight_format_strings = 1
+let g:go_highlight_generate_tags = 1
 let g:go_highlight_generate_tags = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_operators = 1
@@ -153,10 +158,11 @@ let g:go_highlight_types = 1
 
 let g:go_diagnostics_level = 2
 
+let g:go_fmt_fail_silently = 1
 let g:go_def_reuse_buffer = 1
+let g:go_template_use_pkg = 1
 let g:go_auto_type_info = 1
 
-let g:go_highlight_string_spellcheck = 0
 let g:go_imports_autosave = 0
 let g:go_jump_to_error = 0
 let g:go_list_type = 'quickfix'
@@ -164,8 +170,7 @@ let g:go_list_type = 'quickfix'
 let g:go_term_enabled = 1
 let g:go_term_mode = 'split'
 
-" gotests-vim
-let g:gotests_bin = 'gotests-gen'
+let g:go_gopls_matcher = 'caseSensitive'
 
 " tagbar
 let g:no_status_line = 1
@@ -384,6 +389,7 @@ highlight Folded guibg=Black ctermbg=Black
 
 autocmd FocusGained,BufEnter * checktime
 autocmd CompleteDone * silent! pclose
+autocmd BufWinEnter * syntax sync fromstart
 
 autocmd BufNewFile *.sh 0put =\'#!/bin/bash\<nl>\<nl>\'|$
 autocmd BufNewFile *.py 0put=\'#!/usr/bin/env python3\<nl>\<nl>\'|$
@@ -482,13 +488,14 @@ vnoremap d "_d
 nnoremap <C-o> <C-o>zz
 
 " vim-go
-autocmd FileType go nmap <leader>t :GoAddTags<CR>
-autocmd FileType go nmap <leader>i :GoImports<CR>
-autocmd FileType go nmap <leader>l :GoImplements<CR>
-
-" gotests-vim
-autocmd FileType go nmap tf :GoTests<CR>
-autocmd FileType go nmap ta :GoTestsAll<CR>
+autocmd FileType go nmap <buffer> <nowait> <leader>t :GoAddTags<CR>
+autocmd FileType go nmap <buffer> <nowait> <leader>i :GoImports<CR>
+autocmd FileType go nmap <buffer> <nowait> <leader>p :GoImplements<CR>
+autocmd FileType go nmap <buffer> <nowait> <leader>r <Plug>(go-run)
+autocmd FileType go nmap <buffer> <nowait> <leader>T <Plug>(go-test-func)
+autocmd FileType go nmap <buffer> <nowait> <leader>d <Plug>(go-def-tab)
+autocmd FileType go nmap <buffer> <nowait> <leader>n <Plug>(go-rename)
+autocmd FileType go iabbr <buffer> ifer <Cmd>GoIfErr<CR>
 
 autocmd FileType yaml,json setlocal ts=2 sw=2
 " For text file, wrap all the text
@@ -496,6 +503,15 @@ autocmd FileType text setlocal formatoptions=tjl1
 
 autocmd BufNewFile,BufRead *.asm set ft=fasm
 autocmd BufNewFile,BufRead *.inc set ft=fasm
+
+
+autocmd VimEnter * nested if argc() > 1 && !&diff | tab sball | tabfirst | endif
+
+let s:leave_tab = 0
+
+autocmd TabLeave * let s:leave_tab = tabpagenr()
+autocmd TabEnter * if tabpagenr() != 1 && tabpagenr() == s:leave_tab | tabprevious | endif
+
 
 " disable cursors keys, someday, maybe...
 "nnoremap <Left>  :echoe 'Use h'<CR>

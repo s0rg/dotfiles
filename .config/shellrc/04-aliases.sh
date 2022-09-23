@@ -38,6 +38,7 @@ alias mtr='mtr -bze'
 alias more='less'
 alias tailf='tail -f --retry'
 alias today='date "+%Y_%m_%d"'
+alias iso-date='date -u +%FT%H:%M:%S'
 
 # shell tools
 alias sh-reload='exec "${SHELL}" -l'
