@@ -24,7 +24,6 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
   * Async autocomplete: [Shougo/deoplete](https://github.com/Shougo/deoplete.nvim.git)
   * `.editorconfig` support: [editorconfig/editorconfig-vim](https://github.com/editorconfig/editorconfig-vim.git)
   * FZF: [junegunn/fzf](https://github.com/junegunn/fzf.vim.git)
-  * Test generation for golang: [buoto/gotests-vim](https://github.com/buoto/gotests-vim.git)
   * Best theme ever: [nanotech/jellybeans](https://github.com/nanotech/jellybeans.vim.git)
   * Status line: [itchyny/lightline](https://github.com/itchyny/lightline.vim)
   * Git branch name for `lightline`: [itchyny/vim-gitbranch](https://github.com/itchyny/vim-gitbranch.git)
