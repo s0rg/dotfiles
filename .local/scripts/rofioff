@@ -14,8 +14,8 @@ actions = [
     },
     {
         "icon": "\uF9B1",
-        "name": "suspend",
-        "command": "systemctl suspend",
+        "name": "hibernate",
+        "command": "systemctl hibernate",
         "confirm": True
     },
     {

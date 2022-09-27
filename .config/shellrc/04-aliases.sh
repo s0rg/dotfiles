@@ -9,7 +9,6 @@ alias dmesg='dmesg --color=auto'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
-alias ncdu='ncdu --color dark'
 
 # make them verbose and interacive by default
 alias cp='cp -riv'
@@ -22,7 +21,6 @@ alias t='touch'
 alias v='vim'
 alias si='sudo -i'
 alias wh='which'
-alias cdt='cd $(mktemp -d)'
 alias chx='chmod u+x'
 alias duf='duf --hide special'
 alias hdx='hexyl'
@@ -62,9 +60,9 @@ alias sh-toupper='rename "y/a-z/A-Z/" *'
 # list taken from: https://techblog.willshouse.com/2012/01/03/most-common-user-agents/
 alias sh-rnd-ua='shuf -n 1 "${XDG_DATA_HOME}"/rand_ua.list'
 
-# jq
-alias jsp='jq -C .'
-alias swag-urls="jq '.paths | keys | .[]'"
+# dasel
+alias jsp='dasel -r json . | bat'
+alias swag-urls="dasel -r json '.paths | keys | .[]'"
 
 # curl
 alias curl='curl --user-agent "$(sh-rnd-ua)"'
@@ -81,8 +79,9 @@ alias pub-clip='cat ${HOME}/.ssh/id_rsa.pub | clip-put'
 
 # fast travel
 alias cdl='cd ~/Downloads && sh-last'
+alias cdm="cd /media/\${USER} && ll"
 alias cds='cd ~/.local/scripts'
-alias cdm="cd /media/\${USER}"
+alias cdt='cd $(mktemp -d)'
 
 # fast open for configs
 alias omc='cdc; om 00-shell.sh'

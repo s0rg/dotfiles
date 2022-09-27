@@ -17,6 +17,7 @@
     mem = merge master
     wat = whatchanged
     put = push origin --tags
+    stap = stash apply
     # tag add & push
     tap = "!f() { git tag -m '' -a ${1} && git push origin --tags; }; f"
     url = remote get-url origin
