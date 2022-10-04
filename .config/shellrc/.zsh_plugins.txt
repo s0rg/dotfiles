@@ -8,3 +8,4 @@ wfxr/forgit
 arzzen/calc.plugin.zsh
 ael-code/zsh-colored-man-pages
 greymd/docker-zsh-completion
+heyvito/goenv.zsh

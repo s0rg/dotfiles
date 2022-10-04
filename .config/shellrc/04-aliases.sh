@@ -3,6 +3,8 @@ alias sudo='sudo '
 
 alias ls='ls --color=auto --group-directories-first -v'
 alias ll='ls -hAlFG --time-style=+"%Y-%m-%d %H:%M:%S"'
+alias lst='_last_changed'
+
 alias ip='ip -color=auto'
 alias diff='diff --color=auto'
 alias dmesg='dmesg --color=auto'
@@ -23,13 +25,10 @@ alias si='sudo -i'
 alias wh='which'
 alias chx='chmod u+x'
 alias duf='duf --hide special'
-alias hdx='hexyl'
 alias unx='7z x'
-alias upp='uptime --pretty'
 alias rgf='rg --no-heading'
 alias zat='zathura'
 alias cal='echo; ncal -M -3; echo'
-alias calc='noglob calc'
 alias obey='sudo !!'
 alias mc='mc -d'
 alias mtr='mtr -bze'
@@ -45,7 +44,6 @@ alias sh-path='echo -n "$PATH" | tr ":" "\n" | sort'
 
 # shell extras
 alias sh-timer='py-timer'
-alias sh-colors='colortest-python --ansicodes'
 alias sh-rot13='tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]"; echo'
 alias sh-rot47='tr !-~ P-~!-O; echo'
 alias sh-stats='sort | uniq -c | sort -n -r'
@@ -53,7 +51,6 @@ alias sh-trim='sed -e '\''s/^[[:space:]]*//g'\'' -e '\''s/[[:space:]]*\$//g'\'''
 alias sh-size='_fn_size'
 alias sh-strip-ansi="sed 's/\x1b\[[0-9;]*m//g'"
 alias sh-fetch='clear; neofetch --backend "kitty"'
-alias sh-last='_last_changed'
 alias sh-tolower='rename "y/A-Z/a-z/" *'
 alias sh-toupper='rename "y/a-z/A-Z/" *'
 
@@ -75,11 +72,10 @@ alias wttr='echo; \curl http://wttr.in/?format="%c:+%f+%w\n"; echo'
 alias clip-get='xclip -selection clipboard -target STRING -out'
 alias clip-put='xclip -selection clipboard -target STRING -in'
 alias clip-clr='echo -n "" | clip-put'
-alias pub-clip='cat ${HOME}/.ssh/id_rsa.pub | clip-put'
+alias pub2clip='cat ${HOME}/.ssh/id_rsa.pub | clip-put'
 
 # fast travel
-alias cdl='cd ~/Downloads && sh-last'
-alias cdm="cd /media/\${USER} && ll"
+alias cdl='cd ~/Downloads && lst'
 alias cds='cd ~/.local/scripts'
 alias cdt='cd $(mktemp -d)'
 

@@ -1,7 +1,7 @@
 GOVERSION='1.19'
 
-export GO111MODULE=on
 export GOSUMDB=off
+export GO111MODULE=on
 export GOROOT="/usr/local/go${GOVERSION}"
 export GOPATH="${HOME}/projects/go"
 
@@ -28,9 +28,9 @@ _go_cpu_profile() {
 }
 
 # extract stacktrace from logger raw json
-go-get-trace() {
+_go_get_trace() {
 	local trace
-	trace=$(jq '.stacktrace' "$@" | sed -e 's/\"$//' -e 's/^\"//')
+	trace=$(dasel -r json '.stacktrace' "$@" | sed -e 's/\"$//' -e 's/^\"//')
 	if [ -n "${trace}" ]; then
 		echo -e "${trace}"
 	fi
@@ -40,8 +40,13 @@ go-get-trace() {
 alias go-bench='go test -benchmem -bench=./...'
 alias go-clean='go clean -cache -testcache -modcache; golangci-lint cache clean'
 alias go-cpu='_go_cpu_profile'
+alias go-trace='_go_get_trace'
+
 alias go-noproxy='export GOPROXY="direct"'
-alias go-mod-init='go mod init; go mod tidy'
+
+alias gmi='go mod init; go mod tidy'
+alias gmv='go mod vendor'
+
 alias go-mod-up='go get -u ./...; go mod tidy'
 alias go-mod-ls="go list -f '{{join .Deps \"\n\"}}' | xargs go list -f '{{if not .Standard}}{{.ImportPath}}{{end}}'"
 

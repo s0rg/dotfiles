@@ -71,6 +71,7 @@ zstyle ':antidote:bundle' use-friendly-names 'yes'
 cd_aliases+=(
     [cdp]="${HOME}/projects"
     [cdc]="${HOME}/.config"
+    [cdm]="/media/${USER}"
 )
 
 for src in "${HOME}"/.config/shellrc/*.sh; do
@@ -90,11 +91,11 @@ declare -aU IGNORE_CMD=(
     "rm *" "kill *" "killall *"               # one-shot commands, literally
     "man *" "* --help" "* --version"          # info and manuals
     "*KEY*" "*TOKEN*"                         # security
-    "l[ls]#( *)" "up# *" "cd# *" "md *" "omc" # all others
-    "top-*" "nscan-*" "t *" "wttr" "heads *" 
-    "yt[dav] *" "chx *" "cd[cplst]# *" "cal"
-    "get *" "unx *" "mtr" "pip-get *" "bak *"
-    "sh-*" "upp" "ps *"
+    "l[ls]#( *)" "up# *" "cd# *" "md *"       # all others
+    "omc" "nscan-*" "t *" "wttr" "heads *"
+    "yt[dav] *" "chx *" "cd[cplstm]# *" 
+    "cal" "get *" "unx *" "mtr" "pip-get *"
+    "bak *" "sh-*" "lst" "ps *"
 )
 
 joined=""
