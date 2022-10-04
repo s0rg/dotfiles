@@ -87,13 +87,10 @@ alias cdt='cd $(mktemp -d)'
 alias omc='cdc; om 00-shell.sh'
 
 # system
-alias top-mem='ps -Ao user,pid,pcpu,pmem,comm --sort=-pmem | head --lines=6'
-alias top-cpu='ps -Ao user,pid,pcpu,pmem,comm --sort=-pcpu | head --lines=6'
 alias inet-ports='netstat -nape --inet'
 
 # python
 alias py='python3'
-alias bp='bpython'
 alias uuid='python3 -c "from uuid import uuid4; print(uuid4())"'
 alias pip-get='pip3 install --user --upgrade'
 alias pip-up='pip3 freeze --user | cut -d= -f1 | xargs -n1 pip3 install --user --upgrade'
@@ -108,11 +105,11 @@ alias ytv='youtube-dl -f bestvideo+bestaudio'
 alias doi-up="docker images -f 'dangling=false' --format '{{.Repository}}:{{.Tag}}' | xargs -L1 docker pull"
 alias doi-clr="docker images -f 'dangling=true' -q | xargs -L1 docker rmi"
 alias dps='docker ps -a'
-alias dcc='docker-compose'
-alias dcu='docker-compose up --remove-orphans'
-alias dcd='docker-compose down --remove-orphans'
-alias dcb='docker-compose build --force-rm'
-alias dcl='docker-compose logs -f'
+alias dcc='docker compose'
+alias dcu='docker compose up --remove-orphans'
+alias dcd='docker compose down --remove-orphans'
+alias dcb='docker compose build --force-rm'
+alias dcl='docker compose logs -f'
 
 # git
 alias groot='cd $(git root)'

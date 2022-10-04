@@ -11,9 +11,7 @@ call pathogen#helptags()
 filetype plugin indent on
 
 syntax on
-" syntax sync fromstart
-syntax sync minlines=500
-set synmaxcol=200
+set synmaxcol=240
 
 if (has('termguicolors'))
     set termguicolors
@@ -36,13 +34,13 @@ let g:netrw_hide=1
 let g:netrw_banner=0
 let g:netrw_dirhistmax=0
 
+set autoread
 set history=50
 set cmdheight=1
 set pumheight=15
 set shortmess+=c
 set shell=/bin/zsh
 set nrformats-=octal
-set autoread autowrite
 set mouse="" mousehide
 set autoindent cindent
 set formatoptions=cjl1
@@ -56,7 +54,7 @@ set title titlestring=vim:\ %f
 set backspace=indent,eol,start
 set textwidth=120 colorcolumn=+1
 set wrap linebreak whichwrap+=<,>,[,]
-set lazyredraw ttyfast redrawtime=5000
+set lazyredraw ttyfast redrawtime=8000
 set foldmethod=syntax foldlevelstart=99
 set sessionoptions=curdir,folds,tabpages
 set splitbelow splitright termwinsize=6x0
@@ -65,8 +63,9 @@ set completeopt+=longest,menuone complete-=it
 set expandtab smarttab tabstop=4 softtabstop=0
 set nobackup nowritebackup noswapfile noundofile
 set hlsearch incsearch ignorecase smartcase wrapscan
-set nospell nostartofline noerrorbells novisualbell t_vb=
-set encoding=utf-8 fileencoding=utf-8 termencoding=utf-8 nobomb
+set nospell nostartofline nobomb
+set noerrorbells novisualbell t_vb=
+set encoding=utf-8 fileencoding=utf-8 termencoding=utf-8
 
 " enable Normal mode keys in ru layout
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
@@ -468,9 +467,6 @@ noremap  Q     <Nop>
 noremap  <C-z> <Nop>
 nnoremap Y     y$
 
-" reload VIM's configuration
-nmap <leader>r :source $MYVIMRC<CR>
-
 " fzf.vim
 nmap <leader>f :Files<CR>
 nmap <leader>g :Rg<CR>
@@ -503,7 +499,6 @@ autocmd FileType text setlocal formatoptions=tjl1
 
 autocmd BufNewFile,BufRead *.asm set ft=fasm
 autocmd BufNewFile,BufRead *.inc set ft=fasm
-
 
 autocmd VimEnter * nested if argc() > 1 && !&diff | tab sball | tabfirst | endif
 

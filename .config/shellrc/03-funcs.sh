@@ -1,10 +1,11 @@
 ## fs tools
 
-# create new directory (if it does not exists) and enter it
+# create new directory (if it does not exists) and cd into it
 md() {
 	[ -z "${1}" ] && return
 	[ ! -e "${1}" ] && mkdir -p "${1}"
 	cd "${1}" || return
+	echo -e "\033[0;30m$(pwd)\033[0m\n"
 }
 
 # cd up
@@ -48,31 +49,6 @@ _last_changed() {
 _fn_size() { du -sbh -- "${@:-.}"; }
 
 ## shell utils
-
-# eye-candy man
-# see: https://boredzo.org/blog/archives/2016-08-15/colorized-man-pages-understood-and-customized
-# note: putting this directly in your env, will break env command output, so keeping them here
-man() {
-	env \
-		LESS_TERMCAP_mb=$'\e[01;36m' \
-		LESS_TERMCAP_md=$'\e[01;32m' \
-		LESS_TERMCAP_me=$'\e[0m' \
-		LESS_TERMCAP_so=$'\e[01;40;1m' \
-		LESS_TERMCAP_se=$'\e[0m' \
-		LESS_TERMCAP_us=$'\e[01;33m' \
-		LESS_TERMCAP_ue=$'\e[0m' \
-		man "${@}"
-}
-
-# basic math
-calc() {
-	local result
-	result="$(printf 'scale=4;%s\n' "${*}" | bc --mathlib | tr -d '\\\n')"
-	if [[ "$result" == *.* ]]; then
-		result=$(echo -n "${result}" | sed -e 's/^\./0./' -e 's/^-\./-0./' -e 's/0*$//;s/\.$//')
-	fi
-	echo "${result}"
-}
 
 # dump ssl certificate info
 sslcerts() {

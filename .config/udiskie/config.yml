@@ -49,9 +49,9 @@ notifications:
   timeout:          1.0     # set the default for all notifications
 
   # Specify only if you want to overwrite the the default:
-  device_mounted:   5       # mount notification
-  device_unmounted: false   # unmount notification
-  device_added:     false   # device has appeared
+  device_mounted:   3       # mount notification
+  #device_unmounted: false   # unmount notification
+  #device_added:     false   # device has appeared
   device_removed:   false   # device has disappeared
   device_unlocked:  -1      # encrypted device was unlocked
   device_locked:    -1      # encrypted device was locked
