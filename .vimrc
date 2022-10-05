@@ -39,6 +39,7 @@ set history=50
 set cmdheight=1
 set pumheight=15
 set shortmess+=c
+set complete-=it
 set shell=/bin/zsh
 set nrformats-=octal
 set mouse="" mousehide
@@ -53,19 +54,19 @@ set fillchars+=fold:\ ,vert:│
 set title titlestring=vim:\ %f
 set backspace=indent,eol,start
 set textwidth=120 colorcolumn=+1
+set nospell nostartofline nobomb
+set noerrorbells novisualbell t_vb=
 set wrap linebreak whichwrap+=<,>,[,]
 set lazyredraw ttyfast redrawtime=8000
 set foldmethod=syntax foldlevelstart=99
 set sessionoptions=curdir,folds,tabpages
 set splitbelow splitright termwinsize=6x0
 set number numberwidth=5 signcolumn=number
-set completeopt+=longest,menuone complete-=it
 set expandtab smarttab tabstop=4 softtabstop=0
 set nobackup nowritebackup noswapfile noundofile
 set hlsearch incsearch ignorecase smartcase wrapscan
-set nospell nostartofline nobomb
-set noerrorbells novisualbell t_vb=
 set encoding=utf-8 fileencoding=utf-8 termencoding=utf-8
+set completeopt=longest,menuone,noinsert,noselect,preview
 
 " enable Normal mode keys in ru layout
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
@@ -155,8 +156,7 @@ let g:go_highlight_operators = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 
-let g:go_diagnostics_level = 2
-
+let g:go_code_completion_enabled = 1
 let g:go_fmt_fail_silently = 1
 let g:go_def_reuse_buffer = 1
 let g:go_template_use_pkg = 1
@@ -165,6 +165,8 @@ let g:go_auto_type_info = 1
 let g:go_imports_autosave = 0
 let g:go_jump_to_error = 0
 let g:go_list_type = 'quickfix'
+
+let g:go_diagnostics_level = 2
 
 let g:go_term_enabled = 1
 let g:go_term_mode = 'split'
@@ -288,24 +290,28 @@ let g:ale_fixers = {
     \ }
 
 
-" deoplete
-call deoplete#custom#option({
-    \ 'max_list': 15,
-    \ 'auto_complete_delay': 10,
-    \ 'auto_complete_popup': 'manual',
-    \ 'on_insert_enter': v:false,
-    \ 'on_text_changed_i': v:false,
-    \ })
+" asynccomplete-vim + vim-lsp
+let g:asyncomplete_auto_popup = 0
+let g:asyncomplete_auto_completeopt = 0
 
-call deoplete#custom#option('omni_patterns', {
-    \ 'go': '[^. *\t]\.\w*',
-    \ })
+if executable('gopls')
+    " go install golang.org/x/tools/gopls@latest
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'gopls',
+        \ 'cmd': {server_info->['gopls', '-remote=auto']},
+        \ 'allowlist': ['go'],
+        \ })
+    autocmd BufWritePre *.go LspDocumentFormatSync
+endif
 
-call deoplete#custom#option('sources', {
-    \ '_': [ 'ale' ],
-    \ })
-
-let g:deoplete#enable_at_startup = 1
+if executable('pyls')
+    " pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'allowlist': ['python'],
+        \ })
+endif
 
 
 " startify

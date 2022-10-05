@@ -43,6 +43,8 @@ compinit -C -d "${ZSH_COMPDUMP}"
 
 # other goodies
 
+[[ -s "/etc/grc.zsh" ]] && source /etc/grc.zsh
+
 typeset -A cd_aliases
 
 for src in "${HOME}"/.config/shellrc/zshrc.d/*.zsh; do
