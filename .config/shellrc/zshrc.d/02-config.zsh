@@ -1,7 +1,7 @@
 AUTO_NOTIFY_IGNORE=(
-    "mc" "man" "v" "om" "omc" "si"
-    "top" "htop" "gotop" "less" "tailf" "tail"
-    "g ll" "g did" "dots ll" "dots did"
+	"mc" "man" "v" "om" "omc" "si"
+	"top" "htop" "gotop" "less" "tailf" "tail"
+	"g ll" "g did" "dots ll" "dots did"
 )
 
 declare -U AUTO_NOTIFY_IGNORE
@@ -15,7 +15,7 @@ export ZSH_AUTOSUGGEST_CLEAR_WIDGETS
 export ZSH_AUTOSUGGEST_MANUAL_REBIND="yes"
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
-export WORDCHARS='~!#$%^&*(){}[]<>?.+;_'
+export WORDCHARS='-~!#$%^&*(){}[]<>?.+;_'
 
 zstyle ':fzf-tab:*' switch-group ',' '.'
 zstyle ':fzf-tab:*' query-string prefix first
