@@ -10,8 +10,8 @@ autoload -Uz add-zsh-hook vcs_info
 
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:*' unstagedstr "%F{$COLORS_GIT_UNSTAGED}*"
-zstyle ':vcs_info:*' stagedstr "%F{$COLORS_GIT_STAGED}+"
+zstyle ':vcs_info:git:*' stagedstr "%F{$COLORS_GIT_STAGED}+"
+zstyle ':vcs_info:git:*' unstagedstr "%F{$COLORS_GIT_UNSTAGED}*"
 zstyle ':vcs_info:git:*' formats "%F{$COLORS_GIT_BRANCH}%b %m%u%c "
 zstyle ':vcs_info:git:*' actionformats "%F{$COLORS_GIT_BRANCH}%b (%a) %m%u%c "
 
@@ -36,7 +36,7 @@ setopt PROMPT_SUBST
 add-zsh-hook -Uz precmd _reset
 add-zsh-hook -Uz precmd vcs_info
 
-PS1=' %B%F{$COLORS_DIR}%c%b %F{$COLORS_PROMPT}▶%f '
+PS1=' %B%F{$COLORS_DIR}%2~%b %F{$COLORS_PROMPT}▶%f '
 PS2=' %F{$COLORS_PROMPT}>%f '
 
 # this fixes mc prompt

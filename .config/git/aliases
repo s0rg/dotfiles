@@ -50,7 +50,7 @@
     aliases = !git config -l | grep '^alias' | cut -c 7- | sort
     # repo maintaince
     tidy = "!f() { \
-        git branch --merged | grep -v -E '^[* ]{2}m' | xargs -r -n 1 git branch -d ; \
+        git branch --merged | egrep -v '(^\\*|master|main)' | xargs -r -n 1 git branch -dr ; \
         git reflog expire --all --expire=now ; \
         git gc --prune=now --aggressive ; \
         }; f"

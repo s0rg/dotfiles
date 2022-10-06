@@ -291,8 +291,11 @@ let g:ale_fixers = {
 
 
 " asynccomplete-vim + vim-lsp
+let g:lsp_diagnostics_enabled = 0
 let g:asyncomplete_auto_popup = 0
 let g:asyncomplete_auto_completeopt = 0
+let g:lsp_document_highlight_enabled = 0
+let g:lsp_completion_documentation_enabled = 0
 
 if executable('gopls')
     " go install golang.org/x/tools/gopls@latest
@@ -302,6 +305,7 @@ if executable('gopls')
         \ 'allowlist': ['go'],
         \ })
     autocmd BufWritePre *.go LspDocumentFormatSync
+    autocmd FileType go setlocal omnifunc=lsp#complete
 endif
 
 if executable('pyls')
@@ -392,8 +396,8 @@ let g:fzf_action = {'ctrl-t':'tab split'}
 
 highlight Folded guibg=Black ctermbg=Black
 
-autocmd FocusGained,BufEnter * checktime
 autocmd CompleteDone * silent! pclose
+autocmd FocusGained,BufEnter * checktime
 autocmd BufWinEnter * syntax sync fromstart
 
 autocmd BufNewFile *.sh 0put =\'#!/bin/bash\<nl>\<nl>\'|$
@@ -415,11 +419,13 @@ nnoremap <silent> <Leader>c /^\(<\\|=\\|>\)\{7\}\([^=].\+\)\?$<CR>
 " split-join
 let g:splitjoin_split_mapping = ''
 let g:splitjoin_join_mapping = ''
+
 nmap <Leader>j :SplitjoinJoin<cr>
 nmap <Leader>s :SplitjoinSplit<cr>
 
 " vim-move
 let g:move_map_keys = 0
+
 vmap <A-Down> <Plug>MoveBlockDown
 vmap <A-Up>   <Plug>MoveBlockUp
 nmap <A-Down> <Plug>MoveLineDown
@@ -471,7 +477,6 @@ map <C-q> :qall!<CR>
 " no ex mode
 noremap  Q     <Nop>
 noremap  <C-z> <Nop>
-nnoremap Y     y$
 
 " fzf.vim
 nmap <leader>f :Files<CR>
