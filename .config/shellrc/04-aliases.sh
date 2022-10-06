@@ -1,7 +1,7 @@
 # enable aliases to be sudo’ed
 alias sudo='sudo '
 
-alias ls='ls --color=auto --group-directories-first -v'
+alias ls='ls --color=always --group-directories-first -v'
 alias ll='ls -hAlFG --time-style=+"%Y-%m-%d %H:%M:%S"'
 alias lst='_last_changed'
 
