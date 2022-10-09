@@ -6,6 +6,7 @@
     editor = vim
     pager = less --quit-if-one-screen
     whitespace = cr-at-eol
+    untrackedCache = true
 
 [color]
     ui = auto

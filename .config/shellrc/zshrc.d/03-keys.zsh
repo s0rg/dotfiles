@@ -7,11 +7,11 @@ zle -N down-line-or-beginning-search
 zle -N edit-command-line
 zle -N exit_zsh
 
-key[Control-Left]="${terminfo[kLFT5]}"
-key[Control-Right]="${terminfo[kRIT5]}"
+key[Control_Left]="${terminfo[kLFT5]}"
+key[Control_Right]="${terminfo[kRIT5]}"
 
-[[ -n "${key[Control-Left]}" ]] && bindkey -- "${key[Control-Left]}" backward-word
-[[ -n "${key[Control-Right]}" ]] && bindkey -- "${key[Control-Right]}" forward-word
+[[ -n "${key[Control_Left]}" ]] && bindkey -- "${key[Control_Left]}" backward-word
+[[ -n "${key[Control_Right]}" ]] && bindkey -- "${key[Control_Right]}" forward-word
 [[ -n "${key[Up]}" ]] && bindkey -- "${key[Up]}" up-line-or-beginning-search
 [[ -n "${key[Down]}" ]] && bindkey -- "${key[Down]}" down-line-or-beginning-search
 [[ -n "${key[Home]}" ]] && bindkey -- "${key[Home]}" beginning-of-line
@@ -23,6 +23,7 @@ key[Control-Right]="${terminfo[kRIT5]}"
 [[ -n "${key[PageUp]}" ]] && bindkey -- "${key[PageUp]}" beginning-of-buffer-or-history
 [[ -n "${key[PageDown]}" ]] && bindkey -- "${key[PageDown]}" end-of-buffer-or-history
 
+bindkey "^K" kill-line
 bindkey '^D' exit_zsh
 bindkey '^x^e' edit-command-line
 

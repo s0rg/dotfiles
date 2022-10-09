@@ -50,7 +50,7 @@ zstyle ':completion:*' menu select=2
 zstyle ':completion:*' keep-prefix true
 zstyle ':completion:*' insert-tab pending
 zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zcompcache
-zstyle ':completion:*' completer _expand _extensions _complete _ignored _approximate
+zstyle ':completion:*' completer _complete _match _expand _extensions _ignored _approximate
 zstyle ':completion:*' matcher-list \
     'm:{a-zA-Z}={A-Za-z}' \
     'r:|[._-]=* r:|=*' \
@@ -61,7 +61,12 @@ zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*:(rm|kill):*' ignore-line yes
 zstyle ':completion:complete:*:options' sort false
 zstyle ':completion:*:*:make:*' tag-order 'targets'
-zstyle ':completion:*:functions' ignored-patterns '_*'
+zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
+
+# Increase the number of errors based on the length of the typed word.
+zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
 
 zstyle ":completion:*:*:kill:*:processes" list-colors "=(#b) #([0-9]#)*=0=01;31"
 zstyle ":completion:*:kill:*" command "ps --forest -u $USER -o pid,%cpu,%mem,cmd"
@@ -111,4 +116,7 @@ done
 export HISTORY_IGNORE="(${joined})"
 unset joined
 
-alias sh-plugs-up='antidote bundle < "${SHELLRC_HOME}"/.zsh_plugins.txt > "${SHELLRC_HOME}"/.zsh_plugins.zsh; antidote update'
+alias sh-plugs-up='antidote bundle < \
+    "${SHELLRC_HOME}"/.zsh_plugins.txt > \
+    "${SHELLRC_HOME}"/.zsh_plugins.zsh; \
+    antidote update'
