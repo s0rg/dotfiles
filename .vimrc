@@ -289,7 +289,6 @@ let g:ale_fixers = {
     \ 'sh': [ 'shfmt' ],
     \ }
 
-
 " asynccomplete-vim + vim-lsp
 let g:asyncomplete_auto_popup = 0
 let g:asyncomplete_auto_completeopt = 0
@@ -303,7 +302,7 @@ let g:lsp_completion_documentation_enabled = 0
 let g:lsp_document_code_action_signs_enabled = 0
 
 " let g:lsp_signature_help_enabled = 0
-let g:lsp_signature_help_delay = 100
+let g:lsp_signature_help_delay = 500
 
 if executable('gopls')
     " go install golang.org/x/tools/gopls@latest
