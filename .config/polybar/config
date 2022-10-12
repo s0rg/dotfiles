@@ -59,6 +59,7 @@ cursor-scroll = ns-resize
 [module/xwindow]
 type = internal/xwindow
 format-padding = 1
+
 label = %title%
 label-maxlen = 80
 
@@ -66,21 +67,18 @@ label-maxlen = 80
 [module/xkeyboard]
 type = internal/xkeyboard
 blacklist-0 = scroll lock
-format = <label-indicator> <label-layout>
 
+format = <label-indicator> <label-layout>
 label-layout = %icon%
 label-layout-padding = 0
 label-layout-font = 3
 label-layout-foreground = ${colors.foreground-alt}
-
 label-indicator-on = %icon%
 label-indicator-on-padding = 0
 label-indicator-on-margin = 0
-
 layout-icon-default =
 layout-icon-0 = ru;RU
 layout-icon-1 = us;US
-
 indicator-icon-default =
 indicator-icon-0 = caps lock;;CAP
 indicator-icon-1 = num lock;;NUM
@@ -95,8 +93,9 @@ content-margin = 0
 
 [module/filesystem]
 type = internal/fs
-interval = 30
+interval = 10
 mount-0 = /home
+
 label-mounted = %{T4}%{T-} %percentage_used%%
 
 
@@ -111,20 +110,15 @@ pin-workspaces = true
 
 label-mode-padding = 2
 label-mode-foreground = ${colors.foreground-alt}
-
-; focused = Active workspace on focused monitor
 label-focused = %index%
 label-focused-foreground = ${colors.foreground-alt}
 label-focused-overline = ${colors.foreground-alt}
 label-focused-padding = 1
-
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
 label-unfocused-padding = 1
-
 ; visible = Active workspace on unfocused monitor
 label-visible = %index%
-
 ; urgent = Workspace with urgency hint set
 label-urgent = %index%
 label-urgent-background = ${colors.alert}
@@ -136,11 +130,10 @@ label-urgent-padding = 1
 [module/cpu]
 type = internal/cpu
 interval = 1.0
-format = <ramp-coreload>
 
+format = <ramp-coreload>
 ramp-coreload-spacing = 0
 ramp-coreload-font = 5
-
 ramp-coreload-0 = ▁
 ramp-coreload-1 = ▂
 ramp-coreload-2 = ▃
@@ -149,36 +142,40 @@ ramp-coreload-4 = ▅
 ramp-coreload-5 = ▆
 ramp-coreload-6 = ▇
 ramp-coreload-7 = █
-
 ramp-coreload-0-foreground = ${colors.foreground}
 ramp-coreload-1-foreground = ${colors.foreground}
 ramp-coreload-2-foreground = ${colors.foreground}
-
 ramp-coreload-3-foreground = ${colors.foreground-alt}
 ramp-coreload-4-foreground = ${colors.foreground-alt}
 ramp-coreload-5-foreground = ${colors.foreground-alt}
-
 ramp-coreload-6-foreground = ${colors.alert}
 ramp-coreload-7-foreground = ${colors.alert}
 
 
 [module/memory]
 type = internal/memory
-interval = 2
+interval = 1
+
 format = <label>
 label = %{T2}%{T-} %percentage_used:2%%
 
 
 [module/date]
 type = internal/date
-interval = 2
+interval = 1
 date = %a %Y-%m-%d
 time = %H:%M
+
 label = %{T2}%{T-} %date% %{T3}%time%%{T-}
 label-foreground = ${colors.foreground-alt}
 
+
 [module/pulseaudio]
 type = internal/pulseaudio
+sink = @DEFAULT_SINK@
+use-ui-max = false
+click-right = pavucontrol-qt &
+
 format-volume = <label-volume>
 label-volume = %{T2}墳%{T-} %percentage%%
 label-muted = %{T2}婢%{T-} off
@@ -186,15 +183,13 @@ label-volume-minlen = 16
 label-volume-maxlen = 16
 label-muted-minlen = 16
 label-muted-maxlen = 16
-sink = @DEFAULT_SINK@
-use-ui-max = false
-click-right = pavucontrol-qt &
 
 
 [module/backlight]
 type = internal/backlight
 card = amdgpu_bl0
 use-actual-brightness = true
+
 format = <label>
 label = %{T2}%{T-} %percentage%%
 label-minlen = 16
@@ -204,11 +199,12 @@ label-maxlen = 16
 [module/micstatus]
 type = custom/script
 interval = 1.0
+exec = pulse-mic --status
+
 format = <label>
 label-foreground = ${colors.foreground}
 label-font = 4
 label-padding-right = 1
-exec = pulse-mic --status
 
 
 [module/temperature]
@@ -219,19 +215,19 @@ hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input
 
 label = %temperature-c%
 format = <label>
-
 label-warn = %temperature-c%
 label-warn-foreground = ${colors.foreground-alt}
 label-warn-overline = ${colors.alert}
 format-warn = <label-warn>
 
+
 [module/mpd]
 type = internal/mpd
-
 host = 127.0.0.1
 port = 6600
 password =
 interval = 1
+
 format-offline = "mpd offline"
 format-offline-foreground = ${colors.alert}
 format-stopped = ""
@@ -240,10 +236,12 @@ format-paused =   <label-song>
 label-song = %artist% - %title%
 label-time = %elapsed% / %total%
 
+
 [module/bluetooth]
 type = custom/script
 exec = rofi-bluetooth --status
 interval = 1
+
 label-font = 2
 label-padding-right = 1
 
