@@ -48,8 +48,6 @@ set formatoptions=cjl1
 set showmatch matchtime=10
 set cursorline scrolloff=3
 set shiftwidth=4 shiftround
-set noshowmode laststatus=2
-set switchbuf=usetab,newtab
 set fillchars+=fold:\ ,vert:│
 set title titlestring=vim:\ %f
 set backspace=indent,eol,start
@@ -57,6 +55,7 @@ set textwidth=120 colorcolumn=+1
 set nospell nostartofline nobomb
 set noerrorbells novisualbell t_vb=
 set wrap linebreak whichwrap+=<,>,[,]
+set noshowmode switchbuf=usetab,newtab
 set lazyredraw ttyfast redrawtime=8000
 set foldmethod=syntax foldlevelstart=99
 set sessionoptions=curdir,folds,tabpages
@@ -99,6 +98,8 @@ let g:python_highlight_all = 1
 
 
 " lightline
+set laststatus=2
+
 let g:lightline = {
     \   'colorscheme': 'jellybeans',
     \   'active': { 'right': [
@@ -289,13 +290,13 @@ let g:ale_fixers = {
     \ 'sh': [ 'shfmt' ],
     \ }
 
-" asynccomplete-vim + vim-lsp
-let g:asyncomplete_auto_popup = 0
-let g:asyncomplete_auto_completeopt = 0
 
+" vim-lsp
 let g:lsp_text_edit_enabled = 0
+let g:lsp_highlights_enabled = 0
 let g:lsp_insert_text_enabled = 0
 let g:lsp_diagnostics_enabled = 0
+let g:lsp_virtual_text_enabled = 0
 let g:lsp_diagnostics_signs_enabled = 0
 let g:lsp_document_highlight_enabled = 0
 let g:lsp_completion_documentation_enabled = 0
@@ -303,6 +304,11 @@ let g:lsp_document_code_action_signs_enabled = 0
 
 " let g:lsp_signature_help_enabled = 0
 let g:lsp_signature_help_delay = 500
+
+
+" asynccomplete-vim
+let g:asyncomplete_auto_popup = 0
+let g:asyncomplete_auto_completeopt = 0
 
 if executable('gopls')
     " go install golang.org/x/tools/gopls@latest

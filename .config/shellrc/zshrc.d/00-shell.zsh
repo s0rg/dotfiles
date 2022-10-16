@@ -56,6 +56,9 @@ zstyle ':completion:*' matcher-list \
     'r:|[._-]=* r:|=*' \
     'l:|=* r:|=*'
 
+zstyle ':completion:*' insert-unambiguous true
+zstyle ':completion:*' original true
+zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*' ignore-parents parent pwd
 zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*:(rm|kill):*' ignore-line yes

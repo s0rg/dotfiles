@@ -6,6 +6,8 @@ alias ll='ls -hAlFG --time-style=+"%Y-%m-%d %H:%M:%S"'
 alias lst='_last_changed'
 
 alias ip='ip -color=auto'
+alias dir='dir --color'
+alias vdir='vdir --color'
 alias diff='diff --color=auto'
 alias dmesg='dmesg --color=auto'
 alias grep='grep --color=auto'
@@ -140,6 +142,9 @@ alias nscan-web='_nmp -T3 -sS -Pn --open -O --osscan-guess --fuzzy -p 21-25,80,8
 alias nscan-host='_nmp -T3 -sS -Pn --open -sV --version-light -F --top-ports 200'
 alias nscan-xray='_nmp -T3 -sS -Pn --open -A'
 unset _nmp
+
+# socks5 via tor
+alias torsocks='docker run -p 127.0.0.1:9150:9150 stefanoj3/tordock:latest'
 
 # wifi
 alias wifi-ls='nmcli device wifi list --rescan yes'

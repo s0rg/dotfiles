@@ -4,4 +4,12 @@ fi
 
 export PATH=${PATH}:${HOME}/.local/bin:${HOME}/.local/scripts:${HOME}/Telegram
 
-#vi:ft=bash
+export XDG_CONFIG_HOME="${HOME}"/.config
+export XDG_CACHE_HOME="${HOME}"/.cache
+export XDG_DATA_HOME="${HOME}"/.local/share
+
+export SHELLRC_HOME="${HOME}"/.config/shellrc
+
+export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}":/usr/local/lib/pkgconfig
+
+#vi:ft=sh

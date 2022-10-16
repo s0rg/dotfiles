@@ -53,6 +53,7 @@
         git branch --merged | egrep -v '(^\\*|master|main)' | xargs -r -n 1 git branch -dr ; \
         git reflog expire --all --expire=now ; \
         git gc --prune=now --aggressive ; \
+        git remote -v update -p ; \
         }; f"
     # zip
     zip = !git archive -o "$(basename "$(git root)")".zip HEAD
