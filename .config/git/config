@@ -11,8 +11,15 @@
 [color]
     ui = auto
 
+[init]
+    defaultBranch = master
+
 [push]
     default = current
+
+[pull]
+    rebase = true
+    ff = only
 
 [branch]
     sort = -committerdate
@@ -21,16 +28,12 @@
 [fetch]
     prune = true
 
-[pull]
-    rebase = true
-    ff = only
+[checkout]
+	defaultRemote = origin
 
 [rebase]
     instructionFormat = "[%an - %ar] %s"
     autoStash = true
-
-[init]
-    defaultBranch = master
 
 [pager]
     diff = delta

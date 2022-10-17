@@ -1,17 +1,31 @@
 ## fs tools
 
+# nice display for pwd
+_show_pwd() {
+	echo -e "\033[0;30m$(pwd)\033[0m\n"
+}
+
+# show N (5 by deafult) last-changed elements in cwd
+_last_changed() {
+	# shellcheck disable=2012
+	\ls -1ct --color=always --quoting-style=literal | head --lines "${1:-5}"
+}
+
+# determine size of a file or total size of a directory
+_fn_size() { du -sbh -- "${@:-.}"; }
+
 # create new directory (if it does not exists) and cd into it
-md() {
+mcd() {
 	[ -z "${1}" ] && return
 	[ ! -e "${1}" ] && mkdir -p "${1}"
 	cd "${1}" || return
-	echo -e "\033[0;30m$(pwd)\033[0m\n"
+	_show_pwd
 }
 
 # cd up
 up() {
 	cd "$(printf "%0.s../" $(seq 1 "${1:-1}"))" || return
-	echo -e "\033[0;30m$(pwd)\033[0m\n"
+	_show_pwd
 }
 
 # `opn` with no arguments open current directory,
@@ -38,15 +52,6 @@ bak() {
 		cp -v -i -r "$t"{,.bak}
 	fi
 }
-
-# `_last_changed` show N (5 by deafult) last-changed elements in cwd
-_last_changed() {
-	# shellcheck disable=2012
-	\ls -1ct --color=always --quoting-style=literal | head --lines "${1:-5}"
-}
-
-# determine size of a file or total size of a directory
-_fn_size() { du -sbh -- "${@:-.}"; }
 
 ## shell utils
 

@@ -40,7 +40,6 @@ alias today='date "+%Y_%m_%d"'
 alias iso-date='date -u +%FT%H:%M:%S'
 
 # shell tools
-alias sh-reload='exec "${SHELL}" -l'
 alias sh-nohist='unset HISTFILE'
 alias sh-path='echo -n "$PATH" | tr ":" "\n" | sort'
 
@@ -102,6 +101,7 @@ alias ytv='youtube-dl -f bestvideo+bestaudio'
 # docker
 alias doi-up="docker images -f 'dangling=false' --format '{{.Repository}}:{{.Tag}}' | xargs -L1 docker pull"
 alias doi-clr="docker images -f 'dangling=true' -q | xargs -L1 docker rmi"
+alias dop='docker stats'
 alias dps='docker ps -a'
 alias dcc='docker compose'
 alias dcu='docker compose up --remove-orphans'
@@ -144,7 +144,7 @@ alias nscan-xray='_nmp -T3 -sS -Pn --open -A'
 unset _nmp
 
 # socks5 via tor
-alias torsocks='docker run -p 127.0.0.1:9150:9150 stefanoj3/tordock:latest'
+alias torsocks='docker run -p 127.0.0.1:9150:9150 stefanoj3/tordock'
 
 # wifi
 alias wifi-ls='nmcli device wifi list --rescan yes'

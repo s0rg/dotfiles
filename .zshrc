@@ -1,11 +1,19 @@
+# If not running interactively, don't do anything
+[[ -o interactive ]] || return
+
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
+
+export ZSH_COMPDUMP="${HOME}"/.cache/zcompdump
 
 # plugins
 source "${HOME}/.local/antidote/antidote.zsh"
 
 export ZDOTDIR="${HOME}/.config/shellrc"
 export FORGIT_NO_ALIASES="1"
+
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zcompcache
 
 antidote load
 
@@ -15,8 +23,6 @@ export ZDOTDIR="${HOME}"
 # auto-completion
 
 fpath+=("${HOME}/.config/shellrc/zsh-completions")
-
-export ZSH_COMPDUMP="${HOME}"/.cache/zcompdump
 
 autoload -Uz compinit 
 

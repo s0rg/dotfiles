@@ -44,24 +44,24 @@ typeset -U path cdpath fpath manpath
 zle_highlight+=(paste:none)
 
 zstyle ':completion:*' rehash true
-zstyle ':completion:*' use-cache on
+# zstyle ':completion:*' use-cache on
+# zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zcompcache
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' menu select=2
 zstyle ':completion:*' keep-prefix true
 zstyle ':completion:*' insert-tab pending
-zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zcompcache
 zstyle ':completion:*' completer _complete _match _expand _extensions _ignored _approximate
 zstyle ':completion:*' matcher-list \
     'm:{a-zA-Z}={A-Za-z}' \
     'r:|[._-]=* r:|=*' \
     'l:|=* r:|=*'
 
-zstyle ':completion:*' insert-unambiguous true
 zstyle ':completion:*' original true
 zstyle ':completion:*' squeeze-slashes true
+zstyle ':completion:*' insert-unambiguous true
 zstyle ':completion:*' ignore-parents parent pwd
 zstyle ':completion:*:descriptions' format '[%d]'
-zstyle ':completion:*:(rm|kill):*' ignore-line yes
+zstyle ':completion:*:(rm|kill|v):*' ignore-line yes
 zstyle ':completion:complete:*:options' sort false
 zstyle ':completion:*:*:make:*' tag-order 'targets'
 zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'

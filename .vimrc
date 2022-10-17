@@ -22,12 +22,9 @@ endif
 let &t_SI .= "\<Esc>[3 q"
 let &t_EI .= "\<Esc>[5 q"
 
-augroup ResetCursorShape
-    au!
-    autocmd VimEnter * normal! :startinsert :stopinsert
-augroup END
 
 colorscheme jellybeans
+highlight Folded guibg=Black ctermbg=Black
 
 let &showbreak='↪ '
 let g:netrw_hide=1
@@ -144,35 +141,35 @@ let g:lightline#ale#indicator_ok = "\uf00c"
 
 
 " vim-go
-let g:go_highlight_string_spellcheck = 0
-
-let g:go_highlight_function_parameters = 1
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_format_strings = 1
-let g:go_highlight_generate_tags = 1
-let g:go_highlight_generate_tags = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_operators = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_types = 1
-
-let g:go_code_completion_enabled = 1
-let g:go_fmt_fail_silently = 1
-let g:go_def_reuse_buffer = 1
-let g:go_template_use_pkg = 1
-let g:go_auto_type_info = 1
-
-let g:go_imports_autosave = 0
-let g:go_jump_to_error = 0
-let g:go_list_type = 'quickfix'
-
-let g:go_diagnostics_level = 2
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_format_strings = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_function_parameters = 1
 
 let g:go_term_enabled = 1
-let g:go_term_mode = 'split'
+let g:go_auto_type_info = 1
+let g:go_def_reuse_buffer = 1
+let g:go_template_use_pkg = 1
+let g:go_fmt_fail_silently = 1
 
+let g:go_updatetime = 500
+
+let g:go_jump_to_error = 0
+let g:go_code_completion_enabled = 0
+let g:go_highlight_string_spellcheck = 0
+
+let g:go_decls_mode = 'fzf'
+let g:go_term_mode = 'split'
+let g:go_list_type = 'quickfix'
+let g:go_alternate_mode = 'tabedit'
 let g:go_gopls_matcher = 'caseSensitive'
+
 
 " tagbar
 let g:no_status_line = 1
@@ -229,20 +226,6 @@ let g:NERDTreeCustomOpenArgs = { 'file': { 'where': 't', 'keepopen': 1 } }
 
 let g:DevIconsEnableFoldersOpenClose = 1
 
-" Close all open buffers on entering a window if the only
-" buffer that's left is the NERDTree buffer
-function! s:CloseIfOnlyNerdTreeLeft()
-  if exists('t:NERDTreeBufName')
-    if bufwinnr(t:NERDTreeBufName) != -1
-      if winnr('$') == 1
-        q
-      endif
-    endif
-  endif
-endfunction
-
-" Close nerdtree when it's the only buffer left open
-autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
 " ale
 let g:ale_open_list = 0
@@ -301,7 +284,6 @@ let g:lsp_diagnostics_signs_enabled = 0
 let g:lsp_document_highlight_enabled = 0
 let g:lsp_completion_documentation_enabled = 0
 let g:lsp_document_code_action_signs_enabled = 0
-
 " let g:lsp_signature_help_enabled = 0
 let g:lsp_signature_help_delay = 500
 
@@ -309,26 +291,6 @@ let g:lsp_signature_help_delay = 500
 " asynccomplete-vim
 let g:asyncomplete_auto_popup = 0
 let g:asyncomplete_auto_completeopt = 0
-
-if executable('gopls')
-    " go install golang.org/x/tools/gopls@latest
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'gopls',
-        \ 'cmd': {server_info->['gopls', '-remote=auto']},
-        \ 'allowlist': ['go'],
-        \ })
-    autocmd BufWritePre *.go LspDocumentFormatSync
-    autocmd FileType go setlocal omnifunc=lsp#complete
-endif
-
-if executable('pyls')
-    " pip install python-language-server
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'allowlist': ['python'],
-        \ })
-endif
 
 
 " startify
@@ -390,6 +352,7 @@ let g:markdown_fenced_languages = [
 
 
 " fzf
+let g:fzf_action = {'ctrl-t':'tab split'}
 let g:fzf_colors = {
     \ 'fg':      ['fg', 'Normal'],
     \ 'bg':      ['bg', 'Normal'],
@@ -405,22 +368,120 @@ let g:fzf_colors = {
     \ 'spinner': ['fg', 'Label'],
     \ 'header':  ['fg', 'Comment'],
     \ }
-let g:fzf_action = {'ctrl-t':'tab split'}
 
-highlight Folded guibg=Black ctermbg=Black
+
+" Close all open buffers on entering a window if the only
+" buffer that's left is the NERDTree buffer
+function! s:CloseIfOnlyNerdTreeLeft()
+  if exists('t:NERDTreeBufName')
+    if bufwinnr(t:NERDTreeBufName) != -1
+      if winnr('$') == 1
+        q
+      endif
+    endif
+  endif
+endfunction
+
+" tree for current file
+function! NERDTreeToggleInCurDir()
+  " If NERDTree is open in the current buffer
+  if (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)
+    exe ':NERDTreeClose'
+  else
+    exe ':NERDTreeFind'
+  endif
+endfunction
+
+augroup FileType shell
+    autocmd!
+    autocmd BufNewFile *.sh 0put =\'#!/bin/bash\<nl>\<nl>\'|$
+augroup END
+
+augroup FileType make
+    autocmd!
+    autocmd FileType make setlocal noexpandtab
+augroup END
+
+augroup FileType dockefile
+    autocmd!
+    autocmd BufNewFile,BufRead Dockerfile* set ft=dockerfile
+augroup END
+
+augroup FileType python
+    autocmd!
+    autocmd FileType python setlocal autoindent softtabstop=4 formatoptions+=croq smartindent
+    autocmd BufNewFile *.py 0put=\'#!/usr/bin/env python3\<nl>\<nl>\'|$
+    if executable('pyls')
+        " pip install python-language-server
+        au User lsp_setup call lsp#register_server({
+            \ 'name': 'pyls',
+            \ 'cmd': {server_info->['pyls']},
+            \ 'allowlist': ['python'],
+            \ })
+    endif
+augroup END
+
+augroup FileType json
+    autocmd!
+    autocmd FileType json setlocal tabstop=2 shiftwidth=2
+augroup END
+
+augroup FileType yaml
+    autocmd!
+    autocmd FileType yaml setlocal tabstop=2 shiftwidth=2 expandtab
+augroup END
+
+augroup FileType go
+    autocmd!
+    autocmd FileType go setlocal tabstop=4 shiftwidth=4 expandtab
+    autocmd FileType go nmap <buffer> <nowait> <leader>t :GoAddTags<CR>
+    autocmd FileType go nmap <buffer> <nowait> <leader>i :GoImports<CR>
+    autocmd FileType go nmap <buffer> <nowait> <leader>p :GoImplements<CR>
+    autocmd FileType go nmap <buffer> <nowait> <leader>a :GoAlternate!<CR>
+    autocmd FileType go nmap <buffer> <nowait> <leader>r <Plug>(go-run)
+    autocmd FileType go nmap <buffer> <nowait> <leader>T <Plug>(go-test-func)
+    autocmd FileType go nmap <buffer> <nowait> <leader>d <Plug>(go-def-tab)
+    autocmd FileType go nmap <buffer> <nowait> <leader>n <Plug>(go-rename)
+    autocmd FileType go iabbr <buffer> ifer <Cmd>GoIfErr<CR>
+
+    " go install golang.org/x/tools/gopls@latest
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'gopls',
+        \ 'cmd': {server_info->['gopls', '-remote=auto']},
+        \ 'allowlist': ['go'],
+        \ })
+    autocmd FileType go setlocal omnifunc=lsp#complete
+augroup END
+
+augroup FileType fasm
+    autocmd!
+    autocmd BufNewFile,BufRead *.asm set ft=fasm
+    autocmd BufNewFile,BufRead *.inc set ft=fasm
+augroup END
+
+augroup FileType text
+    autocmd!
+    autocmd FileType text setlocal formatoptions=tjl1
+augroup END
+
+" Close nerdtree when it's the only buffer left open
+autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
 autocmd CompleteDone * silent! pclose
 autocmd FocusGained,BufEnter * checktime
 autocmd BufWinEnter * syntax sync fromstart
 
-autocmd BufNewFile *.sh 0put =\'#!/bin/bash\<nl>\<nl>\'|$
-autocmd BufNewFile *.py 0put=\'#!/usr/bin/env python3\<nl>\<nl>\'|$
+augroup vim-enter
+    autocmd!
+    autocmd VimEnter * normal! :startinsert :stopinsert
+    autocmd VimEnter * nested if argc() > 1 && !&diff | tab sball | tabfirst | endif
+augroup END
 
-autocmd BufNewFile,BufRead Dockerfile* set ft=dockerfile
-autocmd FileType make setlocal noexpandtab
+let s:leave_tab = 0
 
-autocmd FileType gitcommit let b:EditorConfig_disable = 1
-autocmd FileType gitcommit setlocal textwidth=72
+autocmd TabLeave * let s:leave_tab = tabpagenr()
+autocmd TabEnter * if tabpagenr() != 1 && tabpagenr() == s:leave_tab | tabprevious | endif
+
 
 " git conflict highlighting & navigation
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
@@ -443,16 +504,6 @@ vmap <A-Down> <Plug>MoveBlockDown
 vmap <A-Up>   <Plug>MoveBlockUp
 nmap <A-Down> <Plug>MoveLineDown
 nmap <A-Up>   <Plug>MoveLineUp
-
-" tree for current file
-function! NERDTreeToggleInCurDir()
-  " If NERDTree is open in the current buffer
-  if (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)
-    exe ':NERDTreeClose'
-  else
-    exe ':NERDTreeFind'
-  endif
-endfunction
 
 inoremap <silent> <F1> <Cmd>:call NERDTreeToggleInCurDir()<CR>
 nnoremap <silent> <F1> <Cmd>:call NERDTreeToggleInCurDir()<CR>
@@ -502,35 +553,11 @@ vmap <leader><space> za
 " vim-commentary
 map <leader>/ :Commentary<CR>
 
+" makes dd delete, not copy
 nnoremap d "_d
 vnoremap d "_d
 
 nnoremap <C-o> <C-o>zz
-
-" vim-go
-autocmd FileType go nmap <buffer> <nowait> <leader>t :GoAddTags<CR>
-autocmd FileType go nmap <buffer> <nowait> <leader>i :GoImports<CR>
-autocmd FileType go nmap <buffer> <nowait> <leader>p :GoImplements<CR>
-autocmd FileType go nmap <buffer> <nowait> <leader>r <Plug>(go-run)
-autocmd FileType go nmap <buffer> <nowait> <leader>T <Plug>(go-test-func)
-autocmd FileType go nmap <buffer> <nowait> <leader>d <Plug>(go-def-tab)
-autocmd FileType go nmap <buffer> <nowait> <leader>n <Plug>(go-rename)
-autocmd FileType go iabbr <buffer> ifer <Cmd>GoIfErr<CR>
-
-autocmd FileType yaml,json setlocal ts=2 sw=2
-" For text file, wrap all the text
-autocmd FileType text setlocal formatoptions=tjl1
-
-autocmd BufNewFile,BufRead *.asm set ft=fasm
-autocmd BufNewFile,BufRead *.inc set ft=fasm
-
-autocmd VimEnter * nested if argc() > 1 && !&diff | tab sball | tabfirst | endif
-
-let s:leave_tab = 0
-
-autocmd TabLeave * let s:leave_tab = tabpagenr()
-autocmd TabEnter * if tabpagenr() != 1 && tabpagenr() == s:leave_tab | tabprevious | endif
-
 
 " disable cursors keys, someday, maybe...
 "nnoremap <Left>  :echoe 'Use h'<CR>
