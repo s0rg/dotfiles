@@ -32,6 +32,8 @@ _reset() {
 }
 
 setopt PROMPT_SUBST
+setopt PROMPT_CR
+setopt PROMPT_SP
 
 add-zsh-hook -Uz precmd _reset
 add-zsh-hook -Uz precmd vcs_info

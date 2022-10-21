@@ -4,6 +4,7 @@ alias sudo='sudo '
 alias ls='ls --color=always --group-directories-first -v'
 alias ll='ls -hAlFG --time-style=+"%Y-%m-%d %H:%M:%S"'
 alias lst='_last_changed'
+alias tree='tree --dirsfirst -I vendor/'
 
 alias ip='ip -color=auto'
 alias dir='dir --color'
@@ -20,6 +21,10 @@ alias ln='ln -iv'
 alias mv='mv -iv'
 alias mkdir='mkdir -pv'
 
+# ripgrep
+alias rg='rg --color always'
+alias rgf='rg --color always --no-heading'
+
 # shortcuts
 alias t='touch'
 alias v='vim'
@@ -28,7 +33,6 @@ alias wh='which'
 alias chx='chmod u+x'
 alias duf='duf --hide special'
 alias unx='7z x'
-alias rgf='rg --no-heading'
 alias zat='zathura'
 alias cal='echo; ncal -M -3; echo'
 alias obey='sudo !!'

@@ -1,7 +1,7 @@
 --hidden
 --trim
 --smart-case
---pretty
+--heading
 --no-messages
 --no-require-git
 --glob=!.git

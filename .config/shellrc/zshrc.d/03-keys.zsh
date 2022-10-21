@@ -23,8 +23,10 @@ key[Control_Right]="${terminfo[kRIT5]}"
 [[ -n "${key[PageUp]}" ]] && bindkey -- "${key[PageUp]}" beginning-of-buffer-or-history
 [[ -n "${key[PageDown]}" ]] && bindkey -- "${key[PageDown]}" end-of-buffer-or-history
 
-bindkey "^K" kill-line
+bindkey '^C' send-break
+bindkey "^K" kill-whole-line
 bindkey '^D' exit_zsh
+bindkey '^Z' undo
 bindkey '^x^e' edit-command-line
 
 bindkey '^q' push-line-or-edit  # push command, use ctrl-y to yank it back

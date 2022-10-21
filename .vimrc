@@ -435,10 +435,8 @@ augroup FileType go
     autocmd!
     autocmd FileType go setlocal tabstop=4 shiftwidth=4 expandtab
     autocmd FileType go nmap <buffer> <nowait> <leader>t :GoAddTags<CR>
-    autocmd FileType go nmap <buffer> <nowait> <leader>i :GoImports<CR>
-    autocmd FileType go nmap <buffer> <nowait> <leader>p :GoImplements<CR>
+    autocmd FileType go nmap <buffer> <nowait> <leader>i :GoImplements<CR>
     autocmd FileType go nmap <buffer> <nowait> <leader>a :GoAlternate!<CR>
-    autocmd FileType go nmap <buffer> <nowait> <leader>r <Plug>(go-run)
     autocmd FileType go nmap <buffer> <nowait> <leader>T <Plug>(go-test-func)
     autocmd FileType go nmap <buffer> <nowait> <leader>d <Plug>(go-def-tab)
     autocmd FileType go nmap <buffer> <nowait> <leader>n <Plug>(go-rename)
