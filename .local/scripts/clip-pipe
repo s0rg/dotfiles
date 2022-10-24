@@ -7,7 +7,7 @@
 # example: clip-pipe | xargs -P 2 -I '{}' wget '{}'
 #
 
-xcmd='xclip -selection clipboard -target STRING'
+xcmd='xclip -selection clipboard'
 xget="$xcmd -out"
 xset="$xcmd -in"
 
@@ -17,12 +17,12 @@ echo -n '' | $xset
 sel=''
 
 while true; do
-    cur=$($xget)
-    if [[ -n $cur && "$cur" != "$sel" ]]; then
-        echo "$cur"
-        sel=$cur
-    fi
-    sleep 0.5
+	cur=$($xget)
+	if [[ -n $cur && "$cur" != "$sel" ]]; then
+		echo "$cur"
+		sel=$cur
+	fi
+	sleep 0.5
 done
 
 # clean last state

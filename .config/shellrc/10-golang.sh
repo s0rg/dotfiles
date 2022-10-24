@@ -32,7 +32,7 @@ _go_get_trace() {
 	local trace
 	trace=$(dasel -r json '.stacktrace' "$@" | sed -e 's/\"$//' -e 's/^\"//')
 	if [ -n "${trace}" ]; then
-		echo -e "${trace}"
+		echo -e "${trace}" | bat
 	fi
 }
 
@@ -43,9 +43,8 @@ alias go-trace='_go_get_trace'
 alias go-cpu='_go_cpu_profile'
 
 alias go-noproxy='export GOPROXY="direct"'
-
-alias gmi='go mod init; go mod tidy'
-alias gmv='go mod vendor'
+alias go-init='go mod init; go mod tidy'
+alias go-vendor='go mod vendor'
 
 alias go-mod-up='go get -u ./...; go mod tidy'
 alias go-mod-ls="go list -f '{{join .Deps \"\n\"}}' | xargs go list -f '{{if not .Standard}}{{.ImportPath}}{{end}}'"

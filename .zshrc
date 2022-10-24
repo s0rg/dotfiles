@@ -46,6 +46,7 @@ else
 fi
 
 compinit -C -d "${ZSH_COMPDUMP}"
+autoload -Uz bashcompinit && bashcompinit
 
 # other goodies
 

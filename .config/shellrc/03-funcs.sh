@@ -7,8 +7,7 @@ _show_pwd() {
 
 # show N (5 by deafult) last-changed elements in cwd
 _last_changed() {
-	# shellcheck disable=2012
-	\ls -1ct --color=always --quoting-style=literal | head --lines "${1:-5}"
+	find . -maxdepth 1 -type f -printf '%T+ %f\n' | sort -r | head --lines "${1:-5}"
 }
 
 # determine size of a file or total size of a directory

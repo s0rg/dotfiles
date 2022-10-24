@@ -7,18 +7,18 @@
 # example: clip-trans
 #
 
-xget='xclip -selection primary -target STRING -out'
+xget='xclip -selection primary -out'
 clip=$($xget)
 
 if [ -n "$clip" ]; then
-    tran=$(trans -no-ansi -j -w 10 \
-        -show-original n \
-        -show-original-phonetics n \
-        -show-translation-phonetics n \
-        -show-prompt-message n \
-        -show-languages n \
-        -show-alternatives n \
-        :ru "$clip")
+	tran=$(trans -no-ansi -j -w 10 \
+		-show-original n \
+		-show-original-phonetics n \
+		-show-translation-phonetics n \
+		-show-prompt-message n \
+		-show-languages n \
+		-show-alternatives n \
+		:ru "$clip")
 
-    dunstify -r 5555 -u low -t 10000 -a "trans" "" "$tran"
+	dunstify -r 5555 -u low -t 10000 -a "trans" "" "$tran"
 fi

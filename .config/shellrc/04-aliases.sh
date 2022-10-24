@@ -29,7 +29,6 @@ alias rgf='rg --color always --no-heading'
 alias t='touch'
 alias v='vim'
 alias si='sudo -i'
-alias wh='which'
 alias chx='chmod u+x'
 alias duf='duf --hide special'
 alias unx='7z x'
@@ -55,7 +54,7 @@ alias sh-stats='sort | uniq -c | sort -n -r'
 alias sh-trim='sed -e '\''s/^[[:space:]]*//g'\'' -e '\''s/[[:space:]]*\$//g'\'''
 alias sh-size='_fn_size'
 alias sh-strip-ansi="sed 's/\x1b\[[0-9;]*m//g'"
-alias sh-fetch='clear; neofetch --backend "kitty"'
+alias sh-fetch='clear; neofetch --backend "kitty"; echo ;'
 alias sh-tolower='rename "y/A-Z/a-z/" *'
 alias sh-toupper='rename "y/a-z/A-Z/" *'
 
@@ -63,19 +62,21 @@ alias sh-toupper='rename "y/a-z/A-Z/" *'
 alias sh-rnd-ua='shuf -n 1 "${XDG_DATA_HOME}"/rand_ua.list'
 
 # dasel
+alias jq='dasel -r json'
 alias jsp='dasel -r json . | bat'
 alias swag-urls="dasel -r json '.paths | keys | .[]'"
 
 # curl
 alias curl='curl --user-agent "$(sh-rnd-ua)"'
-alias get='curl --silent --progress-bar -OL'
-alias heads='curl -sI'
+alias get='curl --progress-bar -OL'
+alias headers='curl -sI'
+
 alias ifco='\curl ifconfig.co'
 alias wttr='echo; \curl http://wttr.in/?format="%c:+%f+%w\n"; echo'
 
 # clipboard
-alias clip-get='xclip -selection clipboard -target STRING -out'
-alias clip-put='xclip -selection clipboard -target STRING -in'
+alias clip-get='xclip -selection clipboard -out'
+alias clip-put='xclip -selection clipboard -in'
 alias clip-clr='echo -n "" | clip-put'
 alias pub2clip='cat ${HOME}/.ssh/id_rsa.pub | clip-put'
 
@@ -92,7 +93,6 @@ alias inet-ports='netstat -nape --inet'
 
 # python
 alias py='python3'
-alias uuid='python3 -c "from uuid import uuid4; print(uuid4())"'
 alias pip-get='pip3 install --user --upgrade'
 alias pip-up='pip3 freeze --user | cut -d= -f1 | xargs -n1 pip3 install --user --upgrade'
 alias py-clear='find . | grep -E "(__pycache__|\.py[co]$)" | xargs rm -rf'
@@ -103,8 +103,8 @@ alias yta='youtube-dl -f bestaudio --extract-audio'
 alias ytv='youtube-dl -f bestvideo+bestaudio'
 
 # docker
-alias doi-up="docker images -f 'dangling=false' --format '{{.Repository}}:{{.Tag}}' | xargs -L1 docker pull"
-alias doi-clr="docker images -f 'dangling=true' -q | xargs -L1 docker rmi"
+alias d-img-up="docker images -f 'dangling=false' --format '{{.Repository}}:{{.Tag}}' | xargs -L1 docker pull"
+alias d-img-clr="docker images -f 'dangling=true' -q | xargs -L1 docker rmi"
 alias dop='docker stats'
 alias dps='docker ps -a'
 alias dcc='docker compose'
@@ -112,9 +112,6 @@ alias dcu='docker compose up --remove-orphans'
 alias dcd='docker compose down --remove-orphans'
 alias dcb='docker compose build --force-rm'
 alias dcl='docker compose logs -f'
-
-# git
-alias groot='cd $(git root)'
 
 # kitty
 alias kitty-up='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin'
@@ -156,3 +153,13 @@ alias wifi-ls='nmcli device wifi list --rescan yes'
 # scc
 alias scc='scc --wide --exclude-dir vendor'
 alias scc-gocode='scc --generated-markers "DO NOT EDIT" --no-gen --include-ext go --not-match "_test\.go$"'
+
+# global aliases
+alias -g NE='2>|/dev/null'
+alias -g NO='&>|/dev/null'
+alias -g EO='>|/dev/null'
+
+alias -g G='| rg '
+alias -g P='| $PAGER'
+alias -g PA='2>&1 | $PAGER'
+alias -g L='| wc -l'

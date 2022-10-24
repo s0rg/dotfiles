@@ -316,6 +316,7 @@ let g:startify_lists = [
 let g:startify_bookmarks = [
     \ { 'v': '~/.vimrc'                   },
     \ { 'n': '~/Documents/notes/local.md' },
+    \ { 'w': '~/Documents/notes/work.md' },
     \ ]
 
 let g:startify_commands = [
