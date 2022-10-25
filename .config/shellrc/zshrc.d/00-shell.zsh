@@ -9,6 +9,7 @@ setopt CLOBBER
 setopt HASH_LIST_ALL
 setopt AUTO_PARAM_SLASH
 setopt TRANSIENT_RPROMPT
+setopt INTERACTIVE_COMMENTS
 
 setopt COMPLETE_IN_WORD
 setopt ALWAYS_TO_END
@@ -62,7 +63,7 @@ zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*' insert-unambiguous true
 zstyle ':completion:*' ignore-parents parent pwd
 zstyle ':completion:*:descriptions' format '[%d]'
-zstyle ':completion:*:(rm|kill|v):*' ignore-line yes
+zstyle ':completion:*:(rm|kill|v|dcu):*' ignore-line yes
 zstyle ':completion:complete:*:options' sort false
 zstyle ':completion:*:*:make:*' tag-order 'targets'
 zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
@@ -74,6 +75,8 @@ zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX
 
 zstyle ":completion:*:*:kill:*:processes" list-colors "=(#b) #([0-9]#)*=0=01;31"
 zstyle ":completion:*:kill:*" command "ps --forest -u $USER -o pid,%cpu,%mem,cmd"
+
+zstyle ':completion:*:*:dcu:*' file-patterns 'docker-*.yml:compose-files'
 
 zstyle ':antidote:bundle' use-friendly-names 'yes'
 

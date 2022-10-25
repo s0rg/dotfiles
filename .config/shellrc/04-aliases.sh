@@ -3,7 +3,7 @@ alias sudo='sudo '
 
 alias ls='ls --color=always --group-directories-first -v'
 alias ll='ls -hAlFG --time-style=+"%Y-%m-%d %H:%M:%S"'
-alias lst='_last_changed'
+alias ls-last='_last_changed'
 alias tree='tree --dirsfirst -I vendor/'
 
 alias ip='ip -color=auto'
@@ -81,7 +81,7 @@ alias clip-clr='echo -n "" | clip-put'
 alias pub2clip='cat ${HOME}/.ssh/id_rsa.pub | clip-put'
 
 # fast travel
-alias cdl='cd ~/Downloads && lst'
+alias cdl='cd ~/Downloads && ls-last'
 alias cds='cd ~/.local/scripts'
 alias cdt='cd $(mktemp -d)'
 
@@ -105,13 +105,13 @@ alias ytv='youtube-dl -f bestvideo+bestaudio'
 # docker
 alias d-img-up="docker images -f 'dangling=false' --format '{{.Repository}}:{{.Tag}}' | xargs -L1 docker pull"
 alias d-img-clr="docker images -f 'dangling=true' -q | xargs -L1 docker rmi"
+alias d-prune="docker system prune -f"
 alias dop='docker stats'
 alias dps='docker ps -a'
 alias dcc='docker compose'
-alias dcu='docker compose up --remove-orphans'
-alias dcd='docker compose down --remove-orphans'
-alias dcb='docker compose build --force-rm'
-alias dcl='docker compose logs -f'
+alias dcd='dcc down'
+alias dcb='dcc build --force-rm'
+alias dcl='dcc logs -f'
 
 # kitty
 alias kitty-up='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin'

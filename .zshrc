@@ -24,6 +24,7 @@ export ZDOTDIR="${HOME}"
 
 fpath+=("${HOME}/.config/shellrc/zsh-completions")
 
+zmodload zsh/complist
 autoload -Uz compinit 
 
 _setup_compdump() {

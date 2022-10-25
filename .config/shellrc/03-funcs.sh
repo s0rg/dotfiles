@@ -151,7 +151,7 @@ kpods() {
 
 ## docker
 
-# executes usql for given docker container with postgres
+# executes `usql` for given docker container with postgres
 dsql() {
 	local container
 	container="${1:-postgres_container}"
@@ -166,4 +166,14 @@ dsql() {
 	local addr
 	addr=$(docker-ip --raw "${container}")
 	usql "postgresql://${user}:${pass}@${addr}:${port}/${db}?sslmode=disable"
+}
+
+# executes `docker compose up` for given files
+dcu() {
+	local files
+	files="-f docker-compose.yml"
+	for var in "$@"; do
+		files="$files -f $var"
+	done
+	eval "docker compose ${files} up"
 }
