@@ -36,18 +36,42 @@ _go_get_trace() {
 	fi
 }
 
+# go mod helper
+gmo() {
+	if [ ! -f go.mod ]; then
+		echo "[*] init"
+		go mod init
+		go mod tidy
+	fi
+
+	case $1 in
+	ls)
+		go list -f '{{join .Deps "\n"}}' | xargs go list -f '{{if not .Standard}}{{.ImportPath}}{{end}}'
+		return
+		;;
+	vendor)
+		go mod vendor
+		return
+		;;
+	up)
+		go get -u ./...
+		;;
+	esac
+
+	go mod tidy
+
+	if [ -d vendor ]; then
+		echo "[*] vendors"
+		go mod vendor
+	fi
+}
+
 # aliases
 alias go-bench='go test -benchmem -bench=./...'
 alias go-clean='go clean -cache -testcache -modcache; golangci-lint cache clean'
 alias go-trace='_go_get_trace'
 alias go-cpu='_go_cpu_profile'
-
 alias go-noproxy='export GOPROXY="direct"'
-alias go-init='go mod init; go mod tidy'
-alias go-vendor='go mod vendor'
-
-alias go-mod-up='go get -u ./...; go mod tidy'
-alias go-mod-ls="go list -f '{{join .Deps \"\n\"}}' | xargs go list -f '{{if not .Standard}}{{.ImportPath}}{{end}}'"
 
 # https://github.com/kyoh86/richgo
 alias go-test='richgo test -count 1 -v ./...'

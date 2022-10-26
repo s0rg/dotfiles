@@ -1,0 +1,5 @@
+#compdef gmo
+
+local -a subcmds
+subcmds=('ls:list modules' 'up:update modules' 'vendor:setup vendor cache')
+_describe 'gmo' subcmds
