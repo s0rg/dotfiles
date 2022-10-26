@@ -36,7 +36,7 @@ _go_get_trace() {
 	fi
 }
 
-# go mod helper
+# go mod operations
 gmo() {
 	if [ ! -f go.mod ]; then
 		echo "[*] init"

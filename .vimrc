@@ -400,6 +400,7 @@ augroup END
 
 augroup FileType make
     autocmd!
+    autocmd FileType make let b:EditorConfig_disable = 1
     autocmd FileType make setlocal noexpandtab
 augroup END
 
@@ -429,7 +430,7 @@ augroup END
 
 augroup FileType yaml
     autocmd!
-    autocmd FileType yaml setlocal tabstop=2 shiftwidth=2 expandtab
+    autocmd FileType yaml setlocal tabstop=2 shiftwidth=2
 augroup END
 
 augroup FileType go
@@ -470,7 +471,7 @@ autocmd CompleteDone * silent! pclose
 autocmd FocusGained,BufEnter * checktime
 autocmd BufWinEnter * syntax sync fromstart
 
-augroup vim-enter
+augroup vim_enter
     autocmd!
     autocmd VimEnter * normal! :startinsert :stopinsert
     autocmd VimEnter * nested if argc() > 1 && !&diff | tab sball | tabfirst | endif
