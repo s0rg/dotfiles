@@ -211,7 +211,7 @@ label-padding-right = 1
 type = internal/temperature
 thermal-zone = 0
 warn-temperature = 75
-hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input
+hwmon-path = /sys/class/thermal/thermal_zone0/hwmon1/temp1_input
 
 label = %temperature-c%
 format = <label>
