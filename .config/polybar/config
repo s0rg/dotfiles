@@ -215,9 +215,8 @@ hwmon-path = /sys/class/thermal/thermal_zone0/hwmon1/temp1_input
 
 label = %temperature-c%
 format = <label>
-label-warn = %temperature-c%
+label-warn = %{T3}%temperature-c%%{T-}
 label-warn-foreground = ${colors.foreground-alt}
-label-warn-overline = ${colors.alert}
 format-warn = <label-warn>
 
 
