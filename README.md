@@ -60,7 +60,7 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
 
 ### helpers
 
-- http cli: [httpie](https://httpie.io/)
+- http cli: [xh](https://github.com/ducaale/xh)
 - sql client: [usql](https://github.com/xo/usql)
 - code stats: [scc](https://github.com/boyter/scc)
 - disk usage: [duf](https://github.com/muesli/duf)

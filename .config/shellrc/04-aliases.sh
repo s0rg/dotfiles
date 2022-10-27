@@ -154,6 +154,9 @@ alias wifi-ls='nmcli device wifi list --rescan yes'
 alias scc='scc --wide --exclude-dir vendor'
 alias scc-gocode='scc --generated-markers "DO NOT EDIT" --no-gen --include-ext go --not-match "_test\.go$"'
 
+# deb packages
+alias ipkg='sudo dpkg -i'
+
 # global aliases
 alias -g NE='2>|/dev/null'
 alias -g NO='&>|/dev/null'

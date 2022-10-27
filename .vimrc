@@ -443,6 +443,7 @@ augroup FileType go
     autocmd FileType go nmap <buffer> <nowait> <leader>d <Plug>(go-def-tab)
     autocmd FileType go nmap <buffer> <nowait> <leader>n <Plug>(go-rename)
     autocmd FileType go iabbr <buffer> ifer <Cmd>GoIfErr<CR>
+    autocmd FileType go iabb fori for i := 0; i < ; i++ {<CR>}<C-o>gk<C-o>g_<C-o>T<
 
     " go install golang.org/x/tools/gopls@latest
     au User lsp_setup call lsp#register_server({
@@ -521,7 +522,7 @@ nmap <C-Down> <C-w>j
 nmap <C-Up>   <C-w>k
 
 nnoremap <A-Left>  ^
-nnoremap <A-Right> $
+nnoremap <A-Right> g_
 
 " tab switching
 nmap <Tab>     gt

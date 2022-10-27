@@ -68,10 +68,11 @@ gmo() {
 
 # aliases
 alias go-bench='go test -benchmem -bench=./...'
+alias go-test='gotest -count 1 -v ./...'
+
 alias go-clean='go clean -cache -testcache -modcache; golangci-lint cache clean'
+
 alias go-trace='_go_get_trace'
 alias go-cpu='_go_cpu_profile'
-alias go-noproxy='export GOPROXY="direct"'
 
-# https://github.com/kyoh86/richgo
-alias go-test='richgo test -count 1 -v ./...'
+alias go-noproxy='export GOPROXY="direct"'

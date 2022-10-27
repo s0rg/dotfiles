@@ -103,13 +103,13 @@ serve() {
 ## vim
 
 # om - Open Main.go (or any other file with given name)
-# 1. finds first existing file ('main.go' by default) or creates new one in cwd
+# 1. finds existing file ('main.go' by default) or creates new one in cwd
 # 2. opens it with $EDITOR
 om() {
 	local name
 	local main
 	name="${1:-main.go}"
-	main="$(fd --type f --max-results=1 --color never --glob "${name}")"
+	main="$(fd --type f --color never --glob "${name}" | fzf -1)"
 	[ -n "${main}" ] && name="${main}"
 	${EDITOR} "${name}"
 }
