@@ -10,9 +10,9 @@ margin-bottom = 0
 [colors]
 background = ${xrdb:color0:#222}
 background-alt = ${xrdb:color8:#444}
-foreground = ${xrdb:color1:#fff}
-foreground-alt = ${xrdb:color2:#eee}
-alert = ${xrdb:color3:#f00}
+foreground = ${xrdb:color2:#fff}
+foreground-alt = ${xrdb:color3:#eee}
+alert = ${xrdb:color1:#f00}
 
 
 [bar/mybar]

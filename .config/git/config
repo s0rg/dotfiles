@@ -8,6 +8,10 @@
     whitespace = cr-at-eol
     untrackedCache = true
 
+[advice]
+    detachedHead = false
+    statusHints = false
+
 [color]
     ui = auto
 

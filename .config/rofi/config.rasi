@@ -8,7 +8,7 @@ configuration {
     scrollbar-width: 4;
 }
 
-@theme "~/.cache/wal/colors-rofi-dark"
+@theme "colors-dark.rasi"
 
 element-text, element-icon {
     background-color: inherit;

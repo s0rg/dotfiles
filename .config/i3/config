@@ -204,7 +204,7 @@ assign [class="^Evolution$"]                            $mail
 font                          pango:monospace 0px
 set_from_resource             $bg i3wm.color0 #000000
 set_from_resource             $fg i3wm.color8 #00FF00
-set_from_resource             $ag i3wm.color1 #0000FF
+set_from_resource             $ag i3wm.color2 #0000FF
 
 # <colorclass>               <border> <background> <text> <indicator> <child_border>
 client.focused                $ag      $bg          $bg    $bg         $fg
@@ -233,7 +233,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id nm-applet
 exec --no-startup-id kbdd
 exec --no-startup-id udiskie
-exec --no-startup-id cbatticon -u 10 --critical-level 10 --command-critical-level "systemctl hibernate"
+exec --no-startup-id cbatticon --command-critical-level "systemctl hibernate"
 
 # first terminal
 exec --no-startup-id $term

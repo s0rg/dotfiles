@@ -63,7 +63,7 @@ alias sh-rnd-ua='shuf -n 1 "${XDG_DATA_HOME}"/rand_ua.list'
 
 # dasel
 alias jq='dasel -r json'
-alias jsp='dasel -r json . | bat'
+alias jsp='dasel --color -r json . <'
 alias swag-urls="dasel -r json '.paths | keys | .[]'"
 
 # curl
