@@ -90,6 +90,14 @@ set grepformat=%f:%l:%c:%m
 
 " ## PLUGINS
 
+let g:webdevicons_enable = 1
+let g:webdevicons_enable_nerdtree = 1
+let g:webdevicons_conceal_nerdtree_brackets = 1
+
+let g:DevIconsEnableFoldersOpenClose = 1
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+
+
 " python-syntax
 let g:python_highlight_all = 1
 
@@ -139,6 +147,20 @@ let g:lightline#ale#indicator_warnings = "\uf071"
 let g:lightline#ale#indicator_errors = "\uf05e"
 let g:lightline#ale#indicator_ok = "\uf00c"
 
+let g:lightline = {
+      \ 'component_function': {
+      \   'filetype': 'MyFiletype',
+      \   'fileformat': 'MyFileformat',
+      \ }
+      \ }
+
+function! MyFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+endfunction
+
+function! MyFileformat()
+  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+endfunction
 
 " vim-go
 let g:go_highlight_types = 1
@@ -224,7 +246,6 @@ let g:NERDTreeStatusline = '%#NonText#'
 let g:NERDTreeMapCustomOpen = '<space>'
 let g:NERDTreeCustomOpenArgs = { 'file': { 'where': 't', 'keepopen': 1 } }
 
-let g:DevIconsEnableFoldersOpenClose = 1
 
 
 " ale
@@ -483,12 +504,6 @@ let s:leave_tab = 0
 autocmd TabLeave * let s:leave_tab = tabpagenr()
 autocmd TabEnter * if tabpagenr() != 1 && tabpagenr() == s:leave_tab | tabprevious | endif
 
-
-" git conflict highlighting & navigation
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
-nnoremap <silent> <Leader>c /^\(<\\|=\\|>\)\{7\}\([^=].\+\)\?$<CR>
-
 " ## KEYS
 
 " split-join
@@ -559,14 +574,3 @@ nnoremap d "_d
 vnoremap d "_d
 
 nnoremap <C-o> <C-o>zz
-
-" disable cursors keys, someday, maybe...
-"nnoremap <Left>  :echoe 'Use h'<CR>
-"nnoremap <Right> :echoe 'Use l'<CR>
-"nnoremap <Up>    :echoe 'Use k'<CR>
-"nnoremap <Down>  :echoe 'Use j'<CR>
-" ...and in insert mode
-"inoremap <Left>  <ESC>:echoe 'Use h'<CR>
-"inoremap <Right> <ESC>:echoe 'Use l'<CR>
-"inoremap <Up>    <ESC>:echoe 'Use k'<CR>
-"inoremap <Down>  <ESC>:echoe 'Use j'<CR>
