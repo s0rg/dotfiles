@@ -43,7 +43,6 @@ set mouse="" mousehide
 set autoindent cindent
 set formatoptions=cjl1
 set showmatch matchtime=10
-set cursorline scrolloff=3
 set shiftwidth=4 shiftround
 set fillchars+=fold:\ ,vert:│
 set title titlestring=vim:\ %f
@@ -52,12 +51,13 @@ set textwidth=120 colorcolumn=+1
 set nospell nostartofline nobomb
 set noerrorbells novisualbell t_vb=
 set wrap linebreak whichwrap+=<,>,[,]
-set noshowmode switchbuf=usetab,newtab
 set lazyredraw ttyfast redrawtime=8000
 set foldmethod=syntax foldlevelstart=99
 set sessionoptions=curdir,folds,tabpages
 set splitbelow splitright termwinsize=6x0
+set cursorline scrolloff=5 sidescrolloff=5
 set number numberwidth=5 signcolumn=number
+set noshowmode switchbuf=useopen,usetab,newtab
 set expandtab smarttab tabstop=4 softtabstop=0
 set nobackup nowritebackup noswapfile noundofile
 set hlsearch incsearch ignorecase smartcase wrapscan
@@ -90,6 +90,24 @@ set grepformat=%f:%l:%c:%m
 
 " ## PLUGINS
 
+" python-syntax
+let g:python_highlight_all = 1
+
+
+" pgsql
+let g:sql_type_default = 'pgsql'
+
+
+" vim-move
+let g:move_map_keys = 0
+
+
+" split-join
+let g:splitjoin_split_mapping = ''
+let g:splitjoin_join_mapping = ''
+
+
+" vim-devicons
 let g:webdevicons_enable = 1
 let g:webdevicons_enable_nerdtree = 1
 let g:webdevicons_conceal_nerdtree_brackets = 1
@@ -98,12 +116,18 @@ let g:DevIconsEnableFoldersOpenClose = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 
 
-" python-syntax
-let g:python_highlight_all = 1
-
-
 " lightline
 set laststatus=2
+
+
+function! Symboltype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : '-') : ''
+endfunction
+
+function! Symbolformat()
+  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+endfunction
+
 
 let g:lightline = {
     \   'colorscheme': 'jellybeans',
@@ -114,7 +138,11 @@ let g:lightline = {
     \       [ 'lint_check', 'lint_err', 'lint_warn', 'lint_info', 'lint_ok' ],
     \       [ 'gitbranch' ]
     \   ]},
-    \   'component_function': { 'gitbranch': 'gitbranch#name' },
+    \   'component_function': {
+    \       'gitbranch': 'gitbranch#name',
+    \       'fileformat': 'Symbolformat',
+    \       'filetype': 'Symboltype',
+    \   },
     \   'component_expand': {
     \       'lint_check': 'lightline#ale#checking',
     \       'lint_info': 'lightline#ale#infos',
@@ -129,16 +157,14 @@ let g:lightline = {
     \       'lint_err': 'error',
     \       'lint_ok': 'right',
     \   },
-    \ }
-
-let g:lightline.tabline = {
-	\ 'left': [ [ 'tabs' ] ],
-    \ 'right': [],
-	\ }
-
-let g:lightline.tab = {
-	\ 'active': [ 'filename', 'modified' ],
-	\ 'inactive': [ 'filename', 'modified' ],
+    \   'tabline': {
+    \       'left': [ [ 'tabs' ] ],
+    \       'right': [],
+    \   },
+    \   'tab': {
+  	\       'active': [ 'filename', 'modified' ],
+ 	\       'inactive': [ 'filename', 'modified' ],
+    \   },
     \ }
 
 let g:lightline#ale#indicator_checking = "\uf110"
@@ -147,20 +173,6 @@ let g:lightline#ale#indicator_warnings = "\uf071"
 let g:lightline#ale#indicator_errors = "\uf05e"
 let g:lightline#ale#indicator_ok = "\uf00c"
 
-let g:lightline = {
-      \ 'component_function': {
-      \   'filetype': 'MyFiletype',
-      \   'fileformat': 'MyFileformat',
-      \ }
-      \ }
-
-function! MyFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
-endfunction
-
-function! MyFileformat()
-  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
-endfunction
 
 " vim-go
 let g:go_highlight_types = 1
@@ -194,18 +206,18 @@ let g:go_gopls_matcher = 'caseSensitive'
 
 
 " tagbar
-let g:no_status_line = 1
 let g:tagbar_width = 50
-let g:tagbar_autofocus = 1
-let g:tagbar_autoclose = 1
-let g:tagbar_compact = 2
 let g:tagbar_silent = 1
 let g:tagbar_indent = 1
-let g:tagbar_show_visibility = 0
-let g:tagbar_show_balloon = 0
-let g:tagbar_show_tag_count = 1
-let g:tagbar_autoshowtag = 1
+let g:tagbar_compact = 2
 let g:tagbar_scrolloff = 5
+let g:tagbar_autofocus = 1
+let g:tagbar_autoclose = 1
+let g:tagbar_autoshowtag = 1
+let g:tagbar_show_balloon = 0
+let g:tagbar_no_status_line = 1
+let g:tagbar_show_tag_count = 1
+let g:tagbar_show_visibility = 0
 let g:tagbar_map_togglefold = '<space>'
 let g:tagbar_type_go = {
     \ 'ctagstype': 'go',
@@ -245,7 +257,6 @@ let g:NERDTreeRespectWildIgnore = 1
 let g:NERDTreeStatusline = '%#NonText#'
 let g:NERDTreeMapCustomOpen = '<space>'
 let g:NERDTreeCustomOpenArgs = { 'file': { 'where': 't', 'keepopen': 1 } }
-
 
 
 " ale
@@ -352,9 +363,6 @@ let g:startify_skiplist = [
 let g:startify_custom_header =
     \ startify#pad(split(system('fortune -s pratchett tao wisdom | cowsay'), '\n'))
 
-" pgsql
-let g:sql_type_default = 'pgsql'
-
 
 " editorconfig-vim
 let g:EditorConfig_disable_rules = [
@@ -391,6 +399,7 @@ let g:fzf_colors = {
     \ 'header':  ['fg', 'Comment'],
     \ }
 
+" ## FUNCTIONS
 
 " Close all open buffers on entering a window if the only
 " buffer that's left is the NERDTree buffer
@@ -413,6 +422,9 @@ function! NERDTreeToggleInCurDir()
     exe ':NERDTreeFind'
   endif
 endfunction
+
+
+" ## AUTO COMMANDS
 
 augroup FileType shell
     autocmd!
@@ -463,8 +475,8 @@ augroup FileType go
     autocmd FileType go nmap <buffer> <nowait> <leader>T <Plug>(go-test-func)
     autocmd FileType go nmap <buffer> <nowait> <leader>d <Plug>(go-def-tab)
     autocmd FileType go nmap <buffer> <nowait> <leader>n <Plug>(go-rename)
-    autocmd FileType go iabbr <buffer> ifer <Cmd>GoIfErr<CR>
-    autocmd FileType go iabb fori for i := 0; i < ; i++ {<CR>}<C-o>gk<C-o>g_<C-o>T<
+    autocmd FileType go iabb <buffer> ERR <Cmd>GoIfErr<CR>
+    autocmd FileType go iabb FOR for i := 0; i < ; i++ {<CR>}<C-o>gk<C-o>g_<C-o>T<
 
     " go install golang.org/x/tools/gopls@latest
     au User lsp_setup call lsp#register_server({
@@ -504,17 +516,13 @@ let s:leave_tab = 0
 autocmd TabLeave * let s:leave_tab = tabpagenr()
 autocmd TabEnter * if tabpagenr() != 1 && tabpagenr() == s:leave_tab | tabprevious | endif
 
-" ## KEYS
+iabb NOW <C-r>=strftime("%d/%m/%Y %H:%M:%S")<cr>
 
-" split-join
-let g:splitjoin_split_mapping = ''
-let g:splitjoin_join_mapping = ''
+
+" ## KEYS
 
 nmap <Leader>j :SplitjoinJoin<cr>
 nmap <Leader>s :SplitjoinSplit<cr>
-
-" vim-move
-let g:move_map_keys = 0
 
 vmap <A-Down> <Plug>MoveBlockDown
 vmap <A-Up>   <Plug>MoveBlockUp

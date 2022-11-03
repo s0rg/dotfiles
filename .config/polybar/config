@@ -121,9 +121,8 @@ label-unfocused-padding = 1
 label-visible = %index%
 ; urgent = Workspace with urgency hint set
 label-urgent = %index%
-label-urgent-background = ${colors.alert}
-label-urgent-foreground = ${colors.background}
-label-urgent-underline = ${colors.background}
+label-urgent-foreground = ${colors.foreground-al}
+label-urgent-underline = ${colors.alert}
 label-urgent-padding = 1
 
 
