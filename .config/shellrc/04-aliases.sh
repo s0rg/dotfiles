@@ -150,6 +150,9 @@ alias torsocks='docker run -p 127.0.0.1:9150:9150 stefanoj3/tordock'
 # wifi
 alias wifi-ls='nmcli device wifi list --rescan yes'
 
+# wireplumber
+alias rewire='systemctl --user restart wireplumber'
+
 # scc
 alias scc='scc --wide --exclude-dir vendor'
 alias scc-gocode='scc --generated-markers "DO NOT EDIT" --no-gen --include-ext go --not-match "_test\.go$"'

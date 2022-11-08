@@ -1,10 +1,5 @@
 ## fs tools
 
-# nice display for pwd
-_show_pwd() {
-	echo -e "\033[0;30m$(pwd)\033[0m\n"
-}
-
 # show N (5 by deafult) last-changed elements in cwd
 _last_changed() {
 	find . -maxdepth 1 -type f -printf '%T+ %f\n' | sort -r | head --lines "${1:-5}"
@@ -18,13 +13,6 @@ mcd() {
 	[ -z "${1}" ] && return
 	[ ! -e "${1}" ] && mkdir -p "${1}"
 	cd "${1}" || return
-	_show_pwd
-}
-
-# cd up
-up() {
-	cd "$(printf "%0.s../" $(seq 1 "${1:-1}"))" || return
-	_show_pwd
 }
 
 # `opn` with no arguments open current directory,

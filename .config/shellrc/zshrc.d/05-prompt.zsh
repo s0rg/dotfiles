@@ -38,6 +38,19 @@ setopt PROMPT_SP
 add-zsh-hook -Uz precmd _reset
 add-zsh-hook -Uz precmd vcs_info
 
+_last_dir="${HOME}"
+
+_show_pwd() {
+	local _dir
+	_dir=$(pwd)
+	if [ "${_last_dir}" != "${_dir}" ]; then
+		echo -e "\033[0;30m${_dir}\033[0m\n"
+		_last_dir="${_dir}"
+	fi
+}
+
+add-zsh-hook -Uz chpwd _show_pwd
+
 PS1=' %B%F{$COLORS_DIR}%2~%b %F{$COLORS_PROMPT}▶%f '
 PS2=' %F{$COLORS_PROMPT}>%f '
 

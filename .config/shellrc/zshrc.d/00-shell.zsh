@@ -14,7 +14,7 @@ setopt INTERACTIVE_COMMENTS
 setopt COMPLETE_IN_WORD
 setopt ALWAYS_TO_END
 
-setopt AUTO_PUSHD
+setopt NO_AUTO_PUSHD
 setopt PUSHD_IGNORE_DUPS
 
 setopt SHARE_HISTORY
@@ -30,7 +30,7 @@ setopt HIST_LEX_WORDS
 setopt HIST_NO_STORE
 setopt HIST_NO_FUNCTIONS
 
-export DIRSTACKSIZE=5
+export DIRSTACKSIZE=0
 
 export ZLE_SPACE_SUFFIX_CHARS='&|'
 
@@ -46,8 +46,8 @@ typeset -U path cdpath fpath manpath
 zle_highlight+=(paste:none)
 
 zstyle ':completion:*' rehash true
-# zstyle ':completion:*' use-cache on
-# zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zcompcache
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zcompcache
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' menu select=2
 zstyle ':completion:*' keep-prefix true
