@@ -64,13 +64,14 @@ mode "$window" {
     bindsym Escape $mode_reset
 }
 
-set $toggle :: [t]ouchpad / [m]ic / [r]edshift / [d]unst / [n]otifies
+set $toggle :: [t]ouchpad / [m]ic / [r]edshift / [d]unst / [n]otifies / [b]lanking
 mode "$toggle" {
     bindsym t $run touchpad-toggle,             $mode_reset
     bindsym r $run pkill -USR1 redshift,        $mode_reset
     bindsym n $run dunstctl close-all,          $mode_reset
     bindsym d $run dunstctl set-paused toggle,  $mode_reset
     bindsym m $run pulse-mic --toggle,          $mode_reset
+    bindsym b $run toggle-blanking,             $mode_reset
 
     bindsym Escape $mode_reset
 }

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+BLANK=$(xset q | grep 'prefer blanking:' | awk '{print $3}')
+MSG_ID=1013
+
+notify() {
+	notify-send -a screen -r ${MSG_ID} -u low "blank" "state: ${1}"
+}
+
+if [[ "${BLANK}" == "yes" ]]; then
+	xset -dpms
+	xset s off
+	xset s noblank
+	notify "OFF"
+else
+	xset +dpms
+	xset s on
+	xset s blank
+	xset s 1200
+	notify "ON"
+fi
+
+#vi: ft=bash
