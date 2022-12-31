@@ -157,8 +157,8 @@ set $tty  "1"
 set $web  "2"
 set $chat "3"
 set $apps "4"
-set $meet "5"
-set $mail "6"
+set $zoom "5"
+set $ext0 "6"
 set $ext1 "7"
 set $ext2 "8"
 set $ext3 "9"
@@ -168,8 +168,8 @@ bindsym $mod+1 workspace number $tty
 bindsym $mod+2 workspace number $web
 bindsym $mod+3 workspace number $chat
 bindsym $mod+4 workspace number $apps
-bindsym $mod+5 workspace number $meet
-bindsym $mod+6 workspace number $mail
+bindsym $mod+5 workspace number $zoom
+bindsym $mod+6 workspace number $ext0
 bindsym $mod+7 workspace number $ext1
 bindsym $mod+8 workspace number $ext2
 bindsym $mod+9 workspace number $ext3
@@ -179,25 +179,23 @@ bindsym $mod+$ctrl+1 move container to workspace number $tty
 bindsym $mod+$ctrl+2 move container to workspace number $web
 bindsym $mod+$ctrl+3 move container to workspace number $chat
 bindsym $mod+$ctrl+4 move container to workspace number $apps
-bindsym $mod+$ctrl+5 move container to workspace number $meet
-bindsym $mod+$ctrl+6 move container to workspace number $mail
+bindsym $mod+$ctrl+5 move container to workspace number $zoom
+bindsym $mod+$ctrl+6 move container to workspace number $ext0
 bindsym $mod+$ctrl+7 move container to workspace number $ext1
 bindsym $mod+$ctrl+8 move container to workspace number $ext2
 bindsym $mod+$ctrl+9 move container to workspace number $ext3
 
 assign [class="^kitty$" instance="^kitty$"]             $tty
 
-assign [class="^firefox$|^Tor Browser$|^qutebrowser$"]  $web
+assign [class="^firefox$|^Tor Browser$|^qbittorrent$"]  $web
 
-assign [class="^TelegramDesktop$|^Slack$"]              $chat
+assign [class="^TelegramDesktop$"]                      $chat
 
 assign [class="^pcmanfm-qt$|^FeatherPad$"]              $apps
 assign [class="^Steam|^Gimp-.+|^Zathura$"]              $apps
-assign [class="^qbittorrent$|^qimgv$|^mpv$"]            $apps
+assign [class="^qimgv$|^mpv$"]                          $apps
 
-assign [class="^zoom$"]                                 $meet
-
-assign [class="^Evolution$"]                            $mail
+assign [class="^zoom$"]                                 $zoom
 
 ## UI
 

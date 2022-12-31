@@ -22,7 +22,6 @@ endif
 let &t_SI .= "\<Esc>[3 q"
 let &t_EI .= "\<Esc>[5 q"
 
-
 colorscheme jellybeans
 highlight Folded guibg=Black ctermbg=Black
 
@@ -119,7 +118,6 @@ let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 " lightline
 set laststatus=2
 
-
 function! Symboltype()
   return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : '-') : ''
 endfunction
@@ -127,7 +125,6 @@ endfunction
 function! Symbolformat()
   return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
-
 
 let g:lightline = {
     \   'colorscheme': 'jellybeans',
@@ -192,8 +189,9 @@ let g:go_def_reuse_buffer = 1
 let g:go_template_use_pkg = 1
 let g:go_fmt_fail_silently = 1
 
-let g:go_updatetime = 500
+let g:go_updatetime = 1000
 
+let g:go_gopls_gofumpt = 0
 let g:go_jump_to_error = 0
 let g:go_code_completion_enabled = 0
 let g:go_highlight_string_spellcheck = 0
@@ -361,7 +359,7 @@ let g:startify_skiplist = [
     \ ]
 
 let g:startify_custom_header =
-    \ startify#pad(split(system('fortune -s pratchett tao wisdom | cowsay'), '\n'))
+    \ startify#pad(split(system('inmfortune | cowsay'), '\n'))
 
 
 " editorconfig-vim
@@ -376,6 +374,7 @@ let g:markdown_fenced_languages = [
     \ 'bash=sh',
     \ 'python',
     \ 'yaml',
+    \ 'json',
     \ 'sql',
     \ 'go',
     \ ]
@@ -446,6 +445,7 @@ augroup FileType python
     autocmd!
     autocmd FileType python setlocal autoindent softtabstop=4 formatoptions+=croq smartindent
     autocmd BufNewFile *.py 0put=\'#!/usr/bin/env python3\<nl>\<nl>\'|$
+
     if executable('pyls')
         " pip install python-language-server
         au User lsp_setup call lsp#register_server({
@@ -516,7 +516,7 @@ let s:leave_tab = 0
 autocmd TabLeave * let s:leave_tab = tabpagenr()
 autocmd TabEnter * if tabpagenr() != 1 && tabpagenr() == s:leave_tab | tabprevious | endif
 
-iabb NOW <C-r>=strftime("%d/%m/%Y %H:%M:%S")<cr>
+iabb _NOW <C-r>=strftime("%d/%m/%Y %H:%M:%S")<cr>
 
 
 " ## KEYS
