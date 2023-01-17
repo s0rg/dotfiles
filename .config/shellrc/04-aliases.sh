@@ -63,7 +63,7 @@ alias sh-toupper='rename "y/a-z/A-Z/" *'
 alias sh-rnd-ua='shuf -n 1 "${XDG_DATA_HOME}"/rand_ua.list'
 
 # dasel
-alias jq='dasel -r json'
+#alias jq='dasel -r json'
 alias jsp='dasel --color -r json . <'
 alias swag-urls="dasel -r json '.paths | keys | .[]'"
 

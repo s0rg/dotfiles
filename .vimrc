@@ -315,7 +315,7 @@ let g:lsp_document_highlight_enabled = 0
 let g:lsp_completion_documentation_enabled = 0
 let g:lsp_document_code_action_signs_enabled = 0
 " let g:lsp_signature_help_enabled = 0
-let g:lsp_signature_help_delay = 500
+let g:lsp_signature_help_delay = 400
 
 
 " asynccomplete-vim
@@ -359,7 +359,7 @@ let g:startify_skiplist = [
     \ ]
 
 let g:startify_custom_header =
-    \ startify#pad(split(system('inmfortune | cowsay'), '\n'))
+    \ startify#pad(split(system('inmfortune | cowsay -f skeleton'), '\n'))
 
 
 " editorconfig-vim
@@ -502,8 +502,10 @@ augroup END
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
 autocmd CompleteDone * silent! pclose
-autocmd FocusGained,BufEnter * checktime
 autocmd BufWinEnter * syntax sync fromstart
+
+autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
+    \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
 
 augroup vim_enter
     autocmd!

@@ -10,14 +10,14 @@ PORT=$(get-tcp-port)
 NEEDLE="${ARG}.${ARG}-psql"
 
 SECRET=$(kubectl get pods -o json |
-    jq '.items[].spec.containers[].env[]?.valueFrom.secretKeyRef.name' |
-    grep "${NEEDLE}" |
-    head -n 1 |
-    tr -d \")
+	jq '.items[].spec.containers[].env[]?.valueFrom.secretKeyRef.name' |
+	grep "${NEEDLE}" |
+	head -n 1 |
+	tr -d \")
 
 CREDS=$(kubectl get secret \
-    "${SECRET}" \
-    -o go-template='{{.data.username|base64decode}}:{{.data.password|base64decode}}')
+	"${SECRET}" \
+	-o go-template='{{.data.username|base64decode}}:{{.data.password|base64decode}}')
 
 DSN_URI="postgres://${CREDS}@localhost:${PORT}/${ARG}"
 
