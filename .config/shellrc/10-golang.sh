@@ -1,4 +1,4 @@
-GOVERSION='1.19'
+GOVERSION='1.20'
 
 export GOSUMDB=off
 export GO111MODULE=on
