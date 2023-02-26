@@ -9,12 +9,10 @@
     st = status
     ll = log --all --decorate --oneline --graph --stat
     ls = ls-files
+    lb = branch -vv -a
     ta = tag -m '' -a
-    bra = branch -vv -a
     cob = checkout -b
     cof = checkout -f
-    com = !git co master && git pull
-    mem = merge master
     wat = whatchanged
     put = push origin --tags
     stap = stash apply

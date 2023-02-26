@@ -3,8 +3,8 @@ alias sudo='sudo '
 
 alias ls='ls --color=always --group-directories-first -v'
 alias ll='ls -hAlFG --time-style=+"%Y-%m-%d %H:%M:%S"'
+alias tt='tree --dirsfirst -I vendor/'
 alias ls-last='_last_changed'
-alias tree='tree --dirsfirst -I vendor/'
 
 alias ip='ip -color=auto'
 alias dir='dir --color'
@@ -62,10 +62,8 @@ alias sh-toupper='rename "y/a-z/A-Z/" *'
 # list taken from: https://techblog.willshouse.com/2012/01/03/most-common-user-agents/
 alias sh-rnd-ua='shuf -n 1 "${XDG_DATA_HOME}"/rand_ua.list'
 
-# dasel
-#alias jq='dasel -r json'
-alias jsp='dasel --color -r json . <'
-alias swag-urls="dasel -r json '.paths | keys | .[]'"
+alias jsp='jq --color . <'
+alias swag-urls="jq '.paths | keys | .[]'"
 
 # curl
 alias curl='curl --user-agent "$(sh-rnd-ua)"'
@@ -97,11 +95,6 @@ alias py='python3'
 alias pip-get='pip3 install --user --upgrade'
 alias pip-up='pip3 freeze --user | cut -d= -f1 | xargs -n1 pip3 install --user --upgrade'
 alias py-clear='find . | grep -E "(__pycache__|\.py[co]$)" | xargs rm -rf'
-
-# youtube-dl
-alias ytd='youtube-dl'
-alias yta='youtube-dl -f bestaudio --extract-audio'
-alias ytv='youtube-dl -f bestvideo+bestaudio'
 
 # docker
 alias d-img-up="docker images -f 'dangling=false' --format '{{.Repository}}:{{.Tag}}' | xargs -L1 docker pull"
@@ -160,6 +153,9 @@ alias scc-gocode='scc --generated-markers "DO NOT EDIT" --no-gen --include-ext g
 
 # deb packages
 alias ipkg='sudo dpkg -i'
+
+# https://github.com/rikhuijzer/ata as chatGPT cli
+alias gpt='ata --config=/home/s0rg/.config/ata/ata.toml'
 
 # global aliases
 alias -g NE='2>|/dev/null'

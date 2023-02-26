@@ -191,9 +191,8 @@ assign [class="^firefox$|^Tor Browser$|^qbittorrent$"]  $web
 
 assign [class="^TelegramDesktop$"]                      $chat
 
-assign [class="^pcmanfm-qt$|^FeatherPad$"]              $apps
-assign [class="^Steam|^Gimp-.+|^Zathura$"]              $apps
-assign [class="^qimgv$|^mpv$"]                          $apps
+assign [class="^pcmanfm-qt$|^FeatherPad$|^Zathura$"]    $apps
+assign [class="^qimgv$|^mpv$|^rocket.chat$|^Gimp-.+"]   $apps
 
 assign [class="^zoom$"]                                 $zoom
 
