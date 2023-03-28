@@ -5,4 +5,4 @@ alias gcb='git forgit checkout_branch'
 alias glo='git forgit log'
 
 alias gcd='cd $(git root)'
-alias gcm="git checkout master && git pull"
+alias gm="git checkout master && git pull"

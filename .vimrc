@@ -498,6 +498,13 @@ augroup FileType text
     autocmd FileType text setlocal formatoptions=tjl1
 augroup END
 
+augroup FileType ino
+    nnoremap <buffer> <leader>aa <cmd>ArduinoAttach<CR>
+    nnoremap <buffer> <leader>av <cmd>ArduinoVerify<CR>
+    nnoremap <buffer> <leader>au <cmd>ArduinoUpload<CR>
+    nnoremap <buffer> <leader>as <cmd>ArduinoUploadAndSerial<CR>
+augroup END
+
 " Close nerdtree when it's the only buffer left open
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
