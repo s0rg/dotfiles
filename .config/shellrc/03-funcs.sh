@@ -19,6 +19,11 @@ mcd() {
 # otherwise open the given location or file
 opn() { xdg-open "${@:-.}" disown >/dev/null 2>&1; }
 
+# open url in firefox tab
+firetab() { firefox --new-tab --url "${1}"; }
+
+export BROWSER='firetab'
+
 # (un-)backups file or dir
 bak() {
 	local t

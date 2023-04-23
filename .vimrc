@@ -446,14 +446,12 @@ augroup FileType python
     autocmd FileType python setlocal autoindent softtabstop=4 formatoptions+=croq smartindent
     autocmd BufNewFile *.py 0put=\'#!/usr/bin/env python3\<nl>\<nl>\'|$
 
-    if executable('pyls')
-        " pip install python-language-server
-        au User lsp_setup call lsp#register_server({
-            \ 'name': 'pyls',
-            \ 'cmd': {server_info->['pyls']},
-            \ 'allowlist': ['python'],
-            \ })
-    endif
+    " pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'allowlist': ['python'],
+        \ })
 augroup END
 
 augroup FileType json
@@ -480,11 +478,10 @@ augroup FileType go
 
     " go install golang.org/x/tools/gopls@latest
     au User lsp_setup call lsp#register_server({
-        \ 'name': 'gopls',
-        \ 'cmd': {server_info->['gopls', '-remote=auto']},
-        \ 'allowlist': ['go'],
-        \ })
-    autocmd FileType go setlocal omnifunc=lsp#complete
+         \ 'name': 'gopls',
+         \ 'cmd': {server_info->['gopls', '-remote=auto']},
+         \ 'allowlist': ['go'],
+         \ })
 augroup END
 
 augroup FileType fasm
@@ -498,7 +495,7 @@ augroup FileType text
     autocmd FileType text setlocal formatoptions=tjl1
 augroup END
 
-augroup FileType ino
+augroup FileType arduino
     nnoremap <buffer> <leader>aa <cmd>ArduinoAttach<CR>
     nnoremap <buffer> <leader>av <cmd>ArduinoVerify<CR>
     nnoremap <buffer> <leader>au <cmd>ArduinoUpload<CR>
@@ -526,6 +523,20 @@ autocmd TabLeave * let s:leave_tab = tabpagenr()
 autocmd TabEnter * if tabpagenr() != 1 && tabpagenr() == s:leave_tab | tabprevious | endif
 
 iabb _NOW <C-r>=strftime("%d/%m/%Y %H:%M:%S")<cr>
+
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+
+    let g:lsp_format_sync_timeout = 1000
+    autocmd! BufWritePre *.py,*.go call execute('LspDocumentFormatSync')
+endfunction
+
+augroup lsp_install
+    au!
+    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
 
 
 " ## KEYS

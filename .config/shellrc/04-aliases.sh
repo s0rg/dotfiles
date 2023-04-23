@@ -166,3 +166,5 @@ alias -g G='| rg '
 alias -g P='| $PAGER'
 alias -g PA='2>&1 | $PAGER'
 alias -g L='| wc -l'
+
+alias shup='sh-plugs-up; vim-plugs-up; echo "Tools:"; gup update; echo "Arduino:"; arduino-cli upgrade'

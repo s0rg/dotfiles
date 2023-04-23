@@ -83,6 +83,7 @@ zstyle ':antidote:bundle' use-friendly-names 'yes'
 
 cd_aliases+=(
     [cdp]="${HOME}/projects"
+    [cda]="${HOME}/Arduino"
     [cdc]="${HOME}/.config"
     [cdm]="/media/${USER}"
 )

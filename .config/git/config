@@ -99,4 +99,3 @@
 
 [include]
     path = "aliases"
-    path = "urls.work"
