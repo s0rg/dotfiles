@@ -185,10 +185,10 @@ print_status() {
 		if device_connected; then
 			echo -n ''
 		else
-			echo -n ''
+			echo -n '󰂯'
 		fi
 	else
-		echo -n ''
+		echo -n '󰂲'
 	fi
 }
 

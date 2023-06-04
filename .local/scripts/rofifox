@@ -103,7 +103,7 @@ def _load_profiles():
 def _make_profile_entry(prompt, p):
     items = [
         rofi_menu.ShellItem("\uF269 <b>" + p + "</b>", _firefox_cmd(p)),
-        rofi_menu.ShellItem("\uFAF8 <span style='italic'>" + p + "</span>",
+        rofi_menu.ShellItem("\uF21B <span style='italic'>" + p + "</span>",
                             _private_cmd(p)),
         rofi_menu.BackItem(text="\uF07C back"),
     ]

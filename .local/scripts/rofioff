@@ -13,7 +13,7 @@ actions = [
         "confirm": False
     },
     {
-        "icon": "\uF9B1",
+        "icon": "\u23FE",
         "name": "hibernate",
         "command": "systemctl hibernate",
         "confirm": True
