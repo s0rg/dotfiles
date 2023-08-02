@@ -2,6 +2,7 @@ setopt NO_BEEP NO_HIST_BEEP NO_LIST_BEEP
 setopt NO_FLOW_CONTROL
 setopt NO_MAIL_WARNING
 setopt NO_AUTO_CD 
+setopt NO_AUTO_PUSHD
 setopt NO_PUSHD_TO_HOME
 
 setopt ALIASES 
@@ -10,15 +11,13 @@ setopt HASH_LIST_ALL
 setopt AUTO_PARAM_SLASH
 setopt TRANSIENT_RPROMPT
 setopt INTERACTIVE_COMMENTS
-
 setopt COMPLETE_IN_WORD
 setopt ALWAYS_TO_END
-
-setopt NO_AUTO_PUSHD
 setopt PUSHD_IGNORE_DUPS
 
-setopt SHARE_HISTORY
-setopt APPEND_HISTORY
+# history
+setopt SHARE_HISTORY APPEND_HISTORY
+
 setopt HIST_FCNTL_LOCK
 setopt HIST_REDUCE_BLANKS
 setopt HIST_SAVE_NO_DUPS
@@ -30,6 +29,7 @@ setopt HIST_LEX_WORDS
 setopt HIST_NO_STORE
 setopt HIST_NO_FUNCTIONS
 
+# no dirstack (auto_pushd disabled)
 export DIRSTACKSIZE=0
 
 export ZLE_SPACE_SUFFIX_CHARS='&|'

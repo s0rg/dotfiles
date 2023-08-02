@@ -1,12 +1,7 @@
-AUTO_NOTIFY_IGNORE=(
-	"mc" "man" "v" "om" "omc" "si"
-	"top" "htop" "gotop" "less" "tailf" "tail"
-	"g ll" "g did" "dots ll" "dots did"
-)
+AUTO_NOTIFY_IGNORE+=("mc" "man" "v" "om" "omc" "si")
+AUTO_NOTIFY_IGNORE+=("top" "htop" "gotop" "less" "tailf" "tail")
+AUTO_NOTIFY_IGNORE+=("g ll" "g did" "dots ll" "dots did")
 
-declare -U AUTO_NOTIFY_IGNORE
-
-export AUTO_NOTIFY_IGNORE
 export AUTO_NOTIFY_EXPIRE_TIME=3000
 export ZSH_TAB_TITLE_ADDITIONAL_TERMS="kitty"
 

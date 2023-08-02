@@ -90,6 +90,7 @@ ip_wan() {
 serve() {
 	local PORT
 	PORT="${1:-8090}"
+	ip_lan
 	python3 -m http.server "${PORT}"
 }
 
@@ -105,30 +106,6 @@ om() {
 	main="$(fd --type f --color never --glob "${name}" | fzf -1)"
 	[ -n "${main}" ] && name="${main}"
 	${EDITOR} "${name}"
-}
-
-## git
-
-# smart push, sets upstream if none yet
-gip() {
-	local branch
-	local upstream
-	branch="$(git symbolic-ref --quiet --short HEAD 2>/dev/null)"
-	upstream="$(git rev-parse --abbrev-ref "${branch}"@\{upstream\} 2>/dev/null)"
-	if [ -z "${upstream}" ]; then
-		git push --set-upstream origin "${branch}"
-	else
-		git push
-	fi
-}
-
-# acts as a git shortcut, without options - runs 'git status'
-g() {
-	if [ -z "${1}" ]; then
-		git status --short --branch
-	else
-		git "${@}"
-	fi
 }
 
 ## kubernetes

@@ -80,7 +80,7 @@ set viminfo=%,<10,'10,/10,:50,h,f0,n~/.vim/cache/.viminfo
 set wildmenu
 set wildignore+=*.o,*~,.git
 set wildignore+=*.pyo,*.pyc,__pycache__
-set wildignore+=vendor,go.mod,go.sum
+set wildignore+=vendor,go.sum
 
 " ripgrep as vim's grep
 set grepprg=rg\ --no-heading\ --vimgrep
@@ -263,6 +263,7 @@ let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 0
 let g:ale_hover_cursor = 0
 let g:ale_update_tagstack = 0
+let g:ale_virtualtext_cursor = 0
 let g:ale_popup_menu_enabled = 0
 let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_filetype_changed = 0
