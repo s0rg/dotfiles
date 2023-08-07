@@ -468,14 +468,13 @@ augroup END
 augroup FileType go
     autocmd!
     autocmd FileType go setlocal tabstop=4 shiftwidth=4 expandtab
-    autocmd FileType go nmap <buffer> <nowait> <leader>t :GoAddTags<CR>
-    autocmd FileType go nmap <buffer> <nowait> <leader>i :GoImplements<CR>
-    autocmd FileType go nmap <buffer> <nowait> <leader>a :GoAlternate!<CR>
-    autocmd FileType go nmap <buffer> <nowait> <leader>T <Plug>(go-test-func)
-    autocmd FileType go nmap <buffer> <nowait> <leader>d <Plug>(go-def-tab)
-    autocmd FileType go nmap <buffer> <nowait> <leader>n <Plug>(go-rename)
-    autocmd FileType go iabb <buffer> ERR <Cmd>GoIfErr<CR>
-    autocmd FileType go iabb FOR for i := 0; i < ; i++ {<CR>}<C-o>gk<C-o>g_<C-o>T<
+    autocmd FileType go nmap <buffer> <nowait> <leader>gt :GoAddTags<CR>
+    autocmd FileType go nmap <buffer> <nowait> <leader>gi :GoImplements<CR>
+    autocmd FileType go nmap <buffer> <nowait> <leader>ga :GoAlternate!<CR>
+    autocmd FileType go nmap <buffer> <nowait> <leader>gT <Plug>(go-test-func)
+    autocmd FileType go nmap <buffer> <nowait> <leader>gd <Plug>(go-def-tab)
+    autocmd FileType go nmap <buffer> <nowait> <leader>gn <Plug>(go-rename)
+    autocmd FileType go nmap <buffer> <nowait> <leader>ge :GoIfErr<CR>
 
     " go install golang.org/x/tools/gopls@latest
     au User lsp_setup call lsp#register_server({

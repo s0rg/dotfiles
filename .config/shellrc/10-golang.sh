@@ -58,6 +58,7 @@ gmo() {
 		;;
 	esac
 
+	go mod edit -go="$(goversion)"
 	go mod tidy
 
 	if [ -d vendor ]; then
