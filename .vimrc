@@ -114,6 +114,9 @@ let g:webdevicons_conceal_nerdtree_brackets = 1
 let g:DevIconsEnableFoldersOpenClose = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 
+" any-jump
+let g:any_jump_disable_vcs_ignore = 1
+let g:any_jump_references_only_for_current_filetype = 1
 
 " lightline
 set laststatus=2

@@ -76,7 +76,7 @@ zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX
 zstyle ":completion:*:*:kill:*:processes" list-colors "=(#b) #([0-9]#)*=0=01;31"
 zstyle ":completion:*:kill:*" command "ps --forest -u $USER -o pid,%cpu,%mem,cmd"
 
-zstyle ':completion:*:*:dcu:*' file-patterns 'docker-*.yml:compose-files'
+zstyle ':completion:*:*:dcu:*' file-patterns '*compose*.(yml|yaml):compose-files'
 zstyle ':completion:*:*:ipkg:*' file-patterns '*.deb:debian-packages'
 
 zstyle ':antidote:bundle' use-friendly-names 'yes'

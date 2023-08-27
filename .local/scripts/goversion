@@ -1,16 +1,8 @@
 #!/usr/bin/env python3
 
-import sys
-import argparse
 import subprocess
+import sys
 
-parser = argparse.ArgumentParser()
-parser.add_argument(
-    "-f",
-    "--full",
-    action="store_true",
-    help="print full version",
-)
 
 def main():
     res = subprocess.run(['go', 'version'], stdout=subprocess.PIPE)
@@ -20,12 +12,8 @@ def main():
         return 1
 
     ver = raw[2].strip('go')
-    arg = parser.parse_args()
-
-    if not arg.full:
-        ver = ver[:ver.rindex('.')]
-
     print(ver)
+
     return 0
 
 

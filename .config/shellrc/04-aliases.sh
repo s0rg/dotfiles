@@ -168,3 +168,5 @@ alias -g PA='2>&1 | $PAGER'
 alias -g L='| wc -l'
 
 alias shup='sh-plugs-up; vim-plugs-up; echo "Tools:"; gup update; echo "Arduino:"; arduino-cli upgrade'
+
+alias structurizr='docker run -it --rm -p 127.0.0.1:30303:8080 -v .:/usr/local/structurizr structurizr/lite'
