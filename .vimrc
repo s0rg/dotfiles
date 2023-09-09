@@ -38,6 +38,7 @@ set shortmess+=c
 set complete-=it
 set shell=/bin/zsh
 set nrformats-=octal
+set ttimeout notimeout
 set mouse="" mousehide
 set autoindent cindent
 set formatoptions=cjl1
@@ -62,6 +63,7 @@ set nobackup nowritebackup noswapfile noundofile
 set hlsearch incsearch ignorecase smartcase wrapscan
 set encoding=utf-8 fileencoding=utf-8 termencoding=utf-8
 set completeopt=longest,menuone,noinsert,noselect,preview
+
 
 " enable Normal mode keys in ru layout
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
@@ -100,6 +102,10 @@ let g:sql_type_default = 'pgsql'
 " vim-move
 let g:move_map_keys = 0
 
+
+" lexima
+let g:lexima_enable_newline_rules = 0
+let g:lexima_enable_endwise_rules = 0
 
 " split-join
 let g:splitjoin_split_mapping = ''
@@ -471,13 +477,13 @@ augroup END
 augroup FileType go
     autocmd!
     autocmd FileType go setlocal tabstop=4 shiftwidth=4 expandtab
-    autocmd FileType go nmap <buffer> <nowait> <leader>gt :GoAddTags<CR>
-    autocmd FileType go nmap <buffer> <nowait> <leader>gi :GoImplements<CR>
-    autocmd FileType go nmap <buffer> <nowait> <leader>ga :GoAlternate!<CR>
-    autocmd FileType go nmap <buffer> <nowait> <leader>gT <Plug>(go-test-func)
-    autocmd FileType go nmap <buffer> <nowait> <leader>gd <Plug>(go-def-tab)
-    autocmd FileType go nmap <buffer> <nowait> <leader>gn <Plug>(go-rename)
-    autocmd FileType go nmap <buffer> <nowait> <leader>ge :GoIfErr<CR>
+    autocmd FileType go nmap <buffer> <nowait> <leader>t :GoAddTags<CR>
+    autocmd FileType go nmap <buffer> <nowait> <leader>i :GoImplements<CR>
+    autocmd FileType go nmap <buffer> <nowait> <leader>a :GoAlternate!<CR>
+    autocmd FileType go nmap <buffer> <nowait> <leader>T <Plug>(go-test-func)
+    autocmd FileType go nmap <buffer> <nowait> <leader>d <Plug>(go-def-tab)
+    autocmd FileType go nmap <buffer> <nowait> <leader>n <Plug>(go-rename)
+    autocmd FileType go nmap <buffer> <nowait> <leader>C ::GoCoverageToggle<CR>
 
     " go install golang.org/x/tools/gopls@latest
     au User lsp_setup call lsp#register_server({
@@ -590,8 +596,8 @@ noremap  Q     <Nop>
 noremap  <C-z> <Nop>
 
 " fzf.vim
-nmap <leader>f :Files<CR>
-nmap <leader>g :Rg<CR>
+nmap <leader>F :Files<CR>
+nmap <leader>G :Rg<CR>
 
 " toggle fold
 nmap <leader><space> za
