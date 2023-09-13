@@ -106,6 +106,9 @@ let g:move_map_keys = 0
 " lexima
 let g:lexima_enable_newline_rules = 0
 let g:lexima_enable_endwise_rules = 0
+let g:lexima_enable_space_rules = 0
+let g:lexima_map_escape = ''
+
 
 " split-join
 let g:splitjoin_split_mapping = ''
@@ -115,14 +118,10 @@ let g:splitjoin_join_mapping = ''
 " vim-devicons
 let g:webdevicons_enable = 1
 let g:webdevicons_enable_nerdtree = 1
-let g:webdevicons_conceal_nerdtree_brackets = 1
-
 let g:DevIconsEnableFoldersOpenClose = 1
+let g:webdevicons_conceal_nerdtree_brackets = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 
-" any-jump
-let g:any_jump_disable_vcs_ignore = 1
-let g:any_jump_references_only_for_current_filetype = 1
 
 " lightline
 set laststatus=2
@@ -480,10 +479,10 @@ augroup FileType go
     autocmd FileType go nmap <buffer> <nowait> <leader>t :GoAddTags<CR>
     autocmd FileType go nmap <buffer> <nowait> <leader>i :GoImplements<CR>
     autocmd FileType go nmap <buffer> <nowait> <leader>a :GoAlternate!<CR>
+    autocmd FileType go nmap <buffer> <nowait> <leader>C ::GoCoverageToggle<CR>
     autocmd FileType go nmap <buffer> <nowait> <leader>T <Plug>(go-test-func)
     autocmd FileType go nmap <buffer> <nowait> <leader>d <Plug>(go-def-tab)
     autocmd FileType go nmap <buffer> <nowait> <leader>n <Plug>(go-rename)
-    autocmd FileType go nmap <buffer> <nowait> <leader>C ::GoCoverageToggle<CR>
 
     " go install golang.org/x/tools/gopls@latest
     au User lsp_setup call lsp#register_server({
@@ -550,8 +549,8 @@ augroup END
 
 " ## KEYS
 
-nmap <Leader>j :SplitjoinJoin<cr>
-nmap <Leader>s :SplitjoinSplit<cr>
+nmap <Leader>sj :SplitjoinJoin<cr>
+nmap <Leader>ss :SplitjoinSplit<cr>
 
 vmap <A-Down> <Plug>MoveBlockDown
 vmap <A-Up>   <Plug>MoveBlockUp

@@ -77,3 +77,5 @@ alias go-trace='_go_get_trace'
 alias go-cpu='_go_cpu_profile'
 
 alias go-noproxy='export GOPROXY="direct"'
+
+alias -g GOF='2>&1 | rg "FAIL"'
