@@ -477,9 +477,10 @@ augroup FileType go
     autocmd!
     autocmd FileType go setlocal tabstop=4 shiftwidth=4 expandtab
     autocmd FileType go nmap <buffer> <nowait> <leader>t :GoAddTags<CR>
+    autocmd FileType go nmap <buffer> <nowait> <leader>c :GoCallers<CR>
     autocmd FileType go nmap <buffer> <nowait> <leader>i :GoImplements<CR>
     autocmd FileType go nmap <buffer> <nowait> <leader>a :GoAlternate!<CR>
-    autocmd FileType go nmap <buffer> <nowait> <leader>C ::GoCoverageToggle<CR>
+    autocmd FileType go nmap <buffer> <nowait> <leader>C :GoCoverageToggle<CR>
     autocmd FileType go nmap <buffer> <nowait> <leader>T <Plug>(go-test-func)
     autocmd FileType go nmap <buffer> <nowait> <leader>d <Plug>(go-def-tab)
     autocmd FileType go nmap <buffer> <nowait> <leader>n <Plug>(go-rename)
@@ -547,23 +548,38 @@ augroup lsp_install
 augroup END
 
 
-" ## KEYS
+" fzf.vim
+nmap <leader>F :Files<CR>
+nmap <leader>G :Rg<CR>
 
-nmap <Leader>sj :SplitjoinJoin<cr>
-nmap <Leader>ss :SplitjoinSplit<cr>
+" toggle fold
+nmap <leader><space> za
+vmap <leader><space> za
 
+" vim-commentary
+map <leader>/ :Commentary<CR>
+
+" split-join
+nmap <Leader>sj :SplitjoinJoin<CR>
+nmap <Leader>ss :SplitjoinSplit<CR>
+
+" vim-move
 vmap <A-Down> <Plug>MoveBlockDown
 vmap <A-Up>   <Plug>MoveBlockUp
 nmap <A-Down> <Plug>MoveLineDown
 nmap <A-Up>   <Plug>MoveLineUp
 
+" nerd-tree
 inoremap <silent> <F1> <Cmd>:call NERDTreeToggleInCurDir()<CR>
 nnoremap <silent> <F1> <Cmd>:call NERDTreeToggleInCurDir()<CR>
 
+" ale
 nmap <silent> <F2> <Plug>(ale_next_wrap)
-map  <silent> <F3> :set invwrap<CR>
 
+map  <silent> <F3> :set invwrap<CR>
 map  <silent> <F11> :set invnumber<CR>
+
+" tagbar
 nmap <silent> <F12> <Cmd>:TagbarToggle<CR>
 
 " window movement (up/down only) via ctrl
@@ -572,15 +588,11 @@ nmap <C-k>    <C-w>k
 nmap <C-Down> <C-w>j
 nmap <C-Up>   <C-w>k
 
-nnoremap <A-Left>  ^
-nnoremap <A-Right> g_
-
 " tab switching
 nmap <Tab>     gt
 nmap <S-Tab>   gT
-nmap <C-Left>  :tabmove -1<CR>
-nmap <C-Right> :tabmove +1<CR>
 
+" ignore shift-arrows
 nnoremap <S-Up>   <Up>
 nnoremap <S-Down> <Down>
 
@@ -592,18 +604,9 @@ map <C-q> :qall!<CR>
 
 " no ex mode
 noremap  Q     <Nop>
+
+" no C-z action
 noremap  <C-z> <Nop>
-
-" fzf.vim
-nmap <leader>F :Files<CR>
-nmap <leader>G :Rg<CR>
-
-" toggle fold
-nmap <leader><space> za
-vmap <leader><space> za
-
-" vim-commentary
-map <leader>/ :Commentary<CR>
 
 " makes dd delete, not copy
 nnoremap d "_d
