@@ -1,0 +1,40 @@
+# This file contains snippets that are always defined. I personally
+# have snippets for signatures and often needed texts
+
+# sligthly lower priority than everything else since specialized versions
+# should overwrite. The user needs to adjust her priority in her snippets to
+# ~-55 so that other filetypes will still overwrite.
+priority -60
+
+#########
+# DATES #
+#########
+snippet date "YYYY-MM-DD" w
+`!v strftime("%Y-%m-%d")`
+endsnippet
+
+
+snippet datetimeiso "ISO format datetime" w
+`!v strftime("%Y-%m-%d %H:%M:%S")`
+endsnippet
+
+
+snippet datetimeisoz "ISO format datetime + zone" w
+`!v strftime("%Y-%m-%d %H:%M:%S%z")`
+endsnippet
+
+
+snippet time "hh:mm:ss" w
+`!v strftime("%H:%M:%S")`
+endsnippet
+
+
+#############
+# FILENAMES #
+#############
+snippet filename "Complete path to current file" b
+`!p snip.rv=snip.fn`
+endsnippet
+
+
+# vim:ft=snippets:

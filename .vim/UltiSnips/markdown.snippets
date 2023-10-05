@@ -1,0 +1,34 @@
+# Snippets for Markdown
+priority -50
+
+snippet code "code snippet" b
+\`\`\`${1:go}
+${0:${VISUAL}}
+\`\`\`
+endsnippet
+
+
+snippet link "link snippet" b
+[${1:name}](${2:${VISUAL}})$0
+endsnippet
+
+
+snippet code_shell "shell code snippet" b
+\`\`\`shell
+${0:${VISUAL}}
+\`\`\`
+endsnippet
+
+
+snippet code_sql "sql code snippet" b
+\`\`\`sql
+${0:${VISUAL}}
+\`\`\`
+endsnippet
+
+
+snippet code_json "json code snippet" b
+\`\`\`json
+${0:${VISUAL}}
+\`\`\`
+endsnippet

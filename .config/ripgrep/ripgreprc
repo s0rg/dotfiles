@@ -1,10 +1,23 @@
+# Search hidden files and directories.
 --hidden
+
+# trim whitespace at the beginning of each line printed
 --trim
+
+# Searches case insensitively.
 --smart-case
+
+# This flag prints the file path above clusters of matches from each file
 --heading
+
+# Suppress all error messages related to opening and reading files
 --no-messages
+
+# This flag allows to respect all git related ignore rules
 --no-require-git
---glob=!.git
---glob=!.cache
---glob=!vendor
---glob=!__pycache__
+
+# Sort by file path.
+--sort=path
+
+# Excludes
+--glob=!{.git,.cache,vendor,__pycache__}

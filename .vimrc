@@ -19,8 +19,8 @@ if (has('termguicolors'))
     set t_ut=
 endif
 
+let &t_EI .= "\<Esc>[1 q"
 let &t_SI .= "\<Esc>[3 q"
-let &t_EI .= "\<Esc>[5 q"
 
 colorscheme jellybeans
 highlight Folded guibg=Black ctermbg=Black
@@ -62,7 +62,7 @@ set expandtab smarttab tabstop=4 softtabstop=0
 set nobackup nowritebackup noswapfile noundofile
 set hlsearch incsearch ignorecase smartcase wrapscan
 set encoding=utf-8 fileencoding=utf-8 termencoding=utf-8
-set completeopt=longest,menuone,noinsert,noselect,preview
+" set completeopt=longest,menuone,noinsert,noselect,preview
 
 
 " enable Normal mode keys in ru layout
@@ -99,14 +99,10 @@ let g:python_highlight_all = 1
 let g:sql_type_default = 'pgsql'
 
 
-" vim-move
-let g:move_map_keys = 0
-
-
 " lexima
-let g:lexima_enable_newline_rules = 0
-let g:lexima_enable_endwise_rules = 0
 let g:lexima_enable_space_rules = 0
+let g:lexima_enable_endwise_rules = 0
+let g:lexima_enable_newline_rules = 0
 let g:lexima_map_escape = ''
 
 
@@ -328,8 +324,7 @@ let g:lsp_signature_help_delay = 400
 
 
 " asynccomplete-vim
-let g:asyncomplete_auto_popup = 0
-let g:asyncomplete_auto_completeopt = 0
+let g:asyncomplete_min_chars = 2
 
 
 " startify
@@ -407,6 +402,7 @@ let g:fzf_colors = {
     \ 'header':  ['fg', 'Comment'],
     \ }
 
+
 " ## FUNCTIONS
 
 " Close all open buffers on entering a window if the only
@@ -434,10 +430,9 @@ endfunction
 
 " ## AUTO COMMANDS
 
-augroup FileType shell
-    autocmd!
-    autocmd BufNewFile *.sh 0put =\'#!/bin/bash\<nl>\<nl>\'|$
-augroup END
+autocmd! InsertLeave * silent! set nopaste
+autocmd! BufWinEnter * syntax sync fromstart
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 augroup FileType make
     autocmd!
@@ -450,19 +445,6 @@ augroup FileType dockefile
     autocmd BufNewFile,BufRead Dockerfile* set ft=dockerfile
 augroup END
 
-augroup FileType python
-    autocmd!
-    autocmd FileType python setlocal autoindent softtabstop=4 formatoptions+=croq smartindent
-    autocmd BufNewFile *.py 0put=\'#!/usr/bin/env python3\<nl>\<nl>\'|$
-
-    " pip install python-language-server
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'allowlist': ['python'],
-        \ })
-augroup END
-
 augroup FileType json
     autocmd!
     autocmd FileType json setlocal tabstop=2 shiftwidth=2
@@ -471,6 +453,29 @@ augroup END
 augroup FileType yaml
     autocmd!
     autocmd FileType yaml setlocal tabstop=2 shiftwidth=2
+augroup END
+
+augroup FileType fasm
+    autocmd!
+    autocmd BufNewFile,BufRead *.asm set ft=fasm
+    autocmd BufNewFile,BufRead *.inc set ft=fasm
+augroup END
+
+augroup FileType text
+    autocmd!
+    autocmd FileType text setlocal formatoptions=tjl1
+augroup END
+
+augroup FileType python
+    autocmd!
+    autocmd FileType python setlocal autoindent softtabstop=4 formatoptions+=croq smartindent
+
+    " pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'allowlist': ['python'],
+        \ })
 augroup END
 
 augroup FileType go
@@ -493,17 +498,6 @@ augroup FileType go
          \ })
 augroup END
 
-augroup FileType fasm
-    autocmd!
-    autocmd BufNewFile,BufRead *.asm set ft=fasm
-    autocmd BufNewFile,BufRead *.inc set ft=fasm
-augroup END
-
-augroup FileType text
-    autocmd!
-    autocmd FileType text setlocal formatoptions=tjl1
-augroup END
-
 augroup FileType arduino
     nnoremap <buffer> <leader>aa <cmd>ArduinoAttach<CR>
     nnoremap <buffer> <leader>av <cmd>ArduinoVerify<CR>
@@ -512,12 +506,9 @@ augroup FileType arduino
 augroup END
 
 " Close nerdtree when it's the only buffer left open
-autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+autocmd! WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
-autocmd CompleteDone * silent! pclose
-autocmd BufWinEnter * syntax sync fromstart
-
-autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
+autocmd! FocusGained,BufEnter,CursorHold,CursorHoldI *
     \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
 
 augroup vim_enter
@@ -528,10 +519,8 @@ augroup END
 
 let s:leave_tab = 0
 
-autocmd TabLeave * let s:leave_tab = tabpagenr()
-autocmd TabEnter * if tabpagenr() != 1 && tabpagenr() == s:leave_tab | tabprevious | endif
-
-iabb _NOW <C-r>=strftime("%d/%m/%Y %H:%M:%S")<cr>
+autocmd! TabLeave * let s:leave_tab = tabpagenr()
+autocmd! TabEnter * if tabpagenr() != 1 && tabpagenr() == s:leave_tab | tabprevious | endif
 
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
@@ -542,45 +531,62 @@ function! s:on_lsp_buffer_enabled() abort
 endfunction
 
 augroup lsp_install
-    au!
+    autocmd!
     " call s:on_lsp_buffer_enabled only for languages that has the server registered.
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
 
+" snippets
+let g:UltiSnipsExpandTrigger       = '<C-e>'
+let g:UltiSnipsJumpForwardTrigger  = '<C-e>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-b>'
+
+autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+    \ 'priority': 5
+    \ }))
+
+
 " fzf.vim
-nmap <leader>F :Files<CR>
-nmap <leader>G :Rg<CR>
+nmap <silent> <leader>L :Lines<CR>
+nmap <silent> <leader>F :Files<CR>
+nmap <silent> <leader>G :Rg<CR>
+
 
 " toggle fold
-nmap <leader><space> za
-vmap <leader><space> za
+nmap <silent> <leader><space> za
+
 
 " vim-commentary
-map <leader>/ :Commentary<CR>
+map <silent> <leader>/ :Commentary<CR>
+
 
 " split-join
-nmap <Leader>sj :SplitjoinJoin<CR>
-nmap <Leader>ss :SplitjoinSplit<CR>
+nmap <silent> <Leader>sj :SplitjoinJoin<CR>
+nmap <silent> <Leader>ss :SplitjoinSplit<CR>
 
-" vim-move
-vmap <A-Down> <Plug>MoveBlockDown
-vmap <A-Up>   <Plug>MoveBlockUp
-nmap <A-Down> <Plug>MoveLineDown
-nmap <A-Up>   <Plug>MoveLineUp
+
+" move lines with Alt + Up/Down
+nnoremap <silent> <A-Up> :m -2<CR>
+inoremap <silent> <A-Up> <Esc>:m -2<CR>gi
+vnoremap <silent> <A-Up> :m '<-2<CR>gvgv
+
+nnoremap <silent> <A-Down> :m +1<CR>
+inoremap <silent> <A-Down> <Esc>:m +1<CR>gi
+vnoremap <silent> <A-Down> :m '>+1<CR>gvgv
+
 
 " nerd-tree
-inoremap <silent> <F1> <Cmd>:call NERDTreeToggleInCurDir()<CR>
-nnoremap <silent> <F1> <Cmd>:call NERDTreeToggleInCurDir()<CR>
+nmap <silent> <F1> <Cmd>:call NERDTreeToggleInCurDir()<CR>
+
 
 " ale
 nmap <silent> <F2> <Plug>(ale_next_wrap)
 
-map  <silent> <F3> :set invwrap<CR>
-map  <silent> <F11> :set invnumber<CR>
 
 " tagbar
 nmap <silent> <F12> <Cmd>:TagbarToggle<CR>
+
 
 " window movement (up/down only) via ctrl
 nmap <C-j>    <C-w>j
@@ -588,28 +594,42 @@ nmap <C-k>    <C-w>k
 nmap <C-Down> <C-w>j
 nmap <C-Up>   <C-w>k
 
+
 " tab switching
 nmap <Tab>     gt
 nmap <S-Tab>   gT
+
 
 " ignore shift-arrows
 nnoremap <S-Up>   <Up>
 nnoremap <S-Down> <Down>
 
+
 " toggle off search highlight
-map <leader><ESC> :noh<CR>
+map <silent> <leader><ESC> :noh<CR>
+
 
 " fast exit
 map <C-q> :qall!<CR>
 
+
 " no ex mode
-noremap  Q     <Nop>
+noremap Q     <Nop>
+
 
 " no C-z action
-noremap  <C-z> <Nop>
+noremap <C-z> <Nop>
+
 
 " makes dd delete, not copy
 nnoremap d "_d
 vnoremap d "_d
 
 nnoremap <C-o> <C-o>zz
+
+nmap <silent> <leader><Enter> !!zsh<CR>
+nmap <silent> <leader>J !!jq --sort-keys<CR>
+
+map <silent> <F3> :set invwrap<CR>
+map <silent> <F4> :set paste<CR>a
+map <silent> <F11> :set invnumber<CR>

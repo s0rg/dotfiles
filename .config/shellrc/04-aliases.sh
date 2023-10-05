@@ -25,9 +25,12 @@ alias mkdir='mkdir -pv'
 alias rg='rg --color always'
 alias rgf='rg --color always --no-heading'
 
+# vim
+alias v='vim -p'
+alias fv='vim $(fzf)'
+
 # shortcuts
 alias t='touch'
-alias v='vim'
 alias si='sudo -i'
 alias chx='chmod u+x'
 alias duf='duf --hide special'
