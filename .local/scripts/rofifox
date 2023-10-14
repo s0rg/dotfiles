@@ -36,11 +36,11 @@ PROFILE = _detect_profile()
 
 
 def _firefox_cmd(profile):
-    return BROWSER + " -no-remote -P " + profile
+    return BROWSER + " -P " + profile
 
 
 def _private_cmd(profile):
-    return BROWSER + " -private -no-remote -P " + profile
+    return BROWSER + " -private -P " + profile
 
 
 def _manager_cmd():

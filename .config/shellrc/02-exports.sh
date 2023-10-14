@@ -5,14 +5,18 @@ export LC_CTYPE='en_US.UTF-8'
 
 export EDITOR='vim'
 export VISUAL='vim'
-export PAGER='less'
 export EMAIL='evolution'
 export PDF='zathura'
-# export BROWSER='qutebrowser'
-export MANPAGER='less -X'
 
-export LESS='-g -i -M -R --tabs=4'
+# ~/.local/bin/firetab
+export BROWSER='firetab'
+
 export LESSCHARSET=utf-8
+export LESS='-giXMRF --incsearch --tabs=4'
+
+export PAGER='less'
+export MANROFFOPT="-c"
+export MANPAGER='less'
 
 # Disable 'less' history file
 export LESSHISTFILE='-'
