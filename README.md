@@ -20,9 +20,7 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
   * fishy things: [zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
   * eye-candy cli: [zdharma-continuum/fast-syntax-highlighting](https://github.com/zdharma-continuum/fast-syntax-highlighting)
   * handy cli calc: [arzzen/calc.plugin.zsh](https://github.com/arzzen/calc.plugin.zsh)
-  * eye-candy man pages: [ael-code/zsh-colored-man-pages](https://github.com/ael-code/zsh-colored-man-pages)
   * docker (and docker compose) completions: [greymd/docker-zsh-completion](https://github.com/greymd/docker-zsh-completion)
-  * auto-manage GOPRIVATE: [heyvito/goenv.zsh](https://github.com/heyvito/goenv.zsh)
 - editor: [vim](https://www.vim.org/) (*plugins* managed by [pathogen](https://github.com/tpope/vim-pathogen)):
   * Async linters/fixers: [dense-analysis/ale](https://github.com/dense-analysis/ale)
   * Async autocomplete: [prabirshrestha/asyncomplete.vim](https://github.com/prabirshrestha/asyncomplete.vim) + [prabirshrestha/asyncomplete-lsp.vim](https://github.com/prabirshrestha/asyncomplete-lsp.vim) + [prabirshrestha/vim-lsp](https://github.com/prabirshrestha/vim-lsp)
@@ -39,7 +37,6 @@ This repo is managed via [this](https://www.atlassian.com/git/tutorials/dotfiles
   * File icons: [ryanoasis/vim-devicons](https://github.com/ryanoasis/vim-devicons)
   * Handy file open with file.name:{line}:{col}: [wsdjeg/vim-fetch](https://github.com/wsdjeg/vim-fetch)
   * Best golang dev toolkit: [fatih/vim-go](https://github.com/fatih/vim-go)
-  * Moving text, easy: [matze/vim-move](https://github.com/matze/vim-move)
   * Less annoiyng quickfix/location lists: [romainl/vim-qf](https://github.com/romainl/vim-qf)
   * Handy startscreen: [mhinz/vim-startify](https://github.com/mhinz/vim-startify)
 - menus: [rofi](https://github.com/davatorium/rofi)
