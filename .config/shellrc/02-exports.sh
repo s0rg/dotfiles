@@ -9,14 +9,13 @@ export EMAIL='evolution'
 export PDF='zathura'
 
 # ~/.local/bin/firetab
-export BROWSER='firetab'
+# export BROWSER='firetab'
 
 export LESSCHARSET=utf-8
 export LESS='-giXMRF --incsearch --tabs=4'
 
 export PAGER='less'
-export MANROFFOPT="-c"
-export MANPAGER='less'
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # Disable 'less' history file
 export LESSHISTFILE='-'
