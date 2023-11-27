@@ -317,7 +317,7 @@ let g:lsp_diagnostics_enabled = 0
 let g:lsp_virtual_text_enabled = 0
 let g:lsp_diagnostics_signs_enabled = 0
 let g:lsp_document_highlight_enabled = 0
-let g:lsp_completion_documentation_enabled = 0
+" let g:lsp_completion_documentation_enabled = 0
 let g:lsp_document_code_action_signs_enabled = 0
 " let g:lsp_signature_help_enabled = 0
 let g:lsp_signature_help_delay = 400
@@ -483,6 +483,7 @@ augroup FileType go
     autocmd FileType go setlocal tabstop=4 shiftwidth=4 expandtab
     autocmd FileType go nmap <buffer> <nowait> <leader>t :GoAddTags<CR>
     autocmd FileType go nmap <buffer> <nowait> <leader>c :GoCallers<CR>
+    autocmd FileType go nmap <buffer> <nowait> <leader>R :GoModReload<CR>
     autocmd FileType go nmap <buffer> <nowait> <leader>i :GoImplements<CR>
     autocmd FileType go nmap <buffer> <nowait> <leader>a :GoAlternate!<CR>
     autocmd FileType go nmap <buffer> <nowait> <leader>C :GoCoverageToggle<CR>
@@ -562,8 +563,8 @@ map <silent> <leader>/ :Commentary<CR>
 
 
 " split-join
-nmap <silent> <Leader>sj :SplitjoinJoin<CR>
-nmap <silent> <Leader>ss :SplitjoinSplit<CR>
+nmap <silent> <Leader>S :SplitjoinSplit<CR>
+nmap <silent> <Leader>J :SplitjoinJoin<CR>
 
 
 " move lines with Alt + Up/Down
