@@ -23,7 +23,9 @@ g() {
 # checkout and pull default branch
 gcm() {
 	cd "$(git root)" || return
-	git checkout "$(_git_default_branch)" && git pull
+	git checkout "$(_git_default_branch)" || return
+	git pull
+	git tidy
 }
 
 # smart push, sets upstream if none yet

@@ -46,13 +46,6 @@
     born = !git log --pretty='format:%ar at %ai' --reverse | head -1
     # local aliases
     aliases = !git config -l | grep '^alias' | cut -c 7- | sort
-    # repo maintaince
-    tidy = "!f() { \
-        git branch --merged | egrep -v '(^\\*|master|main)' | xargs -r -n 1 git branch -dr ; \
-        git reflog expire --all --expire=now ; \
-        git gc --prune=now --aggressive ; \
-        git remote -v update -p ; \
-        }; f"
     # zip
     zip = !git archive -o "$(basename "$(git root)")".zip HEAD
     tag-rm = push --delete origin
