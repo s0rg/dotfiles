@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+git fetch
+git branch -vv | grep \': gone]\' | grep -v \'\*\' | awk \'{ print $1; }\' | xargs -r git branch -d
+git reflog expire --all --expire=now
+git gc --prune=now --aggressive
+git remote -v update -p
