@@ -25,7 +25,7 @@ gcm() {
 	cd "$(git root)" || return
 	git checkout "$(_git_default_branch)" || return
 	git pull
-	git tidy
+	git prune
 }
 
 # smart push, sets upstream if none yet
