@@ -11,7 +11,7 @@ def main():
         print('[-] unknown format: ', raw)
         return 1
 
-    ver = raw[2].strip('go')
+    ver = '.'.join(raw[2].strip('go').split('.')[:2])
     print(ver)
 
     return 0
