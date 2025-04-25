@@ -187,7 +187,7 @@ bindsym $mod+$ctrl+9 move container to workspace number $ext3
 
 assign [class="^kitty$" instance="^kitty$"]             $tty
 
-assign [class="^firefox$|^Tor Browser$|^qbittorrent$"]  $web
+assign [class="^firefox|^Tor Browser$|^qbittorrent$"]  $web
 
 assign [class="^TelegramDesktop$"]                      $chat
 
@@ -220,12 +220,12 @@ exec --no-startup-id redshift
 
 exec --no-startup-id setxkbmap -model pc105 -layout us,ru -option terminate:ctrl_alt_bksp,grp:ctrl_shift_toggle
 exec --no-startup-id lxqt-config-input --load-touchpad
-exec --no-startup-id xset m 20/10 10 r rate 350 30 b on s 1200
+exec --no-startup-id xset m 20/10 10 r rate 350 30 b off s off
+
+exec --no-startup-id feh --no-fehbg --bg-fill ~/.config/i3/wall.png
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3-betterlock
 
 exec --no-startup-id wal -R -n
-exec --no-startup-id feh --no-fehbg --bg-fill ~/.config/i3/wall.png
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3-betterlock
-
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 exec --no-startup-id nm-applet

@@ -8,24 +8,26 @@
 
 ROOT=$HOME/.vim/bundle
 
+mkdir -p "${ROOT}"
+
 if [[ $# == 0 ]]; then
-    ITEMS=$(ls -1 "$ROOT")
+	ITEMS=$(ls -1 "${ROOT}")
 else
-    ITEMS=$(cat "$1")
+	ITEMS=$(cat "${1}")
 fi
 
-for p in $ITEMS; do
-    n=$(basename "$p")
-    [[ "${n##*.}" == "git" ]] && n="${n%.*}" # cut-off '.git' suffix
+for p in ${ITEMS}; do
+	n=$(basename "${p}")
+	[[ "${n##*.}" == "git" ]] && n="${n%.*}" # cut-off '.git' suffix
 
-    if [[ -d $ROOT/$n ]]; then
-        echo "updating: $n..."
-        git -C "$ROOT/$n" pull
-    else
-        echo "installing: $n..."
-        git -C "$ROOT" clone "$p"
-    fi
-    echo
+	if [[ -d ${ROOT}/${n} ]]; then
+		echo "updating: ${n}..."
+		git -C "${ROOT}/${n}" pull
+	else
+		echo "installing: ${n}..."
+		git -C "${ROOT}" clone "${p}"
+	fi
+	echo
 done
 
 #vim:ft=bash

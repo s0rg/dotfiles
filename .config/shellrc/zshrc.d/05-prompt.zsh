@@ -51,7 +51,7 @@ _show_pwd() {
 
 add-zsh-hook -Uz chpwd _show_pwd
 
-PS1=' %B%F{$COLORS_DIR}%2~%b %F{$COLORS_PROMPT}▶%f  '
+PS1=' %B%F{$COLORS_DIR}%2~%b %F{$COLORS_PROMPT}▶%f '
 PS2=' %F{$COLORS_PROMPT}>%f '
 
 # this fixes mc prompt

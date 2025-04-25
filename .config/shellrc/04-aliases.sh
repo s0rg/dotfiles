@@ -173,3 +173,6 @@ alias -g L='| wc -l'
 alias shup='sh-plugs-up; vim-plugs-up; echo "Tools:"; gup update; echo "Arduino:"; arduino-cli upgrade'
 
 alias structurizr='docker run -it --rm -p 127.0.0.1:30303:8080 -v .:/usr/local/structurizr structurizr/lite'
+
+# raspberry pi pico usb console
+alias rpitty='picocom -b 115200 -r -l /dev/ttyACM0'

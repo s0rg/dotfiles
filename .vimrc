@@ -94,6 +94,8 @@ set grepformat=%f:%l:%c:%m
 " python-syntax
 let g:python_highlight_all = 1
 
+" plantuml-syntax
+let g:plantuml_set_makeprg = 0
 
 " pgsql
 let g:sql_type_default = 'pgsql'
@@ -290,6 +292,7 @@ let g:ale_echo_msg_format = '[%severity% : %linter%] %code %%s'
 let g:ale_go_gopls_init_options = { 'ui.diagnostic.analyses': {
     \ 'unusedparams': v:true,
     \ 'composites': v:false,
+    \ 'modernize': v:false,
     \ 'shadow': v:true,
     \ }}
 
@@ -634,3 +637,6 @@ nmap <silent> <leader>J !!jq --sort-keys<CR>
 map <silent> <F3> :set invwrap<CR>
 map <silent> <F4> :set paste<CR>a
 map <silent> <F11> :set invnumber<CR>
+
+nnoremap <leader>q" ciw""<Esc>P
+nnoremap <leader>q' ciw''<Esc>P

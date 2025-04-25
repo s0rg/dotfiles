@@ -8,6 +8,9 @@ _last_changed() {
 # determine size of a file or total size of a directory
 _fn_size() { du -sbh -- "${@:-.}"; }
 
+# zsh has a built in function that conflicts with mtools, delete it.
+compdef -d mcd
+
 # create new directory (if it does not exists) and cd into it
 mcd() {
 	[ -z "${1}" ] && return

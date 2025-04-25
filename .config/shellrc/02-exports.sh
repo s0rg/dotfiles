@@ -15,7 +15,6 @@ export LESSCHARSET=utf-8
 export LESS='-giXMRF --incsearch --tabs=4'
 
 export PAGER='less'
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # Disable 'less' history file
 export LESSHISTFILE='-'
@@ -28,6 +27,8 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 export QT_PLATFORMTHEME=qt5ct
 export QT_PLATFORM_PLUGIN=qt5ct
 
+### FZF
+
 export FZF_DEFAULT_OPTS="
 --ansi
 --cycle
@@ -36,7 +37,7 @@ export FZF_DEFAULT_OPTS="
 --height=40%
 --padding 0
 --no-mouse
---preview-window hidden,right:50%
+--preview-window hidden
 --bind 'change:first,backward-eof:abort,esc:abort'
 --bind 'ctrl-s:toggle-sort'
 --bind 'ctrl-z:ignore'
@@ -45,8 +46,16 @@ export FZF_DEFAULT_OPTS="
 --bind 'page-down:preview-down'
 "
 
-export FZF_DEFAULT_COMMAND='fd --type f'
-# export FZF_CTRL_T_COMMAND='rg --files --no-heading'
+export FZF_DEFAULT_COMMAND='fd --strip-cwd-prefix --exclude .git'
+
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS="--preview-window nohidden --preview 'batcat -n --line-range :100 {}'"
+
+export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type d"
+
+#export FZF_ALT_C_OPTS="--preview 'eza --icons=always --tree --color=always {} | head -200'"
+
+eval "$(fzf --zsh)"
 
 # https://secwiki.org/w/Running_nmap_as_an_unprivileged_user
 export NMAP_PRIVILEGED=''
