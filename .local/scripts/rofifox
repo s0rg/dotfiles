@@ -13,7 +13,7 @@ import rofi_menu
 
 BROWSER = "firefox"
 
-CACHE_PATH = path.expanduser("~/.cache/rofifox/")
+CACHE_PATH = path.expanduser("~/.cache/firefox")
 CACHE_NAME = "profiles.json"
 
 PROFILE_PREFIX = "Profile"
@@ -25,10 +25,10 @@ ROFI_PROMPT = "\uF269 rfox "
 
 
 def _detect_profile():
-    profiles = "/.mozilla/firefox/profiles.ini"
-    snap_path = path.expanduser("~/snap/firefox/common" + profiles)
-    if path.exists(snap_path):
-        return snap_path
+    profiles = "/.config/mozilla/firefox/profiles.ini"
+    #snap_path = path.expanduser("~/snap/firefox/common" + profiles)
+    #if path.exists(snap_path):
+    #    return snap_path
     return path.expanduser("~" + profiles)
 
 

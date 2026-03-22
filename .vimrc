@@ -30,10 +30,13 @@ let g:netrw_hide=1
 let g:netrw_banner=0
 let g:netrw_dirhistmax=0
 
+set fsync
 set autoread
+set nowrapscan
 set history=50
 set cmdheight=1
 set pumheight=15
+set pumwidth=20
 set shortmess+=c
 set complete-=it
 set shell=/bin/zsh
@@ -62,8 +65,12 @@ set expandtab smarttab tabstop=4 softtabstop=0
 set nobackup nowritebackup noswapfile noundofile
 set hlsearch incsearch ignorecase smartcase wrapscan
 set encoding=utf-8 fileencoding=utf-8 termencoding=utf-8
+set undolevels=100
+set wildchar=<Tab>
 " set completeopt=longest,menuone,noinsert,noselect,preview
 
+
+set fileformats=unix,dos
 
 " enable Normal mode keys in ru layout
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
@@ -94,8 +101,10 @@ set grepformat=%f:%l:%c:%m
 " python-syntax
 let g:python_highlight_all = 1
 
+
 " plantuml-syntax
 let g:plantuml_set_makeprg = 0
+
 
 " pgsql
 let g:sql_type_default = 'pgsql'
@@ -257,8 +266,11 @@ let g:NERDTreeMinimalUI = 1
 let g:NERDTreeMinimalMenu = 1
 let g:NERDTreeNaturalSort = 1
 let g:NERDTreeMarkBookmarks = 0
+let g:NERDTreeAutoDeleteBuffer = 1
+let g:NERDTreeCaseSensitiveSort = 0
 let g:NERDTreeRespectWildIgnore = 1
-let g:NERDTreeStatusline = '%#NonText#'
+let g:NERDTreeHighlightCursorline = 1
+let g:NERDTreeStatusline = ' '
 let g:NERDTreeMapCustomOpen = '<space>'
 let g:NERDTreeCustomOpenArgs = { 'file': { 'where': 't', 'keepopen': 1 } }
 
@@ -271,23 +283,25 @@ let g:ale_hover_cursor = 0
 let g:ale_update_tagstack = 0
 let g:ale_virtualtext_cursor = 0
 let g:ale_popup_menu_enabled = 0
-let g:ale_lint_on_insert_leave = 0
-let g:ale_lint_on_filetype_changed = 0
 let g:airline#extensions#ale#enabled = 0
 
 let g:ale_echo_delay = 10
 let g:ale_lint_delay = 250
 
 let g:ale_fix_on_save = 1
-let g:ale_lint_on_enter = 1
 let g:ale_set_highlights = 1
 let g:ale_linters_explicit = 1
 let g:ale_use_global_executables = 1
 
 let g:ale_sign_error = '⤫'
 let g:ale_sign_warning = '⚠'
-let g:ale_lint_on_text_changed = 'never'
 let g:ale_echo_msg_format = '[%severity% : %linter%] %code %%s'
+
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_enter = 1
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_filetype_changed = 1
+let g:ale_lint_on_text_changed = 'normal'
 
 let g:ale_go_gopls_init_options = { 'ui.diagnostic.analyses': {
     \ 'unusedparams': v:true,
@@ -320,7 +334,7 @@ let g:lsp_diagnostics_enabled = 0
 let g:lsp_virtual_text_enabled = 0
 let g:lsp_diagnostics_signs_enabled = 0
 let g:lsp_document_highlight_enabled = 0
-" let g:lsp_completion_documentation_enabled = 0
+let g:lsp_completion_documentation_enabled = 0
 let g:lsp_document_code_action_signs_enabled = 0
 " let g:lsp_signature_help_enabled = 0
 let g:lsp_signature_help_delay = 400
@@ -632,7 +646,7 @@ vnoremap d "_d
 nnoremap <C-o> <C-o>zz
 
 nmap <silent> <leader><Enter> !!zsh<CR>
-nmap <silent> <leader>J !!jq --sort-keys<CR>
+" nmap <silent> <leader>J !!jq --sort-keys<CR>
 
 map <silent> <F3> :set invwrap<CR>
 map <silent> <F4> :set paste<CR>a

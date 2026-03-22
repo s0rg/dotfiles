@@ -20,5 +20,5 @@ zstyle ':fzf-tab:complete:*:*' fzf-preview '
 if [ -d "$realpath" ]; then
     ls --color=always --almost-all --group-directories-first -v1 $realpath | head -n 22
 else
-    bat --color=always --style=numbers $realpath --line-range :22
+    batcat --color=always --style=numbers $realpath --line-range :22
 fi'

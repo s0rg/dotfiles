@@ -45,6 +45,8 @@ typeset -U path cdpath fpath manpath
 
 zle_highlight+=(paste:none)
 
+zstyle ':autocomplete:*' fzf-completion yes
+
 zstyle ':completion:*' rehash true
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zcompcache
@@ -78,6 +80,7 @@ zstyle ":completion:*:kill:*" command "ps --forest -u $USER -o pid,%cpu,%mem,cmd
 
 zstyle ':completion:*:*:dcu:*' file-patterns '*compose*.(yml|yaml):compose-files'
 zstyle ':completion:*:*:ipkg:*' file-patterns '*.deb:debian-packages'
+
 
 zstyle ':antidote:bundle' use-friendly-names 'yes'
 

@@ -20,6 +20,7 @@ set $center         move position 10 ppt 10 ppt; resize set 80 ppt 80 ppt
 set $move_pad       move scratchpad
 set $show_pad       scratchpad show
 
+
 floating_modifier             $mod
 workspace_layout              tabbed
 
@@ -27,14 +28,15 @@ default_border                pixel 1
 default_floating_border       pixel 1
 default_orientation           horizontal
 
-hide_edge_borders             smart
+hide_edge_borders             both
 
 show_marks                    no
 focus_follows_mouse           no
 mouse_warping                 none
-focus_wrapping                workspace
+# focus_wrapping                workspace
 focus_on_window_activation    focus
 workspace_auto_back_and_forth no
+popup_during_fullscreen       smart
 
 floating_minimum_size         300 x 200
 floating_maximum_size         1200 x 650
@@ -187,7 +189,7 @@ bindsym $mod+$ctrl+9 move container to workspace number $ext3
 
 assign [class="^kitty$" instance="^kitty$"]             $tty
 
-assign [class="^firefox|^Tor Browser$|^qbittorrent$"]  $web
+assign [class="^firefox|^Tor Browser$|^qbittorrent$"]   $web
 
 assign [class="^TelegramDesktop$"]                      $chat
 

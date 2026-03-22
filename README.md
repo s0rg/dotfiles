@@ -80,3 +80,9 @@ rsync -rvl --exclude ".git" /tmp/dots/ $HOME/
 rm -r /tmp/dots
 dotfiles submodule update --init --recursive $HOME/
 ```
+
+### PIP requirements
+
+```sh
+pip install pywal pulsectl dbus_next rofi_menu
+```

@@ -1,4 +1,4 @@
-GOVERSION='1.24'
+GOVERSION='1.26'
 
 export GOSUMDB=off
 export GO111MODULE=on
@@ -8,6 +8,8 @@ export GOPATH="${HOME}/projects/go"
 export PATH="${PATH}:/usr/local/go${GOVERSION}/bin:${GOPATH}/bin"
 
 cd_aliases+=([cdgo]="${GOPATH}/src/github.com/${USER}")
+
+alias -s go='$EDITOR'
 
 _go_cpu_profile() {
 	local t
@@ -54,11 +56,11 @@ gmo() {
 		return
 		;;
 	up)
+		go mod edit -go="$(goversion)"
 		go get -u ./...
 		;;
 	esac
 
-	go mod edit -go="$(goversion)"
 	go mod tidy
 
 	if [ -d vendor ]; then

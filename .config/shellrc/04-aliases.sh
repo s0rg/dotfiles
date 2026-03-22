@@ -58,7 +58,7 @@ alias sh-stats='sort | uniq -c | sort -n -r'
 alias sh-trim='sed -e '\''s/^[[:space:]]*//g'\'' -e '\''s/[[:space:]]*\$//g'\'''
 alias sh-size='_fn_size'
 alias sh-strip-ansi="sed 's/\x1b\[[0-9;]*m//g'"
-alias sh-fetch='clear; neofetch --backend "kitty"; echo ;'
+alias sh-fetch='clear; fastfetch; echo ;'
 alias sh-tolower='rename "y/A-Z/a-z/" *'
 alias sh-toupper='rename "y/a-z/A-Z/" *'
 
@@ -169,6 +169,8 @@ alias -g G='| rg '
 alias -g P='| $PAGER'
 alias -g PA='2>&1 | $PAGER'
 alias -g L='| wc -l'
+
+alias -s md='glow'
 
 alias shup='sh-plugs-up; vim-plugs-up; echo "Tools:"; gup update; echo "Arduino:"; arduino-cli upgrade'
 
