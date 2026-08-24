@@ -4,13 +4,16 @@ set nocompatible
 let g:ale_completion_enabled = 0
 
 filetype plugin indent off
+filetype off
 
 call pathogen#infect()
 call pathogen#helptags()
 
+filetype on
 filetype plugin indent on
 
 syntax on
+
 set synmaxcol=240
 
 if (has('termguicolors'))
@@ -108,13 +111,6 @@ let g:plantuml_set_makeprg = 0
 
 " pgsql
 let g:sql_type_default = 'pgsql'
-
-
-" lexima
-let g:lexima_enable_space_rules = 0
-let g:lexima_enable_endwise_rules = 0
-let g:lexima_enable_newline_rules = 0
-let g:lexima_map_escape = ''
 
 
 " split-join
@@ -399,6 +395,10 @@ let g:markdown_fenced_languages = [
     \ 'sql',
     \ 'go',
     \ ]
+
+
+" vim-markdownfmt
+let g:markdownfmt_autosave=1
 
 
 " fzf

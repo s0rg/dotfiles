@@ -39,7 +39,7 @@ alias unx='7z x'
 alias zat='zathura'
 alias cal='echo; ncal -M -3; echo'
 alias obey='sudo !!'
-alias mc='mc -d'
+alias mc='mc -d --nosubshell'
 alias mtr='mtr -bze'
 alias more='less'
 alias tailf='tail -f --retry'
@@ -70,7 +70,7 @@ alias swag-urls="jq '.paths | keys | .[]'"
 
 # curl
 alias curl='curl --user-agent "$(sh-rnd-ua)"'
-alias get='curl --progress-bar -OL'
+alias get='curl --proxy socks5://localhost:1080 --progress-bar -OL'
 alias headers='curl -sI'
 
 alias ifco='\curl ifconfig.co'

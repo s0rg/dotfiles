@@ -20,6 +20,8 @@
 
 [push]
     default = current
+    autoSetupRemote = true
+	followTags = true
 
 [pull]
     rebase = true
@@ -29,8 +31,13 @@
     sort = -committerdate
     autosetuprebase = always
 
+[tag]
+	sort = version:refname
+
 [fetch]
     prune = true
+    pruneTags = true
+    all = true
 
 [checkout]
 	defaultRemote = origin
@@ -38,6 +45,8 @@
 [rebase]
     instructionFormat = "[%an - %ar] %s"
     autoStash = true
+    autoSquash = true
+	updateRefs = true
 
 [pager]
     diff = delta

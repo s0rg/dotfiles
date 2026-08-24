@@ -1,4 +1,4 @@
-GOVERSION='1.26'
+GOVERSION='1.27'
 
 export GOSUMDB=off
 export GO111MODULE=on
@@ -48,7 +48,7 @@ gmo() {
 
 	case $1 in
 	ls)
-		go list -f '{{join .Deps "\n"}}' | xargs go list -f '{{if not .Standard}}{{.ImportPath}}{{end}}'
+		go list -deps -json ./... | jq -rc 'select(.Standard!=true) | unique_by(.Module.Path) | .Module.Path+" v"+.Module.GoVersion' | sort -u
 		return
 		;;
 	vendor)
